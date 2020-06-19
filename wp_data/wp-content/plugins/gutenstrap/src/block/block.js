@@ -2,6 +2,7 @@ import {
 	RichText,
 	AlignmentToolbar,
 	BlockControls,
+	InspectorControls,
 } from '@wordpress/block-editor';
 /**
  * BLOCK: gutenstrap
@@ -78,6 +79,9 @@ registerBlockType( 'cgb/block-gutenstrap', {
 						/>
 					</BlockControls>
 				}
+				<InspectorControls>
+					This text will show when box selected
+				</InspectorControls>
 				<RichText
 					tagName="p"
 					className={ className }
