@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: gutenstrap
- * Description: Bootstrap Gutenberg Blocks
+ * Plugin Name: gutenstrap_old
+ * Description: reference only!
  * Author: Werner, Patrick
- * Version: 1.0.0
- * License: GPL2+
+ * Version: 0.0.0
+ * License: Do what you want license
  */
 
 // Exit if accessed directly.
