@@ -1,0 +1,25 @@
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Styles
+ *
+ * CSS for both Frontend+Backend.
+ */
+.wp-block-cgb-block-testblock {
+  background: lightseagreen;
+  color: #292929;
+  margin: 0 auto;
+  max-width: 740px;
+  padding: 2rem; }
+  .wp-block-cgb-block-testblock.is-style-outline {
+    border: 2px solid currentColor; }
+  .wp-block-cgb-block-testblock.is-style-rounded {
+    border-radius: 15px;
+    margin: 0.5rem 0; }
+  .wp-block-cgb-block-testblock.has-shadow {
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); }

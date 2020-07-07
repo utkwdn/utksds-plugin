@@ -1,0 +1,24 @@
+/**
+ * #.# Styles
+ *
+ * CSS for both Frontend+Backend.
+ */
+
+.wp-block-cgb-block-testblock  {
+  background: $green;
+  color: $black;
+  margin: 0 auto;
+  max-width: 740px;
+  padding: 2rem;
+
+  &.is-style-outline {
+    border: 2px solid currentColor;
+  }
+  &.is-style-rounded {
+    border-radius: 15px;
+    margin: 0.5rem 0;
+  }
+  &.has-shadow {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+}

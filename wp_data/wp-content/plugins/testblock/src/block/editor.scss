@@ -1,0 +1,20 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+
+.wp-block-cgb-block-testblock  {
+  color: $black;
+  margin: 0 auto;
+  max-width: 740px;
+  padding: 2rem;
+
+  &.is-style-outline {
+    border: 2px solid currentColor;
+  }
+  &.is-style-rounded {
+    border-radius: 15px;
+  }
+}
