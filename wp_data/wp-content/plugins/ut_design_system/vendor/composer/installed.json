@@ -1,0 +1,347 @@
+[
+    {
+        "name": "codeinwp/gutenberg-animation",
+        "version": "1.0.6",
+        "version_normalized": "1.0.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Codeinwp/gutenberg-animation.git",
+            "reference": "a685db628c163b39aff81fbbe7d27962dc68511c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Codeinwp/gutenberg-animation/zipball/a685db628c163b39aff81fbbe7d27962dc68511c",
+            "reference": "a685db628c163b39aff81fbbe7d27962dc68511c",
+            "shasum": ""
+        },
+        "require-dev": {
+            "automattic/vipwpcs": "^0.3.0 || ^1.0.0",
+            "dealerdirect/phpcodesniffer-composer-installer": "0.6.2",
+            "phpcompatibility/php-compatibility": "^9",
+            "squizlabs/php_codesniffer": "^3.3",
+            "wp-coding-standards/wpcs": "^1"
+        },
+        "time": "2020-06-13T23:34:22+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "load.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-3.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "ThemeIsle team",
+                "email": "friends@themeisle.com",
+                "homepage": "https://themeisle.com"
+            }
+        ],
+        "description": "CSS Animations for Gutenberg Blocks",
+        "homepage": "https://github.com/Codeinwp/gutenberg-animation"
+    },
+    {
+        "name": "codeinwp/gutenberg-blocks",
+        "version": "1.5.3",
+        "version_normalized": "1.5.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Codeinwp/gutenberg-blocks.git",
+            "reference": "ad512c53be4f7ebe79ac2ed40f39cf9a9d4a4885"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Codeinwp/gutenberg-blocks/zipball/ad512c53be4f7ebe79ac2ed40f39cf9a9d4a4885",
+            "reference": "ad512c53be4f7ebe79ac2ed40f39cf9a9d4a4885",
+            "shasum": ""
+        },
+        "require": {
+            "masterminds/html5": "^2.7",
+            "tubalmartin/cssmin": "^4.1"
+        },
+        "require-dev": {
+            "automattic/vipwpcs": "^0.3.0",
+            "dealerdirect/phpcodesniffer-composer-installer": "0.6.2",
+            "phpcompatibility/php-compatibility": "^9",
+            "squizlabs/php_codesniffer": "^3.3",
+            "wp-coding-standards/wpcs": "^1"
+        },
+        "time": "2020-06-22T21:35:29+00:00",
+        "type": "library",
+        "extra": {
+            "installer-disable": "true"
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "ThemeIsle team",
+                "email": "friends@themeisle.com",
+                "homepage": "https://themeisle.com"
+            }
+        ],
+        "description": "A set of awesome Gutenberg Blocks!",
+        "homepage": "https://github.com/Codeinwp/gutenberg-blocks"
+    },
+    {
+        "name": "codeinwp/gutenberg-css",
+        "version": "1.0.11",
+        "version_normalized": "1.0.11.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Codeinwp/gutenberg-css.git",
+            "reference": "e777778305b4a5e1572df55d5f70ecfe8bddf89a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Codeinwp/gutenberg-css/zipball/e777778305b4a5e1572df55d5f70ecfe8bddf89a",
+            "reference": "e777778305b4a5e1572df55d5f70ecfe8bddf89a",
+            "shasum": ""
+        },
+        "require-dev": {
+            "automattic/vipwpcs": "^0.3.0 || ^1.0.0",
+            "dealerdirect/phpcodesniffer-composer-installer": "0.6.2",
+            "phpcompatibility/php-compatibility": "^9",
+            "squizlabs/php_codesniffer": "^3.3",
+            "wp-coding-standards/wpcs": "^1"
+        },
+        "time": "2020-06-17T19:09:12+00:00",
+        "type": "library",
+        "extra": {
+            "installer-disable": "true"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "load.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-3.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "ThemeIsle team",
+                "email": "friends@themeisle.com",
+                "homepage": "https://themeisle.com"
+            }
+        ],
+        "description": "CSS Editor for Gutenberg Blocks",
+        "homepage": "https://github.com/Codeinwp/gutenberg-css"
+    },
+    {
+        "name": "codeinwp/gutenberg-menu-icons",
+        "version": "1.0.4",
+        "version_normalized": "1.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Codeinwp/gutenberg-menu-icons.git",
+            "reference": "121ef82c57a556301265cbd1032d28619235e488"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Codeinwp/gutenberg-menu-icons/zipball/121ef82c57a556301265cbd1032d28619235e488",
+            "reference": "121ef82c57a556301265cbd1032d28619235e488",
+            "shasum": ""
+        },
+        "require-dev": {
+            "automattic/vipwpcs": "^0.3.0 || ^1.0.0",
+            "dealerdirect/phpcodesniffer-composer-installer": "0.6.2",
+            "phpcompatibility/php-compatibility": "^9",
+            "squizlabs/php_codesniffer": "^3.3",
+            "wp-coding-standards/wpcs": "^1"
+        },
+        "time": "2020-05-17T21:08:46+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "load.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-3.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "ThemeIsle team",
+                "email": "friends@themeisle.com",
+                "homepage": "https://themeisle.com"
+            }
+        ],
+        "description": "Menu Icons for Gutenberg",
+        "homepage": "https://github.com/Codeinwp/gutenberg-menu-icons"
+    },
+    {
+        "name": "codeinwp/themeisle-sdk",
+        "version": "3.2.14",
+        "version_normalized": "3.2.14.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Codeinwp/themeisle-sdk.git",
+            "reference": "992f5e8347836e325ffc50760da1d550b79831c4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Codeinwp/themeisle-sdk/zipball/992f5e8347836e325ffc50760da1d550b79831c4",
+            "reference": "992f5e8347836e325ffc50760da1d550b79831c4",
+            "shasum": ""
+        },
+        "require-dev": {
+            "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
+            "squizlabs/php_codesniffer": "^3.1",
+            "wp-coding-standards/wpcs": "^1.0.0"
+        },
+        "time": "2020-06-10T16:25:09+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "ThemeIsle team",
+                "email": "friends@themeisle.com",
+                "homepage": "https://themeisle.com"
+            }
+        ],
+        "description": "ThemeIsle SDK.",
+        "homepage": "https://github.com/Codeinwp/themeisle-sdk",
+        "keywords": [
+            "wordpress"
+        ]
+    },
+    {
+        "name": "masterminds/html5",
+        "version": "2.7.1",
+        "version_normalized": "2.7.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Masterminds/html5-php.git",
+            "reference": "a3edfe52f9e7380e498d33157e1330e85386645d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/a3edfe52f9e7380e498d33157e1330e85386645d",
+            "reference": "a3edfe52f9e7380e498d33157e1330e85386645d",
+            "shasum": ""
+        },
+        "require": {
+            "ext-ctype": "*",
+            "ext-dom": "*",
+            "ext-libxml": "*",
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8.35",
+            "sami/sami": "~2.0",
+            "satooshi/php-coveralls": "1.0.*"
+        },
+        "time": "2020-02-06T11:39:04+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Masterminds\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Matt Butcher",
+                "email": "technosophos@gmail.com"
+            },
+            {
+                "name": "Matt Farina",
+                "email": "matt@mattfarina.com"
+            },
+            {
+                "name": "Asmir Mustafic",
+                "email": "goetas@gmail.com"
+            }
+        ],
+        "description": "An HTML5 parser and serializer.",
+        "homepage": "http://masterminds.github.io/html5-php",
+        "keywords": [
+            "HTML5",
+            "dom",
+            "html",
+            "parser",
+            "querypath",
+            "serializer",
+            "xml"
+        ]
+    },
+    {
+        "name": "tubalmartin/cssmin",
+        "version": "v4.1.1",
+        "version_normalized": "4.1.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/tubalmartin/YUI-CSS-compressor-PHP-port.git",
+            "reference": "3cbf557f4079d83a06f9c3ff9b957c022d7805cf"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/tubalmartin/YUI-CSS-compressor-PHP-port/zipball/3cbf557f4079d83a06f9c3ff9b957c022d7805cf",
+            "reference": "3cbf557f4079d83a06f9c3ff9b957c022d7805cf",
+            "shasum": ""
+        },
+        "require": {
+            "ext-pcre": "*",
+            "php": ">=5.3.2"
+        },
+        "require-dev": {
+            "cogpowered/finediff": "0.3.*",
+            "phpunit/phpunit": "4.8.*"
+        },
+        "time": "2018-01-15T15:26:51+00:00",
+        "bin": [
+            "cssmin"
+        ],
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "tubalmartin\\CssMin\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Túbal Martín",
+                "homepage": "http://tubalmartin.me/"
+            }
+        ],
+        "description": "A PHP port of the YUI CSS compressor",
+        "homepage": "https://github.com/tubalmartin/YUI-CSS-compressor-PHP-port",
+        "keywords": [
+            "compress",
+            "compressor",
+            "css",
+            "cssmin",
+            "minify",
+            "yui"
+        ]
+    }
+]
