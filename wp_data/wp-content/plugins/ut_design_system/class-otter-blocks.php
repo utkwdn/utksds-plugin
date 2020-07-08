@@ -42,7 +42,7 @@ class Otter_Blocks {
 	 * @access  public
 	 */
 	public function __construct() {
-		$this->name        = __( 'Otter', 'otter-blocks' );
+		$this->name        = __( 'UT Design System', 'otter-blocks' );
 		$this->description = __( 'Blocks for Gutenberg', 'otter-blocks' );
 	}
 
