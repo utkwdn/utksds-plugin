@@ -37,9 +37,6 @@ define( 'DB_CHARSET', 'utf8');
 /** The Database Collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '');
 
-/** per StackOverflow */
-define( 'FS_METHOD', 'direct' );
-
 /**#@+
  * Authentication Unique Keys and Salts.
  *
@@ -49,14 +46,14 @@ define( 'FS_METHOD', 'direct' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         '1d82bc5420ec3057fc62743fd3490cb707fe23c6');
-define( 'SECURE_AUTH_KEY',  '1449fb43b21037c50040672a72d2ebcaf7155e04');
-define( 'LOGGED_IN_KEY',    '4d0b076f0ce55fae9b960882d698c8d1c90a66b4');
-define( 'NONCE_KEY',        '320036b612bff1ce01264a2e87c7eca2ed71380f');
-define( 'AUTH_SALT',        '81716e0d883bc52ed027a0a588a4ee44b0c5225a');
-define( 'SECURE_AUTH_SALT', '00d4fabccce50bc23cf1417a093e34077471dc13');
-define( 'LOGGED_IN_SALT',   'd2825a0d8bc34402c19345ac881783dad8717cdf');
-define( 'NONCE_SALT',       '78fa438e69443f6555ef86aa49b0f8a9586ea04a');
+define( 'AUTH_KEY',         '2cdf62f1caacb976cfb0cb0910182c08900fbd48');
+define( 'SECURE_AUTH_KEY',  'c67682445d3dcc2920758fcaaada79153012d371');
+define( 'LOGGED_IN_KEY',    '457ffb86b69ba55d7f53792a76091b0e5ff61ea1');
+define( 'NONCE_KEY',        'c0ac801880ce547069b06816af032ba7da0c446f');
+define( 'AUTH_SALT',        '33c74be4ab0edbab8ed25a5c0957045b828eb507');
+define( 'SECURE_AUTH_SALT', '66050bf62ce88f512699cdf36ead171894d70441');
+define( 'LOGGED_IN_SALT',   '9bed013d593e24118dcb15a7307299fca1892175');
+define( 'NONCE_SALT',       'b154097e778f551134ed399069b76ff11fb1b417');
 
 /**#@-*/
 
