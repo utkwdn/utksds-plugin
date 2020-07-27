@@ -8,7 +8,7 @@ import './editor.scss';
 registerBlockType( 'jumbotron-fluid/main', {
 	title: 'Fluid Jumbotron',
 	icon: 'editor-contract',
-	category: 'common',
+	category: 'utdesign_system',
 	attributes: {
 		header: {
 			source: 'text',

@@ -7,8 +7,8 @@ import './editor.scss';
 
 registerBlockType( 'accordion-block/main', {
 	title: 'Accordion',
-	icon: 'palmtree',
-	category: 'common',
+	icon: 'menu',
+	category: 'utdesign_system',
 	attributes: {
 		title: {
 			source: 'text',

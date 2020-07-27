@@ -13,6 +13,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+function utdesign_blocks_category($categories, $post) {
+	return array_merge(
+		$categories,
+		array(
+			array(
+				'slug' => 'utdesign_system',
+				'title' => 'University of Tennessee UI Design System',
+				'icon' => 'welcome-learn-more'
+			)
+		)
+	);
+};
+
+add_filter('block_categories', 'utdesign_blocks_category', 10, 2);
+
 /**
  * Enqueue Gutenberg block assets for both frontend + backend.
  *

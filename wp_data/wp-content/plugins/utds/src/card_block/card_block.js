@@ -9,7 +9,7 @@ import './editor.scss';
 registerBlockType( 'card-block/main', {
 	title: 'Card',
 	icon: 'heart',
-	category: 'common',
+	category: 'utdesign_system',
 	attributes: {
 		title: {
 			source: 'text',
