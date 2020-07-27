@@ -75,12 +75,12 @@ registerBlockType( 'jumbotron/main', {
 
 	save( { attributes } ) {
 		return (
-			<div class="jumbotron">
-				<h1 class="display-4">{ attributes.header }</h1>
-				<p class="lead jt_lead">{ attributes.lead }</p>
-				<hr class="my-4" />
-				<p class="jt_subtext">{ attributes.subtext }</p>
-				<a class="btn btn-primary btn-lg jt_btn" href={ attributes.buttonhref } role="button">{ attributes.buttontext }</a>
+			<div className="jumbotron">
+				<h1 className="display-4">{ attributes.header }</h1>
+				<p className="lead jt_lead">{ attributes.lead }</p>
+				<hr className="my-4" />
+				<p className="jt_subtext">{ attributes.subtext }</p>
+				<a className="btn btn-primary btn-lg jt_btn" href={ attributes.buttonhref } role="button">{ attributes.buttontext }</a>
 			</div>
 		);
 	},
