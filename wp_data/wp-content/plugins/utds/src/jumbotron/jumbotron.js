@@ -27,10 +27,10 @@ registerBlockType( 'jumbotron/main', {
 		},
 		buttonhref: {
 			source: 'string',
+			selector: '.btn',
 		},
 		buttontext: {
 			source: 'string',
-			selector: '.jt_btn',
 		},
 	},
 	// eslint-disable-next-line no-unused-vars
@@ -75,7 +75,7 @@ registerBlockType( 'jumbotron/main', {
 				<p className="lead">{ attributes.lead }</p>
 				<hr className="my-4" />
 				<p className="subtext">{ attributes.subtext }</p>
-				<a className="btn btn-primary btn-lg jt_btn" href={ attributes.buttonhref } role="button">{ attributes.buttontext }</a>
+				<a className="btn btn-primary btn-lg" href={ attributes.buttonhref } role="button">{ attributes.buttontext }</a>
 			</div>
 		);
 	},

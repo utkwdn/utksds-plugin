@@ -6,7 +6,7 @@ import { RichText, BlockControls, AlignmentToolbar, InspectorControls, PanelColo
 class Edit extends Component {
 	render() {
 		// eslint-disable-next-line no-console
-		console.log( this.props );
+		// console.log( this.props );
 		const { className, attributes, setTextColor, setBackgroundColor, backgroundColor, textColor } = this.props;
 		const { content, alignment } = attributes;
 		// eslint-disable-next-line no-shadow

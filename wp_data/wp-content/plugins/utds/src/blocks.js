@@ -14,3 +14,4 @@ import './card_block/card_block.js';
 import './accordion_block/accordion_block.js';
 import './jumbotron/jumbotron.js';
 import './jumbotron_fluid/jumbotron_fluid.js';
+import './button/button.js';

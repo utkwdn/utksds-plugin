@@ -1,5 +1,6 @@
 const { PlainText } = wp.editor;
 const { registerBlockType } = wp.blocks;
+const Fragment = wp.element.Fragment;
 
 // Import our CSS files
 import './style.scss';
@@ -21,7 +22,7 @@ registerBlockType( 'button/main', {
 	// eslint-disable-next-line no-unused-vars
 	edit( { attributes, setAttributes } ) {
 		return (
-			<div className="button_container">
+			<Fragment>
 				<PlainText
 					onChange={ content => setAttributes( { buttonhref: content } ) }
 					value={ attributes.buttonhref }
@@ -32,7 +33,7 @@ registerBlockType( 'button/main', {
 					value={ attributes.buttontext }
 					placeholder="button text"
 				/>
-			</div>
+			</Fragment>
 		);
 	},
 
