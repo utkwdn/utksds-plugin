@@ -1,5 +1,6 @@
 const { RichText, PlainText } = wp.editor;
 const { registerBlockType } = wp.blocks;
+const Fragment = wp.element.Fragment;
 
 // Import our CSS files
 import './style.scss';
@@ -21,9 +22,9 @@ registerBlockType( 'accordion-block/main', {
 		},
 	},
 	// eslint-disable-next-line no-unused-vars
-	edit( { attributes, className, setAttributes } ) {
+	edit( { attributes, setAttributes } ) {
 		return (
-			<div className="container">
+			<Fragment>
 				<PlainText
 					onChange={ content => setAttributes( { title: content } ) }
 					value={ attributes.title }
@@ -38,7 +39,7 @@ registerBlockType( 'accordion-block/main', {
 					formattingControls={ [ 'bold', 'italic', 'underline' ] }
 					isSelected={ attributes.isSelected }
 				/>
-			</div>
+			</Fragment>
 		);
 	},
 

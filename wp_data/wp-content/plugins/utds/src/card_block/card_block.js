@@ -30,7 +30,7 @@ registerBlockType( 'card-block/main', {
 		},
 	},
 	// eslint-disable-next-line no-unused-vars
-	edit( { attributes, className, setAttributes } ) {
+	edit( { attributes, setAttributes } ) {
 		const getImageButton = ( openEvent ) => {
 			if ( attributes.imageUrl ) {
 				return (

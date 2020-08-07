@@ -1,5 +1,6 @@
 const { RichText, PlainText } = wp.editor;
 const { registerBlockType } = wp.blocks;
+const Fragment = wp.element.Fragment;
 
 // Import our CSS files
 import './style.scss';
@@ -11,53 +12,47 @@ registerBlockType( 'jumbotron/main', {
 	category: 'utdesign_system',
 	attributes: {
 		header: {
-			source: 'text',
-			selector: '.jt_header',
+			source: 'string',
+			selector: '.display-4',
 		},
 		lead: {
 			type: 'array',
 			source: 'children',
-			selector: '.jt_lead',
+			selector: '.lead',
 		},
 		subtext: {
 			type: 'array',
 			source: 'children',
-			selector: '.jt_subtext',
+			selector: '.subtext',
 		},
 		buttonhref: {
-			source: 'text',
-			selector: '.jt_btn',
+			source: 'string',
 		},
 		buttontext: {
-			source: 'text',
+			source: 'string',
 			selector: '.jt_btn',
 		},
 	},
 	// eslint-disable-next-line no-unused-vars
-	edit( { attributes, className, setAttributes } ) {
+	edit( { attributes, setAttributes } ) {
 		return (
-			<div className="container">
+			<Fragment>
 				<PlainText
 					onChange={ content => setAttributes( { header: content } ) }
 					value={ attributes.header }
 					placeholder="Header text"
-					className="heading"
 				/>
 				<RichText
 					onChange={ content => setAttributes( { lead: content } ) }
 					value={ attributes.lead }
-					multiline="p"
 					placeholder="Your lead text"
 					formattingControls={ [ 'bold', 'italic', 'underline' ] }
-					isSelected={ attributes.isSelected }
 				/>
 				<RichText
 					onChange={ content => setAttributes( { subtext: content } ) }
 					value={ attributes.subtext }
-					multiline="p"
 					placeholder="Your sub/main text"
 					formattingControls={ [ 'bold', 'italic', 'underline' ] }
-					isSelected={ attributes.isSelected }
 				/>
 				<PlainText
 					onChange={ content => setAttributes( { buttonhref: content } ) }
@@ -69,7 +64,7 @@ registerBlockType( 'jumbotron/main', {
 					value={ attributes.buttontext }
 					placeholder="button text"
 				/>
-			</div>
+			</Fragment>
 		);
 	},
 
@@ -77,9 +72,9 @@ registerBlockType( 'jumbotron/main', {
 		return (
 			<div className="jumbotron">
 				<h1 className="display-4">{ attributes.header }</h1>
-				<p className="lead jt_lead">{ attributes.lead }</p>
+				<p className="lead">{ attributes.lead }</p>
 				<hr className="my-4" />
-				<p className="jt_subtext">{ attributes.subtext }</p>
+				<p className="subtext">{ attributes.subtext }</p>
 				<a className="btn btn-primary btn-lg jt_btn" href={ attributes.buttonhref } role="button">{ attributes.buttontext }</a>
 			</div>
 		);

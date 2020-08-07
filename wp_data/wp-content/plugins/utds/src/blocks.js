@@ -9,6 +9,7 @@
  * Webpack is compiling as the input file.
  */
 
+import './base/base.js';
 import './card_block/card_block.js';
 import './accordion_block/accordion_block.js';
 import './jumbotron/jumbotron.js';
