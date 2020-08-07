@@ -14,9 +14,11 @@ registerBlockType( 'button/main', {
 		buttonhref: {
 			type: 'url',
 			source: 'text',
+			selector: '.btn',
 		},
 		buttontext: {
 			source: 'text',
+			selector: '.buttontext',
 		},
 	},
 	// eslint-disable-next-line no-unused-vars
@@ -40,7 +42,7 @@ registerBlockType( 'button/main', {
 	save( { attributes } ) {
 		return (
 			<div className="button_container">
-				<a className="btn btn-primary" href={ attributes.buttonhref } role="button">{ attributes.buttontext }</a>
+				<a className="btn btn-primary" href={ attributes.buttonhref } role="button"><p className="buttontext">{ attributes.buttontext }</p></a>
 			</div>
 		);
 	},

@@ -12,7 +12,7 @@ registerBlockType( 'jumbotron/main', {
 	category: 'utdesign_system',
 	attributes: {
 		header: {
-			source: 'string',
+			type: 'string',
 			selector: '.display-4',
 		},
 		lead: {
@@ -26,11 +26,11 @@ registerBlockType( 'jumbotron/main', {
 			selector: '.subtext',
 		},
 		buttonhref: {
-			source: 'string',
+			type: 'string',
 			selector: '.btn',
 		},
 		buttontext: {
-			source: 'string',
+			type: 'string',
 		},
 	},
 	// eslint-disable-next-line no-unused-vars

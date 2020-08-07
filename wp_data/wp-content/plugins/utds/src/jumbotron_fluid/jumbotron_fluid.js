@@ -7,12 +7,12 @@ import './style.scss';
 import './editor.scss';
 
 registerBlockType( 'jumbotron-fluid/main', {
-	title: 'Fluid Jumbotron',
+	title: 'Jumbotron-fluid',
 	icon: 'editor-contract',
 	category: 'utdesign_system',
 	attributes: {
 		header: {
-			source: 'string',
+			type: 'string',
 			selector: '.display-4',
 		},
 		lead: {
@@ -26,11 +26,11 @@ registerBlockType( 'jumbotron-fluid/main', {
 			selector: '.subtext',
 		},
 		buttonhref: {
-			source: 'string',
+			type: 'string',
+			selector: '.btn',
 		},
 		buttontext: {
-			source: 'string',
-			selector: '.jt_btn',
+			type: 'string',
 		},
 	},
 	// eslint-disable-next-line no-unused-vars
@@ -75,7 +75,7 @@ registerBlockType( 'jumbotron-fluid/main', {
 				<p className="lead">{ attributes.lead }</p>
 				<hr className="my-4" />
 				<p className="subtext">{ attributes.subtext }</p>
-				<a className="btn btn-primary btn-lg jt_btn" href={ attributes.buttonhref } role="button">{ attributes.buttontext }</a>
+				<a className="btn btn-primary btn-lg" href={ attributes.buttonhref } role="button">{ attributes.buttontext }</a>
 			</div>
 		);
 	},
