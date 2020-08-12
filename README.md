@@ -12,3 +12,5 @@ Plugin files can be obtained from `wp-content/plugins`
 
 ## Post clone
 Run npm install in plugins/utds
+
+Run `npm start` in plugin root to automatically compile changes.
