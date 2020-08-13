@@ -140,9 +140,11 @@ add_action( 'widgets_init', 'utdev_test_widgets_init' );
  * Enqueue scripts and styles.
  */
 function utdev_test_scripts() {
+	wp_enqueue_style( 'bootstrap-style', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css' );
 	wp_enqueue_style( 'utdev-test-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_style_add_data( 'utdev-test-style', 'rtl', 'replace' );
-
+	wp_enqueue_script( 'jquery' , 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js' );
+	wp_enqueue_script( 'bootstrap-js' , 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js' );
 	wp_enqueue_script( 'utdev-test-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
