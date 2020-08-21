@@ -11,7 +11,7 @@ import './style.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-import { RichText, getColorClassName } from '@wordpress/block-editor';
+import { RichText, InnerBlocks, getColorClassName } from '@wordpress/block-editor';
 import Edit from './edit';
 import classnames from 'classnames';
 // import { PanelBody } from '@wordpress/components';
@@ -108,6 +108,7 @@ registerBlockType( 'cgb/main', {
 					color: foregroundClass ? undefined : customTextColor,
 				} }
 			/>
+			<InnerBlocks.content />
 		);
 	},
 } );

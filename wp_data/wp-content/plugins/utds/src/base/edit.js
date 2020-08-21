@@ -1,7 +1,7 @@
 import { Component } from '@wordpress/element';
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const Fragment = wp.element.Fragment;
-import { RichText, BlockControls, AlignmentToolbar, InspectorControls, PanelColorSettings, withColors, ContrastChecker } from '@wordpress/block-editor';
+import { RichText, BlockControls, AlignmentToolbar, InspectorControls, PanelColorSettings, withColors, ContrastChecker, InnerBlocks } from '@wordpress/block-editor';
 
 class Edit extends Component {
 	render() {
@@ -55,6 +55,7 @@ class Edit extends Component {
 					formattingControls={ [ 'bold' ] }
 					style={ { textAlign: alignment, backgroundColor: backgroundColor.color, color: textColor.color } }
 				/>
+				<InnerBlocks />
 			</Fragment>
 		);
 	}
