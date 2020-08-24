@@ -10,7 +10,7 @@ import './editor.scss';
 import './style.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
-const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
+const { registerBlockType, createBlock } = wp.blocks; // Import registerBlockType() from wp.blocks
 import { RichText, InnerBlocks, getColorClassName } from '@wordpress/block-editor';
 import Edit from './edit';
 import classnames from 'classnames';
@@ -83,6 +83,35 @@ registerBlockType( 'cgb/main', {
 		},
 	},
 
+	transforms: {
+		from: [
+			{
+				type: 'block',
+				blocks: [ 'core/paragraph' ],
+				transform: ( { content, align } ) => {
+					return createBlock( 'cgb/main', {
+						content: content,
+						alignment: align,
+					} );
+				},
+			},
+			// type: 'prefix',
+		],
+		to: [
+			{
+				type: 'block',
+				blocks: [ 'core/paragraph' ],
+				transform: ( { content, alignment } ) => {
+					return createBlock( 'core/paragraph', {
+						content: content,
+						align: alignment,
+					} );
+				},
+			},
+
+		],
+	},
+
 	edit: Edit,
 
 	save: ( props ) => {
@@ -98,17 +127,19 @@ registerBlockType( 'cgb/main', {
 		} );
 
 		return (
-			<RichText.Content
-				tagName="p"
-				className={ classes }
-				value={ content }
-				style={ {
-					textAlign: alignment,
-					backgroundColor: backgroundClass ? undefined : customBackgroundColor,
-					color: foregroundClass ? undefined : customTextColor,
-				} }
-			/>
-			<InnerBlocks.content />
+			<div>
+				<RichText.Content
+					tagName="p"
+					className={ classes }
+					value={ content }
+					style={ {
+						textAlign: alignment,
+						backgroundColor: backgroundClass ? undefined : customBackgroundColor,
+						color: foregroundClass ? undefined : customTextColor,
+					} }
+				/>
+				<InnerBlocks.content />
+			</div>
 		);
 	},
 } );
