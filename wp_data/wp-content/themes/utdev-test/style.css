@@ -967,3 +967,7 @@ textarea {
 	margin-right: auto;
 	margin-bottom: 1.5em;
 }
+
+svg#utk_logo_footer {
+	width: 200px !important;
+}
