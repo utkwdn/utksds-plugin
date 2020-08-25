@@ -138,7 +138,7 @@ registerBlockType( 'cgb/main', {
 						color: foregroundClass ? undefined : customTextColor,
 					} }
 				/>
-				<InnerBlocks.content />
+				<InnerBlocks.Content />
 			</div>
 		);
 	},

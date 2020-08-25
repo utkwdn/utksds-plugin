@@ -26,24 +26,26 @@
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'utdev-test' ); ?></a>
 
 	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$utdev_test_description = get_bloginfo( 'description', 'display' );
-			if ( $utdev_test_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $utdev_test_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
+		<nav class="navbar navbar-dark bg-dark">
+			<a class="navbar-brand text-uppercase font-weight-bolder text-decoration-none text-small" href="https://www.utk.edu/">
+			<svg version="1.1" id="utk-powert" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				viewBox="0 0 20.74 20.74" style="enable-background:new 0 0 20.74 20.74;height: 1.75rem; width: 1.75rem;margin-top: -0.25rem;" xml:space="preserve">
+				<style type="text/css">
+					.st0{fill:#FF8200;}
+					.st1{fill:#FFFFFF;}
+				</style>
+				<polygon class="st0" points="20.74,20.74 20.74,0 0,0 0,20.74 20.74,20.74 "/>
+				<path class="st1" d="M18.12,2.62v5.23h-1.94c0-0.96-0.95-1.74-2.13-1.74c-0.86,0-1.6,0.42-1.94,1.02v6.54
+					c0,1.39,1.08,2.52,2.42,2.52h0.01v1.94H6.2v-1.94h0.01c1.34,0,2.42-1.13,2.42-2.52V7.12C8.29,6.52,7.55,6.1,6.69,6.1
+					c-1.18,0-2.13,0.78-2.13,1.74H2.62V2.62H18.12L18.12,2.62z"/>
+			</svg>
+
+			<span class="d-none d-md-inline">University of Tennessee, Knoxville</span></a>
+			
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#searchHeader" aria-controls="searchHeader" aria-expanded="false" aria-label="Toggle search">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</nav>
 
 		<nav id="site-navigation" class="main-navigation">
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'utdev-test' ); ?></button>

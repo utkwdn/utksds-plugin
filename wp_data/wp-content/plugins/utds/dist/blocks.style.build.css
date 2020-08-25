@@ -11,9 +11,7 @@
  */
 .wp-block-cgb-main {
   color: #292929;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem; }
+  margin: 0 auto; }
   .wp-block-cgb-main.is-style-outline {
     border: 2px solid currentColor; }
   .wp-block-cgb-main.is-style-rounded {
