@@ -1,8 +1,6 @@
 const { RichText, PlainText } = wp.editor;
 const { registerBlockType } = wp.blocks;
-const Fragment = wp.element.Fragment;
 
-// Import our CSS files
 import './style.scss';
 import './editor.scss';
 
@@ -33,10 +31,9 @@ registerBlockType( 'jumbotron-fluid/main', {
 			type: 'string',
 		},
 	},
-	// eslint-disable-next-line no-unused-vars
 	edit( { attributes, setAttributes } ) {
 		return (
-			<Fragment>
+			<div className="jumbotron-fluid-edit">
 				<PlainText
 					onChange={ content => setAttributes( { header: content } ) }
 					value={ attributes.header }
@@ -64,7 +61,7 @@ registerBlockType( 'jumbotron-fluid/main', {
 					value={ attributes.buttontext }
 					placeholder="button text"
 				/>
-			</Fragment>
+			</div>
 		);
 	},
 

@@ -5,11 +5,32 @@
  * which makes it higher in priority.
  */
 
-.wp-block-cgb-block-utds  {
-  background: $green;
-  border: 0.2rem solid $black;
-  color: $black;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem;
+.jumbotron .jumbotron-edit {
+  padding: 4rem 2rem;
+  margin-bottom: 2rem;
+  background-color: #e9ecef;
+  border-radius: 0.3rem;
+}
+
+.jtedit-header {
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.jtedit-leadtext {
+  line-height: 1.2;
+  font-size: 1.25rem;
+}
+
+.jtedit-maintext {
+
+}
+
+.jtedit-buttonlink {
+
+}
+
+.jtedit-buttonlinktext {
+
 }

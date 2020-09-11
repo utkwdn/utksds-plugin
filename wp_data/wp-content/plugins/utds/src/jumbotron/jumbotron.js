@@ -1,8 +1,6 @@
 const { RichText, PlainText } = wp.editor;
 const { registerBlockType } = wp.blocks;
-const Fragment = wp.element.Fragment;
 
-// Import our CSS files
 import './style.scss';
 import './editor.scss';
 
@@ -27,44 +25,49 @@ registerBlockType( 'jumbotron/main', {
 		},
 		buttonhref: {
 			type: 'string',
-			selector: '.btn',
+			selector: '.btn[href]',
 		},
 		buttontext: {
 			type: 'string',
 		},
 	},
-	// eslint-disable-next-line no-unused-vars
 	edit( { attributes, setAttributes } ) {
 		return (
-			<Fragment>
+			<div className="jumbotron-edit jumbotron">
 				<PlainText
 					onChange={ content => setAttributes( { header: content } ) }
 					value={ attributes.header }
 					placeholder="Header text"
+					className="jtedit-header"
 				/>
 				<RichText
 					onChange={ content => setAttributes( { lead: content } ) }
 					value={ attributes.lead }
 					placeholder="Your lead text"
 					formattingControls={ [ 'bold', 'italic', 'underline' ] }
+					className="jtedit-leadtext"
 				/>
+				<hr />
 				<RichText
 					onChange={ content => setAttributes( { subtext: content } ) }
 					value={ attributes.subtext }
 					placeholder="Your sub/main text"
 					formattingControls={ [ 'bold', 'italic', 'underline' ] }
+					className="jtedit-maintext"
 				/>
 				<PlainText
 					onChange={ content => setAttributes( { buttonhref: content } ) }
 					value={ attributes.buttonhref }
 					placeholder="button href - prepend http:// manually for now"
+					className="jtedit-buttonlink"
 				/>
 				<PlainText
 					onChange={ content => setAttributes( { buttontext: content } ) }
 					value={ attributes.buttontext }
 					placeholder="button text"
+					className="jtedit-buttonlinktext"
 				/>
-			</Fragment>
+			</div>
 		);
 	},
 

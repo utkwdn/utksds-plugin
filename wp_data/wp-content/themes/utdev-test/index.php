@@ -14,7 +14,7 @@
 
 get_header();
 ?>
-	<div class="container-fluik">
+	<div class="container-fluid">
 		<div class="row">
 			<?php
 			get_sidebar();

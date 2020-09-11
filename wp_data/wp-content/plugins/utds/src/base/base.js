@@ -1,143 +1,192 @@
-/**
- * BLOCK: testblock
- *
- * Registering a basic block with Gutenberg.
- * Simple block, renders and saves the same content without any interactivity.
- */
+const { registerBlockType } = wp.blocks;
+const {
+	RichText,
+	InspectorControls,
+	ColorPalette,
+	MediaUpload,
+	InnerBlocks,
+	BlockControls,
+	AlignmentToolbar,
+} = wp.editor;
+const { PanelBody, IconButton, RangeControl } = wp.components;
+const ALLOWED_BLOCKS = [ 'core/button' ];
 
-//  Import CSS.
-import './editor.scss';
-import './style.scss';
-
-const { __ } = wp.i18n; // Import __() from wp.i18n
-const { registerBlockType, createBlock } = wp.blocks; // Import registerBlockType() from wp.blocks
-import { RichText, InnerBlocks, getColorClassName } from '@wordpress/block-editor';
-import Edit from './edit';
-import classnames from 'classnames';
-// import { PanelBody } from '@wordpress/components';
-
-/**
- * Register: aa Gutenberg Block.
- *
- * Registers a new block provided a unique name and an object defining its
- * behavior. Once registered, the block is made editor as an option to any
- * editor interface where blocks are implemented.
- *
- * @link https://wordpress.org/gutenberg/handbook/block-api/
- * @param  {string}   name     Block name.
- * @param  {Object}   settings Block settings.
- * @return {?WPBlock}          The block, if it has been successfully
- *                             registered; otherwise `undefined`.
- */
-registerBlockType( 'cgb/main', {
-	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'base-devel' ), // Block title.
-	description: __( 'Initial block template for design system' ),
+registerBlockType( 'base2/main', {
+	title: 'Base',
+	description: 'V2 Base, Color Picker, Accessibility, InnerBlock Support',
 	icon: {
 		background: '#d79213',
 		foreground: '#fff',
 		src: 'palmtree',
 	},
 	category: 'utdesign_system',
-	keywords: [
-		__( 'UT UI KIT' ),
-		__( 'Bootstrap' ),
-		__( 'Design Kit' ),
-	],
-	styles: [
-		{
-			name: 'squared',
-			label: __( 'Squared' ),
-			isDefault: true,
-		},
-		{
-			name: 'outline',
-			label: __( 'Outline' ),
-		},
-		{
-			name: 'rounded',
-			label: __( 'Rounded' ),
-		},
-	],
+
+	// custom attributes
 	attributes: {
-		content: {
+		title: {
+			type: 'string',
+			source: 'html',
+			selector: 'h2',
+		},
+		titleColor: {
+			type: 'string',
+			default: 'black',
+		},
+		body: {
 			type: 'string',
 			source: 'html',
 			selector: 'p',
 		},
 		alignment: {
 			type: 'string',
+			default: 'none',
 		},
-		backgroundColor: {
+		backgroundImage: {
 			type: 'string',
+			default: null,
 		},
-		textColor: {
+		overlayColor: {
 			type: 'string',
+			default: 'black',
 		},
-		// these two attrs are predefined, so they only need to be instantiated here
-		customBackgroundColor: {
-			type: 'string',
-		},
-		customTextColor: {
-			type: 'string',
+		overlayOpacity: {
+			type: 'number',
+			default: 0.3,
 		},
 	},
 
-	transforms: {
-		from: [
-			{
-				type: 'block',
-				blocks: [ 'core/paragraph' ],
-				transform: ( { content, align } ) => {
-					return createBlock( 'cgb/main', {
-						content: content,
-						alignment: align,
-					} );
-				},
-			},
-			// type: 'prefix',
-		],
-		to: [
-			{
-				type: 'block',
-				blocks: [ 'core/paragraph' ],
-				transform: ( { content, alignment } ) => {
-					return createBlock( 'core/paragraph', {
-						content: content,
-						align: alignment,
-					} );
-				},
-			},
+	edit: ( { attributes, setAttributes } ) => {
+		const {
+			title,
+			body,
+			alignment,
+			titleColor,
+			backgroundImage,
+			overlayColor,
+			overlayOpacity,
+		} = attributes;
 
-		],
+		// custom functions
+		function onChangeTitle( newTitle ) {
+			setAttributes( { title: newTitle } );
+		}
+
+		function onChangeBody( newBody ) {
+			setAttributes( { body: newBody } );
+		}
+
+		function onTitleColorChange( newColor ) {
+			setAttributes( { titleColor: newColor } );
+		}
+
+		function onSelectImage( newImage ) {
+			setAttributes( { backgroundImage: newImage.sizes.full.url } );
+		}
+
+		function onOverlayColorChange( newColor ) {
+			setAttributes( { overlayColor: newColor } );
+		}
+
+		function onOverlayOpacityChange( newOpacity ) {
+			setAttributes( { overlayOpacity: newOpacity } );
+		}
+
+		function onChangeAlignment( newAlignment ) {
+			setAttributes( {
+				alignment: newAlignment === undefined ? 'none' : newAlignment,
+			} );
+		}
+
+		return ( [
+			// eslint-disable-next-line react/jsx-key
+			<InspectorControls style={ { marginBottom: '40px' } }>
+				<PanelBody title={ 'Font Color Settings' }>
+					<p><strong>Select a Title color:</strong></p>
+					<ColorPalette value={ titleColor }
+						onChange={ onTitleColorChange } />
+				</PanelBody>
+				<PanelBody title={ 'Background Image Settings' }>
+					<p><strong>Select a Background Image:</strong></p>
+					<MediaUpload
+						onSelect={ onSelectImage }
+						type="image"
+						value={ backgroundImage }
+						render={ ( { open } ) => (
+							<IconButton
+								className="editor-media-placeholder__button is-button is-default is-large"
+								icon="upload"
+								onClick={ open }>
+								Background Image
+							</IconButton>
+						) } />
+					<div style={ { marginTop: '20px', marginBottom: '40px' } }>
+						<p><strong>Overlay Color:</strong></p>
+						<ColorPalette value={ overlayColor }
+							onChange={ onOverlayColorChange } />
+					</div>
+					<RangeControl
+						label={ 'Overlay Opacity' }
+						value={ overlayOpacity }
+						onChange={ onOverlayOpacityChange }
+						min={ 0 }
+						max={ 1 }
+						step={ 0.01 } />
+				</PanelBody>
+			</InspectorControls>,
+			// eslint-disable-next-line react/jsx-key
+			<div className="cta-container" style={ {
+				backgroundImage: `url(${ backgroundImage })`,
+				backgroundSize: 'cover',
+				backgroundPosition: 'center',
+				backgroundRepeat: 'no-repeat',
+			} }>
+				<div className="cta-overlay" style={ { background: overlayColor, opacity: overlayOpacity } }></div>
+				{
+					<BlockControls>
+						<AlignmentToolbar value={ alignment }
+							onChange={ onChangeAlignment } />
+					</BlockControls>
+				}
+				<RichText key="editable"
+					tagName="h2"
+					placeholder="Your CTA Title"
+					value={ title }
+					onChange={ onChangeTitle }
+					style={ { color: titleColor, textAlign: alignment } } />
+				<RichText key="editable"
+					tagName="p"
+					placeholder="Your CTA Description"
+					value={ body }
+					onChange={ onChangeBody }
+					style={ { textAlign: alignment } } />
+				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
+			</div>,
+		] );
 	},
 
-	edit: Edit,
-
-	save: ( props ) => {
-		const { content, alignment, backgroundColor, textColor, customBackgroundColor, customTextColor } = props.attributes;
-		const backgroundClass = getColorClassName( 'background-color', backgroundColor );
-		const foregroundClass = getColorClassName( 'color', textColor );
-		// eslint-disable-next-line no-console
-		// console.log( props.attributes );
-
-		const classes = classnames( {
-			[ backgroundClass ]: backgroundClass,
-			[ foregroundClass ]: foregroundClass,
-		} );
+	save: ( { attributes } ) => {
+		const {
+			title,
+			body,
+			alignment,
+			titleColor,
+			backgroundImage,
+			overlayColor,
+			overlayOpacity,
+		} = attributes;
 
 		return (
-			<div>
-				<RichText.Content
-					tagName="p"
-					className={ classes }
-					value={ content }
-					style={ {
-						textAlign: alignment,
-						backgroundColor: backgroundClass ? undefined : customBackgroundColor,
-						color: foregroundClass ? undefined : customTextColor,
-					} }
-				/>
+			<div className="cta-container" style={ {
+				backgroundImage: `url(${ backgroundImage })`,
+				backgroundSize: 'cover',
+				backgroundPosition: 'center',
+				backgroundRepeat: 'no-repeat',
+			} }>
+				<div className="cta-overlay" style={ { background: overlayColor, opacity: overlayOpacity } }></div>
+				<h2 style={ { color: titleColor, textAlign: alignment } }>{ title }</h2>
+				<RichText.Content tagName="p"
+					value={ body }
+					style={ { textAlign: alignment } } />
 				<InnerBlocks.Content />
 			</div>
 		);
