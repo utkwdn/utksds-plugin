@@ -9,7 +9,7 @@ const {
 	AlignmentToolbar,
 } = wp.editor;
 const { PanelBody, IconButton, RangeControl } = wp.components;
-const ALLOWED_BLOCKS = [ 'core/button' ];
+const ALLOWED_BLOCKS = [ 'core/button', 'core/column', 'core/columns' ];
 
 registerBlockType( 'base2/main', {
 	title: 'Base',
