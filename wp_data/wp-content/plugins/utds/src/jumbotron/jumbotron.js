@@ -1,5 +1,15 @@
-const { RichText, PlainText } = wp.editor;
 const { registerBlockType } = wp.blocks;
+const {
+	RichText,
+	InspectorControls,
+	ColorPalette,
+	MediaUpload,
+	InnerBlocks,
+	BlockControls,
+	AlignmentToolbar,
+} = wp.editor;
+const { PanelBody, IconButton, RangeControl } = wp.components;
+const ALLOWED_BLOCKS = [ 'core/button', 'core/column', 'core/columns', 'core/separator' ];
 
 import './style.scss';
 import './editor.scss';
@@ -9,76 +19,171 @@ registerBlockType( 'jumbotron/main', {
 	icon: 'editor-contract',
 	category: 'utdesign_system',
 	attributes: {
-		header: {
+		title: {
 			type: 'string',
-			selector: '.display-4',
+			source: 'html',
+			selector: 'h2',
 		},
-		lead: {
-			type: 'array',
-			source: 'children',
-			selector: '.lead',
-		},
-		subtext: {
-			type: 'array',
-			source: 'children',
-			selector: '.subtext',
-		},
-		buttonhref: {
+		titleColor: {
 			type: 'string',
-			selector: '.btn[href]',
+			default: 'black',
 		},
-		buttontext: {
+		body: {
 			type: 'string',
+			source: 'html',
+			selector: 'p',
 		},
-	},
-	edit( { attributes, setAttributes } ) {
-		return (
-			<div className="jumbotron-edit jumbotron">
-				<PlainText
-					onChange={ content => setAttributes( { header: content } ) }
-					value={ attributes.header }
-					placeholder="Header text"
-					className="jtedit-header"
-				/>
-				<RichText
-					onChange={ content => setAttributes( { lead: content } ) }
-					value={ attributes.lead }
-					placeholder="Your lead text"
-					formattingControls={ [ 'bold', 'italic', 'underline' ] }
-					className="jtedit-leadtext"
-				/>
-				<hr />
-				<RichText
-					onChange={ content => setAttributes( { subtext: content } ) }
-					value={ attributes.subtext }
-					placeholder="Your sub/main text"
-					formattingControls={ [ 'bold', 'italic', 'underline' ] }
-					className="jtedit-maintext"
-				/>
-				<PlainText
-					onChange={ content => setAttributes( { buttonhref: content } ) }
-					value={ attributes.buttonhref }
-					placeholder="button href - prepend http:// manually for now"
-					className="jtedit-buttonlink"
-				/>
-				<PlainText
-					onChange={ content => setAttributes( { buttontext: content } ) }
-					value={ attributes.buttontext }
-					placeholder="button text"
-					className="jtedit-buttonlinktext"
-				/>
-			</div>
-		);
+		alignment: {
+			type: 'string',
+			default: 'none',
+		},
+		backgroundImage: {
+			type: 'string',
+			default: null,
+		},
+		overlayColor: {
+			type: 'string',
+			default: 'black',
+		},
+		overlayOpacity: {
+			type: 'number',
+			default: 0.3,
+		},
 	},
 
-	save( { attributes } ) {
+	edit: ( { attributes, setAttributes } ) => {
+		const {
+			title,
+			body,
+			alignment,
+			titleColor,
+			backgroundImage,
+			overlayColor,
+			overlayOpacity,
+		} = attributes;
+
+		// custom functions
+		function onChangeTitle( newTitle ) {
+			setAttributes( { title: newTitle } );
+		}
+
+		function onChangeBody( newBody ) {
+			setAttributes( { body: newBody } );
+		}
+
+		function onTitleColorChange( newColor ) {
+			setAttributes( { titleColor: newColor } );
+		}
+
+		function onSelectImage( newImage ) {
+			setAttributes( { backgroundImage: newImage.sizes.full.url } );
+		}
+
+		function onOverlayColorChange( newColor ) {
+			setAttributes( { overlayColor: newColor } );
+		}
+
+		function onOverlayOpacityChange( newOpacity ) {
+			setAttributes( { overlayOpacity: newOpacity } );
+		}
+
+		function onChangeAlignment( newAlignment ) {
+			setAttributes( {
+				alignment: newAlignment === undefined ? 'none' : newAlignment,
+			} );
+		}
+
+		return ( [
+			// eslint-disable-next-line react/jsx-key
+			<InspectorControls style={ { marginBottom: '40px' } }>
+				<PanelBody title={ 'Font Color Settings' }>
+					<p><strong>Select a Title color:</strong></p>
+					<ColorPalette value={ titleColor }
+						onChange={ onTitleColorChange } />
+				</PanelBody>
+				<PanelBody title={ 'Background Image Settings' }>
+					<p><strong>Select a Background Image:</strong></p>
+					<MediaUpload
+						onSelect={ onSelectImage }
+						type="image"
+						value={ backgroundImage }
+						render={ ( { open } ) => (
+							<IconButton
+								className="editor-media-placeholder__button is-button is-default is-large"
+								icon="upload"
+								onClick={ open }>
+								Background Image
+							</IconButton>
+						) } />
+					<div style={ { marginTop: '20px', marginBottom: '40px' } }>
+						<p><strong>Overlay Color:</strong></p>
+						<ColorPalette value={ overlayColor }
+							onChange={ onOverlayColorChange } />
+					</div>
+					<RangeControl
+						label={ 'Overlay Opacity' }
+						value={ overlayOpacity }
+						onChange={ onOverlayOpacityChange }
+						min={ 0 }
+						max={ 1 }
+						step={ 0.01 } />
+				</PanelBody>
+			</InspectorControls>,
+			// eslint-disable-next-line react/jsx-key
+			<div className="jumbotron-edit jumbotron" style={ {
+				backgroundImage: `url(${ backgroundImage })`,
+				backgroundSize: 'cover',
+				backgroundPosition: 'center',
+				backgroundRepeat: 'no-repeat',
+			} }>
+				<div className="cta-overlay" style={ { background: overlayColor, opacity: overlayOpacity } }></div>
+				{
+					<BlockControls>
+						<AlignmentToolbar value={ alignment }
+							onChange={ onChangeAlignment } />
+					</BlockControls>
+				}
+				<RichText key="editable"
+					tagName="h2"
+					placeholder="Your Jumbotron Title"
+					value={ title }
+					onChange={ onChangeTitle }
+					style={ { color: titleColor, textAlign: alignment } } />
+				<RichText key="editable"
+					tagName="p"
+					placeholder="Jumbotron Text"
+					value={ body }
+					onChange={ onChangeBody }
+					style={ { textAlign: alignment } } />
+				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
+			</div>,
+		] );
+	},
+
+	save: ( { attributes } ) => {
+		const {
+			title,
+			body,
+			alignment,
+			titleColor,
+			backgroundImage,
+			overlayColor,
+			overlayOpacity,
+		} = attributes;
+
 		return (
-			<div className="jumbotron">
-				<h1 className="display-4">{ attributes.header }</h1>
-				<p className="lead">{ attributes.lead }</p>
-				<hr className="my-4" />
-				<p className="subtext">{ attributes.subtext }</p>
-				<a className="btn btn-primary btn-lg" href={ attributes.buttonhref } role="button">{ attributes.buttontext }</a>
+			<div className="jumbotron" style={ {
+				backgroundImage: `url(${ backgroundImage })`,
+				backgroundSize: 'cover',
+				backgroundPosition: 'center',
+				backgroundRepeat: 'no-repeat',
+			} }>
+				<div className="cta-overlay" style={ { background: overlayColor, opacity: overlayOpacity } }></div>
+				<h2 style={ { color: titleColor, textAlign: alignment } }>{ title }</h2>
+				<RichText.Content tagName="p"
+					value={ body }
+					style={ { textAlign: alignment } } />
+				<InnerBlocks.Content />
 			</div>
 		);
 	},

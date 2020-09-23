@@ -48,7 +48,7 @@
  * CSS for just Backend enqueued after style.scss
  * which makes it higher in priority.
  */
-.jumbotron .jumbotron-edit {
+.jumbotron.jumbotron-edit {
   padding: 4rem 2rem;
   margin-bottom: 2rem;
   background-color: #e9ecef;
@@ -56,7 +56,7 @@
 
 .jtedit-header {
   font-size: 3.5rem;
-  font-weight: 300;
+  font-size: 300;
   line-height: 1.2; }
 
 .jtedit-leadtext {
