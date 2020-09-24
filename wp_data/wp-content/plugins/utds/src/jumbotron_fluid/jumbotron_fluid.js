@@ -1,15 +1,12 @@
 const { registerBlockType } = wp.blocks;
 const {
-	RichText,
 	InspectorControls,
 	ColorPalette,
 	MediaUpload,
 	InnerBlocks,
-	BlockControls,
-	AlignmentToolbar,
 } = wp.editor;
 const { PanelBody, IconButton, RangeControl } = wp.components;
-const ALLOWED_BLOCKS = [ 'core/button', 'core/column', 'core/columns', 'core/separator' ];
+const ALLOWED_BLOCKS = [ 'core/button', 'core/column', 'core/columns', 'core/separator', 'core/paragraph', 'core/heading' ];
 
 import './style.scss';
 import './editor.scss';
@@ -19,24 +16,6 @@ registerBlockType( 'jumbotron-fluid/main', {
 	icon: 'editor-expand',
 	category: 'utdesign_system',
 	attributes: {
-		title: {
-			type: 'string',
-			source: 'html',
-			selector: 'h2',
-		},
-		titleColor: {
-			type: 'string',
-			default: 'black',
-		},
-		body: {
-			type: 'string',
-			source: 'html',
-			selector: 'p',
-		},
-		alignment: {
-			type: 'string',
-			default: 'none',
-		},
 		backgroundImage: {
 			type: 'string',
 			default: null,
@@ -53,28 +32,12 @@ registerBlockType( 'jumbotron-fluid/main', {
 
 	edit: ( { attributes, setAttributes } ) => {
 		const {
-			title,
-			body,
-			alignment,
-			titleColor,
 			backgroundImage,
 			overlayColor,
 			overlayOpacity,
 		} = attributes;
 
 		// custom functions
-		function onChangeTitle( newTitle ) {
-			setAttributes( { title: newTitle } );
-		}
-
-		function onChangeBody( newBody ) {
-			setAttributes( { body: newBody } );
-		}
-
-		function onTitleColorChange( newColor ) {
-			setAttributes( { titleColor: newColor } );
-		}
-
 		function onSelectImage( newImage ) {
 			setAttributes( { backgroundImage: newImage.sizes.full.url } );
 		}
@@ -87,20 +50,9 @@ registerBlockType( 'jumbotron-fluid/main', {
 			setAttributes( { overlayOpacity: newOpacity } );
 		}
 
-		function onChangeAlignment( newAlignment ) {
-			setAttributes( {
-				alignment: newAlignment === undefined ? 'none' : newAlignment,
-			} );
-		}
-
 		return ( [
 			// eslint-disable-next-line react/jsx-key
 			<InspectorControls style={ { marginBottom: '40px' } }>
-				<PanelBody title={ 'Font Color Settings' }>
-					<p><strong>Select a Title color:</strong></p>
-					<ColorPalette value={ titleColor }
-						onChange={ onTitleColorChange } />
-				</PanelBody>
 				<PanelBody title={ 'Background Image Settings' }>
 					<p><strong>Select a Background Image:</strong></p>
 					<MediaUpload
@@ -137,24 +89,6 @@ registerBlockType( 'jumbotron-fluid/main', {
 				backgroundRepeat: 'no-repeat',
 			} }>
 				<div className="cta-overlay" style={ { background: overlayColor, opacity: overlayOpacity } }></div>
-				{
-					<BlockControls>
-						<AlignmentToolbar value={ alignment }
-							onChange={ onChangeAlignment } />
-					</BlockControls>
-				}
-				<RichText key="editable"
-					tagName="h2"
-					placeholder="Your Jumbotron Title"
-					value={ title }
-					onChange={ onChangeTitle }
-					style={ { color: titleColor, textAlign: alignment } } />
-				<RichText key="editable"
-					tagName="p"
-					placeholder="Jumbotron Text"
-					value={ body }
-					onChange={ onChangeBody }
-					style={ { textAlign: alignment } } />
 				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
 			</div>,
 		] );
@@ -162,10 +96,6 @@ registerBlockType( 'jumbotron-fluid/main', {
 
 	save: ( { attributes } ) => {
 		const {
-			title,
-			body,
-			alignment,
-			titleColor,
 			backgroundImage,
 			overlayColor,
 			overlayOpacity,
@@ -179,10 +109,6 @@ registerBlockType( 'jumbotron-fluid/main', {
 				backgroundRepeat: 'no-repeat',
 			} }>
 				<div className="cta-overlay" style={ { background: overlayColor, opacity: overlayOpacity } }></div>
-				<h2 style={ { color: titleColor, textAlign: alignment } }>{ title }</h2>
-				<RichText.Content tagName="p"
-					value={ body }
-					style={ { textAlign: alignment } } />
 				<InnerBlocks.Content />
 			</div>
 		);
