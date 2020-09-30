@@ -10,13 +10,11 @@
  * CSS for just Backend enqueued after style.scss
  * which makes it higher in priority.
  */
-.wp-block-cgb-block-utds {
-  background: #bada55;
-  border: 0.2rem solid #292929;
-  color: #292929;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem; }
+.jumbotron.jumbotron-edit {
+  padding: 4rem 2rem;
+  margin-bottom: 2rem;
+  background-color: #e9ecef;
+  border-radius: 0.3rem; }
 /**
  * #.# Common SCSS
  *
@@ -53,31 +51,3 @@
   margin-bottom: 2rem;
   background-color: #e9ecef;
   border-radius: 0.3rem; }
-
-.jtedit-header {
-  font-size: 3.5rem;
-  font-size: 300;
-  line-height: 1.2; }
-
-.jtedit-leadtext {
-  line-height: 1.2;
-  font-size: 1.25rem; }
-/**
- * #.# Common SCSS
- *
- * Can include things like variables and mixins
- * that are used across the project.
-*/
-/**
- * #.# Editor Styles
- *
- * CSS for just Backend enqueued after style.scss
- * which makes it higher in priority.
- */
-.wp-block-cgb-block-utds {
-  background: #bada55;
-  border: 0.2rem solid #292929;
-  color: #292929;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem; }
