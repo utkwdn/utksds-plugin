@@ -1,5 +1,6 @@
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks } = wp.editor;
+const { InnerBlocks, InspectorControls, ColorPalette } = wp.editor;
+const { PanelBody, RangeControl } = wp.components;
 const ALLOWED_BLOCKS = [ 'core/button', 'core/column', 'core/columns', 'core/separator', 'core/paragraph', 'core/heading', 'core/cover', 'core/image' ];
 
 import './style.scss';
@@ -10,14 +11,31 @@ registerBlockType( 'card/main', {
 	icon: 'heart',
 	category: 'utdesign_system',
 	description: '',
-	attributes: {},
+	attributes: {
+		backgroundColor: {
+			type: 'string',
+			default: 'gray',
+		},
+	},
 
-	edit: ( { attributes } ) => {
-		const {} = attributes;
+	edit: ( { attributes, setAttributes } ) => {
+		const { backgroundColor } = attributes;
+
+		function onBackgroundColorChange( newColor ) {
+			setAttributes( { backgroundColor: newColor } );
+		}
 
 		return ( [
 			// eslint-disable-next-line react/jsx-key
-			<div className="card card-edit">
+			<InspectorControls style={ { marginBottom: '40px' } }>
+				<PanelBody title={ 'Background Color Settings' }>
+					<p><strong>Select a Background color:</strong></p>
+					<ColorPalette value={ backgroundColor }
+						onChange={ onBackgroundColorChange } />
+				</PanelBody>
+			</InspectorControls>,
+			// eslint-disable-next-line react/jsx-key
+			<div className="card card-edit" style={ { background: backgroundColor } }>
 				<div className="card-body">
 					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
 				</div>
@@ -26,11 +44,11 @@ registerBlockType( 'card/main', {
 	},
 
 	save: ( { attributes } ) => {
-		const {} = attributes;
+		const { backgroundColor } = attributes;
 
 		return (
 			<div className="card">
-				<div className="card-body">
+				<div className="card-body" style={ { background: backgroundColor } }>
 					<InnerBlocks.Content />
 				</div>
 			</div>
