@@ -11,5 +11,5 @@
 
 // import './base/base.js';
 import './card/card.js';
-import './accordion_block/accordion_block.js';
+import './accordion/accordion.js';
 import './jumbotron/jumbotron.js';
