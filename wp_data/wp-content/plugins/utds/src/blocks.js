@@ -19,28 +19,36 @@ wp.domReady( function() {
 	wp.blocks.unregisterBlockStyle( 'core/button', 'outline' );
 	wp.blocks.unregisterBlockStyle( 'core/button', 'fill' );
 	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'bootstrap-default',
-		label: 'Bootstrap Default',
+		name: 'btn-primary',
+		label: 'Button Primary',
 		isDefault: true,
 	} );
 	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'bootstrap-primary',
-		label: 'Bootstrap Primary',
+		name: 'btn-secondary',
+		label: 'Button Secondary',
 	} );
 	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'bootstrap-success',
-		label: 'Bootstrap Success',
+		name: 'btn-success',
+		label: 'Button Success',
 	} );
 	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'bootstrap-default-lg',
-		label: 'Bootstrap Default Large',
+		name: 'btn-danger',
+		label: 'Button Danger',
 	} );
 	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'bootstrap-primary-lg',
-		label: 'Bootstrap Primary Large',
+		name: 'btn-warning',
+		label: 'Button Warning',
 	} );
 	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'bootstrap-success-lg',
-		label: 'Bootstrap Success Large',
+		name: 'btn-info',
+		label: 'Button Info',
+	} );
+	wp.blocks.registerBlockStyle( 'core/button', {
+		name: 'btn-light',
+		label: 'Button Light',
+	} );
+	wp.blocks.registerBlockStyle( 'core/button', {
+		name: 'btn-dark',
+		label: 'Button Dark',
 	} );
 } );
