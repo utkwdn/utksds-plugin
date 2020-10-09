@@ -51,4 +51,36 @@ wp.domReady( function() {
 		name: 'btn-dark',
 		label: 'Button Dark',
 	} );
+	wp.blocks.registerBlockStyle( 'core/button', {
+		name: 'btn-outline-primary',
+		label: 'Outline Primary',
+	} );
+	wp.blocks.registerBlockStyle( 'core/button', {
+		name: 'btn-outline-secondary',
+		label: 'Outline Secondary',
+	} );
+	wp.blocks.registerBlockStyle( 'core/button', {
+		name: 'btn-outline-success',
+		label: 'Outline Success',
+	} );
+	wp.blocks.registerBlockStyle( 'core/button', {
+		name: 'btn-outline-danger',
+		label: 'Outline Danger',
+	} );
+	wp.blocks.registerBlockStyle( 'core/button', {
+		name: 'btn-outline-warning',
+		label: 'Outline Warning',
+	} );
+	wp.blocks.registerBlockStyle( 'core/button', {
+		name: 'btn-outline-info',
+		label: 'Outline Info',
+	} );
+	wp.blocks.registerBlockStyle( 'core/button', {
+		name: 'btn-outline-light',
+		label: 'Outline Light',
+	} );
+	wp.blocks.registerBlockStyle( 'core/button', {
+		name: 'btn-outline-dark',
+		label: 'Outline Dark',
+	} );
 } );
