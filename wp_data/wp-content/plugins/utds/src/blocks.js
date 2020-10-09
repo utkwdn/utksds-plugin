@@ -14,8 +14,10 @@ import './card/card.js';
 import './accordion/accordion.js';
 import './jumbotron/jumbotron.js';
 
-// DO NOT TOUCH
+// modify default block styles
+// DO NOT TOUCH unless you're sure of what you're doing!
 wp.domReady( function() {
+	// button style overrides
 	wp.blocks.unregisterBlockStyle( 'core/button', 'outline' );
 	wp.blocks.unregisterBlockStyle( 'core/button', 'fill' );
 	wp.blocks.registerBlockStyle( 'core/button', {
@@ -43,4 +45,19 @@ wp.domReady( function() {
 		name: 'bootstrap-success-lg',
 		label: 'Bootstrap Success Large',
 	} );
+
+	// table style overrides
+	function setBlockDefaultWPTable( className, blockName ) {
+		return blockName === 'core/table' ?
+			// [ 'wp-block-table', 'table' ] :
+			'table' :
+			className;
+	}
+
+	// Adding the filter
+	wp.hooks.addFilter(
+		'blocks.getBlockDefaultClassName',
+		'utds/block-filters',
+		setBlockDefaultWPTable
+	);
 } );
