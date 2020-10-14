@@ -22,43 +22,43 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once plugin_dir_path( __FILE__ ) . 'src/init.php';
 
 add_filter( 'render_block', function( $block_content, $block ) {
-	if ( 'core/button' === $block['blockName'] && isset( $block['attrs']['className'] ) ) {
-		// The Bootstrap button classes
-		$allowed_button_link_classes = array(
-			'btn-primary',
-			'btn-secondary',
-			'btn-success',
-			'btn-danger',
-			'btn-warning',
-			'btn-info',
-			'btn-light',
-			'btn-dark',
-			'btn-link',
-			'btn-outline-primary',
-			'btn-outline-secondary',
-			'btn-outline-success',
-			'btn-outline-danger',
-			'btn-outline-warning',
-			'btn-outline-info',
-			'btn-outline-light',
-			'btn-outline-dark',
-			'btn-lg',
-			'btn-sm',
-			'btn-block'
-		);
+	if ( $block['blockName'] === 'core/button' ) {
 
-		// Remove allowed button link classes from the button container first.
-		$block_content = str_replace( 'is-style-', '', $block_content );
-		$block_content = str_replace( $allowed_button_link_classes, '', $block_content );
+		// Find the button settings in the Wordpress classes
+		$start = 'wp-block-button ';
+		$end = '">';
+		
+		$string = ' ' . $block_content;
+		$ini = strpos($string, $start);
+    	if ($ini == 0) return '';
+    	$ini += strlen($start);
+    	$len = strpos($string, $end, $ini) - $ini;
+    	$parsed_classes = substr($string, $ini, $len);
+		
+		// Clean up the Wordpress classes so they don't have any bootstrap fragments from the button settings
+		$class_needle = 'wp-block-button '.$parsed_classes;
+		$block_content = str_replace($class_needle, 'wp-block-button', $block_content);
 
-		// Get custom button classes set for the block.
-		$block['attrs']['className'] = str_replace( 'is-style-', '', $block['attrs']['className'] );
-		$custom_classes = explode( ' ', $block['attrs']['className'] );
+		// Translate the button settings into Bootstrap classes
+		$custom_classes = explode( ' ', $parsed_classes );
+		
+		$btnClasses = '';
+		if(isset($custom_classes[0]) && $custom_classes[0] == 'btn-fill'){
+			$btnClasses .= $custom_classes[1];
+		}elseif(isset($custom_classes[0]) && $custom_classes[0] == 'btn-outline'){
+			$btnColor = str_replace('btn', '', $custom_classes[1]);
+			$btnClasses .= $custom_classes[0] . $btnColor;
+		}elseif(isset($custom_classes[0]) && $custom_classes[0] == 'btn-link'){
+			$btnClasses .= $custom_classes[0];
+		}
+		if(isset($custom_classes[2]) && $custom_classes[2] != 'btn-normal'){
+			$btnClasses .= ' ' . $custom_classes[2];
+		}
 
-		// Apply allowed custom button link classes.
+		// Apply the Bootstrap button link classes.
 		$block_content = str_replace(
 			'wp-block-button__link',
-			'wp-block-button__link btn ' . implode( ' ', array_intersect( $custom_classes, $allowed_button_link_classes ) ),
+			'wp-block-button__link btn ' . $btnClasses,
 			$block_content
 		);
 	}
