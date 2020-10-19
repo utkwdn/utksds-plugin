@@ -79,6 +79,66 @@ add_filter( 'render_block', function( $block_content, $block ) {
 			$block_content
 		);
 	}
+	
+	if ( $block['blockName'] === 'core/table' ) {
+		$start = 'wp-block-table ';
+		$end = '">';
+		
+		$string = ' ' . $block_content;
+		$ini = strpos($string, $start);
+    	if ($ini == 0) return '';
+    	$ini += strlen($start);
+    	$len = strpos($string, $end, $ini) - $ini;
+    	$parsed_classes = substr($string, $ini, $len);
+		
+		// Clean up the Wordpress classes so they don't have any bootstrap fragments from the button settings
+		$class_needle = 'wp-block-table '.$parsed_classes;
+		$block_content = str_replace($class_needle, 'wp-block-table', $block_content);
+		
+		//turn $parsed_classes into array
+		$custom_classes = explode( ' ', $parsed_classes );
+		
+		//create arrays of possible options
+		$table_classes = array(
+			'table-dark',
+			'table-striped',
+			'table-bordered',
+			'table-borderless',
+			'table-hover',
+			'table-sm'
+		);
+		
+		$thead_classes = array(
+			'thead-light',
+			'thead-dark'
+		);
+		
+		$container_classes = array(
+			'table-responsive'
+		);
+		
+		//check intersection of option arrays with $parsed_classes array
+		$selected_table_classes = array_intersect($table_classes, $custom_classes);
+		$selected_thead_classes = array_intersect($thead_classes, $custom_classes);
+		$selected_container_classes = array_intersect($container_classes, $custom_classes);
+		
+		//build strings of classes based on findings
+		$table_class_string = 'table '.implode(' ', $selected_table_classes);
+		$thead_class_string = implode(' ', $selected_thead_classes);
+		$container_class_string = implode(' ', $selected_container_classes);
+		
+		//put strings of classes where they belong in table html
+		if(isset($table_class_string) && $table_class_string != ''){
+			$block_content = str_replace('<table>', '<table class="'.$table_class_string.'">', $block_content);
+		}
+		if(isset($thead_class_string) && $thead_class_string != ''){
+			$block_content = str_replace('<thead>', '<thead class="'.$thead_class_string.'">', $block_content);
+		}
+		if(isset($container_class_string) && $container_class_string != ''){
+			$block_content = str_replace('<table', '<div class="'.$container_class_string.'"><table', $block_content);
+			$block_content = str_replace('</table>', '</table></div>', $block_content);
+		}
+	}
 
 	return $block_content;
 

@@ -14,6 +14,7 @@ import './card/card.js';
 import './accordion/accordion.js';
 import './jumbotron/jumbotron.js';
 import './button/button.js';
+import './table/table.js';
 
 // DO NOT TOUCH
 wp.domReady( function() {
