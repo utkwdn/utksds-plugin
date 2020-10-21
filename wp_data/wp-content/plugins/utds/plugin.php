@@ -59,17 +59,50 @@ add_filter( 'render_block', function( $block_content, $block ) {
 		// Translate the button settings into Bootstrap classes
 		$custom_classes = explode( ' ', $parsed_classes );
 		
+		$color_classes = array(
+			'btn-primary',
+			'btn-secondary',
+			'btn-success',
+			'btn-danger',
+			'btn-warning',
+			'btn-info',
+			'btn-light',
+			'btn-dark',
+		);
+		
+		$fill_classes = array(
+			'btn-fill',
+			'btn-outline',
+			'btn-link',
+		);
+		
+		$size_classes = array(
+			'btn-sm',
+			'btn-normal',
+			'btn-lg',
+			'btn-block',
+		);
+		
+		$btnOptions['fill'] = array_intersect($fill_classes, $custom_classes);
+		$btnOptions['fill'] = implode(' ', $btnOptions['fill']);
+		
+		$btnOptions['color'] = array_intersect($color_classes, $custom_classes);
+		$btnOptions['color'] = implode(' ', $btnOptions['color']);
+		
+		$btnOptions['size'] = array_intersect($size_classes, $custom_classes);
+		$btnOptions['size'] = implode(' ', $btnOptions['size']);
+		
 		$btnClasses = '';
-		if(isset($custom_classes[0]) && $custom_classes[0] == 'btn-fill'){
-			$btnClasses .= $custom_classes[1];
-		}elseif(isset($custom_classes[0]) && $custom_classes[0] == 'btn-outline'){
-			$btnColor = str_replace('btn', '', $custom_classes[1]);
-			$btnClasses .= $custom_classes[0] . $btnColor;
-		}elseif(isset($custom_classes[0]) && $custom_classes[0] == 'btn-link'){
-			$btnClasses .= $custom_classes[0];
+		if(isset($btnOptions['fill']) && $btnOptions['fill'] == 'btn-fill'){
+			$btnClasses .= $btnOptions['color'];
+		}elseif(isset($btnOptions['fill']) && $btnOptions['fill'] == 'btn-outline'){
+			$btnColor = str_replace('btn', '', $btnOptions['color']);
+			$btnClasses .= $btnOptions['fill'] . $btnColor;
+		}elseif(isset($btnOptions['fill']) && $btnOptions['fill'] == 'btn-link'){
+			$btnClasses .= $btnOptions['fill'];
 		}
-		if(isset($custom_classes[2]) && $custom_classes[2] != 'btn-normal'){
-			$btnClasses .= ' ' . $custom_classes[2];
+		if(isset($btnOptions['size']) && $btnOptions['size'] != 'btn-normal'){
+			$btnClasses .= ' ' . $btnOptions['size'];
 		}
 
 		// Apply the Bootstrap button link classes.
