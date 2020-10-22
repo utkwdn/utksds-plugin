@@ -18,37 +18,44 @@ import './jumbotron/jumbotron.js';
 wp.domReady( function() {
 	wp.blocks.unregisterBlockStyle( 'core/button', 'outline' );
 	wp.blocks.unregisterBlockStyle( 'core/button', 'fill' );
-	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'btn-primary',
-		label: 'Button Primary',
-		isDefault: true,
-	} );
-	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'btn-secondary',
-		label: 'Button Secondary',
-	} );
-	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'btn-success',
-		label: 'Button Success',
-	} );
-	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'btn-danger',
-		label: 'Button Danger',
-	} );
-	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'btn-warning',
-		label: 'Button Warning',
-	} );
-	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'btn-info',
-		label: 'Button Info',
-	} );
-	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'btn-light',
-		label: 'Button Light',
-	} );
-	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'btn-dark',
-		label: 'Button Dark',
-	} );
+	// begin unregistered blocks - can we pass this as an array?
+	wp.blocks.unregisterBlockType( 'core/verse' );
+	wp.blocks.unregisterBlockType( 'core/pullquote' );
+	wp.blocks.unregisterBlockType( 'core/tag-cloud' );
+	wp.blocks.unregisterBlockType( 'core/archives' );
+	wp.blocks.unregisterBlockType( 'core/calendar' );
+	wp.blocks.unregisterBlockType( 'core/categories' );
+	wp.blocks.unregisterBlockType( 'core/latest-comments' );
+	wp.blocks.unregisterBlockType( 'core/latest-posts' );
+	wp.blocks.unregisterBlockType( 'core/search' );
+	wp.blocks.unregisterBlockType( 'core/social-icons' );
+	wp.blocks.unregisterBlockType( 'core-embed/flickr' );
+	wp.blocks.unregisterBlockType( 'core-embed/wordpress' );
+	wp.blocks.unregisterBlockType( 'core-embed/meetup-com' );
+	wp.blocks.unregisterBlockType( 'core-embed/cloudup' );
+	wp.blocks.unregisterBlockType( 'core-embed/collegehumor' );
+	wp.blocks.unregisterBlockType( 'core-embed/funnyordie' );
+	wp.blocks.unregisterBlockType( 'core-embed/photobucket' );
+	wp.blocks.unregisterBlockType( 'core-embed/reddit' );
+	wp.blocks.unregisterBlockType( 'core-embed/reverbnation' );
+	wp.blocks.unregisterBlockType( 'core-embed/hulu' );
+	wp.blocks.unregisterBlockType( 'core-embed/smugmug' );
+	wp.blocks.unregisterBlockType( 'core-embed/speaker-deck' );
+	wp.blocks.unregisterBlockType( 'core-embed/spotify' );
+	wp.blocks.unregisterBlockType( 'core-embed/animoto' );
+	wp.blocks.unregisterBlockType( 'core-embed/crowdsignal' );
+	wp.blocks.unregisterBlockType( 'core-embed/dailymotion' );
+	wp.blocks.unregisterBlockType( 'core-embed/imgur' );
+	wp.blocks.unregisterBlockType( 'core-embed/scribd' );
+	wp.blocks.unregisterBlockType( 'core-embed/screencast' );
+	wp.blocks.unregisterBlockType( 'core-embed/issuu' );
+	wp.blocks.unregisterBlockType( 'core-embed/kickstarter' );
+	wp.blocks.unregisterBlockType( 'core-embed/slideshare' );
+	wp.blocks.unregisterBlockType( 'core-embed/tiktok' );
+	wp.blocks.unregisterBlockType( 'core-embed/ted' );
+	wp.blocks.unregisterBlockType( 'core-embed/tumblr' );
+	wp.blocks.unregisterBlockType( 'core-embed/videopress' );
+	wp.blocks.unregisterBlockType( 'core-embed/wordpress-tv' );
+	wp.blocks.unregisterBlockType( 'core-embed/amazon-kindle' );
+	wp.blocks.unregisterBlockType( 'core-embed/mixcloud' );
 } );
