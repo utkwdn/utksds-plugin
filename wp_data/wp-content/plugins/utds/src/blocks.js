@@ -14,6 +14,8 @@ import './card/card.js';
 import './accordion/accordion.js';
 import './jumbotron/jumbotron.js';
 import './media-object/media-object.js';
+import './button/button.js';
+import './table/table.js';
 
 // remove default button styles, declare default and/or plugin created blocks to selectively disable
 wp.domReady( function() {
