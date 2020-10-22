@@ -13,42 +13,12 @@
 import './card/card.js';
 import './accordion/accordion.js';
 import './jumbotron/jumbotron.js';
+import './button/button.js';
+import './table/table.js';
 
 // DO NOT TOUCH
 wp.domReady( function() {
 	wp.blocks.unregisterBlockStyle( 'core/button', 'outline' );
 	wp.blocks.unregisterBlockStyle( 'core/button', 'fill' );
-	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'btn-primary',
-		label: 'Button Primary',
-		isDefault: true,
-	} );
-	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'btn-secondary',
-		label: 'Button Secondary',
-	} );
-	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'btn-success',
-		label: 'Button Success',
-	} );
-	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'btn-danger',
-		label: 'Button Danger',
-	} );
-	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'btn-warning',
-		label: 'Button Warning',
-	} );
-	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'btn-info',
-		label: 'Button Info',
-	} );
-	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'btn-light',
-		label: 'Button Light',
-	} );
-	wp.blocks.registerBlockStyle( 'core/button', {
-		name: 'btn-dark',
-		label: 'Button Dark',
-	} );
+
 } );
