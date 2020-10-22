@@ -13,6 +13,7 @@
 import './card/card.js';
 import './accordion/accordion.js';
 import './jumbotron/jumbotron.js';
+import './media-object/media-object.js';
 
 // DO NOT TOUCH
 wp.domReady( function() {
