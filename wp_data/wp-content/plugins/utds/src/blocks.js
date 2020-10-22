@@ -15,7 +15,7 @@ import './accordion/accordion.js';
 import './jumbotron/jumbotron.js';
 import './media-object/media-object.js';
 
-// DO NOT TOUCH
+// remove default button styles, declare default and/or plugin created blocks to selectively disable
 wp.domReady( function() {
 	wp.blocks.unregisterBlockStyle( 'core/button', 'outline' );
 	wp.blocks.unregisterBlockStyle( 'core/button', 'fill' );
@@ -63,7 +63,5 @@ wp.domReady( function() {
 	];
 
 	const disabledBlocks = blocktodisable.map( blockSlug => wp.blocks.unregisterBlockType( blockSlug ) );
-	// eslint-disable-next-line no-console
-	console.log( disabledBlocks );
 	return disabledBlocks;
 } );
