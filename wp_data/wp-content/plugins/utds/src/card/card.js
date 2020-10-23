@@ -3,6 +3,12 @@ const { InnerBlocks, InspectorControls, ColorPalette } = wp.editor;
 const { PanelBody, RangeControl } = wp.components;
 const ALLOWED_BLOCKS = [ 'core/button', 'core/column', 'core/columns', 'core/separator', 'core/paragraph', 'core/heading', 'core/cover', 'core/image' ];
 
+const BLOCKS_TEMPLATE = [
+    [ 'core/image', { className: 'card-img-top' } ],
+	[ 'core/heading', { className: 'card-title' } ]
+    [ 'core/paragraph', { className: 'card-text' } ],
+];
+
 import './style.scss';
 import './editor.scss';
 
@@ -37,7 +43,7 @@ registerBlockType( 'card/main', {
 			// eslint-disable-next-line react/jsx-key
 			<div className="card card-edit" style={ { background: backgroundColor } }>
 				<div className="card-body">
-					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
+					<InnerBlocks template={ BLOCKS_TEMPLATE } allowedBlocks={ ALLOWED_BLOCKS } />
 				</div>
 			</div>,
 		] );
