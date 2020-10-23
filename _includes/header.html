@@ -1,0 +1,58 @@
+<nav id="universal-header" class="bg-smokey">
+    <div class="container">
+    <ul class="row justify-content-between list-inline mb-0">
+      <li class="col-12 col-lg-6 list-inline-item mr-auto"><small><a href="https://www.utk.edu" class="nav-link text-light text-uppercase text-center text-lg-left">www.utk.edu</a></small></li>
+      <li class="col-auto"><small><a href="https://giveto.utk.edu" class="nav-link px-0 text-light text-uppercase">Give</a></small></li>
+      <li class="col-auto"><small><a href="https://my.utk.edu" class="nav-link px-0 text-light text-uppercase">myUTK</a></small></li>
+      <li class="col-auto"><small><a href="https://apply.utk.edu" class="nav-link px-0 text-light text-uppercase">Apply</a></small></li>
+      <li class="col-auto">
+        <button class="navbar-toggler" type="button" id="mobile-menu-open" data-toggle="site-navigation"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"></path></svg><span class="sr-only">Menu</span></button>
+      </li>
+    </ul>
+    </div>
+  </nav>
+  
+  
+  
+<header class="container" id="masthead">
+
+
+    {%- assign default_paths = site.pages | map: "path" -%}
+    {%- assign page_paths = site.header_pages | default: default_paths -%}
+    {%- assign titles_size = site.pages | map: 'title' | join: '' | size -%}
+    <div class="row mt-4 mb-4 align-items-center">
+      <div class="col-1">
+        <svg version="1.1" c  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20.74 20.74" style="enable-background:new 0 0 20.74 20.74;" xml:space="preserve">
+<style type="text/css">
+     .powert_st0{fill:#FF8200;}
+     .powert_st1{fill:#FFFFFF;}
+</style>
+<polygon class="powert_st0" points="20.74,20.74 20.74,0 0,0 0,20.74 20.74,20.74 "></polygon>
+<path class="powert_st1" d="M18.12,2.62v5.23h-1.94c0-0.96-0.95-1.74-2.13-1.74c-0.86,0-1.6,0.42-1.94,1.02v6.54
+     c0,1.39,1.08,2.52,2.42,2.52h0.01v1.94H6.2v-1.94h0.01c1.34,0,2.42-1.13,2.42-2.52V7.12C8.29,6.52,7.55,6.1,6.69,6.1
+     c-1.18,0-2.13,0.78-2.13,1.74H2.62V2.62H18.12L18.12,2.62z"></path>
+</svg>
+      </div>
+      <div class="col-auto">
+        <a class="h3  text-decoration-none" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+      </div>
+    </div>
+
+    {%- if titles_size > 0 -%}
+      <nav id="site-navigation" class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav mr-auto">
+          {%- for path in page_paths -%}
+            {%- assign my_page = site.pages | where: "path", path | first -%}
+            {%- if my_page.title -%}
+            <li class="nav-item"><a class="nav-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+          <li class="nav-item"><a class="nav-link" href="{{ site.repo | escape }}">Visit repo on GitHub</a></li>
+
+          </ul>
+        </div>
+      </nav>
+    {%- endif -%}
+</header>
