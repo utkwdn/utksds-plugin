@@ -3,12 +3,13 @@ const { InnerBlocks, InspectorControls, ColorPalette } = wp.editor;
 const { PanelBody, RangeControl } = wp.components;
 const ALLOWED_BLOCKS = [ 'core/button', 'core/column', 'core/columns', 'core/separator', 'core/paragraph', 'core/heading', 'core/cover', 'core/image' ];
 
-import './style.scss';
+// import './style.scss';
+// Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
 
 registerBlockType( 'card/main', {
 	title: 'Card',
-	icon: 'heart',
+	icon: 'images-alt2',
 	category: 'utdesign_system',
 	description: '',
 	attributes: {
