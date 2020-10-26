@@ -1,12 +1,19 @@
 const { registerBlockType } = wp.blocks;
 const { InnerBlocks, InspectorControls, ColorPalette } = wp.editor;
 const { PanelBody, RangeControl } = wp.components;
-const ALLOWED_BLOCKS = [ 'core/button', 'core/column', 'core/columns', 'core/separator', 'core/paragraph', 'core/heading', 'core/cover', 'core/image' ];
+const ALLOWED_BLOCKS = [ 'core/button', 'core/separator', 'card/paragraph', 'card/heading' ];
 
-const BLOCKS_TEMPLATE = [
-    [ 'core/image', { className: 'card-img-top' } ],
-	[ 'core/heading', { className: 'card-title' } ]
+const PARAGRAPH_TEMPLATE = [
     [ 'core/paragraph', { className: 'card-text' } ],
+];
+
+const CARD_TEMPLATE = [
+	[ 'core/image', { className: 'card-img-top' } ],
+	[ 'card/body', {} ],
+];
+
+const HEADING_TEMPLATE = [
+	[ 'core/heading', { className: 'card-title' } ],
 ];
 
 import './style.scss';
@@ -42,9 +49,7 @@ registerBlockType( 'card/main', {
 			</InspectorControls>,
 			// eslint-disable-next-line react/jsx-key
 			<div className="card card-edit" style={ { background: backgroundColor } }>
-				<div className="card-body">
-					<InnerBlocks template={ BLOCKS_TEMPLATE } allowedBlocks={ ALLOWED_BLOCKS } />
-				</div>
+				<InnerBlocks template={ CARD_TEMPLATE } allowedBlocks={ ALLOWED_BLOCKS } templateLock={ 'all' } />
 			</div>,
 		] );
 	},
@@ -53,11 +58,70 @@ registerBlockType( 'card/main', {
 		const { backgroundColor } = attributes;
 
 		return (
-			<div className="card">
-				<div className="card-body" style={ { background: backgroundColor } }>
-					<InnerBlocks.Content />
-				</div>
+			<div className="card" style={ { background: backgroundColor } }>
+				<InnerBlocks.Content />
 			</div>
 		);
 	},
+} );
+
+registerBlockType( 'card/body', {
+	title: 'Card Body',
+	parent: [ 'card/main' ],
+	icon: 'text-page',
+				  
+	edit: () => {
+		return (
+			<div className="card-body">
+				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+			</div>
+		)
+	},
+	
+	save: () => {
+		return (
+			<div className="card-body">
+				<InnerBlocks.Content />
+			</div>
+		);
+	},
+			
+} );
+
+registerBlockType( 'card/paragraph', {
+	title: 'Paragraph',
+	parent: [ 'card/body' ],
+	icon: 'editor-paragraph',
+				  
+	edit: () => {
+		return (
+			<InnerBlocks template={ PARAGRAPH_TEMPLATE } allowedBlocks={ 'core/paragraph' } templateLock={ 'all' } />
+		)
+	},
+	
+	save: () => {
+		return (
+			<InnerBlocks.Content />
+		);
+	},
+			
+} );
+		
+registerBlockType( 'card/heading', {
+	title: 'Heading',
+	parent: [ 'card/body' ],
+	icon: 'heading',
+				  
+	edit: () => {
+		return (
+			<InnerBlocks template={ HEADING_TEMPLATE } allowedBlocks={ 'core/heading' } templateLock={ 'all' } />
+		)
+	},
+	
+	save: () => {
+		return (
+			<InnerBlocks.Content />
+		);
+	},
+			
 } );

@@ -172,6 +172,14 @@ add_filter( 'render_block', function( $block_content, $block ) {
 			$block_content = str_replace('</table>', '</table></div>', $block_content);
 		}
 	}
+	
+	if ( $block['blockName'] === 'card/main' ) {
+		//remove Bootstrap class from figure container element
+		$block_content = str_replace(' card-img-top', '', $block_content);
+		
+		//add Bootstrap class to img element
+		$block_content = str_replace('wp-image-', 'card-img-top wp-image-', $block_content);
+	}
 
 	return $block_content;
 
