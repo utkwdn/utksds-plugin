@@ -12,5 +12,9 @@
 //   border-radius: 0.3rem;
 // }
 
+@import "./../../../../../design-system-build-files/node_modules/bootstrap/scss/tables";
 
-@import "./../../../../../design-system-build-files/node_modules/bootstrap/scss/media";
+
+.wp-block-table table {
+  @extend .table;
+}

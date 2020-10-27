@@ -2,7 +2,8 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable eqeqeq */
 /* eslint-disable linebreak-style */
-import './style.scss';
+// import './style.scss';
+// Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
 const __ = wp.i18n.__;
 const registerBlockType = wp.blocks.registerBlockType;
@@ -10,7 +11,7 @@ const { RichText, PlainText } = wp.editor;
 
 registerBlockType( 'accordion/main', {
 	title: __( 'Accordion' ),
-	icon: 'format-quote',
+	icon: 'list-view',
 	category: 'utdesign_system',
 	keywords: [ __( 'Accordion' ) ],
 
