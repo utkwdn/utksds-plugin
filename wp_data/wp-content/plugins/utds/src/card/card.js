@@ -173,9 +173,7 @@ registerBlockType( 'card/image', {
 	icon: 'format-image',
 				  
 	edit: () => {
-		return (
-			<InnerBlocks template={ IMAGE_TEMPLATE } allowedBlocks={ 'core/image' } templateLock={ 'all' } />,
-		);
+		return ( <InnerBlocks template={ IMAGE_TEMPLATE } allowedBlocks={ 'core/image' } templateLock={ 'all' } /> );
 	},
 	
 	save: () => {
