@@ -1,7 +1,37 @@
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, InspectorControls, ColorPalette } = wp.editor;
-const { PanelBody, RangeControl } = wp.components;
-const ALLOWED_BLOCKS = [ 'core/button', 'core/column', 'core/columns', 'core/separator', 'core/paragraph', 'core/heading', 'core/cover', 'core/image' ];
+const { InnerBlocks, InspectorControls, ColorPalette, RichText } = wp.editor;
+const { PanelBody, PanelRow, RangeControl, RadioControl } = wp.components;
+const { withState } = wp.compose;
+const ALLOWED_BLOCKS = [ 'core/button', 'core/separator', 'card/paragraph', 'card/heading' ];
+
+const PARAGRAPH_TEMPLATE = [
+    [ 'core/paragraph', { className: 'card-text' } ],
+];
+
+const IMAGE_TEMPLATE = [
+	[ 'core/image', { className: 'card-img-top' } ],
+]
+
+const HEADING_TEMPLATE = [
+	[ 'core/heading', { className: 'card-title' } ],
+];
+
+/*
+const CardImgPosition = withState( {
+	option: 'card-img-top',
+} )( ( { option, setState } ) => (
+	<RadioControl
+		label="Image Position"
+		help="The placement of the image on the card."
+		selected={ option }
+		options={ [
+			{ label: 'Top', value: 'card-img-top' },
+			{ label: 'Bottom', value: 'card-img-bottom' },
+		] }
+		onChange={ ( option ) => { setState( { option } ) } }
+	/>
+) );
+*/
 
 // import './style.scss';
 // Commenting out the front style, as it will be handled by the bootstrap css pulled in.
@@ -37,9 +67,7 @@ registerBlockType( 'card/main', {
 			</InspectorControls>,
 			// eslint-disable-next-line react/jsx-key
 			<div className="card card-edit" style={ { background: backgroundColor } }>
-				<div className="card-body">
-					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
-				</div>
+				<InnerBlocks allowedBlocks={ [ 'card/body', 'card/header', 'card/footer', 'card/image' ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>,
 		] );
 	},
@@ -48,11 +76,167 @@ registerBlockType( 'card/main', {
 		const { backgroundColor } = attributes;
 
 		return (
-			<div className="card">
-				<div className="card-body" style={ { background: backgroundColor } }>
-					<InnerBlocks.Content />
-				</div>
+			<div className="card" style={ { background: backgroundColor } }>
+				<InnerBlocks.Content />
 			</div>
 		);
+	},
+} );
+
+registerBlockType( 'card/body', {
+	title: 'Card Body',
+	parent: [ 'card/main' ],
+	icon: 'media-text',
+				  
+	edit: () => {
+		return (
+			<div className="card-body">
+				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+			</div>
+		)
+	},
+	
+	save: () => {
+		return (
+			<div className="card-body">
+				<InnerBlocks.Content />
+			</div>
+		);
+	},
+			
+} );
+
+registerBlockType( 'card/paragraph', {
+	title: 'Paragraph',
+	parent: [ 'card/body' ],
+	icon: 'editor-paragraph',
+				  
+	edit: () => {
+		return (
+			<InnerBlocks template={ PARAGRAPH_TEMPLATE } allowedBlocks={ 'core/paragraph' } templateLock={ 'all' } />
+		)
+	},
+	
+	save: () => {
+		return (
+			<InnerBlocks.Content />
+		);
+	},
+			
+} );
+		
+registerBlockType( 'card/heading', {
+	title: 'Heading',
+	parent: [ 'card/body' ],
+	icon: 'heading',
+				  
+	edit: () => {
+		return (
+			<InnerBlocks template={ HEADING_TEMPLATE } allowedBlocks={ 'core/heading' } templateLock={ 'all' } />
+		)
+	},
+	
+	save: () => {
+		return (
+			<InnerBlocks.Content />
+		);
+	},
+			
+} );
+		
+/*registerBlockType( 'card/image', {
+	title: 'Image',
+	parent: [ 'card/main' ],
+	icon: 'format-image',
+				  
+	edit: () => {
+		return ( [
+			<InspectorControls>
+				<PanelBody title='Image Cap' children={ CardImgPosition } >
+
+				</PanelBody>
+			</InspectorControls>,
+			<InnerBlocks template={ IMAGE_TEMPLATE } allowedBlocks={ 'core/image' } templateLock={ 'all' } />,
+		] );
+	},
+	
+	save: () => {
+		return (
+			<InnerBlocks.Content />
+		);
+	},
+			
+} );*/
+		
+registerBlockType( 'card/image', {
+	title: 'Image',
+	parent: [ 'card/main' ],
+	icon: 'format-image',
+				  
+	edit: () => {
+		return ( <InnerBlocks template={ IMAGE_TEMPLATE } allowedBlocks={ 'core/image' } templateLock={ 'all' } /> );
+	},
+	
+	save: () => {
+		return (
+			<InnerBlocks.Content />
+		);
+	},
+			
+} );
+
+registerBlockType( 'card/header', {
+	title: 'Card Header',
+	parent: [ 'card/main' ],
+	icon: 'table-row-before',
+	attributes: {
+		content: {
+			source: 'html',
+			selector: 'div',
+		},
+	},
+	
+	edit: ( { className, attributes, setAttributes } ) => {
+		return(
+			<RichText 
+				tagName='div'
+				className={ className, 'card-header' }
+				value={ attributes.content }
+				onChange={ ( content ) => setAttributes( { content } ) }
+				formattingControls={ [] }
+			/>
+		);
+	},
+				  
+	save: ( { className, attributes } ) => {
+		return <RichText.Content tagName="div" className="card-header card-header" value={ attributes.content } />;
+	},
+} );
+	
+registerBlockType( 'card/footer', {
+	title: 'Card Footer',
+	parent: [ 'card/main' ],
+	icon: 'table-row-after',
+	attributes: {
+		content: {
+			source: 'html',
+			selector: 'div',
+		},
+	},
+	
+	edit: ( { className, attributes, setAttributes } ) => {
+		return(
+			<RichText 
+				tagName='div'
+				className={ className, 'card-footer' }
+				value={ attributes.content }
+				onChange={ ( content ) => setAttributes( { content } ) }
+				formattingControls={ [] }
+			/>
+		);
+	},
+				  
+	save: ( { className, attributes } ) => {
+		return <RichText.Content tagName="div" className="card-footer card-footer" value={ attributes.content } />;
 	},
 } );
