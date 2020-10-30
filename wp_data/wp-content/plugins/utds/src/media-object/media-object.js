@@ -3,12 +3,13 @@ const { MediaUpload, InnerBlocks, InspectorControls, ColorPalette } = wp.editor;
 const { Button, PanelBody } = wp.components;
 const ALLOWED_BLOCKS = [ 'core/button', 'core/column', 'core/columns', 'core/separator', 'core/paragraph', 'core/heading' ];
 
-import './style.scss';
+// import './style.scss';
+// Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
 
 registerBlockType( 'media-object/main', {
 	title: 'Media Object',
-	icon: 'welcome-view-site',
+	icon: 'media-video',
 	category: 'utdesign_system',
 	description: 'Horizontally oriented text and picture',
 	attributes: {
