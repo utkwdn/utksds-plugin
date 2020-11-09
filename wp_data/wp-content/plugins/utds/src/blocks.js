@@ -9,7 +9,8 @@
  * Webpack is compiling as the input file.
  */
 
-// import './base/base.js';
+//to create a new block, either create a new directory, along with js and scss files, or copy an existing directory with a new name. The block will be available once it is assigned a new name, and imported below
+
 import './card/card.js';
 import './accordion/accordion.js';
 import './jumbotron/jumbotron.js';

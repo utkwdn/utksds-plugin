@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+//this creates the utdesign system category for the new blocks
 function utdesign_blocks_category($categories, $post) {
 	return array_merge(
 		$categories,
