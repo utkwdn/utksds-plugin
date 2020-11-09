@@ -8,7 +8,7 @@ import classnames from 'classnames';
 /**
  * WordPress Dependencies
  */
-const { __ } = wp.i18n;
+// const { __ } = wp.i18n;
 const { addFilter } = wp.hooks;
 const { Fragment }	= wp.element;
 const { InspectorControls }	= wp.editor;
@@ -26,26 +26,23 @@ const allowedBlocks = [ 'core/button' ];
  * @return {Object} settings Modified settings.
  */
 function addAttributes( settings ) {
-	
 	/*check if object exists for old Gutenberg version compatibility
 	add allowedBlocks restriction*/
-	if( typeof settings.attributes !== 'undefined' && allowedBlocks.includes( settings.name ) ){
-	
+	if ( typeof settings.attributes !== 'undefined' && allowedBlocks.includes( settings.name ) ) {
 		settings.attributes = Object.assign( settings.attributes, {
-			btnColor:{
+			btnColor: {
 				type: 'string',
 				default: 'btn-primary',
 			},
-			btnFill:{ 
+			btnFill: {
 				type: 'string',
 				default: 'btn-fill',
 			},
-			btnSize:{ 
+			btnSize: {
 				type: 'string',
 				default: 'btn-normal',
 			},
-		});
-    
+		} );
 	}
 
 	return settings;
@@ -60,7 +57,6 @@ function addAttributes( settings ) {
  */
 const withAdvancedControls = createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
-
 		const {
 			name,
 			attributes,
@@ -73,54 +69,53 @@ const withAdvancedControls = createHigherOrderComponent( ( BlockEdit ) => {
 			btnFill,
 			btnSize,
 		} = attributes;
-		
-		
+
 		return (
 			<Fragment>
-				<BlockEdit {...props} />
+				<BlockEdit { ...props } />
 				{ isSelected && allowedBlocks.includes( name ) &&
 					<InspectorControls>
 						<RadioControl
-							label='Button color:'
+							label="Button color:"
 							selected={ btnColor }
 							options={
 								[
-									{label: 'Primary', value: 'btn-primary' },
-									{label: 'Secondary', value: 'btn-secondary' },
-									{label: 'Success', value: 'btn-success' },
-									{label: 'Danger', value: 'btn-danger' },
-									{label: 'Warning', value: 'btn-warning' },
-									{label: 'Info', value: 'btn-info' },
-									{label: 'Light', value: 'btn-light' },
-									{label: 'Dark', value: 'btn-dark' },
+									{ label: 'Primary', value: 'btn-primary' },
+									{ label: 'Secondary', value: 'btn-secondary' },
+									{ label: 'Success', value: 'btn-success' },
+									{ label: 'Danger', value: 'btn-danger' },
+									{ label: 'Warning', value: 'btn-warning' },
+									{ label: 'Info', value: 'btn-info' },
+									{ label: 'Light', value: 'btn-light' },
+									{ label: 'Dark', value: 'btn-dark' },
 								]
 							}
-							onChange={ (newValue) => setAttributes( { btnColor: newValue } ) }
+							onChange={ ( newValue ) => setAttributes( { btnColor: newValue } ) }
 						/>
 						<RadioControl
-							label='Button fill type:'
+							label="Button fill type:"
 							selected={ btnFill }
 							options={
 								[
-									{label: 'Solid', value: 'btn-fill' },
-									{label: 'Outline', value: 'btn-outline' },
-									{label: 'Text', value: 'btn-link' },
+									{ label: 'Solid', value: 'btn-fill' },
+									{ label: 'Outline', value: 'btn-outline' },
+									{ label: 'Text', value: 'btn-link' },
 								]
 							}
-							onChange={ (newValue) => setAttributes( { btnFill: newValue } ) }
+							onChange={ ( newValue ) => setAttributes( { btnFill: newValue } ) }
 						/>
 						<RadioControl
-							label='Button size:'
+							label="Button size:"
 							selected={ btnSize }
 							options={
 								[
-									{label: 'Small', value: 'btn-sm' },
-									{label: 'Normal', value: 'btn-normal' },
-									{label: 'Large', value: 'btn-lg' },
-									{label: 'Block', value: 'btn-block' },
+									{ label: 'Small', value: 'btn-sm' },
+									{ label: 'Normal', value: 'btn-normal' },
+									{ label: 'Large', value: 'btn-lg' },
+									{ label: 'Block', value: 'btn-block' },
 								]
 							}
-							onChange={ (newValue) => setAttributes( { btnSize: newValue } ) }
+							onChange={ ( newValue ) => setAttributes( { btnSize: newValue } ) }
 						/>
 					</InspectorControls>
 				}
@@ -128,7 +123,7 @@ const withAdvancedControls = createHigherOrderComponent( ( BlockEdit ) => {
 			</Fragment>
 		);
 	};
-}, 'withAdvancedControls');
+}, 'withAdvancedControls' );
 
 /**
  * Add custom element class in save element.
@@ -140,9 +135,8 @@ const withAdvancedControls = createHigherOrderComponent( ( BlockEdit ) => {
  * @return {Object} extraProps Modified block element.
  */
 function applyExtraClass( extraProps, blockType, attributes ) {
-
 	const { btnFill, btnColor, btnSize } = attributes;
-	
+
 	//check if attribute exists for old Gutenberg version compatibility
 	//add class only when visibleOnMobile = false
 	//add allowedBlocks restriction
