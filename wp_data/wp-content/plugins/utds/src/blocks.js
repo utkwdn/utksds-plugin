@@ -30,9 +30,23 @@ wp.domReady( function() {
 		'core/calendar',
 		'core/categories',
 		'core/latest-comments',
-		'core/latest-posts',
+//		'core/latest-posts',
 		'core/search',
 		'core/social-icons',
+		'core/audio',
+		'core/cover',
+		'core/preformatted',
+		'core/media-text',
+//  	'core/buttons',
+    'core/text-columns',
+    'core/columns',
+    'core/html',
+    'core/more',
+    'core/nextpage',
+    'core/separator',
+    'core/spacer',
+    'core/group',
+
 		'core-embed/flickr',
 		'core-embed/wordpress',
 		'core-embed/meetup-com',
@@ -62,6 +76,7 @@ wp.domReady( function() {
 		'core-embed/wordpress-tv',
 		'core-embed/amazon-kindle',
 		'core-embed/mixcloud',
+
 	];
 
 	const disabledBlocks = blocktodisable.map( blockSlug => wp.blocks.unregisterBlockType( blockSlug ) );
