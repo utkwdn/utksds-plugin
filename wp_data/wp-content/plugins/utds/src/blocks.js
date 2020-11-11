@@ -17,6 +17,7 @@ import './media-object/media-object.js';
 import './button/button.js';
 import './table/table.js';
 import './alert/alert.js';
+import './lead/lead.js';
 
 // remove default button styles, declare default and/or plugin created blocks to selectively disable
 wp.domReady( function() {

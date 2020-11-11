@@ -1,23 +1,32 @@
 const { registerBlockType } = wp.blocks;
 const { InnerBlocks, InspectorControls, ColorPalette } = wp.editor;
 const { Button, PanelBody, RadioControl } = wp.components;
-const ALLOWED_BLOCKS = [ 'core/button', 'core/paragraph', 'core/heading' ];
+const ALLOWED_BLOCKS = [ 'core/paragraph' ];
 
 // import './style.scss';
 // Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
 
-registerBlockType( 'alert/main', {
-	title: 'Alert',
+registerBlockType( 'lead/main', {
+	title: 'Lead',
 	icon: 'welcome-view-site',
 	category: 'utdesign_system',
-	description: 'Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.',
+	description: 'Provide contextual feedback messages for typical user actions with the handful of available and flexible lead messages.',
 	attributes: {
 		backgroundColor: {
 			type: 'string',
 			default: '',
 		},
+//    content: {
+//        type: 'string',
+//        source: 'text',
+//        selector: 'p',
+//    },
 	},
+	supports: {
+    anchor: true,
+    align: true
+  },
 
 	edit: ( { attributes, setAttributes } ) => {
 		const { backgroundColor } = attributes;
@@ -35,9 +44,9 @@ registerBlockType( 'alert/main', {
 							onChange={ onBackgroundColorChange } />
 					</PanelBody>
 				</InspectorControls>,
-			<div className="alert-edit alert" style={ { background: backgroundColor } }>
+			<p className="lead">
 				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
-			</div>,
+			</p>,
 		] );
 	},
 
@@ -45,9 +54,11 @@ registerBlockType( 'alert/main', {
 		const { backgroundColor } = attributes;
 
 		return (
-			<div className="alert" style={ { background: backgroundColor } }>
-				<InnerBlocks.Content />
+			<div className="lead" style={ { background: backgroundColor } }>
+				{ attributes.content }
 			</div>
+
+			
 		);
 	},
 } );
