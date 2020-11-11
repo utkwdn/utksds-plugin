@@ -9,7 +9,7 @@ import './editor.scss';
 
 registerBlockType( 'jumbotron/main', {
 	title: 'Jumbotron',
-	icon: 'welcome-view-site',
+	icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22 4v12h-20v-12h20zm2-2h-24v16h24v-16zm-7 18h-10v2h10v-2z"/></svg>,
 	category: 'utdesign_system',
 	description: 'A jumbotron container which can hold a number of layout elements',
 	attributes: {

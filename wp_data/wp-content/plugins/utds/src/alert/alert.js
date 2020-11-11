@@ -9,7 +9,7 @@ import './editor.scss';
 
 registerBlockType( 'alert/main', {
 	title: 'Alert',
-	icon: 'welcome-view-site',
+	icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 1l-12 22h24l-12-22zm-1 8h2v7h-2v-7zm1 11.25c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z"/></svg>,
 	category: 'utdesign_system',
 	description: 'Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.',
 	attributes: {
