@@ -143,31 +143,54 @@ registerBlockType( 'card/heading', {
 			
 } );
 		
-/*registerBlockType( 'card/image', {
+registerBlockType( 'card/image', {
 	title: 'Image',
 	parent: [ 'card/main' ],
 	icon: 'format-image',
+	attributes: {
+		imagePostion: {
+			type: 'string',
+			default: 'card-img-top',
+		},
+	},
 				  
-	edit: () => {
+	edit: ( { attributes, setAttributes } ) => {
+		const { imagePostion } = attributes;
+
+		function onImagePositionChange( newValue ) {
+			setAttributes( { imagePostion: newValue } );
+		}
+		
 		return ( [
 			<InspectorControls>
-				<PanelBody title='Image Cap' children={ CardImgPosition } >
-
+				<PanelBody title='Image Cap'>
+				<RadioControl
+		label="Image Position"
+		help="The placement of the image on the card."
+		selected={ imagePostion }
+		options={ [
+			{ label: 'Top', value: 'card-img-top' },
+			{ label: 'Bottom', value: 'card-img-bottom' },
+		] }
+		onChange={ onImagePositionChange }
+	/>
 				</PanelBody>
 			</InspectorControls>,
-			<InnerBlocks template={ IMAGE_TEMPLATE } allowedBlocks={ 'core/image' } templateLock={ 'all' } />,
+			<div className={ imagePostion }><InnerBlocks template={ IMAGE_TEMPLATE } allowedBlocks={ 'core/image' } templateLock={ 'all' } /></div>,
 		] );
 	},
 	
-	save: () => {
+	save: ( { attributes } ) => {
+		const { imagePostion } = attributes;
+		
 		return (
 			<InnerBlocks.Content />
 		);
 	},
 			
-} );*/
+} );
 		
-registerBlockType( 'card/image', {
+/*registerBlockType( 'card/image', {
 	title: 'Image',
 	parent: [ 'card/main' ],
 	icon: 'format-image',
@@ -182,7 +205,7 @@ registerBlockType( 'card/image', {
 		);
 	},
 			
-} );
+} );*/
 
 registerBlockType( 'card/header', {
 	title: 'Card Header',
