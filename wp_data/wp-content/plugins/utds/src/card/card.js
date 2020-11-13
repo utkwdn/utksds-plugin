@@ -33,12 +33,13 @@ const CardImgPosition = withState( {
 ) );
 */
 
-import './style.scss';
+// import './style.scss';
+// Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
 
 registerBlockType( 'card/main', {
 	title: 'Card',
-	icon: 'heart',
+	icon: 'images-alt2',
 	category: 'utdesign_system',
 	description: '',
 	attributes: {

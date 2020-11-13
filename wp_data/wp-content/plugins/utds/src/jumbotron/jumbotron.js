@@ -3,12 +3,13 @@ const { InnerBlocks, InspectorControls, ColorPalette } = wp.editor;
 const { PanelBody, RangeControl } = wp.components;
 const ALLOWED_BLOCKS = [ 'core/button', 'core/column', 'core/columns', 'core/separator', 'core/paragraph', 'core/heading', 'core/cover', 'core/image' ];
 
-import './style.scss';
+// import './style.scss';
+// Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
 
 registerBlockType( 'jumbotron/main', {
 	title: 'Jumbotron',
-	icon: 'editor-contract',
+	icon: 'welcome-view-site',
 	category: 'utdesign_system',
 	description: 'A jumbotron container which can hold a number of layout elements',
 	attributes: {
