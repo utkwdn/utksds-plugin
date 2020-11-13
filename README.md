@@ -3,13 +3,13 @@
 ## Set up Instructions
 
 For the initial set up, you'll need a working local setup consisting of WAMP (windows machines), MAMP (OS X), or MySQL, PHP7, and Apache/Nginx.
-Alternatively, you can simply use docker, by running ```docker-compose up -d``` in the root directory.
+Alternatively, you can simply use docker, by running ```docker-compose up -d``` in the project root directory, which is the first folder.
 
 ## Getting Started
 
 All of the plugin-specific files are found in ```/wp-data/wp-content/plugins/utds/src```.
 This project utilizes node/npm, or yarn, along with webpack to build browser compliant JS from ES6, and a SCSS processor for writing .scss files in lieu of css.
-In order to see your changes to files in /src/ reflected as newly built and/or modified blocks, run ```yarn start``` in the root directory.
+In order to see your changes to files in /src/ reflected as newly built and/or modified blocks, run ```yarn start``` in the plugin root directory, ```/wp-data/wp-content/plugins/utds/src```.
 
 ## Creating New Blocks
 
