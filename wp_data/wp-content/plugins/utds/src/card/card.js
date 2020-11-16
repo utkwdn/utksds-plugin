@@ -48,6 +48,9 @@ registerBlockType( 'card/main', {
 			default: 'gray',
 		},
 	},
+	providesContext: {
+    	'card/backgroundColor': 'backgroundColor',
+	},
 
 	edit: ( { attributes, setAttributes } ) => {
 		const { backgroundColor } = attributes;
@@ -148,6 +151,7 @@ registerBlockType( 'card/image', {
 	title: 'Image',
 	parent: [ 'card/main' ],
 	icon: 'format-image',
+	usesContext: ['card/backgroundColor'],
 	attributes: {
 		imagePostion: {
 			type: 'string',
@@ -155,7 +159,7 @@ registerBlockType( 'card/image', {
 		},
 	},
 				  
-	edit: ( { attributes, setAttributes } ) => {
+	edit: ( { attributes, setAttributes, context } ) => {
 		const { imagePostion } = attributes;
 
 		function onImagePositionChange( newValue ) {
@@ -177,7 +181,7 @@ registerBlockType( 'card/image', {
 	/>
 				</PanelBody>
 			</InspectorControls>,
-			<div className={ imagePostion }><InnerBlocks template={ IMAGE_TEMPLATE } allowedBlocks={ 'core/image' } templateLock={ 'all' } /></div>,
+			<div className={ imagePostion + ' ' + context['card/backgroundColor'] }><InnerBlocks template={ IMAGE_TEMPLATE } allowedBlocks={ 'core/image' } templateLock={ 'all' } /></div>,
 		] );
 	},
 	
