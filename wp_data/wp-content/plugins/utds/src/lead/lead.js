@@ -1,5 +1,5 @@
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, InspectorControls, ColorPalette } = wp.editor;
+const { InspectorControls, ColorPalette, RichText } = wp.editor;
 const { Button, PanelBody, RadioControl } = wp.components;
 const ALLOWED_BLOCKS = [ 'core/paragraph' ];
 
@@ -27,40 +27,23 @@ registerBlockType( 'lead/main', {
     anchor: true,
     align: true
   },
-
-	edit: ( { attributes, setAttributes } ) => {
-		const { backgroundColor } = attributes;
-
-		function onBackgroundColorChange( newColor ) {
-			setAttributes( { backgroundColor: newColor } );
-		}
-
-		return ( [
-			// eslint-disable-next-line react/jsx-key
-		    <InspectorControls style={ { marginBottom: '40px' } }>
-					<PanelBody title={ 'Background Color Settings' }>
-						<p><strong>Select a Background color:</strong></p>
-						<ColorPalette value={ backgroundColor }
-							onChange={ onBackgroundColorChange } />
-					</PanelBody>
-				</InspectorControls>,
-			<p className="lead">
-				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
-			</p>,
-		] );
-	},
-
-	save: ( { attributes } ) => {
-		const { backgroundColor } = attributes;
-
-		return (
-			<div className="lead" style={ { background: backgroundColor } }>
-				{ attributes.content }
-			</div>
-
-			
+	
+	edit: ( { className, attributes, setAttributes } ) => {
+		return(
+			<RichText 
+				tagName='p'
+				className={ className, 'lead' }
+				value={ attributes.content }
+				onChange={ ( content ) => setAttributes( { content } ) }
+				formattingControls={ [] }
+			/>
 		);
 	},
+				  
+	save: ( { className, attributes } ) => {
+		return <RichText.Content tagName="p" className="lead" value={ attributes.content } />;
+	},
+
 } );
 
 
