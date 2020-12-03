@@ -1,4 +1,6 @@
+//the following is an "example" block. It was originally intended to be a sort of 'primal' block, that would be copied and modified as needed. As it is now, it is mostly not useful, and serves as documentation more than anything.
 const { registerBlockType } = wp.blocks;
+//below, we are picking out the wordpress features that we want to use in our new block
 const {
 	RichText,
 	InspectorControls,
@@ -9,8 +11,10 @@ const {
 	AlignmentToolbar,
 } = wp.editor;
 const { PanelBody, IconButton, RangeControl } = wp.components;
+//if the block is a container for other blocks, the types of block to allow are in the array below
 const ALLOWED_BLOCKS = [ 'core/button', 'core/column', 'core/columns', 'core/separator' ];
 
+//the base2, and Base strings below should be unique to each new block. The user will see the "title", but the base2/main, is used by the system to reference each block, so it must be unique
 registerBlockType( 'base2/main', {
 	title: 'Base',
 	description: 'V2 Base, Color Picker, Accessibility, InnerBlock Support',
@@ -22,6 +26,7 @@ registerBlockType( 'base2/main', {
 	category: 'utdesign_system',
 
 	// custom attributes
+    // this is where we create properties for the new block. It is helpful to assign them names that reflect their purpose, for clarity and maintainability
 	attributes: {
 		title: {
 			type: 'string',
@@ -55,6 +60,7 @@ registerBlockType( 'base2/main', {
 		},
 	},
 
+    // the edit view reflects what a person *editing* a page will see. the editor.scss file is specific to this view as well.
 	edit: ( { attributes, setAttributes } ) => {
 		const {
 			title,
@@ -159,11 +165,13 @@ registerBlockType( 'base2/main', {
 					value={ body }
 					onChange={ onChangeBody }
 					style={ { textAlign: alignment } } />
-				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
+                //<!--the element below enables blocks named in the array on line 15 to be placed within the block-->
+                <InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
 			</div>,
 		] );
 	},
 
+    // save reflects what is ultimately shown on the front end of the site, once edits have been made. Occasionally, there may be errors related to disparities between the edit and save views. If this happens, refer to the js developer console in browser. Reconcile the differences reflected in the error return in order to resolve.
 	save: ( { attributes } ) => {
 		const {
 			title,
@@ -187,6 +195,7 @@ registerBlockType( 'base2/main', {
 				<RichText.Content tagName="p"
 					value={ body }
 					style={ { textAlign: alignment } } />
+                //<!--the element below enables blocks named in the array on line 15 to be displayed-->
 				<InnerBlocks.Content />
 			</div>
 		);

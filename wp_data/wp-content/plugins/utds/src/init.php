@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+//this creates the utdesign system category for the new blocks
 function utdesign_blocks_category($categories, $post) {
 	return array_merge(
 		$categories,
@@ -103,3 +104,14 @@ function utds_cgb_block_assets() { // phpcs:ignore
 
 // Hook: Block assets.
 add_action( 'init', 'utds_cgb_block_assets' );
+
+
+
+
+/**
+ * Deregister the gutenberg styles
+ */
+add_action( 'wp_print_styles', 'wps_deregister_styles', 100 );
+function wps_deregister_styles() {
+    wp_dequeue_style( 'wp-block-library' );
+}
