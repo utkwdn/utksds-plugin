@@ -1,3 +1,6 @@
+import { dispatch } from '@wordpress/data';
+import { select } from '@wordpress/data';
+
 const { registerBlockType } = wp.blocks;
 const { InnerBlocks, InspectorControls, ColorPalette, RichText } = wp.editor;
 const { PanelBody, PanelRow, RangeControl, RadioControl } = wp.components;
@@ -16,23 +19,6 @@ const HEADING_TEMPLATE = [
 	[ 'core/heading', { className: 'card-title' } ],
 ];
 
-/*
-const CardImgPosition = withState( {
-	option: 'card-img-top',
-} )( ( { option, setState } ) => (
-	<RadioControl
-		label="Image Position"
-		help="The placement of the image on the card."
-		selected={ option }
-		options={ [
-			{ label: 'Top', value: 'card-img-top' },
-			{ label: 'Bottom', value: 'card-img-bottom' },
-		] }
-		onChange={ ( option ) => { setState( { option } ) } }
-	/>
-) );
-*/
-
 // import './style.scss';
 // Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
@@ -47,14 +33,35 @@ registerBlockType( 'card/main', {
 			type: 'string',
 			default: 'gray',
 		},
+		blockName: {
+			type: 'string',
+			default: 'card',
+		}
+	},
+	providesContext: {
+    	'card/blockName': 'blockName',
 	},
 
-	edit: ( { attributes, setAttributes } ) => {
-		const { backgroundColor } = attributes;
+	edit: ( props ) => {
+		//const { backgroundColor } = attributes;
+		const {
+    		attributes: { backgroundColor },
+			clientId,
+			name,
+    		setAttributes
+  		} = props;
 
 		function onBackgroundColorChange( newColor ) {
 			setAttributes( { backgroundColor: newColor } );
 		}
+		
+		select( 'core/editor' ).getBlock( props.clientId ).innerBlocks.map( childrenBlock => {
+  			dispatch( 'core/block-editor' ).updateBlockAttributes( childrenBlock.clientId, {
+ 
+				parentBlockName: props.name, 
+
+  			} );
+		} );
 
 		return ( [
 			// eslint-disable-next-line react/jsx-key
@@ -67,7 +74,7 @@ registerBlockType( 'card/main', {
 			</InspectorControls>,
 			// eslint-disable-next-line react/jsx-key
 			<div className="card card-edit" style={ { background: backgroundColor } }>
-				<InnerBlocks allowedBlocks={ [ 'card/body', 'card/header', 'card/footer', 'card/image' ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks allowedBlocks={ [ 'card/body', 'card/header', 'card/footer', 'core/image' ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>,
 		] );
 	},
@@ -148,42 +155,51 @@ registerBlockType( 'card/heading', {
 	title: 'Image',
 	parent: [ 'card/main' ],
 	icon: 'format-image',
+	usesContext: ['card/blockName'],
+	attributes: {
+		imagePostion: {
+			type: 'string',
+			default: 'card-img-top',
+		},
+	},
 				  
-	edit: () => {
+	edit: ( { attributes, setAttributes, context } ) => {
+		const { imagePostion } = attributes;
+		
+		//console.log('Current attributes: ', attributes);
+
+		function onImagePositionChange( newValue ) {
+			setAttributes( { imagePostion: newValue } );
+		}
+		
 		return ( [
 			<InspectorControls>
-				<PanelBody title='Image Cap' children={ CardImgPosition } >
-
+				<PanelBody title='Image Cap'>
+				<RadioControl
+		label="Image Position"
+		help="The placement of the image on the card."
+		selected={ imagePostion }
+		options={ [
+			{ label: 'Top', value: 'card-img-top' },
+			{ label: 'Bottom', value: 'card-img-bottom' },
+		] }
+		onChange={ onImagePositionChange }
+	/>
 				</PanelBody>
 			</InspectorControls>,
-			<InnerBlocks template={ IMAGE_TEMPLATE } allowedBlocks={ 'core/image' } templateLock={ 'all' } />,
+			<div className={ imagePostion + ' ' + context['card/blockName'] }><InnerBlocks template={ IMAGE_TEMPLATE } allowedBlocks={ 'core/image' } templateLock={ 'all' } /></div>,
 		] );
 	},
 	
-	save: () => {
+	save: ( { attributes } ) => {
+		const { imagePostion } = attributes;
+		
 		return (
 			<InnerBlocks.Content />
 		);
 	},
 			
 } );*/
-		
-registerBlockType( 'card/image', {
-	title: 'Image',
-	parent: [ 'card/main' ],
-	icon: 'format-image',
-				  
-	edit: () => {
-		return ( <InnerBlocks template={ IMAGE_TEMPLATE } allowedBlocks={ 'core/image' } templateLock={ 'all' } /> );
-	},
-	
-	save: () => {
-		return (
-			<InnerBlocks.Content />
-		);
-	},
-			
-} );
 
 registerBlockType( 'card/header', {
 	title: 'Card Header',
