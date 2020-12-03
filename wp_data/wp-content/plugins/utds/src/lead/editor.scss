@@ -1,0 +1,15 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+@import "./../../../../../design-system-build-files/node_modules/bootstrap/scss/type";
+
+
+// This extension is editor only, and probably temporary until we get the editors to add proper classes.
+
+
+.editor-styles-wrapper p.lead {
+  @extend .lead;
+}
