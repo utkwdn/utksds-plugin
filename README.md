@@ -1,4 +1,4 @@
-# Gutenberg-Bootstrap Plugin
+# University of Tennessee, Knoxville Design System WordPress Plugin
 
 ## Set up Instructions
 
