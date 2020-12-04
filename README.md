@@ -1,15 +1,19 @@
 # University of Tennessee, Knoxville Design System WordPress Plugin
 
-## Set up Instructions
+## Requirements
 
-For the initial set up, you'll need a working local setup consisting of WAMP (windows machines), MAMP (OS X), or MySQL, PHP7, and Apache/Nginx.
-Alternatively, you can simply use docker, by running ```docker-compose up -d``` in the project root directory, which is the first folder.
+1. Node
+2. [The UT Design System Framework](https://github.utk.edu/ocm/utkds-framework)
 
-## Getting Started
+It is required that the design framework project be placed **in the same directory** as this project, since they share resources.
 
-All of the plugin-specific files are found in ```/wp-data/wp-content/plugins/utds/src```.
-This project utilizes node/npm, or yarn, along with webpack to build browser compliant JS from ES6, and a SCSS processor for writing .scss files in lieu of css.
-In order to see your changes to files in /src/ reflected as newly built and/or modified blocks, run ```yarn start``` in the plugin root directory, ```/wp-data/wp-content/plugins/utds/src```.
+## Recommended development configuration
+
+To test or develop this project locally, install WordPress, but do not install this plugin. Instead, create symlink to the root directory of this project and place that symlink in your WordPress installation's plugins directory.
+
+## Installation
+
+1. run `npm install --save-dev`
 
 ## Creating New Blocks
 
