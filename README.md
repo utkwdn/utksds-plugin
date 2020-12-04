@@ -7,13 +7,15 @@
 
 It is required that the design framework project be placed **in the same directory** as this project, since they share resources.
 
+## Installating this project
+
+1. run `npm install --save-dev`
+
+
 ## Recommended development configuration
 
 To test or develop this project locally, install WordPress, but do not install this plugin. Instead, create symlink to the root directory of this project and place that symlink in your WordPress installation's plugins directory.
 
-## Installation
-
-1. run `npm install --save-dev`
 
 ## Creating New Blocks
 
