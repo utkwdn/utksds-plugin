@@ -3225,7 +3225,7 @@ fieldset:disabled a.wp-block-button__link {
   display: block;
   width: 100%; }
   .btn-block + .btn-block {
-    margin-top: 0.5rem; }
+    margin-top: 4rem; }
 
 input[type="submit"].btn-block,
 input[type="reset"].btn-block,
