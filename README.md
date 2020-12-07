@@ -7,7 +7,7 @@
 
 It is required that the design framework project be placed **in the same directory** as this project, since they share resources.
 
-## Installating this project
+## Installing this project
 
 1. run `npm install --save-dev`
 
