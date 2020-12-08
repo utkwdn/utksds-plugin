@@ -20,6 +20,7 @@ import './table/table.js';
 import './image/image.js';
 import './alert/alert.js';
 import './lead/lead.js';
+import './column/column.js';
 
 
 // remove default button styles, declare default and/or plugin created blocks to selectively disable
