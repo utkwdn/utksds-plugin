@@ -9,6 +9,8 @@
  * Webpack is compiling as the input file.
  */
 
+import { registerBlockType } from '@wordpress/blocks';
+
 //to create a new block, either create a new directory, along with js and scss files, or copy an existing directory with a new name. The block will be available once it is assigned a new name, and imported below
 
 import './card/card.js';
@@ -20,8 +22,7 @@ import './table/table.js';
 import './image/image.js';
 import './alert/alert.js';
 import './lead/lead.js';
-import './column/column.js';
-
+import './columns/columns.js';
 
 // remove default button styles, declare default and/or plugin created blocks to selectively disable
 wp.domReady( function() {
