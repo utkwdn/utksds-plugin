@@ -1,0 +1,44 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+
+//@import "./../utksds-framework/node_modules/bootstrap/scss/grid";
+
+
+.row > .block-editor-inner-blocks > .block-editor-block-list__layout  {
+
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px; 
+
+  border: 4px solid #555;
+
+  .block-editor-block-list__layout {
+    
+    // reset from the parent
+ //   display: -ms-inline-flex;
+ //   display: inline-flex;
+ //   -ms-flex-wrap: wrap;
+ //   flex-wrap: wrap;
+ //   margin-right: 0;
+ //   margin-left: 0; 
+ //
+ //   border-color: aqua;
+
+  }
+  > .block-editor-block-list__block {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    background-color: rgba(39,41,43,0.03);
+    border: 1px solid rgba(39,41,43,0.1);
+    flex: 1 0 0%;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}

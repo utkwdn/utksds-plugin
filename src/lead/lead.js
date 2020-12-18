@@ -3,7 +3,7 @@ const { InspectorControls, ColorPalette, RichText } = wp.editor;
 const { Button, PanelBody, RadioControl } = wp.components;
 const ALLOWED_BLOCKS = [ 'core/paragraph' ];
 
-// import './style.scss';
+import './style.scss';
 // Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
 

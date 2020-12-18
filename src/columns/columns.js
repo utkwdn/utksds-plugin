@@ -3,6 +3,9 @@
 import { Path, SVG } from '@wordpress/components';
 //import { BlockVariationPicker } from '@wordpress/block-editor';
 //import { store as blocksStore } from '@wordpress/blocks';
+import './editor.scss';
+
+
 
 const { registerBlockType } = wp.blocks;
 const { InnerBlocks, InspectorControls } = wp.editor;
@@ -131,9 +134,9 @@ registerBlockType( 'utksds/columns', {
 			</SVG>
 		),
 		innerBlocks: [
-			[ 'utksds/column', { className: 'col-4' } ],
-			[ 'utksds/column', { className: 'col-4' } ],
-			[ 'utksds/column', { className: 'col-4' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
 		],
 		//scope: [ 'block' ],
 	},
