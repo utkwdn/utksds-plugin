@@ -19,7 +19,7 @@ registerBlockType( 'utksds/columns', {
 	category: 'utdesign_system',
 	description: '',
 	attributes: {
-		columnsType: {
+		rowClass: {
 			type: 'string',
 			default: '',
 		},
@@ -43,6 +43,7 @@ registerBlockType( 'utksds/columns', {
 				/>
 			</SVG>
 		),
+		attributes: { rowClass: 'column-100' },
 		innerBlocks: [ [ 'utksds/column', { className: 'col-12' } ] ],
 		//scope: [ 'block' ],
 	},
@@ -64,6 +65,7 @@ registerBlockType( 'utksds/columns', {
 				/>
 			</SVG>
 		),
+		attributes: { rowClass: 'column-50-50' },
 		isDefault: true,
 		innerBlocks: [ [ 'utksds/column', { className: 'col-6' } ], [ 'utksds/column', { className: 'col-6' } ] ],
 		//scope: [ 'block' ],
@@ -86,6 +88,7 @@ registerBlockType( 'utksds/columns', {
 				/>
 			</SVG>
 		),
+		attributes: { rowClass: 'column-30-70' },
 		innerBlocks: [
 			[ 'utksds/column', { className: 'col-4' } ],
 			[ 'utksds/column', { className: 'col-8' } ],
@@ -110,6 +113,7 @@ registerBlockType( 'utksds/columns', {
 				/>
 			</SVG>
 		),
+		attributes: { rowClass: 'column-70-30' },
 		innerBlocks: [
 			[ 'utksds/column', { className: 'col-8' } ],
 			[ 'utksds/column', { className: 'col-4' } ],
@@ -133,6 +137,7 @@ registerBlockType( 'utksds/columns', {
 				/>
 			</SVG>
 		),
+		attributes: { rowClass: 'column-33-33-33' },
 		innerBlocks: [
 			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
 			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
@@ -157,6 +162,7 @@ registerBlockType( 'utksds/columns', {
 				/>
 			</SVG>
 		),
+		attributes: { rowClass: 'column-25-50-25' },
 		innerBlocks: [
 			[ 'utksds/column', { className: 'col-3' } ],
 			[ 'utksds/column', { className: 'col-6' } ],
@@ -164,12 +170,32 @@ registerBlockType( 'utksds/columns', {
 		],
 		//scope: [ 'block' ],
 	},
+	{
+		name: 'four-columns-equal',
+		title: 'Columns: 25 / 25 / 25 / 25',
+		description: 'Four columns; equal split',
+		icon: (
+			<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false">
+  <path fill-rule="nonzero" d="M39 12a2 2 0 011.995 1.85L41 14v20a2 2 0 01-1.85 1.995L39 36H9a2 2 0 01-1.995-1.85L7 34V14a2 2 0 011.85-1.995L9 12h30zm-24 2H9v20h6V14zm8 0h-6v20h6V14zm2 0v20h6V14h-6zm8 20h6V14h-6v20z" />
+</svg>
+		),
+		attributes: { rowClass: 'column-25-25-25-25' },
+		innerBlocks: [
+			[ 'utksds/column', { className: 'col-3' } ],
+			[ 'utksds/column', { className: 'col-3' } ],
+			[ 'utksds/column', { className: 'col-3' } ],
+			[ 'utksds/column', { className: 'col-3' } ],
+		],
+		//scope: [ 'block' ],
+	},
 	],
 	
-	edit: ( props ) => {		
+	edit: ( props ) => {
+		const{ attributes } = props;
+		const{ rowClass } = attributes;
 		return (
 			<div className="container">
-				<div className="row">
+				<div className={"row " + rowClass }>
 					<InnerBlocks />
 				</div>
 			</div>
