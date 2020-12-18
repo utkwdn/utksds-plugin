@@ -196,7 +196,7 @@ registerBlockType( 'utksds/columns', {
 		return (
 			<div className="container">
 				<div className={"row " + rowClass }>
-					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
+					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } templateLock={ 'all' } />
 				</div>
 			</div>
 		);
@@ -221,7 +221,7 @@ registerBlockType( 'utksds/column', {
 	edit: ( props ) => {
 		return (
 			<div className={ props.className } >
-				<InnerBlocks renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 		)
 	},
