@@ -193,7 +193,7 @@ registerBlockType( 'utksds/columns', {
 		return (
 			<div className="container">
 				<div className={"row " + rowClass }>
-					<InnerBlocks />
+					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
 				</div>
 			</div>
 		);
