@@ -31,12 +31,8 @@ registerBlockType( 'card/main', {
 	attributes: {
 		backgroundColor: {
 			type: 'string',
-			default: 'gray',
+			default: 'card card-primary',
 		},
-		blockName: {
-			type: 'string',
-			default: 'card',
-		}
 	},
 	providesContext: {
     	'card/blockName': 'blockName',
@@ -68,12 +64,27 @@ registerBlockType( 'card/main', {
 			<InspectorControls style={ { marginBottom: '40px' } }>
 				<PanelBody title={ 'Background Color Settings' }>
 					<p><strong>Select a Background color:</strong></p>
-					<ColorPalette value={ backgroundColor }
-						onChange={ onBackgroundColorChange } />
+          <RadioControl
+      		label="Color"
+      		help="The color of the card."
+      		selected={ backgroundColor }
+      		options={ [
+      			{ label: 'Primary', value: 'card card-primary' },
+      			{ label: 'Smokey', value: 'card text-white bg-smokey' },
+      			{ label: 'Secondary', value: 'card text-white bg-secondary' },
+      			{ label: 'Success', value: 'card text-white bg-success' },
+      			{ label: 'Danger', value: 'card text-white bg-danger' },
+      			{ label: 'Warning', value: 'card bg-warning' },
+      			{ label: 'Info', value: 'card text-white bg-info' },
+      			{ label: 'Light', value: 'card bg-light' },
+      			{ label: 'Dark', value: 'card text-white bg-dark' },
+      		] }
+      		onChange={ onBackgroundColorChange }
+      	/>
 				</PanelBody>
 			</InspectorControls>,
 			// eslint-disable-next-line react/jsx-key
-			<div className="card card-edit" style={ { background: backgroundColor } }>
+			<div className={  backgroundColor }>
 				<InnerBlocks allowedBlocks={ [ 'card/body', 'card/header', 'card/footer', 'core/image' ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>,
 		] );
@@ -83,7 +94,7 @@ registerBlockType( 'card/main', {
 		const { backgroundColor } = attributes;
 
 		return (
-			<div className="card" style={ { background: backgroundColor } }>
+			<div className={ backgroundColor }>
 				<InnerBlocks.Content />
 			</div>
 		);
