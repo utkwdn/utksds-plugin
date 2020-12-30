@@ -70,7 +70,7 @@ const addImageControls =  createHigherOrderComponent( ( BlockEdit ) => {
     };
 }, "addImageControls" );
 
-function applyExtraClass( extraProps, blockType, attributes ) {
+/*function applyExtraClass( extraProps, blockType, attributes ) {
 	
 	const { imagePostion } = attributes;
 	
@@ -79,7 +79,7 @@ function applyExtraClass( extraProps, blockType, attributes ) {
 	}
 				 
 	return extraProps;
-}
+}*/
 
 addFilter(
 	'blocks.registerBlockType',
@@ -93,8 +93,8 @@ addFilter(
 	addImageControls
 );
 				 
-addFilter(
+/*addFilter(
 	'blocks.getSaveContent.extraProps',
 	'gutenstrap/imageExtraClass',
 	applyExtraClass
-);
+);*/
