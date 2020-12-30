@@ -23,6 +23,8 @@ import './image/image.js';
 import './alert/alert.js';
 import './lead/lead.js';
 import './columns/columns.js';
+import './horizontal-rule/horizontal-rule.js';
+
 
 // remove default button styles, declare default and/or plugin created blocks to selectively disable
 wp.domReady( function() {
