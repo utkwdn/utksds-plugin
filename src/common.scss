@@ -109,3 +109,20 @@
   font-family: $font-family-sans-serif;
 }
 
+// Here we make the editor a bit wider than default.
+// ===================================================================
+/* Main column width */
+.wp-block {
+    max-width: 1080px;
+}
+
+/* Width of "wide" blocks */
+.wp-block[data-align="wide"] {
+    max-width: 1880px;
+}
+
+/* Width of "full-width" blocks */
+.wp-block[data-align="full"] {
+    max-width: none;
+}
+
