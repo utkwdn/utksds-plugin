@@ -204,11 +204,9 @@ registerBlockType( 'utksds/columns', {
 	
 	save: ( { attributes } ) => {
 		return (
-			<div className="container">
 				<div className="row">
 					<InnerBlocks.Content />
 				</div>
-			</div>
 		);
 	},
 } );
