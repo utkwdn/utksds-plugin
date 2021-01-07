@@ -16,7 +16,7 @@ const ALLOWED_BLOCKS = [ 'utksds/column' ];
 registerBlockType( 'utksds/columns', {
 	title: 'UTK Columns',
 	icon: 'editor-table',
-	category: 'utdesign_system',
+	category: 'utdesign_layout',
 	description: '',
 	attributes: {
 		rowClass: {
