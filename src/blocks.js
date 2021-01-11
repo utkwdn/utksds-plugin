@@ -24,6 +24,7 @@ import './alert/alert.js';
 import './lead/lead.js';
 import './strip/strip.js';
 import './columns/columns.js';
+import './calendar/calendar.js';
 import './horizontal-rule/horizontal-rule.js';
 
 
