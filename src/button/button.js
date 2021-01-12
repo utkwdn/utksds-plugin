@@ -1,174 +1,93 @@
+import { Path, SVG } from '@wordpress/components';
 import './editor.scss';
 
-/**
- * External Dependencies
- */
-import classnames from 'classnames';
+const { registerBlockType } = wp.blocks;
+const { InnerBlocks, InspectorControls } = wp.editor;
+const { RichText, BlockControls } = wp.blockEditor;
+const { PanelBody, PanelRow, Button, ButtonGroup, Popover, ToggleControl, ToolbarButton, ToolbarGroup } = wp.components;
 
-/**
- * WordPress Dependencies
- */
-// const { __ } = wp.i18n;
-const { addFilter } = wp.hooks;
-const { Fragment }	= wp.element;
-const { InspectorControls }	= wp.editor;
-const { createHigherOrderComponent } = wp.compose;
-const { RadioControl } = wp.components;
-
-//restrict to specific block names
-const allowedBlocks = [ 'core/button' ];
-
-/**
- * Add custom attributes to allow settings for Bootstrap button attributes, including color, fill, and size.
- *
- * @param {Object} settings Settings for the block.
- *
- * @return {Object} settings Modified settings.
- */
-function addAttributes( settings ) {
-	/*check if object exists for old Gutenberg version compatibility
-	add allowedBlocks restriction*/
-	if ( typeof settings.attributes !== 'undefined' && allowedBlocks.includes( settings.name ) ) {
-		settings.attributes = Object.assign( settings.attributes, {
-			btnColor: {
-				type: 'string',
-				default: 'btn-primary',
-			},
-			btnFill: {
-				type: 'string',
-				default: 'btn-fill',
-			},
-			btnSize: {
-				type: 'string',
-				default: 'btn-normal',
-			},
-		} );
-	}
-
-	return settings;
-}
-
-/**
- * Add selectors for color, fill, and size.
- *
- * @param {function} BlockEdit Block edit component.
- *
- * @return {function} BlockEdit Modified block edit component.
- */
-const withAdvancedControls = createHigherOrderComponent( ( BlockEdit ) => {
-	return ( props ) => {
-		const {
-			name,
-			attributes,
-			setAttributes,
-			isSelected,
-		} = props;
-
-		const {
-			btnColor,
-			btnFill,
-			btnSize,
-		} = attributes;
-
-		return (
-			<Fragment>
-				<BlockEdit { ...props } />
-				{ isSelected && allowedBlocks.includes( name ) &&
-					<InspectorControls>
-						<RadioControl
-							label="Button color:"
-							selected={ btnColor }
-							options={
-								[
-									{ label: 'Primary', value: 'btn-primary' },
-									{ label: 'Secondary', value: 'btn-secondary' },
-									{ label: 'Success', value: 'btn-success' },
-									{ label: 'Danger', value: 'btn-danger' },
-									{ label: 'Warning', value: 'btn-warning' },
-									{ label: 'Info', value: 'btn-info' },
-									{ label: 'Light', value: 'btn-light' },
-									{ label: 'Dark', value: 'btn-dark' },
-								]
-							}
-							onChange={ ( newValue ) => setAttributes( { btnColor: newValue } ) }
-						/>
-						<RadioControl
-							label="Button fill type:"
-							selected={ btnFill }
-							options={
-								[
-									{ label: 'Solid', value: 'btn-fill' },
-									{ label: 'Outline', value: 'btn-outline' },
-									{ label: 'Text', value: 'btn-link' },
-								]
-							}
-							onChange={ ( newValue ) => setAttributes( { btnFill: newValue } ) }
-						/>
-						<RadioControl
-							label="Button size:"
-							selected={ btnSize }
-							options={
-								[
-									{ label: 'Small', value: 'btn-sm' },
-									{ label: 'Normal', value: 'btn-normal' },
-									{ label: 'Large', value: 'btn-lg' },
-									{ label: 'Block', value: 'btn-block' },
-								]
-							}
-							onChange={ ( newValue ) => setAttributes( { btnSize: newValue } ) }
-						/>
-					</InspectorControls>
-				}
-
-			</Fragment>
+registerBlockType( 'utksds/button', {
+	title: 'UTK Button',
+	icon: (
+	<svg width="48" height="48" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false"><path d="M19 6.5H5c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7c0-1.1-.9-2-2-2zm.5 9c0 .3-.2.5-.5.5H5c-.3 0-.5-.2-.5-.5v-7c0-.3.2-.5.5-.5h14c.3 0 .5.2.5.5v7zM8 13h8v-1.5H8V13z"></path></svg>
+	),
+	category: 'utdesign_system',
+	description: '',
+	attributes: {
+		url: {
+			type: 'string',
+			source: 'attribute',
+			selector: 'a',
+			attribute: 'href'
+		},
+		title: {
+			type: 'string',
+			source: 'attribute',
+			selector: 'a',
+			attribute: 'title'
+		},
+		text: {
+			type: 'string',
+			source: 'html',
+			selector: 'a'
+		},
+		linkTarget: {
+			type: 'string',
+			source: 'attribute',
+			selector: 'a',
+			attribute: 'target'
+		},
+		rel: {
+			type: 'string',
+			source: 'attribute',
+			selector: 'a',
+			attribute: 'rel'
+		},
+		placeholder: {
+			type: 'string',
+			default: 'Add Text'
+		},
+	},
+	
+	edit: ( { attributes, ClassName, setAttributes } ) => {
+		//const{ attributes } = props;
+		//const{ rowClass } = attributes;
+		return ( [
+			<BlockControls>
+				<ToolbarGroup>
+					<ToolbarButton
+						name="link"
+						icon={ <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-hidden="true" focusable="false"><path d="M15.6 7.2H14v1.5h1.6c2 0 3.7 1.7 3.7 3.7s-1.7 3.7-3.7 3.7H14v1.5h1.6c2.8 0 5.2-2.3 5.2-5.2 0-2.9-2.3-5.2-5.2-5.2zM4.7 12.4c0-2 1.7-3.7 3.7-3.7H10V7.2H8.4c-2.9 0-5.2 2.3-5.2 5.2 0 2.9 2.3 5.2 5.2 5.2H10v-1.5H8.4c-2 0-3.7-1.7-3.7-3.7zm4.6.9h5.3v-1.5H9.3v1.5z"></path></svg> }
+						title='Link'
+						//shortcut={ displayShortcut.primary( 'k' ) }
+						//onClick={ openLinkControl }
+					/>
+				</ToolbarGroup>
+			</BlockControls>,
+			<RichText 
+				tagName='a'
+				className={ 'btn btn-primary' }
+				placeholder={ attributes.placeholder }
+				value={ attributes.text }
+				onChange={ ( value ) => setAttributes( { text: value } ) }
+				withoutInteractiveFormatting
+			/>
+		] );
+	},
+	
+	save: ( { attributes } ) => {
+		return(
+			<RichText.Content
+				tagName="a"
+				type = 'button'
+				className={ 'btn btn-primary' }
+				href={ attributes.url }
+				title={ attributes.title }
+				style={ '' }
+				value={ attributes.text }
+				target={ attributes.linkTarget }
+				rel={ attributes.rel }
+			/>
 		);
-	};
-}, 'withAdvancedControls' );
-
-/**
- * Add custom element class in save element.
- *
- * @param {Object} extraProps     Block element.
- * @param {Object} blockType      Blocks object.
- * @param {Object} attributes     Blocks attributes.
- *
- * @return {Object} extraProps Modified block element.
- */
-function applyExtraClass( extraProps, blockType, attributes ) {
-	const { btnFill, btnColor, btnSize } = attributes;
-
-	//check if attribute exists for old Gutenberg version compatibility
-	//add class only when visibleOnMobile = false
-	//add allowedBlocks restriction
-	if ( typeof btnFill !== 'undefined' && allowedBlocks.includes( blockType.name ) ) {
-		extraProps.className = classnames( extraProps.className, btnFill );
-	}
-	if ( typeof btnColor !== 'undefined' && allowedBlocks.includes( blockType.name ) ) {
-		extraProps.className = classnames( extraProps.className, btnColor );
-	}
-	if ( typeof btnSize !== 'undefined' && allowedBlocks.includes( blockType.name ) ) {
-		extraProps.className = classnames( extraProps.className, btnSize );
-	}
-
-	return extraProps;
-}
-
-//add filters
-
-addFilter(
-	'blocks.registerBlockType',
-	'editorskit/custom-attributes',
-	addAttributes
-);
-
-addFilter(
-	'editor.BlockEdit',
-	'editorskit/custom-advanced-control',
-	withAdvancedControls
-);
-
-addFilter(
-	'blocks.getSaveContent.extraProps',
-	'editorskit/applyExtraClass',
-	applyExtraClass
-);
+	},
+} );
