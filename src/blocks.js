@@ -22,7 +22,9 @@ import './table/table.js';
 import './image/image.js';
 import './alert/alert.js';
 import './lead/lead.js';
+import './strip/strip.js';
 import './columns/columns.js';
+import './calendar/calendar.js';
 import './horizontal-rule/horizontal-rule.js';
 
 
@@ -39,14 +41,12 @@ wp.domReady( function() {
 		'core/calendar',
 		'core/categories',
 		'core/latest-comments',
-//		'core/latest-posts',
 		'core/search',
 		'core/social-icons',
 		'core/audio',
 		'core/cover',
 		'core/preformatted',
 		'core/media-text',
-//  	'core/buttons',
     'core/text-columns',
     'core/columns',
     'core/html',
@@ -55,7 +55,6 @@ wp.domReady( function() {
     'core/separator',
     'core/spacer',
     'core/group',
-
 		'core-embed/flickr',
 		'core-embed/wordpress',
 		'core-embed/meetup-com',

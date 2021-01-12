@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: utds — CGB Gutenberg Block Plugin
+ * Plugin Name: Design System Gutenberg Block Plugin
  * Description: utds — is a Gutenberg plugin created via create-guten-block.
- * Author: Patrick Werner
- * Author URI: http://patrickwerner.org/
+ * Author: University of Tennessee, Office of Communications and Marketing
+ * Author URI: https://communications.utk.edu/
  * Version: 1.0.0
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt

@@ -31,7 +31,7 @@ import './editor.scss';
 registerBlockType( 'horizontal-rule/main', {
 	title: 'Horizontal Rule',
 	icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 16v-8h-24v8h24zm-22-6h2v2h1v-2h2v3h1v-3h2v2h1v-2h2v2h1v-2h2v3h1v-3h2v2h1v-2h2v4h-20v-4z"/></svg>,
-  category: 'utdesign_system',
+  category: 'design',
 	attributes: {
 		imagePostion: {
 			type: 'string',

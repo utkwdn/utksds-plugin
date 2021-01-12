@@ -26,17 +26,13 @@ import './editor.scss';
 registerBlockType( 'card/main', {
 	title: 'Card',
 	icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 0v2h-18v18h-2v-20h20zm-7.281 20.497l-.719 3.503 3.564-.658-2.845-2.845zm8.435-8.436l2.846 2.845-7.612 7.612-2.845-2.845 7.611-7.612zm-17.154-8.061v20h6v-2h-4v-16h16v4.077l2 2v-8.077h-20z"/></svg>,
-	category: 'utdesign_system',
+	category: 'design',
 	description: '',
 	attributes: {
 		backgroundColor: {
 			type: 'string',
-			default: 'gray',
+			default: 'card card-primary',
 		},
-		blockName: {
-			type: 'string',
-			default: 'card',
-		}
 	},
 	providesContext: {
     	'card/blockName': 'blockName',
@@ -68,12 +64,27 @@ registerBlockType( 'card/main', {
 			<InspectorControls style={ { marginBottom: '40px' } }>
 				<PanelBody title={ 'Background Color Settings' }>
 					<p><strong>Select a Background color:</strong></p>
-					<ColorPalette value={ backgroundColor }
-						onChange={ onBackgroundColorChange } />
+          <RadioControl
+      		label="Color"
+      		help="The color of the card."
+      		selected={ backgroundColor }
+      		options={ [
+      			{ label: 'Primary', value: 'card card-primary' },
+      			{ label: 'Smokey', value: 'card text-white bg-smokey' },
+      			{ label: 'Secondary', value: 'card text-white bg-secondary' },
+      			{ label: 'Success', value: 'card text-white bg-success' },
+      			{ label: 'Danger', value: 'card text-white bg-danger' },
+      			{ label: 'Warning', value: 'card bg-warning' },
+      			{ label: 'Info', value: 'card text-white bg-info' },
+      			{ label: 'Light', value: 'card bg-light' },
+      			{ label: 'Dark', value: 'card text-white bg-dark' },
+      		] }
+      		onChange={ onBackgroundColorChange }
+      	/>
 				</PanelBody>
 			</InspectorControls>,
 			// eslint-disable-next-line react/jsx-key
-			<div className="card card-edit" style={ { background: backgroundColor } }>
+			<div className={  backgroundColor }>
 				<InnerBlocks allowedBlocks={ [ 'card/body', 'card/header', 'card/footer', 'core/image' ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>,
 		] );
@@ -83,7 +94,7 @@ registerBlockType( 'card/main', {
 		const { backgroundColor } = attributes;
 
 		return (
-			<div className="card" style={ { background: backgroundColor } }>
+			<div className={ backgroundColor }>
 				<InnerBlocks.Content />
 			</div>
 		);
