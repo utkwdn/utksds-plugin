@@ -5,6 +5,8 @@ const { registerBlockType } = wp.blocks;
 const { InnerBlocks, InspectorControls } = wp.editor;
 const { RichText, BlockControls } = wp.blockEditor;
 const { PanelBody, PanelRow, Button, ButtonGroup, Popover, ToggleControl, ToolbarButton, ToolbarGroup } = wp.components;
+const { withState } = wp.compose;
+const { Fragment, useCallback, useState } = wp.element;
 
 registerBlockType( 'utksds/button', {
 	title: 'UTK Button',
@@ -49,9 +51,27 @@ registerBlockType( 'utksds/button', {
 		},
 	},
 	
-	edit: ( { attributes, ClassName, setAttributes } ) => {
-		//const{ attributes } = props;
+	edit: ( { isSelected, attributes, ClassName, setAttributes } ) => {
 		//const{ rowClass } = attributes;
+		const [ isURLPickerOpen, setIsURLPickerOpen ] = useState( false );
+		const urlIsSet = !! attributes.url;
+		const urlIsSetandSelected = urlIsSet && isSelected;
+		const openLinkControl = () => {
+			setIsURLPickerOpen( true );
+			return false; // prevents default behaviour for event
+		};
+		const unlinkButton = () => {
+			setAttributes( {
+				url: undefined,
+				linkTarget: undefined,
+				rel: undefined,
+			} );
+			setIsURLPickerOpen( false );
+		};
+		
+		const [ isVisible, setisVisible ] = useState( false );
+		const toggleVisible = () => setisVisible(value => !value);
+		
 		return ( [
 			<BlockControls>
 				<ToolbarGroup>
@@ -61,7 +81,28 @@ registerBlockType( 'utksds/button', {
 						title='Link'
 						//shortcut={ displayShortcut.primary( 'k' ) }
 						//onClick={ openLinkControl }
+						onClick={ openLinkControl }
 					/>
+					{ isURLPickerOpen || urlIsSetandSelected && (
+						<Popover 
+							position="bottom center"
+							onClose={ () => setIsURLPickerOpen( false ) }
+							anchorRef={ current }
+						>
+            				Popover is toggled!
+            			</Popover>
+					) }
+					<ToolbarButton
+						name="popover"
+						icon={ <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 24 24" width="24" height="24" role="img" aria-hidden="true" focusable="false"><path d="M7 8h6v4H7zm-5 5v4h4l-1.2-1.2L7 12l-3.8 2.2M14 17h4v-4l-1.2 1.2L13 12l2.2 3.8M14 3l1.3 1.3L13 8l3.8-2.2L18 7V3M6 3H2v4l1.2-1.2L7 8 4.7 4.3"></path></svg> }
+						title='Popover'
+						onClick={ toggleVisible }
+					/>
+					{ isVisible && (
+                	<Popover>
+                    	Popover is toggled!
+                	</Popover>
+            		) }
 				</ToolbarGroup>
 			</BlockControls>,
 			<RichText 
