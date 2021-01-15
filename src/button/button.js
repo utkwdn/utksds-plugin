@@ -3,10 +3,12 @@ import './editor.scss';
 
 const { registerBlockType } = wp.blocks;
 const { InnerBlocks, InspectorControls } = wp.editor;
-const { RichText, BlockControls } = wp.blockEditor;
+const { RichText, BlockControls, URLInputButton, __experimentalLinkControl } = wp.blockEditor;
 const { PanelBody, PanelRow, Button, ButtonGroup, Popover, ToggleControl, ToolbarButton, ToolbarGroup } = wp.components;
 const { withState } = wp.compose;
 const { Fragment, useCallback, useState } = wp.element;
+
+const LinkControl = __experimentalLinkControl;
 
 registerBlockType( 'utksds/button', {
 	title: 'UTK Button',
@@ -75,23 +77,10 @@ registerBlockType( 'utksds/button', {
 		return ( [
 			<BlockControls>
 				<ToolbarGroup>
-					<ToolbarButton
-						name="link"
-						icon={ <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-hidden="true" focusable="false"><path d="M15.6 7.2H14v1.5h1.6c2 0 3.7 1.7 3.7 3.7s-1.7 3.7-3.7 3.7H14v1.5h1.6c2.8 0 5.2-2.3 5.2-5.2 0-2.9-2.3-5.2-5.2-5.2zM4.7 12.4c0-2 1.7-3.7 3.7-3.7H10V7.2H8.4c-2.9 0-5.2 2.3-5.2 5.2 0 2.9 2.3 5.2 5.2 5.2H10v-1.5H8.4c-2 0-3.7-1.7-3.7-3.7zm4.6.9h5.3v-1.5H9.3v1.5z"></path></svg> }
-						title='Link'
-						//shortcut={ displayShortcut.primary( 'k' ) }
-						//onClick={ openLinkControl }
-						onClick={ openLinkControl }
+					<URLInputButton
+						url={ attributes.url }
+						onChange={ ( url, post ) => setAttributes( { url } ) }
 					/>
-					{ isURLPickerOpen || urlIsSetandSelected && (
-						<Popover 
-							position="bottom center"
-							onClose={ () => setIsURLPickerOpen( false ) }
-							anchorRef={ current }
-						>
-            				Popover is toggled!
-            			</Popover>
-					) }
 					<ToolbarButton
 						name="popover"
 						icon={ <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 24 24" width="24" height="24" role="img" aria-hidden="true" focusable="false"><path d="M7 8h6v4H7zm-5 5v4h4l-1.2-1.2L7 12l-3.8 2.2M14 17h4v-4l-1.2 1.2L13 12l2.2 3.8M14 3l1.3 1.3L13 8l3.8-2.2L18 7V3M6 3H2v4l1.2-1.2L7 8 4.7 4.3"></path></svg> }
@@ -100,7 +89,11 @@ registerBlockType( 'utksds/button', {
 					/>
 					{ isVisible && (
                 	<Popover>
-                    	Popover is toggled!
+                    	<LinkControl
+    						onChange={(nextValue) => {
+    							console.log(nextValue);
+    						}}
+ 						/>
                 	</Popover>
             		) }
 				</ToolbarGroup>
