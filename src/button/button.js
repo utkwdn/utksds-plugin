@@ -54,7 +54,7 @@ registerBlockType( 'utksds/button', {
 	},
 	
 	edit: ( { isSelected, attributes, ClassName, setAttributes } ) => {
-		//const{ rowClass } = attributes;
+		//const { url, linkTarget } = attributes;
 		const [ isURLPickerOpen, setIsURLPickerOpen ] = useState( false );
 		const urlIsSet = !! attributes.url;
 		const urlIsSetandSelected = urlIsSet && isSelected;
@@ -74,13 +74,15 @@ registerBlockType( 'utksds/button', {
 		const [ isVisible, setisVisible ] = useState( false );
 		const toggleVisible = () => setisVisible(value => !value);
 		
+		const [ NewTab, setNewTab ] = useState( false );
+		
 		return ( [
 			<BlockControls>
 				<ToolbarGroup>
-					<URLInputButton
+					/*<URLInputButton
 						url={ attributes.url }
 						onChange={ ( url, post ) => setAttributes( { url } ) }
-					/>
+					/>*/
 					<ToolbarButton
 						name="popover"
 						icon={ <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 24 24" width="24" height="24" role="img" aria-hidden="true" focusable="false"><path d="M7 8h6v4H7zm-5 5v4h4l-1.2-1.2L7 12l-3.8 2.2M14 17h4v-4l-1.2 1.2L13 12l2.2 3.8M14 3l1.3 1.3L13 8l3.8-2.2L18 7V3M6 3H2v4l1.2-1.2L7 8 4.7 4.3"></path></svg> }
@@ -90,9 +92,22 @@ registerBlockType( 'utksds/button', {
 					{ isVisible && (
                 	<Popover>
                     	<LinkControl
-    						onChange={(nextValue) => {
-    							console.log(nextValue);
-    						}}
+    						value={ { url: attributes.url, opensInNewTab: attributes.linkTarget } }
+							onChange={ ( {
+								url: newURL = '',
+								opensInNewTab: NewTab = value ? '_blank' : undefined,
+							} ) => {
+								//setNewTab(value => !value);
+								setAttributes( { url: attributes.url = newURL, opensInNewTab: attributes.linkTarget = NewTab } );
+								
+			
+								/*if ( NewTab == true ) {
+									attributes.linkTarget = '_blank';
+								} else {
+									attributes.linkTarget = undefined;
+								}*/
+			
+							} }
  						/>
                 	</Popover>
             		) }
