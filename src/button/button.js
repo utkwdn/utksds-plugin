@@ -41,6 +41,10 @@ registerBlockType( 'utksds/button', {
 			selector: 'a',
 			attribute: 'target'
 		},
+		linkTab: {
+			type: 'boolean',
+			default: false,
+		},
 		rel: {
 			type: 'string',
 			source: 'attribute',
@@ -74,7 +78,8 @@ registerBlockType( 'utksds/button', {
 		const [ isVisible, setisVisible ] = useState( false );
 		const toggleVisible = () => setisVisible(value => !value);
 		
-		const [ NewTab, setNewTab ] = useState( false );
+		const [ NewTab, setNewTab ] = useState( attributes.linkTab );
+		//const toggleNewTab = () => setNewTab(value => !value);
 		
 		return ( [
 			<BlockControls>
@@ -92,22 +97,28 @@ registerBlockType( 'utksds/button', {
 					{ isVisible && (
                 	<Popover>
                     	<LinkControl
-    						value={ { url: attributes.url, opensInNewTab: attributes.linkTarget } }
+							value = { { url: attributes.url, opensInNewTab: attributes.linkTab } }
 							onChange={ ( {
-								url: newURL = '',
-								opensInNewTab: NewTab = value ? '_blank' : undefined,
+								url: newurl = '',
+								opensInNewTab: NewTab
 							} ) => {
-								//setNewTab(value => !value);
-								setAttributes( { url: attributes.url = newURL, opensInNewTab: attributes.linkTarget = NewTab } );
+								//console.log(NewTab);
 								
+								setAttributes( { url: newurl, opensInNewTab: setNewTab(value => !value) } );
 			
-								/*if ( NewTab == true ) {
+								attributes.url = newurl;
+								attributes.linkTab = NewTab;
+			
+								if ( attributes.linkTab === true ) {
 									attributes.linkTarget = '_blank';
 								} else {
 									attributes.linkTarget = undefined;
-								}*/
+								}
+			
+								//console.log(attributes.linkTarget);
 			
 							} }
+			
  						/>
                 	</Popover>
             		) }
