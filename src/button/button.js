@@ -2,9 +2,8 @@ import { Path, SVG } from '@wordpress/components';
 import './editor.scss';
 
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, InspectorControls } = wp.editor;
-const { RichText, BlockControls, URLInputButton, __experimentalLinkControl } = wp.blockEditor;
-const { PanelBody, PanelRow, Button, ButtonGroup, Popover, ToggleControl, ToolbarButton, ToolbarGroup } = wp.components;
+const { InnerBlocks, InspectorControls, RichText, BlockControls, ColorPalette, getColorObjectByColorValue, __experimentalLinkControl } = wp.blockEditor;
+const { PanelBody, PanelRow, RangeControl, Button, ButtonGroup, Popover, ToggleControl, ToolbarButton, ToolbarGroup } = wp.components;
 const { withState } = wp.compose;
 const { Fragment, useCallback, useState } = wp.element;
 const { rawShortcut, displayShortcut } = wp.keycodes;
@@ -56,6 +55,10 @@ registerBlockType( 'utksds/button', {
 			type: 'string',
 			default: 'Add Text'
 		},
+		buttonColor: {
+			type: 'object',
+			default: { name: 'Primary', slug: 'btn-primary', color: '#58595b'}
+		},
 	},
 	
 	edit: ( { isSelected, attributes, ClassName, setAttributes } ) => {
@@ -71,7 +74,7 @@ registerBlockType( 'utksds/button', {
 				linkTab: false,
 				rel: undefined,
 			} );
-			setIsURLPickerOpen( false );
+			setisVisible( false );
 		};
 		
 		const [ isVisible, setisVisible ] = useState( false );
@@ -79,6 +82,24 @@ registerBlockType( 'utksds/button', {
 		
 		const [ NewTab, setNewTab ] = useState( attributes.linkTab );
 		//const toggleNewTab = () => setNewTab(value => !value);
+		
+		const colors = [
+			{ name: 'Primary', slug: 'btn-primary', color: '#58595b'},
+			{ name: 'Secondary', slug: 'btn-secondary', color: '#006c93'},
+			{ name: 'Light', slug: 'btn-light', color: '#F6F6F6'},
+			{ name: 'Dark', slug: 'btn-dark', color: '#4b4b4b'},
+		];
+		
+		const outlineColors = [
+			{ name: 'btn-outline-primary', color: '#007bff'},
+			{ name: 'btn-outline-secondary', color: '#6c757d'},
+			{ name: 'btn-outline-light', color: '#f8f9fa'},
+			{ name: 'btn-outline-dark', color: '#343a40'},
+		];
+		
+		function onButtonColorChange( newColor ) {
+			setAttributes( { buttonColor: newColor } );
+		}
 		
 		return ( [
 			<BlockControls>
@@ -130,9 +151,30 @@ registerBlockType( 'utksds/button', {
             		) }
 				</ToolbarGroup>
 			</BlockControls>,
+			<InspectorControls>
+				<PanelBody title='Colors' initialOpen={ true }>
+					<PanelRow>
+						<p><strong>Select a Button color:</strong></p>
+					</PanelRow>
+					<PanelRow>
+						<ColorPalette 
+							colors = { colors }
+							value={ attributes.buttonColor.color }
+							onChange={ ( value ) =>{
+								const thisColor = getColorObjectByColorValue( colors, value );
+								setAttributes( { buttonColor:thisColor } );
+								//console.log(thisColor);
+							} }
+							disableCustomColors={ true }
+							clearable={ false }
+						/>
+					</PanelRow>
+				</PanelBody>
+			
+			</InspectorControls>,
 			<RichText 
 				tagName='a'
-				className={ 'btn btn-primary' }
+				className={ 'btn ' + attributes.buttonColor.slug }
 				placeholder={ attributes.placeholder }
 				value={ attributes.text }
 				onChange={ ( value ) => setAttributes( { text: value } ) }
@@ -146,7 +188,7 @@ registerBlockType( 'utksds/button', {
 			<RichText.Content
 				tagName="a"
 				type = 'button'
-				className={ 'btn btn-primary' }
+				className={ 'btn ' + attributes.buttonColor.slug  }
 				href={ attributes.url }
 				title={ attributes.title }
 				style={ '' }
