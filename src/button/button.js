@@ -3,7 +3,7 @@ import './editor.scss';
 
 const { registerBlockType } = wp.blocks;
 const { InnerBlocks, InspectorControls, RichText, BlockControls, ColorPalette, getColorObjectByColorValue, __experimentalLinkControl } = wp.blockEditor;
-const { PanelBody, PanelRow, RangeControl, Button, ButtonGroup, Popover, ToggleControl, ToolbarButton, ToolbarGroup } = wp.components;
+const { PanelBody, PanelRow, RadioControl, Button, ButtonGroup, Popover, ToggleControl, ToolbarButton, ToolbarGroup } = wp.components;
 const { withState } = wp.compose;
 const { Fragment, useCallback, useState } = wp.element;
 const { rawShortcut, displayShortcut } = wp.keycodes;
@@ -62,7 +62,10 @@ registerBlockType( 'utksds/button', {
 		buttonOutline: {
 			type: 'boolean',
 			default: false
-		}
+		},
+		buttonSize:{
+			type: 'string',
+		},
 	},
 	
 	edit: ( { isSelected, attributes, ClassName, setAttributes } ) => {
@@ -219,11 +222,31 @@ registerBlockType( 'utksds/button', {
 						/>
 					</PanelRow>
 				</PanelBody>
-			
+				<PanelBody title='Size' initialOpen={ true }>
+					<PanelRow>
+						<p><strong>Select a Button size:</strong></p>
+					</PanelRow>
+					<PanelRow>
+						<RadioControl
+							help="The size of the button."
+							selected={ attributes.buttonSize }
+							options={ [
+            					{ label: 'Small', value: ' btn-sm' },
+            					{ label: 'Normal', value: undefined },
+								{ label: 'Large', value: ' btn-lg' },
+								{ label: 'Block', value: ' btn-block' },
+        					] }
+							onChange={ ( value ) =>{
+								setAttributes( { buttonSize: value } );
+								//console.log(value);
+							} }
+						/>
+					</PanelRow>
+				</PanelBody>
 			</InspectorControls>,
 			<RichText 
 				tagName='a'
-				className={ 'btn ' + attributes.buttonColor.slug }
+				className={ 'btn ' + attributes.buttonColor.slug + attributes.buttonSize }
 				placeholder={ attributes.placeholder }
 				value={ attributes.text }
 				onChange={ ( value ) => setAttributes( { text: value } ) }
@@ -237,7 +260,7 @@ registerBlockType( 'utksds/button', {
 			<RichText.Content
 				tagName="a"
 				type = 'button'
-				className={ 'btn ' + attributes.buttonColor.slug  }
+				className={ 'btn ' + attributes.buttonColor.slug + attributes.buttonSize }
 				href={ attributes.url }
 				title={ attributes.title }
 				style={ '' }
