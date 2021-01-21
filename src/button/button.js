@@ -59,6 +59,10 @@ registerBlockType( 'utksds/button', {
 			type: 'object',
 			default: { name: 'Primary', slug: 'btn-primary', color: '#58595b'}
 		},
+		buttonOutline: {
+			type: 'boolean',
+			default: false
+		}
 	},
 	
 	edit: ( { isSelected, attributes, ClassName, setAttributes } ) => {
@@ -91,10 +95,10 @@ registerBlockType( 'utksds/button', {
 		];
 		
 		const outlineColors = [
-			{ name: 'btn-outline-primary', color: '#007bff'},
-			{ name: 'btn-outline-secondary', color: '#6c757d'},
-			{ name: 'btn-outline-light', color: '#f8f9fa'},
-			{ name: 'btn-outline-dark', color: '#343a40'},
+			{ name: 'Primary', slug: 'btn-outline-primary', color: '#58595b'},
+			{ name: 'Secondary', slug: 'btn-outline-secondary', color: '#006c93'},
+			{ name: 'Light', slug: 'btn-outline-light', color: '#F6F6F6'},
+			{ name: 'Dark', slug: 'btn-outline-dark', color: '#4b4b4b'},
 		];
 		
 		function onButtonColorChange( newColor ) {
@@ -153,9 +157,12 @@ registerBlockType( 'utksds/button', {
 			</BlockControls>,
 			<InspectorControls>
 				<PanelBody title='Colors' initialOpen={ true }>
+					{ ! attributes.buttonOutline && (
 					<PanelRow>
 						<p><strong>Select a Button color:</strong></p>
 					</PanelRow>
+					) }
+					{ ! attributes.buttonOutline && (
 					<PanelRow>
 						<ColorPalette 
 							colors = { colors }
@@ -167,6 +174,48 @@ registerBlockType( 'utksds/button', {
 							} }
 							disableCustomColors={ true }
 							clearable={ false }
+						/>
+					</PanelRow>
+					) }
+					{ attributes.buttonOutline && (
+					<PanelRow>
+						<p><strong>Select a Button Outline color:</strong></p>
+					</PanelRow>
+					) }
+					{ attributes.buttonOutline && (
+					<PanelRow>
+						<ColorPalette 
+							colors = { outlineColors }
+							value={ attributes.buttonColor.color }
+							onChange={ ( value ) =>{
+								const thisColor = getColorObjectByColorValue( outlineColors, value );
+								setAttributes( { buttonColor:thisColor } );
+								//console.log(thisColor);
+							} }
+							disableCustomColors={ true }
+							clearable={ false }
+						/>
+					</PanelRow>
+					) }
+					<PanelRow>
+						<ToggleControl
+							label='Button Fill'
+							help={ attributes.buttonOutline ? 'Button is outlined in color.' : 'Button is solid color.' }
+							checked={ attributes.buttonOutline }
+							onChange={ () => {
+								setAttributes( { buttonOutline: !attributes.buttonOutline } );
+								//console.log(attributes.buttonOutline);
+								
+								if( !attributes.buttonOutline === true ){
+									const thisColor = getColorObjectByColorValue( outlineColors, attributes.buttonColor.color );
+									setAttributes( { buttonColor:thisColor } );
+								}else{
+									const thisColor = getColorObjectByColorValue( colors, attributes.buttonColor.color );
+									setAttributes( { buttonColor:thisColor } );
+								}
+			
+								//console.log(attributes.buttonColor);
+							} }
 						/>
 					</PanelRow>
 				</PanelBody>
