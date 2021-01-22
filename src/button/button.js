@@ -65,6 +65,7 @@ registerBlockType( 'utksds/button', {
 		},
 		buttonSize:{
 			type: 'string',
+			default: ' btn-nrml'
 		},
 	},
 	
@@ -150,6 +151,7 @@ registerBlockType( 'utksds/button', {
 								}
 			
 								//console.log(attributes.linkTarget);
+								//setisVisible(false);
 			
 							} }
 			
@@ -232,7 +234,7 @@ registerBlockType( 'utksds/button', {
 							selected={ attributes.buttonSize }
 							options={ [
             					{ label: 'Small', value: ' btn-sm' },
-            					{ label: 'Normal', value: undefined },
+            					{ label: 'Normal', value: ' btn-nrml' },
 								{ label: 'Large', value: ' btn-lg' },
 								{ label: 'Block', value: ' btn-block' },
         					] }
