@@ -273,3 +273,89 @@ registerBlockType( 'utksds/button', {
 		);
 	},
 } );
+
+registerBlockType( 'utksds/buttongroup', {
+	title: 'Button Group',
+	icon: (
+	<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-segmented-nav" viewBox="0 0 16 16"><path d="M0 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6zm6 3h4V5H6v4zm9-1V6a1 1 0 0 0-1-1h-3v4h3a1 1 0 0 0 1-1z"/></svg>
+	),
+	category: 'utdesign_system',
+	description: '',
+	attributes: {
+		orientation: {
+			type: 'string',
+			default: 'btn-group'
+		},
+		orientationSetting: {
+			type: 'boolean',
+			default: false
+		},
+		groupSize: {
+			type: 'string',
+			default: ' btn-group-nrml'
+		},
+	},
+	
+	edit: ( { attributes, ClassName, setAttributes } ) => {
+		return ( [
+			// eslint-disable-next-line react/jsx-key
+			<InspectorControls style={ { marginBottom: '40px' } }>
+				<PanelBody title={ 'Orientation' } initialOpen={ true }>
+					<PanelRow>
+						<ToggleControl
+							label='Button Group Direction'
+							help={ attributes.orientationSetting ? 'Vertical.' : 'Horizontal.' }
+							checked={ attributes.orientationSetting }
+							onChange={ () => {
+								setAttributes( { orientationSetting: !attributes.orientationSetting } );
+								//console.log(attributes.buttonOutline);
+								
+								if( !attributes.orientationSetting === true ){
+									setAttributes( { orientation: 'btn-group-vertical' } );
+								}else{
+									setAttributes( { orientation: 'btn-group' } );;
+								}
+			
+								//console.log(attributes.buttonColor);
+							} }
+						/>
+					</PanelRow>
+				</PanelBody>
+				<PanelBody title='Size' initialOpen={ true }>
+					<PanelRow>
+						<p><strong>Select a Group size:</strong></p>
+					</PanelRow>
+					<PanelRow>
+						<RadioControl
+							help="The size of the group."
+							selected={ attributes.groupSize }
+							options={ [
+            					{ label: 'Small', value: ' btn-group-sm' },
+            					{ label: 'Normal', value: ' btn-group-nrml' },
+								{ label: 'Large', value: ' btn-group-lg' },
+								{ label: 'Block', value: ' btn-group-block' },
+        					] }
+							onChange={ ( value ) =>{
+								setAttributes( { groupSize: value } );
+								//console.log(value);
+							} }
+						/>
+					</PanelRow>
+				</PanelBody>
+			</InspectorControls>,
+			// eslint-disable-next-line react/jsx-key
+			<div className={ attributes.orientation + attributes.groupSize } role='group'>
+				<InnerBlocks allowedBlocks={ [ 'utksds/button' ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+			</div>,
+		] );
+	},
+	
+	save: ( { attributes } ) => {
+
+		return (
+			<div className={ attributes.orientation + attributes.groupSize } role='group'>
+				<InnerBlocks.Content />
+			</div>
+		);
+	},
+} );
