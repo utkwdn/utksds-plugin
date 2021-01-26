@@ -6,7 +6,8 @@ const { registerBlockType, registerBlockVariation } = wp.blocks;
 const { InnerBlocks, InspectorControls, ColorPalette, RichText, getColorObjectByColorValue } = wp.blockEditor;
 const { PanelBody, PanelRow, RangeControl, RadioControl, ToggleControl } = wp.components;
 const { withState } = wp.compose;
-const { ALLOWED_BLOCKS } = [ 'core/button', 'core/separator', 'card/paragraph', 'card/heading' ];
+
+const ALLOWED_BLOCKS = [ 'core/button', 'card/paragraph', 'card/heading', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ];
 
 const PARAGRAPH_TEMPLATE = [
     [ 'core/paragraph', { className: 'card-text' } ],
