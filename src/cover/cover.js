@@ -1,5 +1,6 @@
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, InspectorControls, PostFeaturedImage } = wp.blockEditor;
+const { PostFeaturedImage } = wp.editor;
+const { InnerBlocks, InspectorControls, } = wp.blockEditor;
 const { PanelBody, } = wp.components;
 
 import './editor.scss';
@@ -11,27 +12,37 @@ registerBlockType( 'utkds/cover', {
 	description: 'An image cover for the page leveraging the featured image.',
 	attributes: {
 		featuredImage: {
-			type: 'object',
+			type: 'sting',
+			default: '',
 		},
 	},
 
 	edit: ( { attributes, setAttributes } ) => {
 	
 		const featuredImageId = wp.data.select( 'core/editor' ).getEditedPostAttribute( 'featured_media' );
-		attributes.featuredImage = featuredImageId ? wp.data.select( 'core').getMedia( featuredImageId ) : null;
+		const imageObj = featuredImageId ? wp.data.select( 'core').getMedia( featuredImageId ) : null;
+		
+		if( imageObj !== null){
+			attributes.featuredImage = imageObj.source_url;
+		}else{
+			attributes.featuredImage = '';
+		}
 	
 		//console.log(attributes.featuredImage);
 
 		return ( [
 			<InspectorControls style={ { marginBottom: '40px' } }>
 				<PanelBody title='Featured Image'>
-					<PostFeaturedImage />
+					<PostFeaturedImage
+						onChange={ () => {
+							console.log(attributes.featuredImage);
+						} }
+					/>
 				</PanelBody>
 			</InspectorControls>,
-			// eslint-disable-next-line react/jsx-key
 			<div className="entry-thumbnail entry-thumbnail-webapp">
-			<div className='home-jumbotron' aria-hidden='false' style={ { backgroundImage: 'url(' + attributes.featuredImage.source_url + ')' } }>
-				<InnerBlocks allowedBlocks={ [ 'cover/caption', ] } />
+			<div className='home-jumbotron' aria-hidden='false' style={ { backgroundImage: 'url(' + attributes.featuredImage + ')' } }>
+				<InnerBlocks allowedBlocks={ [ 'cover/caption', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 			</div>,
 		] );
@@ -41,7 +52,7 @@ registerBlockType( 'utkds/cover', {
 
 		return (
 			<div className="entry-thumbnail entry-thumbnail-webapp">
-			<div className='home-jumbotron' aria-hidden='false' style={'background-image: url(/' + attributes.featuredImage.media_details.file + ');'}>
+			<div className='home-jumbotron' aria-hidden='false' style={ { backgroundImage: 'url(/' + attributes.featuredImage + ')' } }>
 				<InnerBlocks.Content />
 			</div>
 			</div>
@@ -64,7 +75,7 @@ registerBlockType( 'cover/caption', {
 		);
 	},
 	
-	save () => {
+	save: () => {
 		return (
 			<div className='home-jumbotron-caption'>
 			<div className='home-jumbotron-caption-inside'>
