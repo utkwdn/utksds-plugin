@@ -9,10 +9,10 @@
 @import "./../utksds-framework/src/scss/custom_variables";
 @import "./../utksds-framework/node_modules/bootstrap/scss/variables";
 @import "./../utksds-framework/node_modules/bootstrap/scss/mixins";
-@import "./../utksds-framework/node_modules/bootstrap/scss/root";
-@import "./../utksds-framework/node_modules/bootstrap/scss/reboot";
-@import "./../utksds-framework/node_modules/bootstrap/scss/type";
-@import "./../utksds-framework/node_modules/bootstrap/scss/images";
+//@import "./../utksds-framework/node_modules/bootstrap/scss/root";
+//@import "./../utksds-framework/node_modules/bootstrap/scss/reboot";
+//@import "./../utksds-framework/node_modules/bootstrap/scss/type";
+//@import "./../utksds-framework/node_modules/bootstrap/scss/images";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/code";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/grid";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/tables";
@@ -107,5 +107,22 @@
 .block-editor-writing-flow {
   color: $utsmokey;
   font-family: $font-family-sans-serif;
+}
+
+// Here we make the editor a bit wider than default.
+// ===================================================================
+/* Main column width */
+.wp-block {
+    max-width: 1080px;
+}
+
+/* Width of "wide" blocks */
+.wp-block[data-align="wide"] {
+    max-width: 1880px;
+}
+
+/* Width of "full-width" blocks */
+.wp-block[data-align="full"] {
+    max-width: none;
 }
 

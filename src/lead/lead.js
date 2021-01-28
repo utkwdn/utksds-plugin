@@ -9,8 +9,8 @@ import './editor.scss';
 
 registerBlockType( 'lead/main', {
 	title: 'Lead',
-	icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 1h24v2h-24v-2zm0 6h24v-2h-24v2zm0 7h24v-4h-24v4zm0 5h24v-2h-24v2zm0 4h24v-2h-24v2z"/></svg>,
-	category: 'utdesign_system',
+	icon: <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M20 15h4.071v2h-4.071v4.071h-2v-4.071h-4.071v-2h4.071v-4.071h2v4.071zm-8 6h-12v-2h12v2zm0-4.024h-12v-2h12v2zm0-3.976h-12v-2h12v2zm12-4h-24v-2h24v2zm0-4h-24v-2h24v2z"/></svg>,
+	category: 'text',
 	description: 'Provide contextual feedback messages for typical user actions with the handful of available and flexible lead messages.',
 	attributes: {
 		backgroundColor: {
