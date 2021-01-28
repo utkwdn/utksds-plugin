@@ -12,7 +12,7 @@ const { RichText, PlainText } = wp.editor;
 registerBlockType( 'accordion/main', {
 	title: __( 'Accordion' ),
 	icon: 'list-view',
-	category: 'utdesign_system',
+	category: 'design',
 	keywords: [ __( 'Accordion' ) ],
 
 	attributes: {
