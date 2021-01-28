@@ -193,6 +193,8 @@ add_filter( 'render_block', function( $block_content, $block ) {
 			$parsed_classes.' wp-image',
 			$block_content
 		);
+		
+		$block_content = str_replace('is-style-framed', 'framed', $block_content);
 	}
 
 	return $block_content;
