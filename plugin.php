@@ -173,12 +173,26 @@ add_filter( 'render_block', function( $block_content, $block ) {
 		}
 	}
 	
-	if ( $block['blockName'] === 'card/main' ) {
-		//remove Bootstrap class from figure container element
-		$block_content = str_replace(' card-img-top', '', $block_content);
+	if ( $block['blockName'] === 'core/image' ) {
+		$start = 'wp-block-image ';
+		$end = '">';
 		
-		//add Bootstrap class to img element
-		$block_content = str_replace('wp-image-', 'card-img-top wp-image-', $block_content);
+		$string = ' ' . $block_content;
+		$ini = strpos($string, $start);
+    	if ($ini == 0) return '';
+    	$ini += strlen($start);
+    	$len = strpos($string, $end, $ini) - $ini;
+    	$parsed_classes = substr($string, $ini, $len);
+		
+		//$custom_classes = explode( ' ', $parsed_classes );
+		
+		$block_content = strip_tags($block_content, ['a', 'img']);
+		
+		$block_content = str_replace(
+			'wp-image',
+			$parsed_classes.' wp-image',
+			$block_content
+		);
 	}
 
 	return $block_content;
