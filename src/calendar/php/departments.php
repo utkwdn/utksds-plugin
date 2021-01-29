@@ -1,4 +1,5 @@
 <?php
+header('Content-type:application/json;charset=utf-8');
 
 function get_departments($page = NULL){
 	$pp = '100';
@@ -39,9 +40,11 @@ if($depts->page->total > 1){
 
 //print_r($departments);
 
-print 'const departments = [';
+/*print 'const departments = [';
 foreach($departments as $department){
 	print "{ label: '".$department['name']."', value: '".$department['urlname']."'},";
 }
-print ']';
+print ']';*/
+
+echo json_encode($departments);
 ?>
