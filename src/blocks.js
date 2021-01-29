@@ -27,6 +27,7 @@ import './columns/columns.js';
 import './calendar/calendar.js';
 import './horizontal-rule/horizontal-rule.js';
 import './cover/cover.js';
+import './heading/heading.js';
 
 
 // remove default button styles, declare default and/or plugin created blocks to selectively disable

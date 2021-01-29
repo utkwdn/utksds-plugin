@@ -196,6 +196,10 @@ add_filter( 'render_block', function( $block_content, $block ) {
 		
 		$block_content = str_replace('is-style-framed', 'framed', $block_content);
 	}
+	
+	if ( $block['blockName'] === 'core/heading' ) {
+		$block_content = str_replace('is-style-', '', $block_content);
+	}
 
 	return $block_content;
 
