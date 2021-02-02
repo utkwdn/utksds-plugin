@@ -4,34 +4,17 @@ const { PanelBody, PanelRow, RangeControl, RadioControl, TextControl, SelectCont
 const { withState } = wp.compose;
 const ALLOWED_BLOCKS = [  'core/button', 'core/separator', 'core/paragraph', 'core/heading', 'utksds/columns' ];
 
-import apiFetch from '@wordpress/api-fetch';
-
-/*
-const alertImgPosition = withState( {
-	option: 'alert-img-top',
-} )( ( { option, setState } ) => (
-	<RadioControl
-		label="Image Position"
-		help="The placement of the image on the alert."
-		selected={ option }
-		options={ [
-			{ label: 'Top', value: 'alert-img-top' },
-			{ label: 'Bottom', value: 'alert-img-bottom' },
-		] }
-		onChange={ ( option ) => { setState( { option } ) } }
-	/>
-) );
-*/
+//import apiFetch from '@wordpress/api-fetch';
 
 // import './style.scss';
 // Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
 
-//import departments from './php/departments.php';
+import all_places from './places.js';
+import all_groups from './groups.js';
+import all_departments from './departments.js';
 
-apiFetch( { url: 'http://localhost:8888/wordpress/wp-content/plugins/utksds-plugin/src/calendar/php/departments.php' } ).then( posts => {
-    console.log( posts );
-} );
+//console.log(all_places);
 		
 registerBlockType( 'utksds/calendar', {
 	title: 'Calendar',
@@ -47,6 +30,14 @@ registerBlockType( 'utksds/calendar', {
 			default: 'modern',
 		},
 		department: {
+			type: 'string',
+			default: '',
+		},
+		place: {
+			type: 'string',
+			default: '',
+		},
+		group: {
 			type: 'string',
 			default: '',
 		},
@@ -90,10 +81,22 @@ registerBlockType( 'utksds/calendar', {
 				</PanelBody>
 				<PanelBody title='Content'>
 					<SelectControl
+						label='Group'
+						value={ attributes.group }
+						options={ all_groups }
+						onChange={ ( value ) =>{ setAttributes( {group:value} ); } }
+					/>
+					<SelectControl
 						label='Department'
 						value={ attributes.department }
-						options={ departments }
+						options={ all_departments }
 						onChange={ ( value ) =>{ setAttributes( {department:value} ); } }
+					/>
+					<SelectControl
+						label='Place'
+						value={ attributes.place }
+						options={ all_places }
+						onChange={ ( value ) =>{ setAttributes( {place:value} ); } }
 					/>
 				</PanelBody>
 
@@ -101,7 +104,7 @@ registerBlockType( 'utksds/calendar', {
 			</InspectorControls>,
 		  <div className="container bg-light p-4">
 		    <code>
-		      {"https://calendar.utk.edu/widget/view?schools=utk&departments=" +  deptShortname  + "&days=31&num=5&container=localist-widget-37654425&template=" + calTemplate }
+		      {"https://calendar.utk.edu/widget/view?schools=utk&venues=" + attributes.place + "&departments=" +  deptShortname  + "&days=31&num=5&container=localist-widget-37654425&template=" + calTemplate }
 		    </code>
 			  <div id={"localist-widget" + deptShortname} className="localist-widget"></div><script defer type="text/javascript" src={"https://calendar.utk.edu/widget/view?schools=utk" + String.fromCharCode(38) + "departments=" +  deptShortname  + String.fromCharCode(38) +"days=31" + String.fromCharCode(38) + "num=5" + String.fromCharCode(38) + "container=localist-widget" + deptShortname + String.fromCharCode(38) +"template=" + calTemplate}></script>
 		  </div>,
