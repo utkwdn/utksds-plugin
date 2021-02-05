@@ -241,7 +241,7 @@ registerBlockType( 'utksds/calendar', {
 						value={ attributes.daysAhead }
         				onChange={ ( value ) =>{ setAttributes( {daysAhead:value} ); } }
 						min={ 1 }
-						max={ 31 }
+						max={ 365 }
     				/>
 				</PanelBody>
 				<PanelBody title='Content'>
