@@ -123,6 +123,70 @@ registerBlockType( 'utksds/calendar', {
 			type: 'string',
 			default: 'modern',
 		},
+		hideDesc: {
+			type: 'boolean',
+			default: false,
+		},
+		hideDescS: {
+			type: 'string',
+			default: '',
+		},
+		truncate: {
+			type: 'boolean',
+			default: false,
+		},
+		truncateS: {
+			type: 'string',
+			default: '',
+		},
+		htmlDesc: {
+			type: 'boolean',
+			default: false,
+		},
+		htmlDescS: {
+			type: 'string',
+			default: '',
+		},
+		evImage: {
+			type: 'boolean',
+			default: false,
+		},
+		evImageS: {
+			type: 'string',
+			default: '',
+		},
+		evTime: {
+			type: 'boolean',
+			default: false,
+		},
+		evTimeS: {
+			type: 'string',
+			default: '',
+		},
+		viewAll: {
+			type: 'boolean',
+			default: false,
+		},
+		viewAllS: {
+			type: 'string',
+			default: '',
+		},
+		newWin: {
+			type: 'boolean',
+			default: false,
+		},
+		newWinS: {
+			type: 'string',
+			default: '',
+		},
+		hideDrop: {
+			type: 'boolean',
+			default: false,
+		},
+		hideDropS: {
+			type: 'string',
+			default: '',
+		},
 	},	 
 	edit: ( { attributes, setAttributes } ) => {
 	
@@ -150,7 +214,7 @@ registerBlockType( 'utksds/calendar', {
 							setAttributes( {calTemplate:value} );
 								 
 							if( value !== '' ){
-								setAttributes( {template:value} );
+								setAttributes( {template:value, widgetType:'view', hideDesc:false, hideDescS:'', truncate:false, truncateS:'', htmlDesc:false, htmlDescS:'', evImage:false, evImageS:'', evTime:false, evTimeS:'', viewAll:false, viewAllS:'', newWin:false, newWinS:'', hideDrop:false, hideDropS:''} );
 							}else{
 								setAttributes( {template:'modern'} );
 							}
@@ -437,11 +501,155 @@ registerBlockType( 'utksds/calendar', {
 						onChange={ ( value ) =>{ setAttributes( {style:value} ); } }
 					/>
 					) }
+					{ attributes.calTemplate === '' && (
+					<CheckboxControl
+            			label="Hide Descriptions"
+            			checked={ attributes.hideDesc }
+            			onChange={ () =>{
+							setAttributes( {hideDesc:!attributes.hideDesc} );
+								 
+							if( !attributes.hideDesc === true ){
+								setAttributes( {hideDescS:'&hidedesc=1'} );
+							}else{
+								setAttributes( {hideDescS:''} );
+							}
+							
+						} }
+        			/>
+					) }
+					{ attributes.calTemplate === '' && (
+					<CheckboxControl
+            			label="Truncate Descriptions"
+            			checked={ attributes.truncate }
+            			onChange={ () =>{
+							setAttributes( {truncate:!attributes.truncate} );
+								 
+							if( !attributes.truncate === true ){
+								setAttributes( {truncateS:'&expand_descriptions=1'} );
+							}else{
+								setAttributes( {truncateS:''} );
+							}
+							
+						} }
+        			/>
+					) }
+					{ attributes.calTemplate === '' && (
+					<CheckboxControl
+            			label="Render HTML in Descriptions"
+            			checked={ attributes.htmlDesc }
+            			onChange={ () =>{
+							setAttributes( {htmlDesc:!attributes.htmlDesc} );
+								 
+							if( !attributes.htmlDesc === true ){
+								setAttributes( {htmlDescS:'&html_descriptions=1'} );
+							}else{
+								setAttributes( {htmlDescS:''} );
+							}
+							
+						} }
+        			/>
+					) }
+					{ attributes.calTemplate === '' && (
+					<CheckboxControl
+            			label="Hide Event Images"
+            			checked={ attributes.evImage }
+            			onChange={ () =>{
+							setAttributes( {evImage:!attributes.evImage} );
+								 
+							if( !attributes.evImage === true ){
+								setAttributes( {evImageS:'&hideimage=1'} );
+							}else{
+								setAttributes( {evImageS:''} );
+							}
+							
+						} }
+        			/>
+					) }
+					{ attributes.calTemplate === '' && (
+					<CheckboxControl
+            			label="Hide Event Times"
+            			checked={ attributes.evTime }
+            			onChange={ () =>{
+							setAttributes( {evTime:!attributes.evTime} );
+								 
+							if( !attributes.evTime === true ){
+								setAttributes( {evTimeS:'&show_times=0'} );
+							}else{
+								setAttributes( {evTimeS:''} );
+							}
+							
+						} }
+        			/>
+					) }
+					{ attributes.calTemplate === '' && (
+					<CheckboxControl
+            			label="Hide 'View All Events' Link"
+            			checked={ attributes.viewAll }
+            			onChange={ () =>{
+							setAttributes( {viewAll:!attributes.viewAll} );
+								 
+							if( !attributes.viewAll === true ){
+								setAttributes( {viewAllS:'&show_view_all_cta=0'} );
+							}else{
+								setAttributes( {viewAllS:''} );
+							}
+							
+						} }
+        			/>
+					) }
+					{ attributes.calTemplate === '' && attributes.widgetType === 'combo' && (
+					<CheckboxControl
+            			label="Hide Filter Dropdown"
+            			checked={ attributes.hideDrop }
+            			onChange={ () =>{
+							setAttributes( {hideDrop:!attributes.hideDrop} );
+								 
+							if( !attributes.hideDrop === true ){
+								setAttributes( {hideDropS:'&show_types=0'} );
+							}else{
+								setAttributes( {hideDropS:''} );
+							}
+							
+						} }
+        			/>
+					) }
+					{ attributes.calTemplate === '' && (
+					<CheckboxControl
+            			label="Open Links in New Window"
+            			checked={ attributes.newWin }
+            			onChange={ () =>{
+							setAttributes( {newWin:!attributes.newWin} );
+								 
+							if( !attributes.newWin === true ){
+								setAttributes( {newWinS:'&target_blank=1'} );
+							}else{
+								setAttributes( {newWinS:''} );
+							}
+							
+						} }
+        			/>
+					) }
+					{ attributes.calTemplate !== '' && (
+					<CheckboxControl
+            			label="Include Styles"
+            			checked={ attributes.newWin }
+            			onChange={ () =>{
+							setAttributes( {newWin:!attributes.newWin} );
+								 
+							if( !attributes.newWin === true ){
+								setAttributes( {newWinS:'&target_blank=1'} );
+							}else{
+								setAttributes( {newWinS:''} );
+							}
+							
+						} }
+        			/>
+					) }
 				</PanelBody>
 			</InspectorControls>,
 		  <div className="container bg-light p-4">
 		    <code>
-		      {"https://calendar.utk.edu/widget/" + attributes.widgetType + "?schools=utk&venues=" + attributes.place + "&departments=" +  attributes.department  + "&groups=" + attributes.group + "&types=" + attributes.all_types + "&days=" + attributes.daysAhead + "&num=" + attributes.numResults + "&tags=" + attributes.keywords + attributes.featuredS + attributes.sponsoredS + attributes.matchingS + attributes.pastS + "&match=" + attributes.mustMatch + "&exclude_types=" + attributes.exAll_types + "&container=localist-widget-37654425&template=" + attributes.template }
+		      {"https://calendar.utk.edu/widget/" + attributes.widgetType + "?schools=utk&venues=" + attributes.place + "&departments=" +  attributes.department  + "&groups=" + attributes.group + "&types=" + attributes.all_types + "&days=" + attributes.daysAhead + "&num=" + attributes.numResults + "&tags=" + attributes.keywords + attributes.featuredS + attributes.sponsoredS + attributes.matchingS + attributes.pastS + attributes.hideDescS + attributes.truncateS + attributes.htmlDescS + attributes.evImageS + attributes.evTimeS + attributes.viewAllS + attributes.newWinS + attributes.hideDropS + "&match=" + attributes.mustMatch + "&exclude_types=" + attributes.exAll_types + "&container=localist-widget-37654425&template=" + attributes.template }
 		    </code>
 			  <div id={"localist-widget deptShortname"} className="localist-widget"></div><script defer type="text/javascript" src={"https://calendar.utk.edu/widget/view?schools=utk" + String.fromCharCode(38) + "departments=" +  attributes.department  + String.fromCharCode(38) +"days=31" + String.fromCharCode(38) + "num=5" + String.fromCharCode(38) + "container=localist-widget" + String.fromCharCode(38) +"template=" + attributes.template}></script>
 		  </div>,
@@ -464,7 +672,7 @@ registerBlockType( 'utksds/calendar', {
 		return (
 			<div className={ 'deptShortname' }>
 			  <div className="container p-4">
-				  <div id={"localist-widget deptShortname"} className="localist-widget"></div><script defer type="text/javascript" src={"https://calendar.utk.edu/widget/view?schools=utk" + String.fromCharCode(38) + "departments=" +  attributes.department  + String.fromCharCode(38) +"days=31" + String.fromCharCode(38) + "num=5" + String.fromCharCode(38) + "container=localist-widget" + String.fromCharCode(38) +"template=" + attributes.template}></script>
+				  <div id={"localist-widget"} className="localist-widget"></div><script defer type="text/javascript" src={"https://calendar.utk.edu/widget/" + attributes.widgetType + "?schools=utk&venues=" + attributes.place + "&departments=" +  attributes.department  + "&groups=" + attributes.group + "&types=" + attributes.all_types + "&days=" + attributes.daysAhead + "&num=" + attributes.numResults + "&tags=" + attributes.keywords + attributes.featuredS + attributes.sponsoredS + attributes.matchingS + attributes.pastS + attributes.hideDescS + attributes.truncateS + attributes.htmlDescS + attributes.evImageS + attributes.evTimeS + attributes.viewAllS + attributes.newWinS + attributes.hideDropS + "&match=" + attributes.mustMatch + "&exclude_types=" + attributes.exAll_types + "&container=localist-widget-37654425&template=" + attributes.template}></script>
 				</div>
 			</div>
 		);
