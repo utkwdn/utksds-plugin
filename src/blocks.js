@@ -19,7 +19,7 @@ import './jumbotron/jumbotron.js';
 import './media-object/media-object.js';
 import './button/button.js';
 import './table/table.js';
-//import './image/image.js';
+import './image/image.js';
 import './alert/alert.js';
 import './lead/lead.js';
 import './strip/strip.js';
@@ -27,6 +27,7 @@ import './columns/columns.js';
 import './calendar/calendar.js';
 import './horizontal-rule/horizontal-rule.js';
 import './cover/cover.js';
+import './heading/heading.js';
 
 
 // remove default button styles, declare default and/or plugin created blocks to selectively disable
