@@ -29,9 +29,13 @@ registerBlockType( 'utksds/tabs', {
 	edit: ( { attributes, clientId, setAttributes } ) => {
 	
 		var tabs_title = [];
-		select( 'core/editor' ).getBlock( clientId ).innerBlocks.map( childrenBlock =>{
-			tabs_title.push( { tabName: childrenBlock.attributes.tabName, tabSlug: childrenBlock.attributes.tabSlug } );
-			//setAttributes( {tabNames:tabs_title} );
+		select( 'core/editor' ).getBlock( clientId ).innerBlocks.map( ( childrenBlock, index ) =>{
+			if(index === 0){
+				childrenBlock.attributes.tabActive = 'active';
+				childrenBlock.attributes.tabShow = 'show';
+			}
+			
+			tabs_title.push( { tabName: childrenBlock.attributes.tabName, tabSlug: childrenBlock.attributes.tabSlug, tabActive: childrenBlock.attributes.tabActive } );
 		} );
 		attributes.tabNames = tabs_title;
 	
@@ -39,7 +43,7 @@ registerBlockType( 'utksds/tabs', {
 		if(Array.isArray(attributes.tabNames) && attributes.tabNames.length){
 			for(var thisTab of attributes.tabNames){
 				listItems.push(<li class="nav-item" role="presentation">
-    				<a className={ "nav-link active" } id={ thisTab.tabSlug + "-tab" } data-toggle="tab" href={ "#" + thisTab.tabSlug } role="tab" aria-controls={ thisTab.tabSlug } aria-selected="true">{ thisTab.tabName }</a>
+    				<a className={ "nav-link " + thisTab.tabActive } id={ thisTab.tabSlug + "-tab" } data-toggle="tab" href={ "#" + thisTab.tabSlug } role="tab" aria-controls={ thisTab.tabSlug } aria-selected="true">{ thisTab.tabName }</a>
   				</li>);
 			}
 		}
@@ -72,7 +76,7 @@ registerBlockType( 'utksds/tabs', {
 		if(Array.isArray(attributes.tabNames) && attributes.tabNames.length){
 			for(var thisTab of attributes.tabNames){
 				listItems.push(<li class="nav-item" role="presentation">
-    				<a className={ "nav-link active" } id={ thisTab.tabSlug + "-tab" } data-toggle="tab" href={ "#" + thisTab.tabSlug } role="tab" aria-controls={ thisTab.tabSlug } aria-selected="true">{ thisTab.tabName }</a>
+    				<a className={ "nav-link " + thisTab.tabActive } id={ thisTab.tabSlug + "-tab" } data-toggle="tab" href={ "#" + thisTab.tabSlug } role="tab" aria-controls={ thisTab.tabSlug } aria-selected="true">{ thisTab.tabName }</a>
   				</li>);
 			}
 		}
@@ -104,6 +108,14 @@ registerBlockType( 'tabs/tab', {
 			type: 'string',
 			default: 'new-tab'
 		},
+		tabActive: {
+			type: 'string',
+			default: ''
+		},
+		tabShow: {
+			type: 'string',
+			default: ''
+		},
 	},
 				  
 	edit: ( { attributes, setAttributes } ) => {
@@ -116,13 +128,13 @@ registerBlockType( 'tabs/tab', {
 						help='The identifier for the tabs group.'
 						value={ attributes.tabName }
 						onChange={ ( value ) =>{ 
-							setAttributes( {tabName:value, tabSlug:cleanForSlug(value)} );
+							setAttributes( {tabName:value, tabSlug: 'tab-' + cleanForSlug(value)} );
 							//console.log(attributes.tabSlug);
 						} }
 					/>
 				</PanelBody>
 			</InspectorControls>,
-			<div className={ "tab-pane fade show active" } id={ attributes.tabSlug } role="tabpanel" aria-labelledby={ attributes.tabSlug + "-tab" }>
+			<div className={ "tab-pane fade " + attributes.tabShow + " " + attributes.tabActive } id={ attributes.tabSlug } role="tabpanel" aria-labelledby={ attributes.tabSlug + "-tab" }>
 				<InnerBlocks allowedBlocks={ 'core/button', 'core/paragraph', 'card/heading', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 		] )
@@ -130,7 +142,7 @@ registerBlockType( 'tabs/tab', {
 	
 	save: ( { attributes } ) => {
 		return (
-			<div className={ "tab-pane fade show active" } id={ attributes.tabSlug } role="tabpanel" aria-labelledby={ attributes.tabSlug + "-tab" }>
+			<div className={ "tab-pane fade " + attributes.tabShow + " " + attributes.tabActive } id={ attributes.tabSlug } role="tabpanel" aria-labelledby={ attributes.tabSlug + "-tab" }>
 				<InnerBlocks.Content />
 			</div>
 		);
