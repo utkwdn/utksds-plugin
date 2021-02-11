@@ -12,8 +12,6 @@ import './editor.scss';
 
 function setTabNames( parentID ){
 	
-	console.log(parentID);
-	
 	var thisBlock = select( 'core/editor' ).getBlock( parentID );
 	var tabs_title = [];
 	
@@ -43,20 +41,9 @@ registerBlockType( 'utksds/tabs', {
 			type: 'array',
 			default: [],
 		},
-		tabsClientID: {
-			type: 'string',
-			default: this.clientId,
-		},
-	},
-	providesContext: {
-    	'tab/clientID': 'tabsClientID',
 	},
 
 	edit: ( { attributes, clientId, setAttributes } ) => {
-	
-		//attributes.tabsClientID = clientId;
-	
-		//console.log(attributes.tabsClientID);
 	
 		var listItems = [];
 		if(Array.isArray(attributes.tabNames) && attributes.tabNames.length){
@@ -137,7 +124,7 @@ registerBlockType( 'tabs/tab', {
 		},
 	},
 				  
-	edit: ( { attributes, clientId, context, setAttributes } ) => {
+	edit: ( { attributes, clientId, setAttributes } ) => {
 	
 		var parentID = '';
 		const parentBlocks = wp.data.select( 'core/block-editor' ).getBlockParents(clientId);
@@ -148,8 +135,6 @@ registerBlockType( 'tabs/tab', {
 				parentID = thisBlock.clientId;
 			}
 		}
-	
-		//console.log(parentID);
 		
 		return ( [
 			<InspectorControls>
@@ -162,8 +147,6 @@ registerBlockType( 'tabs/tab', {
 							setAttributes( {tabName:value, tabSlug: 'tab-' + cleanForSlug(value)} );
 							
 							setTabNames(parentID);
-			
-							//console.log(parentID);
 						} }
 					/>
 				</PanelBody>
