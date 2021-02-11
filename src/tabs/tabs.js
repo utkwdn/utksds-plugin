@@ -10,6 +10,25 @@ const { cleanForSlug } = wp.url;
 // Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
 
+function setTabNames( parentID ){
+	
+	console.log(parentID);
+	
+	var thisBlock = select( 'core/editor' ).getBlock( parentID );
+	var tabs_title = [];
+	
+	thisBlock.innerBlocks.map( ( childrenBlock, index ) =>{
+		if(index === 0){
+			childrenBlock.attributes.tabActive = 'active';
+			childrenBlock.attributes.tabShow = 'show';
+		}
+			
+		tabs_title.push( { tabName: childrenBlock.attributes.tabName, tabSlug: childrenBlock.attributes.tabSlug, tabActive: childrenBlock.attributes.tabActive } );
+	} );
+	
+	thisBlock.attributes.tabNames = tabs_title;
+}
+
 registerBlockType( 'utksds/tabs', {
 	title: 'Tabs',
 	icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5.759 4l.038.069c1.444 2.646 2.691 4.931 7.141 4.931h9.062v11h-20v-16h3.759zm1.179-2h-6.938v20h24v-15h-11.062c-3.719 0-4.188-1.812-6-5zm6.171 3h10.891v-3h-14.604c1.39 2.574 1.63 3 3.713 3z"/></svg>,
@@ -24,20 +43,20 @@ registerBlockType( 'utksds/tabs', {
 			type: 'array',
 			default: [],
 		},
+		tabsClientID: {
+			type: 'string',
+			default: this.clientId,
+		},
+	},
+	providesContext: {
+    	'tab/clientID': 'tabsClientID',
 	},
 
 	edit: ( { attributes, clientId, setAttributes } ) => {
 	
-		var tabs_title = [];
-		select( 'core/editor' ).getBlock( clientId ).innerBlocks.map( ( childrenBlock, index ) =>{
-			if(index === 0){
-				childrenBlock.attributes.tabActive = 'active';
-				childrenBlock.attributes.tabShow = 'show';
-			}
-			
-			tabs_title.push( { tabName: childrenBlock.attributes.tabName, tabSlug: childrenBlock.attributes.tabSlug, tabActive: childrenBlock.attributes.tabActive } );
-		} );
-		attributes.tabNames = tabs_title;
+		//attributes.tabsClientID = clientId;
+	
+		//console.log(attributes.tabsClientID);
 	
 		var listItems = [];
 		if(Array.isArray(attributes.tabNames) && attributes.tabNames.length){
@@ -118,8 +137,20 @@ registerBlockType( 'tabs/tab', {
 		},
 	},
 				  
-	edit: ( { attributes, setAttributes } ) => {
+	edit: ( { attributes, clientId, context, setAttributes } ) => {
 	
+		var parentID = '';
+		const parentBlocks = wp.data.select( 'core/block-editor' ).getBlockParents(clientId);
+	
+		for(var thisParent of parentBlocks){
+			var thisBlock = select( 'core/editor' ).getBlock( thisParent );
+			if( thisBlock.name === 'utksds/tabs'){
+				parentID = thisBlock.clientId;
+			}
+		}
+	
+		//console.log(parentID);
+		
 		return ( [
 			<InspectorControls>
 				<PanelBody title='Tab Properties' initialOpen={ true }>
@@ -129,7 +160,10 @@ registerBlockType( 'tabs/tab', {
 						value={ attributes.tabName }
 						onChange={ ( value ) =>{ 
 							setAttributes( {tabName:value, tabSlug: 'tab-' + cleanForSlug(value)} );
-							//console.log(attributes.tabSlug);
+							
+							setTabNames(parentID);
+			
+							//console.log(parentID);
 						} }
 					/>
 				</PanelBody>
