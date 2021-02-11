@@ -3,7 +3,7 @@ import { Path, SVG } from '@wordpress/components';
 
 const { registerBlockType } = wp.blocks;
 const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
-const { PanelBody, PanelRow, TextControl } = wp.components;
+const { PanelBody, PanelRow, TextControl, ToggleControl } = wp.components;
 const { cleanForSlug } = wp.url;
 
 registerBlockType( 'utksds/accordion', {
@@ -90,6 +90,27 @@ registerBlockType( 'accordion/fold', {
 		setAttributes( { parentID:context['accordion/parentID'] } );
 		
 		return ( [
+			<InspectorControls>
+				<PanelBody title='Accordion Fold Settings' initialOpen={ true }>
+					<ToggleControl
+						label='Show'
+						help={ attributes.show ? 'Fold defaults to open.' : 'Fold defaults to closed.' }
+						checked={ attributes.show }
+						onChange={ () => {
+							setAttributes( { show: !attributes.show } );
+							//console.log(attributes.buttonOutline);
+								
+							if( !attributes.show === true ){
+								setAttributes( { showS:' show', collapseS:'' } );
+							}else{
+								setAttributes( { showS:'', collapseS:' collapsed' } );
+							}
+			
+							//console.log(attributes.buttonColor);
+						} }
+					/>
+				</PanelBody>
+			</InspectorControls>,
 			<div className="card">
     			<div className="card-header" id={ "heading " + attributes.foldSlug }>
       				<h2 class="mb-0">
