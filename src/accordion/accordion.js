@@ -112,7 +112,7 @@ registerBlockType( 'accordion/fold', {
 				</PanelBody>
 			</InspectorControls>,
 			<div className="card">
-    			<div className="card-header" id={ "heading " + attributes.foldSlug }>
+    			<div className="card-header" id={ "heading" + attributes.foldSlug }>
       				<h2 class="mb-0">
 						<RichText
 							tagName='button'
@@ -123,7 +123,7 @@ registerBlockType( 'accordion/fold', {
 							aria-expanded={ attributes.show }
 							aria-controls={ "collapse" + attributes.foldSlug }
 							value={ attributes.foldName }
-							onChange={ ( value ) => setAttributes( { foldName: value, foldSlug: ' ' + cleanForSlug(value) } ) }
+							onChange={ ( value ) => setAttributes( { foldName: value, foldSlug: cleanForSlug(value) } ) }
 							allowedFormats ={ [] }
 							withoutInteractiveFormatting
 						/>
