@@ -2,13 +2,35 @@ import { Path, SVG } from '@wordpress/components';
 import './editor.scss';
 
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, InspectorControls, RichText, BlockControls, ColorPalette, getColorObjectByColorValue, __experimentalLinkControl } = wp.blockEditor;
-const { PanelBody, PanelRow, RadioControl, Button, ButtonGroup, Popover, ToggleControl, ToolbarButton, ToolbarGroup } = wp.components;
+const { InnerBlocks, InspectorControls, RichText, BlockControls, ColorPalette, getColorObjectByColorValue, RichTextToolbarButton, __experimentalLinkControl } = wp.blockEditor;
+const { PanelBody, PanelRow, RadioControl, Button, ButtonGroup, Popover, ToggleControl, ToolbarButton, ToolbarGroup, SelectControl } = wp.components;
 const { withState } = wp.compose;
 const { Fragment, useCallback, useState } = wp.element;
 const { rawShortcut, displayShortcut } = wp.keycodes;
+//const { create, registerFormatType, insert, insertObject, toHTMLString } = wp.richText;
 
 const LinkControl = __experimentalLinkControl;
+
+/*const BoxArrowUpRightButton = ( props ) => {
+    return (<RichTextToolbarButton
+		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>}
+		title={'Box arrow up-right'}
+		onClick={ () => {
+			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>'} )
+		
+			props.onChange( insert( props.value, iconRT ) );
+		} }
+	/>);
+};
+
+registerFormatType(
+    'btnicons/boxarrowupright', {
+        title: 'Box arrow up-right',
+		tagName: 'xyz',
+		className: null,
+        edit: BoxArrowUpRightButton,
+    }
+);*/
 
 registerBlockType( 'utksds/button', {
 	title: 'UTK Button',
@@ -67,6 +89,22 @@ registerBlockType( 'utksds/button', {
 			type: 'string',
 			default: ' btn-nrml'
 		},
+		iconValue: {
+			type: 'string',
+			default: ''
+		},
+		iconValueLeft: {
+			type: 'array',
+			default: ''
+		},
+		iconValueRight: {
+			type: 'array',
+			default: ''
+		},
+		iconSide: {
+			type: 'boolean',
+			default: false
+		},
 	},
 	
 	edit: ( { isSelected, attributes, ClassName, setAttributes } ) => {
@@ -103,6 +141,24 @@ registerBlockType( 'utksds/button', {
 			{ name: 'Secondary', slug: 'btn-outline-secondary', color: '#006c93'},
 			{ name: 'Light', slug: 'btn-outline-light', color: '#F6F6F6'},
 			{ name: 'Dark', slug: 'btn-outline-dark', color: '#4b4b4b'},
+		];
+		
+		const iconList = [
+			{ name: 'Box arrow up-right', slug: 'box-arrow-up-right', svg: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>) },
+			{ name: 'Check2', slug: 'check2', svg: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>) },
+			{ name: 'Check2 circle', slug: 'check2-circle', svg: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>) },
+			{ name: 'Chevron right', slug: 'chevron-right', svg: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>) },
+			{ name: 'Chevron left', slug: 'chevron-left', svg: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>) },
+			{ name: 'Plus', slug: 'plus', svg: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>) },
+		];													
+		
+		const icons = [
+			{ label: 'Box arrow up-right', value: 'box-arrow-up-right' },
+			{ label: 'Check2', value: 'check2' },
+			{ label: 'Check2 circle', value: 'check2-circle' },
+			{ label: 'Chevron right', value: 'chevron-right' },
+			{ label: 'Chevron left', value: 'chevron-left' },
+			{ label: 'Plus', value: 'plus' },
 		];
 		
 		function onButtonColorChange( newColor ) {
@@ -244,6 +300,31 @@ registerBlockType( 'utksds/button', {
 							} }
 						/>
 					</PanelRow>
+				</PanelBody>
+				<PanelBody title='Icons' initialOpen={ true }>
+					<PanelRow>
+				  		<SelectControl
+							label='Select a button icon'
+							value={ attributes.iconValue }
+							options={ icons }
+							onChange={ ( value ) =>{ 
+								setAttributes( {iconValue:value} );
+
+								const fullValue = iconList.find( element => element.slug === value);
+	
+								if(attributes.iconSide === false){
+									setAttributes( {iconValueLeft:fullValue, iconValueRight: ''} );
+								}else{
+									setAttributes( {iconValueRight:fullValue, iconValueLeft: ''} );
+								}
+							} }
+						/>
+				  	</PanelRow>
+					{ attributes.iconValue !== '' && (
+					<PanelRow>
+						<p>Selected icon: {attributes.iconValueLeft.svg}</p>
+					</PanelRow>
+					) }
 				</PanelBody>
 			</InspectorControls>,
 			<RichText 
