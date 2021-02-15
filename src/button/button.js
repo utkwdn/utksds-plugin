@@ -320,37 +320,74 @@ registerBlockType( 'utksds/button', {
 							} }
 						/>
 				  	</PanelRow>
-					{ attributes.iconValue !== '' && (
 					<PanelRow>
-						<p>Selected icon: {attributes.iconValueLeft.svg}</p>
+						<ToggleControl
+							label='Icon Side'
+							help={ attributes.iconSide ? 'Icon appears on the right side.' : 'Icon appears on the left side.' }
+							checked={ attributes.iconSide }
+							onChange={ () => {
+								setAttributes( { iconSide: !attributes.iconSide } );
+								
+								const fullValue = iconList.find( element => element.slug === attributes.iconValue);
+								
+								if( !attributes.iconSide === true ){
+									setAttributes( {iconValueRight:fullValue, iconValueLeft: ''} );
+								}else{
+									setAttributes( {iconValueLeft:fullValue, iconValueRight: ''} );
+								}
+							} }
+						/>
+					</PanelRow>
+					{ attributes.iconValueLeft !== '' && (
+					<PanelRow>
+						<p>Selected icon appears on the left: {attributes.iconValueLeft.svg}</p>
+					</PanelRow>
+					) }
+					{ attributes.iconValueRight !== '' && (
+					<PanelRow>
+						<p>Selected icon appears on the right: {attributes.iconValueRight.svg}</p>
 					</PanelRow>
 					) }
 				</PanelBody>
 			</InspectorControls>,
-			<RichText 
-				tagName='a'
+			<a
+				href={ attributes.url }
+				title={ attributes.title }
+				type = 'button'
 				className={ 'btn ' + attributes.buttonColor.slug + attributes.buttonSize }
-				placeholder={ attributes.placeholder }
-				value={ attributes.text }
-				onChange={ ( value ) => setAttributes( { text: value } ) }
-				withoutInteractiveFormatting
-			/>
+				target={ attributes.linkTarget }
+				rel={ attributes.rel }
+			>
+				{ attributes.iconValueLeft.svg }
+				<RichText
+					tagName='div'
+					placeholder={ attributes.placeholder }
+					value={ attributes.text }
+					onChange={ ( value ) => setAttributes( { text: value } ) }
+					withoutInteractiveFormatting
+				/>
+				{ attributes.iconValueRight.svg }
+			</a>
 		] );
 	},
 	
 	save: ( { attributes } ) => {
 		return(
-			<RichText.Content
-				tagName="a"
-				type = 'button'
-				className={ 'btn ' + attributes.buttonColor.slug + attributes.buttonSize }
+			<a
 				href={ attributes.url }
 				title={ attributes.title }
-				style={ '' }
-				value={ attributes.text }
+				type = 'button'
+				className={ 'btn ' + attributes.buttonColor.slug + attributes.buttonSize }
 				target={ attributes.linkTarget }
 				rel={ attributes.rel }
-			/>
+			>
+				{ attributes.iconValueLeft.svg }
+				<RichText.Content
+					tagName=''
+					value={ attributes.text }
+				/>
+				{ attributes.iconValueRight.svg }
+			</a>
 		);
 	},
 } );
