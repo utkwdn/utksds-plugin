@@ -1,6 +1,5 @@
 import { Path, SVG } from '@wordpress/components';
 //import svgr from '@svgr/core';
-import { parse } from 'svg-parser'
 import './editor.scss';
 
 const { registerBlockType } = wp.blocks;
@@ -17,14 +16,76 @@ const BoxArrowUpRightButton = ( props ) => {
     return (<RichTextToolbarButton
 		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>}
 		title={'Box arrow up-right'}
+		isActive={ props.isActive }
 		onClick={ () => {
 			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"> </path><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"> </path></svg>', preserveWhiteSpace: true} );
 		
 			props.onChange( insert( props.value, iconRT ) );
+		} }
+	/>);
+};
+
+const Check2Button = ( props ) => {
+    return (<RichTextToolbarButton
+		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>}
+		title={'Check 2'}
+		isActive={ props.isActive }
+		onClick={ () => {
+			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"> </path></svg>', preserveWhiteSpace: true} );
 		
-			var iconHTML = toHTMLString( {value:iconRT } );
+			props.onChange( insert( props.value, iconRT ) );
+		} }
+	/>);
+};
+
+const Check2CircleButton = ( props ) => {
+    return (<RichTextToolbarButton
+		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>}
+		title={'Check 2 circle'}
+		isActive={ props.isActive }
+		onClick={ () => {
+			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"> </path><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"> </path></svg>', preserveWhiteSpace: true} );
 		
-			console.log(iconHTML);
+			props.onChange( insert( props.value, iconRT ) );
+		} }
+	/>);
+};
+
+const ChevronRightButton = ( props ) => {
+    return (<RichTextToolbarButton
+		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>}
+		title={'Chevron right'}
+		isActive={ props.isActive }
+		onClick={ () => {
+			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"> </path></svg>', preserveWhiteSpace: true} );
+		
+			props.onChange( insert( props.value, iconRT ) );
+		} }
+	/>);
+};
+
+const ChevronLeftButton = ( props ) => {
+    return (<RichTextToolbarButton
+		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>}
+		title={'Chevron left'}
+		isActive={ props.isActive }
+		onClick={ () => {
+			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"> </path></svg>', preserveWhiteSpace: true} );
+		
+			props.onChange( insert( props.value, iconRT ) );
+		} }
+	/>);
+};
+
+const PlusButton = ( props ) => {
+    return (<RichTextToolbarButton
+		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>}
+		title={'Plus'}
+		isActive={ props.isActive }
+		onClick={ () => {
+			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"> </path></svg>', preserveWhiteSpace: true} );
+		
+			props.onChange( insert( props.value, iconRT ) );
 		} }
 	/>);
 };
@@ -35,6 +96,51 @@ registerFormatType(
 		tagName: 'xyz',
 		className: null,
         edit: BoxArrowUpRightButton,
+    }
+);
+
+registerFormatType(
+    'btnicons/check2', {
+        title: 'Check2',
+		tagName: 'qrs',
+		className: null,
+        edit: Check2Button,
+    }
+);
+
+registerFormatType(
+    'btnicons/check2circle', {
+        title: 'Check2 circle',
+		tagName: 'tuv',
+		className: null,
+        edit: Check2CircleButton,
+    }
+);
+
+registerFormatType(
+    'btnicons/chevronright', {
+        title: 'Chevron right',
+		tagName: 'wxy',
+		className: null,
+        edit: ChevronRightButton,
+    }
+);
+
+registerFormatType(
+    'btnicons/chevronleft', {
+        title: 'Chevron left',
+		tagName: 'abc',
+		className: null,
+        edit: ChevronLeftButton,
+    }
+);
+
+registerFormatType(
+    'btnicons/plus', {
+        title: 'Plus',
+		tagName: 'def',
+		className: null,
+        edit: PlusButton,
     }
 );
 
@@ -95,18 +201,6 @@ registerBlockType( 'utksds/button', {
 			type: 'string',
 			default: ' btn-nrml'
 		},
-		iconValue: {
-			type: 'string',
-			default: ''
-		},
-		iconSVG: {
-			type: 'object',
-			default: {}
-		},
-		iconSide: {
-			type: 'boolean',
-			default: false
-		},
 	},
 	
 	edit: ( { isSelected, attributes, ClassName, setAttributes } ) => {
@@ -145,41 +239,11 @@ registerBlockType( 'utksds/button', {
 			{ name: 'Dark', slug: 'btn-outline-dark', color: '#4b4b4b'},
 		];
 		
-		const parsedBoxArrowUpRight = parse( `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>` );
-		
-		const parsedCheck2 = parse( '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>' );
-		
-		const parsedCheck2Circle = parse( '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>' );
-		
-		const parsedChevronRight = parse( '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>' );
-		
-		const parsedChevronLeft = parse( '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>' );
-		
-		const parsedPlus = parse( '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>' );
-		
-		const iconList = [
-			{ name: 'Box arrow up-right', slug: 'box-arrow-up-right', svg: parsedBoxArrowUpRight },
-			{ name: 'Check2', slug: 'check2', svg: parsedCheck2 },
-			{ name: 'Check2 circle', slug: 'check2-circle', svg: parsedCheck2Circle },
-			{ name: 'Chevron right', slug: 'chevron-right', svg: parsedChevronRight },
-			{ name: 'Chevron left', slug: 'chevron-left', svg: parsedChevronLeft },
-			{ name: 'Plus', slug: 'plus', svg: parsedPlus },
-		];													
-		
-		const icons = [
-			{ label: 'Box arrow up-right', value: 'box-arrow-up-right' },
-			{ label: 'Check2', value: 'check2' },
-			{ label: 'Check2 circle', value: 'check2-circle' },
-			{ label: 'Chevron right', value: 'chevron-right' },
-			{ label: 'Chevron left', value: 'chevron-left' },
-			{ label: 'Plus', value: 'plus' },
-		];
-		
 		function onButtonColorChange( newColor ) {
 			setAttributes( { buttonColor: newColor } );
 		}
 			
-		console.log(attributes.iconSVG);
+		console.log(wp.data.select( 'core/rich-text' ).getFormatTypes());
 
 		return ( [
 			<BlockControls>
@@ -317,46 +381,6 @@ registerBlockType( 'utksds/button', {
 						/>
 					</PanelRow>
 				</PanelBody>
-				<PanelBody title='Icons' initialOpen={ true }>
-					<PanelRow>
-				  		<SelectControl
-							label='Select a button icon'
-							value={ attributes.iconValue }
-							options={ icons }
-							onChange={ ( value ) =>{ 
-								setAttributes( {iconValue:value} );
-								
-								const fullValue = iconList.find( element => element.slug === value);
-								//attributes.iconSVG = attributes.iconSVG.slice(0, attributes.iconSVG.length - 1);
-								//attributes.iconSVG = attributes.iconSVG.concat(fullValue.svg);
-	
-								attributes.iconSVG = fullValue.svg;
-
-								setAttributes( {iconSVG:attributes.iconSVG} );
-							} }
-						/>
-				  	</PanelRow>
-					<PanelRow>
-						<ToggleControl
-							label='Icon Side'
-							help={ attributes.iconSide ? 'Icon appears on the right side.' : 'Icon appears on the left side.' }
-							checked={ attributes.iconSide }
-							onChange={ () => {
-								setAttributes( { iconSide: !attributes.iconSide } );
-							} }
-						/>
-					</PanelRow>
-					{ !attributes.iconSide && attributes.iconSVG !== '' && (
-					<PanelRow>
-						<p>Selected icon appears on the left:</p>
-					</PanelRow>
-					) }
-					{ attributes.iconSide && attributes.iconSVG !== '' && (
-					<PanelRow>
-						<p>Selected icon appears on the right:</p>
-					</PanelRow>
-					) }
-				</PanelBody>
 			</InspectorControls>,
 			<a
 				href={ attributes.url }
@@ -366,15 +390,14 @@ registerBlockType( 'utksds/button', {
 				target={ attributes.linkTarget }
 				rel={ attributes.rel }
 			>
-
 				<RichText
 					tagName='div'
 					placeholder={ attributes.placeholder }
 					value={ attributes.text }
+				  	allowedFormats={ [ 'core/bold', 'core/italic', 'btnicons/boxarrowupright', 'btnicons/check2', 'btnicons/check2circle', 'btnicons/chevronright', 'btnicons/chevronleft', 'btnicons/plus' ] }
 					onChange={ ( value ) => setAttributes( { text: value } ) }
 					withoutInteractiveFormatting
-				/>
-				
+				/>	
 			</a>
 		] );
 	},
@@ -388,8 +411,7 @@ registerBlockType( 'utksds/button', {
 				className={ 'btn ' + attributes.buttonColor.slug + attributes.buttonSize }
 				target={ attributes.linkTarget }
 				rel={ attributes.rel }
-			>
-				
+			>	
 				<RichText.Content
 					tagName=''
 					value={ attributes.text }
