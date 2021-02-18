@@ -1,4 +1,6 @@
 import { Path, SVG } from '@wordpress/components';
+//import svgr from '@svgr/core';
+import { parse } from 'svg-parser'
 import './editor.scss';
 
 const { registerBlockType } = wp.blocks;
@@ -7,18 +9,22 @@ const { PanelBody, PanelRow, RadioControl, Button, ButtonGroup, Popover, ToggleC
 const { withState } = wp.compose;
 const { Fragment, useCallback, useState } = wp.element;
 const { rawShortcut, displayShortcut } = wp.keycodes;
-//const { create, registerFormatType, insert, insertObject, toHTMLString } = wp.richText;
+const { create, registerFormatType, insert, insertObject, toHTMLString, removeFormat } = wp.richText;
 
 const LinkControl = __experimentalLinkControl;
 
-/*const BoxArrowUpRightButton = ( props ) => {
+const BoxArrowUpRightButton = ( props ) => {
     return (<RichTextToolbarButton
 		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>}
 		title={'Box arrow up-right'}
 		onClick={ () => {
-			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>'} )
+			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"> </path><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"> </path></svg>', preserveWhiteSpace: true} );
 		
 			props.onChange( insert( props.value, iconRT ) );
+		
+			var iconHTML = toHTMLString( {value:iconRT } );
+		
+			console.log(iconHTML);
 		} }
 	/>);
 };
@@ -30,7 +36,7 @@ registerFormatType(
 		className: null,
         edit: BoxArrowUpRightButton,
     }
-);*/
+);
 
 registerBlockType( 'utksds/button', {
 	title: 'UTK Button',
@@ -93,13 +99,9 @@ registerBlockType( 'utksds/button', {
 			type: 'string',
 			default: ''
 		},
-		iconValueLeft: {
-			type: 'array',
-			default: ''
-		},
-		iconValueRight: {
-			type: 'array',
-			default: ''
+		iconSVG: {
+			type: 'object',
+			default: {}
 		},
 		iconSide: {
 			type: 'boolean',
@@ -143,13 +145,25 @@ registerBlockType( 'utksds/button', {
 			{ name: 'Dark', slug: 'btn-outline-dark', color: '#4b4b4b'},
 		];
 		
+		const parsedBoxArrowUpRight = parse( `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>` );
+		
+		const parsedCheck2 = parse( '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>' );
+		
+		const parsedCheck2Circle = parse( '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>' );
+		
+		const parsedChevronRight = parse( '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>' );
+		
+		const parsedChevronLeft = parse( '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>' );
+		
+		const parsedPlus = parse( '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>' );
+		
 		const iconList = [
-			{ name: 'Box arrow up-right', slug: 'box-arrow-up-right', svg: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>) },
-			{ name: 'Check2', slug: 'check2', svg: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>) },
-			{ name: 'Check2 circle', slug: 'check2-circle', svg: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>) },
-			{ name: 'Chevron right', slug: 'chevron-right', svg: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>) },
-			{ name: 'Chevron left', slug: 'chevron-left', svg: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>) },
-			{ name: 'Plus', slug: 'plus', svg: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>) },
+			{ name: 'Box arrow up-right', slug: 'box-arrow-up-right', svg: parsedBoxArrowUpRight },
+			{ name: 'Check2', slug: 'check2', svg: parsedCheck2 },
+			{ name: 'Check2 circle', slug: 'check2-circle', svg: parsedCheck2Circle },
+			{ name: 'Chevron right', slug: 'chevron-right', svg: parsedChevronRight },
+			{ name: 'Chevron left', slug: 'chevron-left', svg: parsedChevronLeft },
+			{ name: 'Plus', slug: 'plus', svg: parsedPlus },
 		];													
 		
 		const icons = [
@@ -164,7 +178,9 @@ registerBlockType( 'utksds/button', {
 		function onButtonColorChange( newColor ) {
 			setAttributes( { buttonColor: newColor } );
 		}
-		
+			
+		console.log(attributes.iconSVG);
+
 		return ( [
 			<BlockControls>
 				<ToolbarGroup>
@@ -309,14 +325,14 @@ registerBlockType( 'utksds/button', {
 							options={ icons }
 							onChange={ ( value ) =>{ 
 								setAttributes( {iconValue:value} );
-
+								
 								const fullValue = iconList.find( element => element.slug === value);
+								//attributes.iconSVG = attributes.iconSVG.slice(0, attributes.iconSVG.length - 1);
+								//attributes.iconSVG = attributes.iconSVG.concat(fullValue.svg);
 	
-								if(attributes.iconSide === false){
-									setAttributes( {iconValueLeft:fullValue, iconValueRight: ''} );
-								}else{
-									setAttributes( {iconValueRight:fullValue, iconValueLeft: ''} );
-								}
+								attributes.iconSVG = fullValue.svg;
+
+								setAttributes( {iconSVG:attributes.iconSVG} );
 							} }
 						/>
 				  	</PanelRow>
@@ -327,25 +343,17 @@ registerBlockType( 'utksds/button', {
 							checked={ attributes.iconSide }
 							onChange={ () => {
 								setAttributes( { iconSide: !attributes.iconSide } );
-								
-								const fullValue = iconList.find( element => element.slug === attributes.iconValue);
-								
-								if( !attributes.iconSide === true ){
-									setAttributes( {iconValueRight:fullValue, iconValueLeft: ''} );
-								}else{
-									setAttributes( {iconValueLeft:fullValue, iconValueRight: ''} );
-								}
 							} }
 						/>
 					</PanelRow>
-					{ attributes.iconValueLeft !== '' && (
+					{ !attributes.iconSide && attributes.iconSVG !== '' && (
 					<PanelRow>
-						<p>Selected icon appears on the left: {attributes.iconValueLeft.svg}</p>
+						<p>Selected icon appears on the left:</p>
 					</PanelRow>
 					) }
-					{ attributes.iconValueRight !== '' && (
+					{ attributes.iconSide && attributes.iconSVG !== '' && (
 					<PanelRow>
-						<p>Selected icon appears on the right: {attributes.iconValueRight.svg}</p>
+						<p>Selected icon appears on the right:</p>
 					</PanelRow>
 					) }
 				</PanelBody>
@@ -358,7 +366,7 @@ registerBlockType( 'utksds/button', {
 				target={ attributes.linkTarget }
 				rel={ attributes.rel }
 			>
-				{ attributes.iconValueLeft.svg }
+
 				<RichText
 					tagName='div'
 					placeholder={ attributes.placeholder }
@@ -366,7 +374,7 @@ registerBlockType( 'utksds/button', {
 					onChange={ ( value ) => setAttributes( { text: value } ) }
 					withoutInteractiveFormatting
 				/>
-				{ attributes.iconValueRight.svg }
+				
 			</a>
 		] );
 	},
@@ -381,12 +389,11 @@ registerBlockType( 'utksds/button', {
 				target={ attributes.linkTarget }
 				rel={ attributes.rel }
 			>
-				{ attributes.iconValueLeft.svg }
+				
 				<RichText.Content
 					tagName=''
 					value={ attributes.text }
 				/>
-				{ attributes.iconValueRight.svg }
 			</a>
 		);
 	},
