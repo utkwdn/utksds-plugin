@@ -5,10 +5,11 @@ import './editor.scss';
 const { registerBlockType } = wp.blocks;
 const { InnerBlocks, InspectorControls, RichText, BlockControls, ColorPalette, getColorObjectByColorValue, RichTextToolbarButton, __experimentalLinkControl } = wp.blockEditor;
 const { PanelBody, PanelRow, RadioControl, Button, ButtonGroup, Popover, ToggleControl, ToolbarButton, ToolbarGroup, SelectControl } = wp.components;
-const { withState } = wp.compose;
+const { withState, compose, ifCondition } = wp.compose;
 const { Fragment, useCallback, useState } = wp.element;
 const { rawShortcut, displayShortcut } = wp.keycodes;
 const { create, registerFormatType, insert, insertObject, toHTMLString, removeFormat } = wp.richText;
+const { withSelect } = wp.data;
 
 const LinkControl = __experimentalLinkControl;
 
@@ -90,12 +91,96 @@ const PlusButton = ( props ) => {
 	/>);
 };
 
+const ConditionalBoxArrowUpRight = compose(
+    withSelect( function( select ) {
+        return {
+            selectedBlock: select( 'core/editor' ).getSelectedBlock()
+        }
+    } ),
+    ifCondition( function( props ) {
+        return (
+            props.selectedBlock &&
+            props.selectedBlock.name === 'utksds/button'
+        );
+    } )
+)( BoxArrowUpRightButton );
+
+const ConditionalCheck2 = compose(
+    withSelect( function( select ) {
+        return {
+            selectedBlock: select( 'core/editor' ).getSelectedBlock()
+        }
+    } ),
+    ifCondition( function( props ) {
+        return (
+            props.selectedBlock &&
+            props.selectedBlock.name === 'utksds/button'
+        );
+    } )
+)( Check2Button );
+
+const ConditionalCheck2Circle = compose(
+    withSelect( function( select ) {
+        return {
+            selectedBlock: select( 'core/editor' ).getSelectedBlock()
+        }
+    } ),
+    ifCondition( function( props ) {
+        return (
+            props.selectedBlock &&
+            props.selectedBlock.name === 'utksds/button'
+        );
+    } )
+)( Check2CircleButton );
+
+const ConditionalChevronRight = compose(
+    withSelect( function( select ) {
+        return {
+            selectedBlock: select( 'core/editor' ).getSelectedBlock()
+        }
+    } ),
+    ifCondition( function( props ) {
+        return (
+            props.selectedBlock &&
+            props.selectedBlock.name === 'utksds/button'
+        );
+    } )
+)( ChevronRightButton );
+
+const ConditionalChevronLeft = compose(
+    withSelect( function( select ) {
+        return {
+            selectedBlock: select( 'core/editor' ).getSelectedBlock()
+        }
+    } ),
+    ifCondition( function( props ) {
+        return (
+            props.selectedBlock &&
+            props.selectedBlock.name === 'utksds/button'
+        );
+    } )
+)( ChevronLeftButton );
+
+const ConditionalPlus = compose(
+    withSelect( function( select ) {
+        return {
+            selectedBlock: select( 'core/editor' ).getSelectedBlock()
+        }
+    } ),
+    ifCondition( function( props ) {
+        return (
+            props.selectedBlock &&
+            props.selectedBlock.name === 'utksds/button'
+        );
+    } )
+)( PlusButton );
+
 registerFormatType(
     'btnicons/boxarrowupright', {
         title: 'Box arrow up-right',
 		tagName: 'xyz',
 		className: null,
-        edit: BoxArrowUpRightButton,
+        edit: ConditionalBoxArrowUpRight,
     }
 );
 
@@ -104,7 +189,7 @@ registerFormatType(
         title: 'Check2',
 		tagName: 'qrs',
 		className: null,
-        edit: Check2Button,
+        edit: ConditionalCheck2,
     }
 );
 
@@ -113,7 +198,7 @@ registerFormatType(
         title: 'Check2 circle',
 		tagName: 'tuv',
 		className: null,
-        edit: Check2CircleButton,
+        edit: ConditionalCheck2Circle,
     }
 );
 
@@ -122,7 +207,7 @@ registerFormatType(
         title: 'Chevron right',
 		tagName: 'wxy',
 		className: null,
-        edit: ChevronRightButton,
+        edit: ConditionalChevronRight,
     }
 );
 
@@ -131,7 +216,7 @@ registerFormatType(
         title: 'Chevron left',
 		tagName: 'abc',
 		className: null,
-        edit: ChevronLeftButton,
+        edit: ConditionalChevronLeft,
     }
 );
 
@@ -140,7 +225,7 @@ registerFormatType(
         title: 'Plus',
 		tagName: 'def',
 		className: null,
-        edit: PlusButton,
+        edit: ConditionalPlus,
     }
 );
 
@@ -382,41 +467,30 @@ registerBlockType( 'utksds/button', {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<a
-				href={ attributes.url }
-				title={ attributes.title }
-				type = 'button'
+			<RichText 
+				tagName='a'
 				className={ 'btn ' + attributes.buttonColor.slug + attributes.buttonSize }
-				target={ attributes.linkTarget }
-				rel={ attributes.rel }
-			>
-				<RichText
-					tagName='div'
-					placeholder={ attributes.placeholder }
-					value={ attributes.text }
-				  	allowedFormats={ [ 'core/bold', 'core/italic', 'btnicons/boxarrowupright', 'btnicons/check2', 'btnicons/check2circle', 'btnicons/chevronright', 'btnicons/chevronleft', 'btnicons/plus' ] }
-					onChange={ ( value ) => setAttributes( { text: value } ) }
-					withoutInteractiveFormatting
-				/>	
-			</a>
+				placeholder={ attributes.placeholder }
+				value={ attributes.text }
+				allowedFormats={ [ 'core/bold', 'core/italic', 'btnicons/boxarrowupright', 'btnicons/check2', 'btnicons/check2circle', 'btnicons/chevronright', 'btnicons/chevronleft', 'btnicons/plus' ] }
+				onChange={ ( value ) => setAttributes( { text: value } ) }
+				withoutInteractiveFormatting
+			/>
 		] );
 	},
 	
 	save: ( { attributes } ) => {
 		return(
-			<a
-				href={ attributes.url }
-				title={ attributes.title }
+			<RichText.Content
+				tagName="a"
 				type = 'button'
 				className={ 'btn ' + attributes.buttonColor.slug + attributes.buttonSize }
+				href={ attributes.url }
+				title={ attributes.title }
+				value={ attributes.text }
 				target={ attributes.linkTarget }
 				rel={ attributes.rel }
-			>	
-				<RichText.Content
-					tagName=''
-					value={ attributes.text }
-				/>
-			</a>
+			/>
 		);
 	},
 } );
