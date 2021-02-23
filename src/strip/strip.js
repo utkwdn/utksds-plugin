@@ -71,7 +71,7 @@ registerBlockType( 'strip/main', {
 				</PanelBody>
 			</InspectorControls>,
 		  <div className={ imagePostion }>
-				<InnerBlocks templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>,
 		] );
 	},

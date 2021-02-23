@@ -219,7 +219,7 @@ registerBlockType( 'utksds/column', {
 	edit: ( props ) => {
 		return (
 			<div className={ props.className } >
-				<InnerBlocks templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>
 		)
 	},
