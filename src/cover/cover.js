@@ -69,7 +69,7 @@ registerBlockType( 'cover/caption', {
 		return (
 			<div className='home-jumbotron-caption'>
 			<div className='home-jumbotron-caption-inside'>
-				<InnerBlocks allowedBlocks={ [ 'core/button', 'card/paragraph', 'card/heading', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks allowedBlocks={ [ 'core/button', 'core/paragraph', 'core/heading', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 			</div>
 		);
