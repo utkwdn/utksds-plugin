@@ -214,12 +214,19 @@ registerBlockType( 'utksds/columns', {
 registerBlockType( 'utksds/column', {
 	title: 'Column',
 	parent: [ 'utksds/columns' ],
+	usesContext: [ 'card/blockName' ],
 	icon: 'editor-justify',
 	
 	edit: ( props ) => {
+		if(typeof props.context['card/blockName'] !== 'undefined' && props.context['card/blockName'] === 'utksds/card'){
+			var these_blocks = [ 'card/body', 'card/image' ];
+		}else{
+			var these_blocks = true ;
+		}
+		
 		return (
 			<div className={ props.className } >
-				<InnerBlocks templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks allowedBlocks={ these_blocks } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>
 		)
 	},

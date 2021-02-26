@@ -3,7 +3,7 @@ import { Path, SVG } from '@wordpress/components';
 
 const { registerBlockType } = wp.blocks;
 const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
-const { PanelBody, PanelRow, TextControl } = wp.components;
+const { PanelBody, PanelRow, TextControl, ToggleControl } = wp.components;
 const { cleanForSlug } = wp.url;
 
 registerBlockType( 'utksds/accordion', {
@@ -90,8 +90,29 @@ registerBlockType( 'accordion/fold', {
 		setAttributes( { parentID:context['accordion/parentID'] } );
 		
 		return ( [
+			<InspectorControls>
+				<PanelBody title='Accordion Fold Settings' initialOpen={ true }>
+					<ToggleControl
+						label='Show'
+						help={ attributes.show ? 'Fold defaults to open.' : 'Fold defaults to closed.' }
+						checked={ attributes.show }
+						onChange={ () => {
+							setAttributes( { show: !attributes.show } );
+							//console.log(attributes.buttonOutline);
+								
+							if( !attributes.show === true ){
+								setAttributes( { showS:' show', collapseS:'' } );
+							}else{
+								setAttributes( { showS:'', collapseS:' collapsed' } );
+							}
+			
+							//console.log(attributes.buttonColor);
+						} }
+					/>
+				</PanelBody>
+			</InspectorControls>,
 			<div className="card">
-    			<div className="card-header" id={ "heading " + attributes.foldSlug }>
+    			<div className="card-header" id={ "heading" + attributes.foldSlug }>
       				<h2 class="mb-0">
 						<RichText
 							tagName='button'
@@ -102,7 +123,7 @@ registerBlockType( 'accordion/fold', {
 							aria-expanded={ attributes.show }
 							aria-controls={ "collapse" + attributes.foldSlug }
 							value={ attributes.foldName }
-							onChange={ ( value ) => setAttributes( { foldName: value, foldSlug: ' ' + cleanForSlug(value) } ) }
+							onChange={ ( value ) => setAttributes( { foldName: value, foldSlug: cleanForSlug(value) } ) }
 							allowedFormats ={ [] }
 							withoutInteractiveFormatting
 						/>
@@ -110,7 +131,7 @@ registerBlockType( 'accordion/fold', {
     			</div>
     			<div id={ "collapse" + attributes.foldSlug } className={ "collapse" + attributes.showS } aria-labelledby={ "heading" + attributes.foldSlug } data-parent={ "#" + attributes.parentID }>
       				<div className="card-body">
-        				<InnerBlocks allowedBlocks={ 'core/button', 'core/paragraph', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+        				<InnerBlocks allowedBlocks={ 'core/button', 'core/paragraph', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
       				</div>
     			</div>
   			</div>

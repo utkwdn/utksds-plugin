@@ -1,14 +1,233 @@
 import { Path, SVG } from '@wordpress/components';
+//import svgr from '@svgr/core';
 import './editor.scss';
 
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, InspectorControls, RichText, BlockControls, ColorPalette, getColorObjectByColorValue, __experimentalLinkControl } = wp.blockEditor;
-const { PanelBody, PanelRow, RadioControl, Button, ButtonGroup, Popover, ToggleControl, ToolbarButton, ToolbarGroup } = wp.components;
-const { withState } = wp.compose;
+const { InnerBlocks, InspectorControls, RichText, BlockControls, ColorPalette, getColorObjectByColorValue, RichTextToolbarButton, __experimentalLinkControl } = wp.blockEditor;
+const { PanelBody, PanelRow, RadioControl, Button, ButtonGroup, Popover, ToggleControl, ToolbarButton, ToolbarGroup, SelectControl } = wp.components;
+const { withState, compose, ifCondition } = wp.compose;
 const { Fragment, useCallback, useState } = wp.element;
 const { rawShortcut, displayShortcut } = wp.keycodes;
+const { create, registerFormatType, insert, insertObject, toHTMLString, removeFormat } = wp.richText;
+const { withSelect } = wp.data;
 
 const LinkControl = __experimentalLinkControl;
+
+const BoxArrowUpRightButton = ( props ) => {
+    return (<RichTextToolbarButton
+		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>}
+		title={'Box arrow up-right'}
+		isActive={ props.isActive }
+		onClick={ () => {
+			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"> </path><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"> </path></svg>', preserveWhiteSpace: true} );
+		
+			props.onChange( insert( props.value, iconRT ) );
+		} }
+	/>);
+};
+
+const Check2Button = ( props ) => {
+    return (<RichTextToolbarButton
+		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>}
+		title={'Check 2'}
+		isActive={ props.isActive }
+		onClick={ () => {
+			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"> </path></svg>', preserveWhiteSpace: true} );
+		
+			props.onChange( insert( props.value, iconRT ) );
+		} }
+	/>);
+};
+
+const Check2CircleButton = ( props ) => {
+    return (<RichTextToolbarButton
+		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>}
+		title={'Check 2 circle'}
+		isActive={ props.isActive }
+		onClick={ () => {
+			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"> </path><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"> </path></svg>', preserveWhiteSpace: true} );
+		
+			props.onChange( insert( props.value, iconRT ) );
+		} }
+	/>);
+};
+
+const ChevronRightButton = ( props ) => {
+    return (<RichTextToolbarButton
+		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>}
+		title={'Chevron right'}
+		isActive={ props.isActive }
+		onClick={ () => {
+			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"> </path></svg>', preserveWhiteSpace: true} );
+		
+			props.onChange( insert( props.value, iconRT ) );
+		} }
+	/>);
+};
+
+const ChevronLeftButton = ( props ) => {
+    return (<RichTextToolbarButton
+		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>}
+		title={'Chevron left'}
+		isActive={ props.isActive }
+		onClick={ () => {
+			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"> </path></svg>', preserveWhiteSpace: true} );
+		
+			props.onChange( insert( props.value, iconRT ) );
+		} }
+	/>);
+};
+
+const PlusButton = ( props ) => {
+    return (<RichTextToolbarButton
+		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>}
+		title={'Plus'}
+		isActive={ props.isActive }
+		onClick={ () => {
+			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"> </path></svg>', preserveWhiteSpace: true} );
+		
+			props.onChange( insert( props.value, iconRT ) );
+		} }
+	/>);
+};
+
+const ConditionalBoxArrowUpRight = compose(
+    withSelect( function( select ) {
+        return {
+            selectedBlock: select( 'core/editor' ).getSelectedBlock()
+        }
+    } ),
+    ifCondition( function( props ) {
+        return (
+            props.selectedBlock &&
+            props.selectedBlock.name === 'utksds/button'
+        );
+    } )
+)( BoxArrowUpRightButton );
+
+const ConditionalCheck2 = compose(
+    withSelect( function( select ) {
+        return {
+            selectedBlock: select( 'core/editor' ).getSelectedBlock()
+        }
+    } ),
+    ifCondition( function( props ) {
+        return (
+            props.selectedBlock &&
+            props.selectedBlock.name === 'utksds/button'
+        );
+    } )
+)( Check2Button );
+
+const ConditionalCheck2Circle = compose(
+    withSelect( function( select ) {
+        return {
+            selectedBlock: select( 'core/editor' ).getSelectedBlock()
+        }
+    } ),
+    ifCondition( function( props ) {
+        return (
+            props.selectedBlock &&
+            props.selectedBlock.name === 'utksds/button'
+        );
+    } )
+)( Check2CircleButton );
+
+const ConditionalChevronRight = compose(
+    withSelect( function( select ) {
+        return {
+            selectedBlock: select( 'core/editor' ).getSelectedBlock()
+        }
+    } ),
+    ifCondition( function( props ) {
+        return (
+            props.selectedBlock &&
+            props.selectedBlock.name === 'utksds/button'
+        );
+    } )
+)( ChevronRightButton );
+
+const ConditionalChevronLeft = compose(
+    withSelect( function( select ) {
+        return {
+            selectedBlock: select( 'core/editor' ).getSelectedBlock()
+        }
+    } ),
+    ifCondition( function( props ) {
+        return (
+            props.selectedBlock &&
+            props.selectedBlock.name === 'utksds/button'
+        );
+    } )
+)( ChevronLeftButton );
+
+const ConditionalPlus = compose(
+    withSelect( function( select ) {
+        return {
+            selectedBlock: select( 'core/editor' ).getSelectedBlock()
+        }
+    } ),
+    ifCondition( function( props ) {
+        return (
+            props.selectedBlock &&
+            props.selectedBlock.name === 'utksds/button'
+        );
+    } )
+)( PlusButton );
+
+registerFormatType(
+    'btnicons/boxarrowupright', {
+        title: 'Box arrow up-right',
+		tagName: 'xyz',
+		className: null,
+        edit: ConditionalBoxArrowUpRight,
+    }
+);
+
+registerFormatType(
+    'btnicons/check2', {
+        title: 'Check2',
+		tagName: 'qrs',
+		className: null,
+        edit: ConditionalCheck2,
+    }
+);
+
+registerFormatType(
+    'btnicons/check2circle', {
+        title: 'Check2 circle',
+		tagName: 'tuv',
+		className: null,
+        edit: ConditionalCheck2Circle,
+    }
+);
+
+registerFormatType(
+    'btnicons/chevronright', {
+        title: 'Chevron right',
+		tagName: 'wxy',
+		className: null,
+        edit: ConditionalChevronRight,
+    }
+);
+
+registerFormatType(
+    'btnicons/chevronleft', {
+        title: 'Chevron left',
+		tagName: 'abc',
+		className: null,
+        edit: ConditionalChevronLeft,
+    }
+);
+
+registerFormatType(
+    'btnicons/plus', {
+        title: 'Plus',
+		tagName: 'def',
+		className: null,
+        edit: ConditionalPlus,
+    }
+);
 
 registerBlockType( 'utksds/button', {
 	title: 'UTK Button',
@@ -108,7 +327,9 @@ registerBlockType( 'utksds/button', {
 		function onButtonColorChange( newColor ) {
 			setAttributes( { buttonColor: newColor } );
 		}
-		
+			
+		//console.log(wp.data.select( 'core/rich-text' ).getFormatTypes());
+
 		return ( [
 			<BlockControls>
 				<ToolbarGroup>
@@ -251,6 +472,7 @@ registerBlockType( 'utksds/button', {
 				className={ 'btn ' + attributes.buttonColor.slug + attributes.buttonSize }
 				placeholder={ attributes.placeholder }
 				value={ attributes.text }
+				allowedFormats={ [ 'core/bold', 'core/italic', 'btnicons/boxarrowupright', 'btnicons/check2', 'btnicons/check2circle', 'btnicons/chevronright', 'btnicons/chevronleft', 'btnicons/plus' ] }
 				onChange={ ( value ) => setAttributes( { text: value } ) }
 				withoutInteractiveFormatting
 			/>
@@ -265,7 +487,6 @@ registerBlockType( 'utksds/button', {
 				className={ 'btn ' + attributes.buttonColor.slug + attributes.buttonSize }
 				href={ attributes.url }
 				title={ attributes.title }
-				style={ '' }
 				value={ attributes.text }
 				target={ attributes.linkTarget }
 				rel={ attributes.rel }
