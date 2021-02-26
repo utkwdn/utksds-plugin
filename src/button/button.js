@@ -328,7 +328,7 @@ registerBlockType( 'utksds/button', {
 			setAttributes( { buttonColor: newColor } );
 		}
 			
-		console.log(wp.data.select( 'core/rich-text' ).getFormatTypes());
+		//console.log(wp.data.select( 'core/rich-text' ).getFormatTypes());
 
 		return ( [
 			<BlockControls>
