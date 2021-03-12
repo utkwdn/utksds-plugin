@@ -29,6 +29,7 @@ import './horizontal-rule/horizontal-rule.js';
 import './cover/cover.js';
 import './heading/heading.js';
 import './tabs/tabs.js';
+import './remote-data/remote-data.js';
 
 
 // remove default button styles, declare default and/or plugin created blocks to selectively disable
