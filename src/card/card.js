@@ -4,7 +4,7 @@ import { Path, SVG } from '@wordpress/components';
 
 const { registerBlockType, registerBlockVariation } = wp.blocks;
 const { InnerBlocks, InspectorControls, ColorPalette, RichText, getColorObjectByColorValue } = wp.blockEditor;
-const { PanelBody, PanelRow, RangeControl, RadioControl, ToggleControl } = wp.components;
+const { PanelBody, PanelRow, RangeControl, RadioControl, ToggleControl, SelectControl } = wp.components;
 const { withState } = wp.compose;
 
 const ALLOWED_BLOCKS = [ 'core/button', 'card/paragraph', 'card/heading', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ];
@@ -195,7 +195,7 @@ registerBlockType( 'utksds/card', {
 
 registerBlockType( 'card/body', {
 	title: 'Card Body',
-	parent: [ 'card/main' ],
+	parent: [ 'card/main'],
 	icon: 'media-text',
 	description: 'Contains all the text elements within a Card.',
 	usesContext: [ 'card/cardColor', 'card/cardOutline', ],
@@ -333,37 +333,70 @@ registerBlockType( 'card/topcap', {
 			
 } );
 
-/*registerBlockType( 'card/header', {
+registerBlockType( 'card/header', {
 	title: 'Card Header',
-	parent: [ 'card/main' ],
+	parent: [ 'utksds/card' ],
 	icon: 'table-row-before',
 	attributes: {
 		content: {
-			source: 'html',
-			selector: 'div',
+			type: 'string',
 		},
+		tagName: {
+			type: 'string',
+			default: 'div'
+		}
 	},
 	
 	edit: ( { className, attributes, setAttributes } ) => {
-		return(
+		
+		return( [
+			<InspectorControls>
+				<PanelBody title='Remote Data' initialOpen={ true }>
+					<PanelRow>
+						<SelectControl
+							label='Heading Type'
+							options={ [
+								{ label: 'Div', value: 'div'},
+								{ label: 'H5', value: 'h5'},
+								{ label: 'H4', value: 'h4'},
+								{ label: 'H3', value: 'h3'},
+								{ label: 'H2', value: 'h2'},
+								{ label: 'H1', value: 'h1'},
+							] }
+							value={ attributes.tagName }
+							onChange={ ( value ) =>{ 
+								setAttributes( { tagName:value } );
+							} }
+						/>
+					</PanelRow>
+				</PanelBody>
+			</InspectorControls>,
 			<RichText 
-				tagName='div'
-				className={ className, 'card-header' }
+				tagName={ attributes.tagName }
+				className={ className + ' card-header' }
 				value={ attributes.content }
-				onChange={ ( content ) => setAttributes( { content } ) }
-				formattingControls={ [] }
+				onChange={ ( value ) =>{ 
+					setAttributes( { content:value } );
+				} }
+				withoutInteractiveFormatting
 			/>
-		);
+		] );
 	},
 				  
 	save: ( { className, attributes } ) => {
-		return <RichText.Content tagName="div" className="card-header card-header" value={ attributes.content } />;
+		return( 
+			<RichText.Content 
+				tagName={ attributes.tagName } 
+				className={ className + ' card-header' }
+				value={ attributes.content }
+			/>
+		);
 	},
 } );
 	
-registerBlockType( 'card/footer', {
+/*registerBlockType( 'card/footer', {
 	title: 'Card Footer',
-	parent: [ 'card/main' ],
+	parent: [ 'utksds/card' ],
 	icon: 'table-row-after',
 	attributes: {
 		content: {
