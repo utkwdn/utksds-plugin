@@ -337,6 +337,9 @@ registerBlockType( 'card/header', {
 	title: 'Card Header',
 	parent: [ 'utksds/card' ],
 	icon: 'table-row-before',
+	supports: {
+    	className: false,
+	},
 	attributes: {
 		content: {
 			type: 'string',
@@ -347,14 +350,14 @@ registerBlockType( 'card/header', {
 		}
 	},
 	
-	edit: ( { className, attributes, setAttributes } ) => {
+	edit: ( { attributes, setAttributes } ) => {
 		
 		return( [
 			<InspectorControls>
-				<PanelBody title='Remote Data' initialOpen={ true }>
+				<PanelBody title='Card Header' initialOpen={ true }>
 					<PanelRow>
 						<SelectControl
-							label='Heading Type'
+							label='Header Type'
 							options={ [
 								{ label: 'Div', value: 'div'},
 								{ label: 'H5', value: 'h5'},
@@ -373,7 +376,7 @@ registerBlockType( 'card/header', {
 			</InspectorControls>,
 			<RichText 
 				tagName={ attributes.tagName }
-				className={ className + ' card-header' }
+				className={ 'card-header' }
 				value={ attributes.content }
 				onChange={ ( value ) =>{ 
 					setAttributes( { content:value } );
@@ -383,41 +386,71 @@ registerBlockType( 'card/header', {
 		] );
 	},
 				  
-	save: ( { className, attributes } ) => {
+	save: ( { attributes } ) => {
 		return( 
 			<RichText.Content 
 				tagName={ attributes.tagName } 
-				className={ className + ' card-header' }
+				className={ 'card-header' }
 				value={ attributes.content }
 			/>
 		);
 	},
 } );
 	
-/*registerBlockType( 'card/footer', {
+registerBlockType( 'card/footer', {
 	title: 'Card Footer',
 	parent: [ 'utksds/card' ],
 	icon: 'table-row-after',
+	supports: {
+    	className: false,
+	},
 	attributes: {
 		content: {
-			source: 'html',
-			selector: 'div',
+			type: 'string',
 		},
+		muted: {
+			type: 'boolean',
+			default: false,
+		},
+		mutedClass: {
+			type: 'string',
+			default: '',
+		}
 	},
 	
-	edit: ( { className, attributes, setAttributes } ) => {
-		return(
+	edit: ( { attributes, setAttributes } ) => {
+		return( [
+			<InspectorControls>
+				<PanelBody title='Card Footer' initialOpen={ true }>
+					<PanelRow>
+						<ToggleControl
+							label='Muted Text'
+							help={ attributes.muted ? 'Text is muted.' : 'Button is not muted.' }
+							checked={ attributes.muted }
+							onChange={ () => {
+								setAttributes( { muted: !attributes.muted } );
+								
+								if( !attributes.muted === true ){
+									setAttributes( { mutedClass:'text-muted' } );
+								}else{
+									setAttributes( { mutedClass:'' } );
+								}
+							} }
+						/>
+					</PanelRow>
+				</PanelBody>
+			</InspectorControls>,
 			<RichText 
 				tagName='div'
-				className={ className, 'card-footer' }
+				className={ 'card-footer ' + attributes.mutedClass }
 				value={ attributes.content }
 				onChange={ ( content ) => setAttributes( { content } ) }
 				formattingControls={ [] }
 			/>
-		);
+		] );
 	},
 				  
-	save: ( { className, attributes } ) => {
-		return <RichText.Content tagName="div" className="card-footer card-footer" value={ attributes.content } />;
+	save: ( { attributes } ) => {
+		return <RichText.Content tagName="div" className={ 'card-footer ' + attributes.mutedClass } value={ attributes.content } />;
 	},
-} );*/
+} );
