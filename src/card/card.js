@@ -197,6 +197,7 @@ registerBlockType( 'card/body', {
 	title: 'Card Body',
 	parent: [ 'card/main'],
 	icon: 'media-text',
+	category: 'design',
 	description: 'Contains all the text elements within a Card.',
 	usesContext: [ 'card/cardColor', 'card/cardOutline', ],
 	attributes: {
@@ -237,6 +238,7 @@ registerBlockType( 'card/overlay', {
 	title: 'Card Overlay',
 	parent: [ 'card/main' ],
 	icon: 'media-text',
+	category: 'design',
 	description: 'Contains all the text elements that overlay an image in a Card.',
 				  
 	edit: () => {
@@ -261,6 +263,7 @@ registerBlockType( 'card/paragraph', {
 	title: 'Paragraph',
 	parent: [ 'card/body' ],
 	icon: 'editor-paragraph',
+	category: 'design',
 				  
 	edit: () => {
 		return (
@@ -280,6 +283,7 @@ registerBlockType( 'card/heading', {
 	title: 'Heading',
 	parent: [ 'card/body' ],
 	icon: 'heading',
+	category: 'design',
 				  
 	edit: () => {
 		return (
@@ -299,6 +303,7 @@ registerBlockType( 'card/image', {
 	title: 'Image',
 	parent: [ 'utksds/card' ],
 	icon: (<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img" aria-hidden="true" focusable="false"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 4.5h14c.3 0 .5.2.5.5v8.4l-3-2.9c-.3-.3-.8-.3-1 0L11.9 14 9 12c-.3-.2-.6-.2-.8 0l-3.6 2.6V5c-.1-.3.1-.5.4-.5zm14 15H5c-.3 0-.5-.2-.5-.5v-2.4l4.1-3 3 1.9c.3.2.7.2.9-.1L16 12l3.5 3.4V19c0 .3-.2.5-.5.5z"></path></svg>),
+	category: 'design',
 				  
 	edit: () => {
 		return (
@@ -318,6 +323,7 @@ registerBlockType( 'card/topcap', {
 	title: 'Image Cap Top',
 	parent: [ 'utksds/card' ],
 	icon: (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18 18h6v6h-6v-6zm-9 6h6v-6h-6v6zm-9 0h6v-6h-6v6zm0-8h24v-16h-24v16z"/></svg>),
+	category: 'design',
 				  
 	edit: () => {
 		return (
@@ -337,6 +343,7 @@ registerBlockType( 'card/header', {
 	title: 'Card Header',
 	parent: [ 'utksds/card' ],
 	icon: 'table-row-before',
+	category: 'design',
 	supports: {
     	className: false,
 	},
@@ -401,6 +408,7 @@ registerBlockType( 'card/footer', {
 	title: 'Card Footer',
 	parent: [ 'utksds/card' ],
 	icon: 'table-row-after',
+	category: 'design',
 	supports: {
     	className: false,
 	},
