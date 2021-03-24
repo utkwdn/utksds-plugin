@@ -26,10 +26,10 @@ import './strip/strip.js';
 import './columns/columns.js';
 import './calendar/calendar.js';
 import './horizontal-rule/horizontal-rule.js';
-import './cover/cover.js';
+//import './cover/cover.js';
 import './heading/heading.js';
 import './tabs/tabs.js';
-import './remote-data/remote-data.js';
+//import './remote-data/remote-data.js';
 
 
 // remove default button styles, declare default and/or plugin created blocks to selectively disable
@@ -53,7 +53,7 @@ wp.domReady( function() {
 		'core/media-text',
     'core/text-columns',
     'core/columns',
-    'core/html',
+    'core/button',
     'core/more',
     'core/nextpage',
     'core/separator',
