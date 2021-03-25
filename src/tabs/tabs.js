@@ -2,7 +2,7 @@ import { select } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
 
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, InspectorControls } = wp.blockEditor;
+const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
 const { PanelBody, PanelRow, TextControl } = wp.components;
 const { cleanForSlug } = wp.url;
 
@@ -65,13 +65,8 @@ registerBlockType( 'utksds/tabs', {
 					/>
 				</PanelBody>
 			</InspectorControls>,
-			<div>
-			<ul className={ "nav nav-tabs" } id={ attributes.tabID } role="tablist">
-				{ listItems }
-			</ul>
 			<div class="tab-content" id="myTabContent">
 				<InnerBlocks allowedBlocks={ [ 'tabs/tab', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
-			</div>
 			</div>,
 		] );
 	},
@@ -137,21 +132,21 @@ registerBlockType( 'tabs/tab', {
 		}
 		
 		return ( [
-			<InspectorControls>
-				<PanelBody title='Tab Properties' initialOpen={ true }>
-					<TextControl
-						label='Tab Name'
-						help='The identifier for the tabs group.'
+			<div className={ "tab-pane fade " + attributes.tabShow + " " + attributes.tabActive } id={ attributes.tabSlug } role="tabpanel" aria-labelledby={ attributes.tabSlug + "-tab" }>
+				<div className="tab-header">
+					<RichText
+						tagName='h3'
+						className={ "tab-name" }
 						value={ attributes.tabName }
 						onChange={ ( value ) =>{ 
 							setAttributes( {tabName:value, tabSlug: 'tab-' + cleanForSlug(value)} );
 							
 							setTabNames(parentID);
 						} }
+						allowedFormats ={ [] }
+						withoutInteractiveFormatting
 					/>
-				</PanelBody>
-			</InspectorControls>,
-			<div className={ "tab-pane fade " + attributes.tabShow + " " + attributes.tabActive } id={ attributes.tabSlug } role="tabpanel" aria-labelledby={ attributes.tabSlug + "-tab" }>
+				</div>
 				<InnerBlocks allowedBlocks={ 'core/button', 'core/paragraph', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>
 		] )
