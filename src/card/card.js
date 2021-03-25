@@ -30,24 +30,21 @@ const IMAGE_TEMPLATE = [
 import './editor.scss';
 
 const bgColors = [
+	{ name: 'Light', slug: 'bg-light', color: '#F6F6F6'},
 	{ name: 'Primary', slug: 'bg-primary', color: '#58595b'},
 	{ name: 'Secondary', slug: 'bg-secondary', color: '#006c93'},
-	{ name: 'Light', slug: 'bg-light', color: '#F6F6F6'},
-	{ name: 'Dark', slug: 'bg-dark', color: '#4b4b4b'},
 ];
 
 const borderColors = [
+	{ name: 'Light', slug: 'border-light', color: '#F6F6F6'},
 	{ name: 'Primary', slug: 'border-primary', color: '#58595b'},
 	{ name: 'Secondary', slug: 'border-secondary', color: '#006c93'},
-	{ name: 'Light', slug: 'border-light', color: '#F6F6F6'},
-	{ name: 'Dark', slug: 'border-dark', color: '#4b4b4b'},
 ];
 
 const textColors = [
+	{ name: 'Light', slug: 'text-light', color: '#F6F6F6'},
 	{ name: 'Primary', slug: 'text-primary', color: '#58595b'},
 	{ name: 'Secondary', slug: 'text-secondary', color: '#006c93'},
-	{ name: 'Light', slug: 'text-light', color: '#F6F6F6'},
-	{ name: 'Dark', slug: 'text-dark', color: '#4b4b4b'},
 ];
 
 /*registerBlockVariation( 'core/image', {
