@@ -1,6 +1,6 @@
 const { registerBlockType } = wp.blocks;
-const { MediaUpload, InnerBlocks, InspectorControls, ColorPalette } = wp.editor;
-const { Button, PanelBody } = wp.components;
+const { MediaUpload, InnerBlocks, InspectorControls, ColorPalette } = wp.blockEditor;
+const { Button, PanelBody, PanelRow, RangeControl } = wp.components;
 const ALLOWED_BLOCKS = [ 'core/button', 'core/column', 'core/columns', 'core/separator', 'core/paragraph', 'core/heading' ];
 
 // import './style.scss';
@@ -25,6 +25,10 @@ registerBlockType( 'media-object/main', {
 			attribute: 'src',
 			selector: '.mr-3',
 		},
+		imageSize: {
+			type: 'string',
+			default: '',
+		},
 	},
 
 	// eslint-disable-next-line no-unused-vars
@@ -40,6 +44,7 @@ registerBlockType( 'media-object/main', {
 				return (
 					<img
 						src={ attributes.imageUrl }
+						style={ { width:attributes.imageSize } }
 						onClick={ openEvent }
 						className="image"
 					/>
@@ -66,11 +71,22 @@ registerBlockType( 'media-object/main', {
 			);
 		};
 
-		return (
+		return ( [
+			<InspectorControls>
+				<PanelBody title='Image Settings' initialOpen={ true }>
+					<RangeControl
+        				label="Width"
+						value={ attributes.imageSize }
+        				onChange={ ( value ) =>{ setAttributes( {imageSize:value} ); } }
+						min={ 50 }
+						max={ 500 }
+    				/>
+				</PanelBody>
+			</InspectorControls>,
 			<div className="media">
 				<MediaUpload
 					onSelect={ media => {
-						setAttributes( { imageAlt: media.alt, imageUrl: media.url } );
+						setAttributes( { imageAlt: media.alt, imageUrl: media.url, imageSize: media.width } );
 					} }
 					type="image"
 					value={ attributes.imageID }
@@ -78,7 +94,7 @@ registerBlockType( 'media-object/main', {
 				/>
 				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
 			</div>
-		);
+		] );
 	},
 
 	save( { attributes } ) {
@@ -93,6 +109,7 @@ registerBlockType( 'media-object/main', {
 						className="mr-3"
 						src={ src }
 						alt={ alt }
+						style={ { width:attributes.imageSize } }
 					/>
 				);
 			}
@@ -103,15 +120,18 @@ registerBlockType( 'media-object/main', {
 					className="mr-3"
 					src={ src }
 					alt=""
+					style={ { width:attributes.imageSize } }
 					aria-hidden="true"
 				/>
 			);
 		};
 
 		return (
-			<div className="media">
-				{ mediaImage( attributes.imageUrl, attributes.imageAlt ) }
-				<div className="media-body">
+			<div className="media d-flex">
+				<div class="flex-shrink-0">
+					{ mediaImage( attributes.imageUrl, attributes.imageAlt ) }
+				</div>
+				<div className="media-body flex-grow-1 ms-3">
 					<InnerBlocks.Content />
 				</div>
 			</div>

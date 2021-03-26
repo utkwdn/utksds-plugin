@@ -71,7 +71,7 @@ registerBlockType( 'utksds/card', {
 		},
 		cardColor: {
 			type: 'object',
-			default: { name: 'Light', slug: 'text-light', color: '#F6F6F6'},
+			default: { name: 'Light', slug: 'bg-light', color: '#F6F6F6'},
 		},
 		cardOutline: {
 			type: 'boolean',
