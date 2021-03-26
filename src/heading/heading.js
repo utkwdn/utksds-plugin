@@ -1,3 +1,6 @@
+// Commenting out the front style, as it will be handled by the bootstrap css pulled in.
+import './editor.scss';
+
 const { registerBlockStyle } = wp.blocks;
 
 registerBlockStyle('core/heading', {
