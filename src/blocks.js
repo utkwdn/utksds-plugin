@@ -67,6 +67,7 @@ wp.domReady( function() {
     	'core/text-columns',
 		'core/columns',
 		'core/button',
+		'core/buttons',
     	'core/more',
     	'core/nextpage',
     	'core/separator',
