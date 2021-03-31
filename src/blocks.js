@@ -15,7 +15,7 @@ import { registerBlockType } from '@wordpress/blocks';
 
 import './card/card.js';
 import './accordion/accordion.js';
-import './jumbotron/jumbotron.js';
+//import './jumbotron/jumbotron.js';
 import './media-object/media-object.js';
 import './button/button.js';
 import './table/table.js';
