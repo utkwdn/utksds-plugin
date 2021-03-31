@@ -1,14 +1,12 @@
-//import { dispatch } from '@wordpress/data';
+import { withDispatch, useDispatch } from '@wordpress/data';
 //import { select, useSelect } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
 //import { BlockVariationPicker } from '@wordpress/block-editor';
-//import { store as blocksStore } from '@wordpress/blocks';
+import { createBlocksFromInnerBlocksTemplate, store as blocksStore } from '@wordpress/blocks';
+import { InnerBlocks, InspectorControls, __experimentalBlockVariationPicker, store as blockEditorStore } from '@wordpress/block-editor';
 import './editor.scss';
 
-
-
-const { registerBlockType } = wp.blocks;
-const { InnerBlocks, InspectorControls } = wp.editor;
+const { registerBlockType, getBlockVariations } = wp.blocks;
 const { PanelBody, PanelRow } = wp.components;
 
 const ALLOWED_BLOCKS = [ 'utksds/column' ];
@@ -45,7 +43,7 @@ registerBlockType( 'utksds/columns', {
 		),
 		attributes: { rowClass: 'column-100' },
 		innerBlocks: [ [ 'utksds/column', { className: 'col-12' } ] ],
-		//scope: [ 'block' ],
+		scope: [ 'block' ],
 	},
 	{
 		name: 'two-columns-equal',
@@ -68,7 +66,7 @@ registerBlockType( 'utksds/columns', {
 		attributes: { rowClass: 'column-50-50' },
 		isDefault: true,
 		innerBlocks: [ [ 'utksds/column', { className: 'col-6' } ], [ 'utksds/column', { className: 'col-6' } ] ],
-		//scope: [ 'block' ],
+		scope: [ 'block' ],
 	},
 	{
 		name: 'two-columns-one-third-two-thirds',
@@ -93,7 +91,7 @@ registerBlockType( 'utksds/columns', {
 			[ 'utksds/column', { className: 'col-4' } ],
 			[ 'utksds/column', { className: 'col-8' } ],
 		],
-		//scope: [ 'block' ],
+		scope: [ 'block' ],
 	},
 	{
 		name: 'two-columns-two-thirds-one-third',
@@ -118,7 +116,7 @@ registerBlockType( 'utksds/columns', {
 			[ 'utksds/column', { className: 'col-8' } ],
 			[ 'utksds/column', { className: 'col-4' } ],
 		],
-		//scope: [ 'block' ],
+		scope: [ 'block' ],
 	},
 	{
 		name: 'three-columns-equal',
@@ -143,7 +141,7 @@ registerBlockType( 'utksds/columns', {
 			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
 			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
 		],
-		//scope: [ 'block' ],
+		scope: [ 'block' ],
 	},
 	{
 		name: 'three-columns-wider-center',
@@ -168,7 +166,7 @@ registerBlockType( 'utksds/columns', {
 			[ 'utksds/column', { className: 'col-6' } ],
 			[ 'utksds/column', { className: 'col-3' } ],
 		],
-		//scope: [ 'block' ],
+		scope: [ 'block' ],
 	},
 	{
 		name: 'four-columns-equal',
@@ -186,17 +184,39 @@ registerBlockType( 'utksds/columns', {
 			[ 'utksds/column', { className: 'col-3' } ],
 			[ 'utksds/column', { className: 'col-3' } ],
 		],
-		//scope: [ 'block' ],
+		scope: [ 'block' ],
 	},
 	],
 	
-	edit: ( props ) => {
-		const{ attributes } = props;
-		const{ rowClass } = attributes;
+	edit: ( { clientId, attributes, setAttributes } ) => {
+		
+		const colVariations = getBlockVariations( 'utksds/columns' );
+		const { replaceInnerBlocks } = useDispatch( blockEditorStore );
+		
+		const colPlaceholder = (
+			<__experimentalBlockVariationPicker
+				label = 'Columns'
+				instructions = 'Choose a column layout.'
+				variations={ colVariations }
+				onSelect={ ( nextVariation ) =>{
+					//console.log( nextVariation );
+					setAttributes( nextVariation.attributes );
+					
+					replaceInnerBlocks(
+						clientId,
+						createBlocksFromInnerBlocksTemplate(
+							nextVariation.innerBlocks
+						),
+						true
+					);
+				} }
+			/>
+		);
+		
 		return (
 			<div className="container">
-				<div className={"row " + rowClass }>
-					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } templateLock={ 'all' } />
+				<div className={"row " + attributes.rowClass }>
+					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } placeholder={ colPlaceholder } templateLock={ 'all' } />
 				</div>
 			</div>
 		);

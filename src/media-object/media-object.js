@@ -26,8 +26,8 @@ registerBlockType( 'media-object/main', {
 			selector: '.mr-3',
 		},
 		imageSize: {
-			type: 'string',
-			default: '',
+			attribute: 'width',
+			selector: '.mr-3',
 		},
 	},
 
@@ -98,7 +98,7 @@ registerBlockType( 'media-object/main', {
 	},
 
 	save( { attributes } ) {
-		const mediaImage = ( src, alt ) => {
+		const mediaImage = ( src, alt, width ) => {
 			if ( ! src ) {
 				return null;
 			}
@@ -109,7 +109,7 @@ registerBlockType( 'media-object/main', {
 						className="mr-3"
 						src={ src }
 						alt={ alt }
-						style={ { width:attributes.imageSize } }
+						style={ { width:width } }
 					/>
 				);
 			}
@@ -120,7 +120,7 @@ registerBlockType( 'media-object/main', {
 					className="mr-3"
 					src={ src }
 					alt=""
-					style={ { width:attributes.imageSize } }
+					style={ { width:width } }
 					aria-hidden="true"
 				/>
 			);
@@ -129,7 +129,7 @@ registerBlockType( 'media-object/main', {
 		return (
 			<div className="media d-flex">
 				<div class="flex-shrink-0">
-					{ mediaImage( attributes.imageUrl, attributes.imageAlt ) }
+					{ mediaImage( attributes.imageUrl, attributes.imageAlt, attributes.imageSize ) }
 				</div>
 				<div className="media-body flex-grow-1 ms-3">
 					<InnerBlocks.Content />
