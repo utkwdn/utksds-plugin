@@ -6,6 +6,10 @@ const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
 const { PanelBody, PanelRow, TextControl, ToggleControl } = wp.components;
 const { cleanForSlug } = wp.url;
 
+const ACCORDION_TEMPLATE = [
+    [ 'accordion/fold' ],
+];
+
 registerBlockType( 'utksds/accordion', {
 	title: 'Accordion',
 	icon: 'list-view',
@@ -35,7 +39,7 @@ registerBlockType( 'utksds/accordion', {
 				</PanelBody>
 			</InspectorControls>,
 			<div className={ "accordion" } id={ attributes.accordionID }>
-				<InnerBlocks allowedBlocks={ [ 'accordion/fold', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks template={ ACCORDION_TEMPLATE } allowedBlocks={ [ 'accordion/fold', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 		] );
 	},
