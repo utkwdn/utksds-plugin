@@ -1,0 +1,30 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+
+// .jumbotron.jumbotron-edit {
+//   padding: 4rem 2rem;
+//   margin-bottom: 2rem;
+//   background-color: #e9ecef;
+//   border-radius: 0.3rem;
+// }
+
+@import "./../utksds-framework/node_modules/bootstrap/scss/type";
+
+.editor-styles-wrapper {
+  .is-style-display-1 {
+    @extend .display-1;
+  }
+  .is-style-display-2 {
+    @extend .display-2;
+  }
+  .is-style-display-3 {
+    @extend .display-3;
+  }
+  .is-style-display-4 {
+    @extend .display-4;
+  }  
+}
