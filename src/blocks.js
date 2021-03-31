@@ -15,7 +15,7 @@ import { registerBlockType } from '@wordpress/blocks';
 
 import './card/card.js';
 import './accordion/accordion.js';
-import './jumbotron/jumbotron.js';
+//import './jumbotron/jumbotron.js';
 import './media-object/media-object.js';
 import './button/button.js';
 import './table/table.js';
@@ -37,6 +37,19 @@ wp.domReady( function() {
 	wp.blocks.unregisterBlockStyle( 'core/button', 'outline' );
 	wp.blocks.unregisterBlockStyle( 'core/button', 'fill' );
 
+	const allowedEmbedBlocks = [
+    	'twitter',
+    	'youtube',
+		'soundcloud',
+		'flickr',
+		'vimeo',
+  	];
+  	wp.blocks.getBlockVariations( 'core/embed' ).forEach( function ( blockVariation ) {
+    	if ( -1 === allowedEmbedBlocks.indexOf( blockVariation.name )) {
+      		wp.blocks.unregisterBlockVariation( 'core/embed', blockVariation.name );
+    	}
+  	});
+	
 	const blocktodisable = [
 		'core/verse',
 		'core/pullquote',
@@ -46,51 +59,23 @@ wp.domReady( function() {
 		'core/categories',
 		'core/latest-comments',
 		'core/search',
-		'core/social-icons',
+		//'core/social-icons',
 		'core/audio',
 		'core/cover',
 		'core/preformatted',
 		'core/media-text',
-    'core/text-columns',
-    'core/columns',
-    'core/button',
-    'core/more',
-    'core/nextpage',
-    'core/separator',
-    'core/spacer',
-    'core/group',
-		'core-embed/flickr',
-		'core-embed/wordpress',
-		'core-embed/meetup-com',
-		'core-embed/cloudup',
-		'core-embed/collegehumor',
-		'core-embed/funnyordie',
-		'core-embed/photobucket',
-		'core-embed/reddit',
-		'core-embed/reverbnation',
-		'core-embed/hulu',
-		'core-embed/smugmug',
-		'core-embed/speaker-deck',
-		'core-embed/spotify',
-		'core-embed/animoto',
-		'core-embed/crowdsignal',
-		'core-embed/dailymotion',
-		'core-embed/imgur',
-		'core-embed/scribd',
-		'core-embed/screencast',
-		'core-embed/issuu',
-		'core-embed/kickstarter',
-		'core-embed/slideshare',
-		'core-embed/tiktok',
-		'core-embed/ted',
-		'core-embed/tumblr',
-		'core-embed/videopress',
-		'core-embed/wordpress-tv',
-		'core-embed/amazon-kindle',
-		'core-embed/mixcloud',
-
+    	'core/text-columns',
+		'core/columns',
+		'core/button',
+    	'core/more',
+    	'core/nextpage',
+    	'core/separator',
+    	'core/spacer',
+    	'core/group',
+		//'core/embed',
 	];
 
 	const disabledBlocks = blocktodisable.map( blockSlug => wp.blocks.unregisterBlockType( blockSlug ) );
 	return disabledBlocks;
+	
 } );
