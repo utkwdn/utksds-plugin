@@ -65,7 +65,10 @@ registerBlockType( 'utksds/columns', {
 		),
 		attributes: { rowClass: 'column-50-50' },
 		isDefault: true,
-		innerBlocks: [ [ 'utksds/column', { className: 'col-6' } ], [ 'utksds/column', { className: 'col-6' } ] ],
+		innerBlocks: [ 
+		  [ 'utksds/column', { className: 'col-12 col-md-6' } ], 
+		  [ 'utksds/column', { className: 'col-12 col-md-6' } ] 
+		],
 		scope: [ 'block' ],
 	},
 	{
@@ -88,8 +91,8 @@ registerBlockType( 'utksds/columns', {
 		),
 		attributes: { rowClass: 'column-30-70' },
 		innerBlocks: [
-			[ 'utksds/column', { className: 'col-4' } ],
-			[ 'utksds/column', { className: 'col-8' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-8' } ],
 		],
 		scope: [ 'block' ],
 	},
@@ -113,8 +116,8 @@ registerBlockType( 'utksds/columns', {
 		),
 		attributes: { rowClass: 'column-70-30' },
 		innerBlocks: [
-			[ 'utksds/column', { className: 'col-8' } ],
-			[ 'utksds/column', { className: 'col-4' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-8' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
 		],
 		scope: [ 'block' ],
 	},
@@ -162,9 +165,9 @@ registerBlockType( 'utksds/columns', {
 		),
 		attributes: { rowClass: 'column-25-50-25' },
 		innerBlocks: [
-			[ 'utksds/column', { className: 'col-3' } ],
-			[ 'utksds/column', { className: 'col-6' } ],
-			[ 'utksds/column', { className: 'col-3' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-3' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-6' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-3' } ],
 		],
 		scope: [ 'block' ],
 	},
@@ -179,10 +182,10 @@ registerBlockType( 'utksds/columns', {
 		),
 		attributes: { rowClass: 'column-25-25-25-25' },
 		innerBlocks: [
-			[ 'utksds/column', { className: 'col-3' } ],
-			[ 'utksds/column', { className: 'col-3' } ],
-			[ 'utksds/column', { className: 'col-3' } ],
-			[ 'utksds/column', { className: 'col-3' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-6 col-lg-3' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-6 col-lg-3' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-6 col-lg-3' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-6 col-lg-3' } ],
 		],
 		scope: [ 'block' ],
 	},
