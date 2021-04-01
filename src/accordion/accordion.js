@@ -6,6 +6,10 @@ const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
 const { PanelBody, PanelRow, TextControl, ToggleControl } = wp.components;
 const { cleanForSlug } = wp.url;
 
+const ACCORDION_TEMPLATE = [
+    [ 'accordion/fold' ],
+];
+
 registerBlockType( 'utksds/accordion', {
 	title: 'Accordion',
 	icon: 'list-view',
@@ -35,7 +39,7 @@ registerBlockType( 'utksds/accordion', {
 				</PanelBody>
 			</InspectorControls>,
 			<div className={ "accordion" } id={ attributes.accordionID }>
-				<InnerBlocks allowedBlocks={ [ 'accordion/fold', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks template={ ACCORDION_TEMPLATE } allowedBlocks={ [ 'accordion/fold', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 		] );
 	},
@@ -131,7 +135,7 @@ registerBlockType( 'accordion/fold', {
     			</div>
     			<div id={ "collapse" + attributes.foldSlug } className={ "collapse" + attributes.showS } aria-labelledby={ "heading" + attributes.foldSlug } data-parent={ "#" + attributes.parentID }>
       				<div className="card-body">
-        				<InnerBlocks allowedBlocks={ 'core/button', 'core/paragraph', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
+        				<InnerBlocks allowedBlocks={ [ 'utksds/button', 'core/paragraph', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
       				</div>
     			</div>
   			</div>
