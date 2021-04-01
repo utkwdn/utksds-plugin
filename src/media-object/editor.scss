@@ -13,4 +13,17 @@
 // }
 
 
-@import "./../utksds-framework/node_modules/bootstrap/scss/alert";
+@import "./../utksds-framework/node_modules/bootstrap/scss/media";
+
+
+.media {
+  img {
+    margin-right: 2rem;
+  }
+ .block-editor-inner-blocks {
+  @extend .media-body;
+ } 
+}
+
+
+
