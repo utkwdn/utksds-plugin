@@ -1,13 +1,15 @@
-import { dispatch } from '@wordpress/data';
+import { dispatch, withDispatch, useDispatch  } from '@wordpress/data';
 import { select } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
+import { store as blocksStore } from '@wordpress/blocks';
+import { store as blockEditorStore } from '@wordpress/block-editor';
 
-const { registerBlockType, registerBlockVariation } = wp.blocks;
-const { InnerBlocks, InspectorControls, ColorPalette, RichText, getColorObjectByColorValue } = wp.blockEditor;
+const { registerBlockType, registerBlockVariation, getBlockVariations, createBlocksFromInnerBlocksTemplate } = wp.blocks;
+const { InnerBlocks, InspectorControls, ColorPalette, RichText, getColorObjectByColorValue, __experimentalBlockVariationPicker } = wp.blockEditor;
 const { PanelBody, PanelRow, RangeControl, RadioControl, ToggleControl, SelectControl } = wp.components;
 const { withState } = wp.compose;
 
-const ALLOWED_BLOCKS = [ 'core/button', 'card/paragraph', 'card/heading', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ];
+const ALLOWED_BLOCKS = [ 'utksds/button', 'card/paragraph', 'card/heading', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ];
 
 const PARAGRAPH_TEMPLATE = [
     [ 'core/paragraph', { className: 'card-text' } ],
@@ -83,6 +85,70 @@ registerBlockType( 'utksds/card', {
 		'card/cardColor': 'cardColor',
 		'card/cardOutline': 'cardOutline',
 	},
+	variations: [
+	{
+		name: 'image-title-body-button',
+		title: 'Top image with title, text, and button',
+		description: 'Top image with title, body, and button',
+		icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-heading" viewBox="0 0 16 16"><path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/><path d="M3 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0-5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1z"/></svg>),
+		innerBlocks: [
+			[ 'card/main', {}, [
+				[ 'card/topcap' ],
+				[ 'card/body', {}, [ [ 'card/heading' ], [ 'card/paragraph' ], [ 'utksds/button' ] ] ],
+			] ],
+		],
+		scope: [ 'block' ],
+	},
+	{
+		name: 'image-overlay',
+		title: 'Image with text overlay',
+		description: 'Image overlayed with text',
+		icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-image" viewBox="0 0 16 16"><path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/><path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54A.505.505 0 0 1 1 12.5v-9a.5.5 0 0 1 .5-.5h13z"/></svg>),
+		innerBlocks: [
+			[ 'card/main', {}, [
+				[ 'card/image' ],
+				[ 'card/overlay', {}, [ [ 'card/heading' ], [ 'card/paragraph' ] ] ],
+			] ],
+		],
+		scope: [ 'block' ],
+	},
+	{
+		name: 'header-footer',
+		title: 'Card with header and footer',
+		description: 'Card with header and footer',
+		icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-heading" viewBox="0 0 16 16"><path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/><path d="M3 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0-5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1z"/></svg>),
+		innerBlocks: [ 
+			[ 'card/main', {}, [
+				[ 'card/header' ],
+				[ 'card/body', {}, [ [ 'card/paragraph' ] ] ],
+				[ 'card/footer' ],
+			] ],
+		],
+		scope: [ 'block' ],
+	},
+	{
+		name: 'title-body',
+		title: 'Card with title and text',
+		description: 'Card with title and text',
+		icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16"><path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/><path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/></svg>),
+		innerBlocks: [
+			[ 'card/main', {}, [
+				[ 'card/body', {}, [ [ 'card/heading' ], [ 'card/paragraph' ] ] ],
+			] ],
+		],
+		scope: [ 'block' ],
+	},
+	{
+		name: 'blank',
+		title: 'Blank card to build from scratch',
+		description: 'Blank card to build from scratch',
+		icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-square" viewBox="0 0 16 16"><path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/></svg>),
+		innerBlocks: [ 
+			[ 'card/main' ],
+		],
+		scope: [ 'block' ],
+	},
+	],
 
 	edit: ( props ) => {
 		//const { backgroundColor } = attributes;
@@ -92,12 +158,37 @@ registerBlockType( 'utksds/card', {
 			name,
     		setAttributes
   		} = props;
+	
+		const cardVariations = getBlockVariations( 'utksds/card' );
+		const { replaceInnerBlocks } = useDispatch( blockEditorStore );
+	
+		var cardPlaceholder = (
+			<__experimentalBlockVariationPicker
+				label = 'Card Template'
+				instructions = 'Choose a card template or a blank card to build your own.'
+				variations={ cardVariations }
+				onSelect={ ( nextVariation ) =>{
+					console.log( nextVariation );
+					setAttributes( nextVariation.attributes );
+					
+					replaceInnerBlocks(
+						clientId,
+						createBlocksFromInnerBlocksTemplate(
+							nextVariation.innerBlocks
+						),
+						true
+					);
+				} }
+			/>
+		);
+
+		console.log( replaceInnerBlocks );
 
 		function onBackgroundColorChange( newColor ) {
 			setAttributes( { backgroundColor: newColor } );
 		}
 		
-		select( 'core/editor' ).getBlock( props.clientId ).innerBlocks.map( childrenBlock => {
+		select( 'core/block-editor' ).getBlock( props.clientId ).innerBlocks.map( childrenBlock => {
   			dispatch( 'core/block-editor' ).updateBlockAttributes( childrenBlock.clientId, {
  
 				parentBlockName: props.name, 
@@ -174,7 +265,7 @@ registerBlockType( 'utksds/card', {
 			</InspectorControls>,
 			// eslint-disable-next-line react/jsx-key
 			<div className={'card card-edit ' + attributes.cardColor.slug }>
-				<InnerBlocks allowedBlocks={ [ 'card/body', 'card/image', 'utksds/columns', 'card/overlay', 'card/topcap', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks allowedBlocks={ [ 'card/body', 'card/image', 'utksds/columns', 'card/overlay', 'card/topcap', ] } placeholder={ cardPlaceholder } templateLock={ 'all' } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>,
 		] );
 	},
@@ -186,6 +277,25 @@ registerBlockType( 'utksds/card', {
 			<div className={'card ' + attributes.cardColor.slug }>
 				<InnerBlocks.Content />
 			</div>
+		);
+	},
+} );
+
+registerBlockType( 'card/main', {
+	title: 'Card Main',
+	description: 'Inner blocks container for Card.',
+	
+	edit: ( props ) => {
+		
+		return(
+			<InnerBlocks allowedBlocks={ [ 'card/body', 'card/image', 'utksds/columns', 'card/overlay', 'card/topcap', ] } placeholder={ 'Choose an image, body, or other card component to place here.' } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+		);
+	},
+	
+	save: ( { attributes } ) => {
+
+		return (
+			<InnerBlocks.Content />
 		);
 	},
 } );
@@ -216,7 +326,7 @@ registerBlockType( 'card/body', {
 	
 		return (
 			<div className={ 'card-body ' + attributes.textColor }>
-				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } placeholder={ 'Click the + button to add a title, text, button, or other body component.' } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 		)
 	},
@@ -381,6 +491,7 @@ registerBlockType( 'card/header', {
 			<RichText 
 				tagName={ attributes.tagName }
 				className={ 'card-header' }
+				placeholder='Type header here'
 				value={ attributes.content }
 				onChange={ ( value ) =>{ 
 					setAttributes( { content:value } );
@@ -448,9 +559,10 @@ registerBlockType( 'card/footer', {
 			<RichText 
 				tagName='div'
 				className={ 'card-footer ' + attributes.mutedClass }
+				placeholder='Type footer here'
 				value={ attributes.content }
 				onChange={ ( content ) => setAttributes( { content } ) }
-				formattingControls={ [] }
+				allowedFormats={ [] }
 			/>
 		] );
 	},
