@@ -174,7 +174,7 @@ add_filter( 'render_block', function( $block_content, $block ) {
 	}
 	
 	if ( $block['blockName'] === 'core/image' ) {
-		$start = 'wp-block-image ';
+		/*$start = 'wp-block-image ';
 		$end = '">';
 		
 		$string = ' ' . $block_content;
@@ -194,7 +194,11 @@ add_filter( 'render_block', function( $block_content, $block ) {
 			$block_content
 		);
 		
-		$block_content = str_replace('is-style-framed', 'framed', $block_content);
+		$block_content = str_replace('is-style-framed', 'framed', $block_content);*/
+		
+		$block_content = str_replace('is-style-', '', $block_content);
+		$block_content = str_replace('<figure', '<div', $block_content);
+		$block_content = str_replace('</figure', '</div', $block_content);
 	}
 	
 	if ( $block['blockName'] === 'core/heading' ) {
