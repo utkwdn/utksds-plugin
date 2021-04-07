@@ -272,7 +272,7 @@ registerBlockType( 'utksds/button', {
 		},
 		placeholder: {
 			type: 'string',
-			default: 'Add Text'
+			default: 'Button'
 		},
 		buttonColor: {
 			type: 'object',
