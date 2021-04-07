@@ -283,11 +283,18 @@ registerBlockType( 'card/main', {
 	title: 'Card Main',
 	parent: [ 'utksds/card' ],
 	description: 'Inner blocks container for Card.',
+	usesContext: [ 'columns/blockName', ],
 	
-	edit: ( props ) => {
+	edit: ( { context } ) => {
+		
+		if( context['columns/blockName'] == 'utksds/columns' ){
+			var columns_blocks = [ 'card/body', 'card/image', 'card/overlay', 'card/topcap', ];
+		}else{
+			var columns_blocks = [ 'card/body', 'card/image', 'utksds/columns', 'card/overlay', 'card/topcap', ];
+		}
 		
 		return(
-			<InnerBlocks allowedBlocks={ [ 'card/body', 'card/image', 'utksds/columns', 'card/overlay', 'card/topcap', ] } placeholder={ 'Choose an image, body, or other card component to place here.' } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+			<InnerBlocks allowedBlocks={ columns_blocks } placeholder={ 'Choose an image, body, or other card component to place here.' } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 		);
 	},
 	
