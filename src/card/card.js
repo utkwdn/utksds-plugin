@@ -168,7 +168,7 @@ registerBlockType( 'utksds/card', {
 				instructions = 'Choose a card template or a blank card to build your own.'
 				variations={ cardVariations }
 				onSelect={ ( nextVariation ) =>{
-					console.log( nextVariation );
+					//console.log( nextVariation );
 					setAttributes( nextVariation.attributes );
 					
 					replaceInnerBlocks(
@@ -181,8 +181,6 @@ registerBlockType( 'utksds/card', {
 				} }
 			/>
 		);
-
-		console.log( replaceInnerBlocks );
 
 		function onBackgroundColorChange( newColor ) {
 			setAttributes( { backgroundColor: newColor } );
@@ -283,6 +281,7 @@ registerBlockType( 'utksds/card', {
 
 registerBlockType( 'card/main', {
 	title: 'Card Main',
+	parent: [ 'utksds/card' ],
 	description: 'Inner blocks container for Card.',
 	
 	edit: ( props ) => {
