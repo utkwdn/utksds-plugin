@@ -6,6 +6,10 @@ const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
 const { PanelBody, PanelRow, TextControl } = wp.components;
 const { cleanForSlug } = wp.url;
 
+const TAB_TEMPLATE = [
+    [ 'tabs/tab' ],
+];
+
 // import './style.scss';
 // Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
@@ -66,7 +70,7 @@ registerBlockType( 'utksds/tabs', {
 				</PanelBody>
 			</InspectorControls>,
 			<div class="tab-content" id="myTabContent">
-				<InnerBlocks allowedBlocks={ [ 'tabs/tab', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks template={ TAB_TEMPLATE } allowedBlocks={ [ 'tabs/tab', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>,
 		] );
 	},
@@ -147,7 +151,7 @@ registerBlockType( 'tabs/tab', {
 						withoutInteractiveFormatting
 					/>
 				</div>
-				<InnerBlocks allowedBlocks={ 'core/button', 'core/paragraph', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
+				<InnerBlocks allowedBlocks={ [ 'utksds/button', 'core/paragraph', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>
 		] )
 	},

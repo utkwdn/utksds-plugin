@@ -477,7 +477,7 @@ registerBlockType( 'card/header', {
 				<PanelBody title='Card Header' initialOpen={ true }>
 					<PanelRow>
 						<SelectControl
-							label='Header Type'
+							label='Type'
 							options={ [
 								{ label: 'Div', value: 'div'},
 								{ label: 'H5', value: 'h5'},
@@ -568,7 +568,7 @@ registerBlockType( 'card/footer', {
 				placeholder='Type footer here'
 				value={ attributes.content }
 				onChange={ ( content ) => setAttributes( { content } ) }
-				allowedFormats={ [] }
+				withoutInteractiveFormatting
 			/>
 		] );
 	},
