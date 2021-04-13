@@ -29,7 +29,7 @@ function setTabNames( parentID ){
 
 registerBlockType( 'utksds/tabs', {
 	title: 'Tabs',
-	icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5.759 4l.038.069c1.444 2.646 2.691 4.931 7.141 4.931h9.062v11h-20v-16h3.759zm1.179-2h-6.938v20h24v-15h-11.062c-3.719 0-4.188-1.812-6-5zm6.171 3h10.891v-3h-14.604c1.39 2.574 1.63 3 3.713 3z"/></svg>,
+	icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-segmented-nav" viewBox="0 0 16 16"><path d="M0 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6zm6 3h4V5H6v4zm9-1V6a1 1 0 0 0-1-1h-3v4h3a1 1 0 0 0 1-1z"/></svg>,
 	category: 'design',
 	description: '',
 	attributes: {
