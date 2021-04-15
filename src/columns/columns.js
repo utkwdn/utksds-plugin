@@ -12,7 +12,7 @@ const { PanelBody, PanelRow } = wp.components;
 const ALLOWED_BLOCKS = [ 'utksds/column' ];
 
 registerBlockType( 'utksds/columns', {
-	title: 'UTK Columns',
+	title: 'Columns',
 	icon: 'editor-table',
 	category: 'utdesign_layout',
 	description: '',
@@ -28,18 +28,7 @@ registerBlockType( 'utksds/columns', {
 		title: 'Columns: 100',
 		description: 'One column',
 		icon: (
-			<SVG
-				width="48"
-				height="48"
-				viewBox="0 0 48 48"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<Path
-					fillRule="evenodd"
-					clipRule="evenodd"
-					d="m39.0625 14h-30.0625v20.0938h30.0625zm-30.0625-2c-1.10457 0-2 .8954-2 2v20.0938c0 1.1045.89543 2 2 2h30.0625c1.1046 0 2-.8955 2-2v-20.0938c0-1.1046-.8954-2-2-2z"
-				/>
-			</SVG>
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-columns" viewBox="0 0 16 16"><path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V2zm8.5 0v8H15V2H8.5zm0 9v3H15v-3H8.5zm-1-9H1v3h6.5V2zM1 14h6.5V6H1v8z"/></svg>
 		),
 		attributes: { rowClass: 'column-100' },
 		innerBlocks: [ [ 'utksds/column', { className: 'col-12' } ] ],
