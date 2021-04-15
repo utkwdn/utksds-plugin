@@ -11,7 +11,14 @@
 // This extension is editor only, and probably temporary until we get the editors to add proper classes.
 
 
-.wp-block-button__link {
+.wp-block-button__link  {
   @extend .btn;
   @extend .btn-primary;
-}
+  }
+.wp-block-button__link, .btn {
+  // This is overriding styles that allow the button to be selected in the editor.
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
+  }
