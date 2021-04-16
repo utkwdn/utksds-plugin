@@ -5,6 +5,7 @@
  * which makes it higher in priority.
  */
 
+@import "./../utksds-framework/node_modules/bootstrap/scss/button-group";
 @import "./../utksds-framework/node_modules/bootstrap/scss/buttons";
 
 
@@ -21,4 +22,9 @@
   -moz-user-select: auto;
   -ms-user-select: auto;
   user-select: auto;
+  }
+  
+  
+.btn-group  .block-editor-block-list__layout {
+    @extend .btn-group;
   }
