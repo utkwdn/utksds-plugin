@@ -71,9 +71,8 @@ registerBlockType( 'utksds/overlay', {
 				{ attributes.imageUrl !== '' && (
   				<img src={ attributes.imageUrl } className="card-img" alt={ attributes.imageAlt } />
 				) }
-  				<div className="card-img-overlay">
+  				<div className="card-img-overlay"></div>
     				<InnerBlocks allowedBlocks={ [ 'overlay/main' ] } placeholder={ ovPlaceholder } templateLock={ true } />
-				</div>
 			</div>
 		] );
 	
