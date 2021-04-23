@@ -64,6 +64,10 @@ registerBlockType( 'accordion/fold', {
 	attributes: {
 		foldName: {
 			type: 'string',
+			default: ''
+		},
+		foldNamePH: {
+			type: 'string',
 			default: 'New Fold'
 		},
 		foldSlug: {
@@ -119,7 +123,7 @@ registerBlockType( 'accordion/fold', {
     			<div className="card-header" id={ "heading" + attributes.foldSlug }>
       				<h2 class="mb-0">
 						<RichText
-							tagName='button'
+							tagName='div'
 							className={ "btn btn-link btn-block text-left" + attributes.collapseS }
 							type='button'
 							data-toggle='collapse'
@@ -127,6 +131,7 @@ registerBlockType( 'accordion/fold', {
 							aria-expanded={ attributes.show }
 							aria-controls={ "collapse" + attributes.foldSlug }
 							value={ attributes.foldName }
+							placeholder={ attributes.foldNamePH }
 							onChange={ ( value ) => setAttributes( { foldName: value, foldSlug: cleanForSlug(value) } ) }
 							allowedFormats ={ [] }
 							withoutInteractiveFormatting

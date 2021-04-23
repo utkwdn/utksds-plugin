@@ -71,8 +71,7 @@ registerBlockType( 'utksds/overlay', {
 				{ attributes.imageUrl !== '' && (
   				<img src={ attributes.imageUrl } className="card-img" alt={ attributes.imageAlt } />
 				) }
-  				<div className="card-img-overlay"></div>
-    				<InnerBlocks allowedBlocks={ [ 'overlay/main' ] } placeholder={ ovPlaceholder } templateLock={ true } />
+    			<InnerBlocks allowedBlocks={ [ 'overlay/main' ] } placeholder={ ovPlaceholder } templateLock={ true } />
 			</div>
 		] );
 	
@@ -103,14 +102,17 @@ registerBlockType( 'overlay/main', {
 	edit: ( props ) => {
 		
 		return(
-			<InnerBlocks allowedBlocks={ [ 'card/heading', 'card/paragraph', 'utksds/button' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+			<div className="card-img-overlay">
+				<InnerBlocks allowedBlocks={ [ 'card/heading', 'card/paragraph', 'utksds/button', 'lead/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } /></div>
 		);
 	},
 	
 	save: ( { attributes } ) => {
 
 		return (
+			<div className="card-img-overlay">
 			<InnerBlocks.Content />
+			</div>
 		);
 	},
 } );
