@@ -21,6 +21,13 @@ registerBlockType( 'utksds/columns', {
 			type: 'string',
 			default: '',
 		},
+		blockName: {
+			type: 'string',
+			default: 'utksds/columns',
+		},
+	},
+	providesContext: {
+    	'columns/blockName': 'blockName',
 	},
 	variations: [
 		{
@@ -233,7 +240,8 @@ registerBlockType( 'utksds/column', {
 		if(typeof props.context['card/blockName'] !== 'undefined' && props.context['card/blockName'] === 'utksds/card'){
 			var these_blocks = [ 'card/body', 'card/image' ];
 		}else{
-			var these_blocks = true ;
+			//var these_blocks = [ 'core/paragraph', 'core/heading', 'core/list', 'core/quote', 'core/table', 'core/image', 'core/gallery', 'core/file', 'core/video', 'core/freeform', 'core/code', 'core/navigation', 'core/shortcode', 'core/html', 'core/latest-posts', 'core/page-list', 'core/rss', 'core/social-link', 'core/embed', 'lead/main', 'media-object/main', 'utksds/tabs', 'horizontal-rule/main', 'alert/main', 'utksds/buttongroup', 'utksds/button', 'utksds/accordion', 'utksds/card', 'utksds/calendar' ] ;
+			var these_blocks = null;
 		}
 		
 		return (

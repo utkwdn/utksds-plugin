@@ -68,7 +68,7 @@ registerBlockType( 'accordion/fold', {
 		},
 		foldNamePH: {
 			type: 'string',
-			default: 'New Fold'
+			default: 'New Section'
 		},
 		foldSlug: {
 			type: 'string',
