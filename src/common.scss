@@ -41,7 +41,7 @@
 // @import "./../utksds-framework/node_modules/bootstrap/scss/popover";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/carousel";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/spinners";
-// @import "./../utksds-framework/node_modules/bootstrap/scss/utilities";
+ @import "./../utksds-framework/node_modules/bootstrap/scss/utilities";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/print";
 
 
@@ -91,7 +91,7 @@
 // @import "./../utksds-framework/src/scss/styles/search_forms";
 // @import "./../utksds-framework/src/scss/styles/typography";
 // @import "./../utksds-framework/src/scss/styles/background";
-// @import "./../utksds-framework/src/scss/styles/textcolors";
+@import "./../utksds-framework/src/scss/styles/textcolors";
 // @import "./../utksds-framework/src/scss/styles/pagination";
 
 
@@ -103,6 +103,20 @@
 // @import "./../utksds-framework/src/scss/covid-specific/home";
 
 
+
+
+
+
+
+
+
+
+
+// Typography.
+// ===================================================================
+.has-info-color {
+  
+}
 
 .block-editor-writing-flow {
   color: $utsmokey;
