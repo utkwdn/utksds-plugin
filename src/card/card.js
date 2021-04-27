@@ -100,19 +100,6 @@ registerBlockType( 'utksds/card', {
 		scope: [ 'block' ],
 	},
 	{
-		name: 'image-overlay',
-		title: 'Image with text overlay',
-		description: 'Image overlayed with text',
-		icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-image" viewBox="0 0 16 16"><path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/><path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54A.505.505 0 0 1 1 12.5v-9a.5.5 0 0 1 .5-.5h13z"/></svg>),
-		innerBlocks: [
-			[ 'card/main', {}, [
-				[ 'card/image' ],
-				[ 'card/overlay', {}, [ [ 'card/heading' ], [ 'card/paragraph' ] ] ],
-			] ],
-		],
-		scope: [ 'block' ],
-	},
-	{
 		name: 'header-footer',
 		title: 'Card with header and footer',
 		description: 'Card with header and footer',
@@ -263,7 +250,7 @@ registerBlockType( 'utksds/card', {
 			</InspectorControls>,
 			// eslint-disable-next-line react/jsx-key
 			<div className={'card card-edit ' + attributes.cardColor.slug }>
-				<InnerBlocks allowedBlocks={ [ 'card/body', 'card/image', 'utksds/columns', 'card/overlay', 'card/topcap', ] } placeholder={ cardPlaceholder } templateLock={ 'all' } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks allowedBlocks={ [ 'card/body', 'card/image', 'utksds/columns', 'card/topcap', ] } placeholder={ cardPlaceholder } templateLock={ 'all' } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>,
 		] );
 	},
@@ -340,31 +327,6 @@ registerBlockType( 'card/body', {
 	save: ( { attributes } ) => {
 		return (
 			<div className={ 'card-body ' + attributes.textColor }>
-				<InnerBlocks.Content />
-			</div>
-		);
-	},
-			
-} );
-
-registerBlockType( 'card/overlay', {
-	title: 'Card Overlay',
-	parent: [ 'card/main' ],
-	icon: 'media-text',
-	category: 'design',
-	description: 'Contains all the text elements that overlay an image in a Card.',
-				  
-	edit: () => {
-		return (
-			<div className="card-img-overlay">
-				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
-			</div>
-		)
-	},
-	
-	save: () => {
-		return (
-			<div className="card-img-overlay">
 				<InnerBlocks.Content />
 			</div>
 		);
