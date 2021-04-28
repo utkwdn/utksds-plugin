@@ -4,234 +4,55 @@ import './editor.scss';
 
 const { registerBlockType } = wp.blocks;
 const { InnerBlocks, InspectorControls, RichText, BlockControls, ColorPalette, getColorObjectByColorValue, RichTextToolbarButton, __experimentalLinkControl } = wp.blockEditor;
-const { PanelBody, PanelRow, RadioControl, Button, ButtonGroup, Popover, ToggleControl, ToolbarButton, ToolbarGroup, SelectControl } = wp.components;
+const { PanelBody, PanelRow, RadioControl, Button, ButtonGroup, Popover, ToggleControl, ToolbarButton, ToolbarGroup, SelectControl, DropdownMenu, Icon } = wp.components;
 const { withState, compose, ifCondition } = wp.compose;
-const { Fragment, useCallback, useState } = wp.element;
+const { Fragment, useCallback, useState, renderToString, createElement, isValidElement } = wp.element;
 const { rawShortcut, displayShortcut } = wp.keycodes;
-const { create, registerFormatType, insert, insertObject, toHTMLString, removeFormat } = wp.richText;
+const { create, concat, registerFormatType, insert, insertObject, toHTMLString, removeFormat } = wp.richText;
 const { withSelect } = wp.data;
 
 const LinkControl = __experimentalLinkControl;
 
+const AllIcons = [
+	{
+		name:'Box arrow up-right', 
+		string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>', 
+		code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>)
+	},
+	{
+		name:'Check 2',
+		string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>',
+		code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>)
+	},
+	{
+		name:'Check 2 circle',
+		string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>',
+		code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>)
+	},
+	{
+		name:'Chevron right',
+		string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>',
+		code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>)
+	},
+	{
+		name:'Chevron right',
+		string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>',
+		code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>)
+	},
+	{
+		name:'Chevron left',
+		string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>',
+		code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>)
+	},
+	{
+		name:'Plus',
+		string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>',
+		code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>)
+	}
+];
 const BUTTON_TEMPLATE = [
     [ 'utksds/button' ],
 ];
-
-const BoxArrowUpRightButton = ( props ) => {
-    return (<RichTextToolbarButton
-		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>}
-		title={'Box arrow up-right'}
-		isActive={ props.isActive }
-		onClick={ () => {
-			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"> </path><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"> </path></svg>', preserveWhiteSpace: true} );
-		
-			props.onChange( insert( props.value, iconRT ) );
-		} }
-	/>);
-};
-
-const Check2Button = ( props ) => {
-    return (<RichTextToolbarButton
-		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>}
-		title={'Check 2'}
-		isActive={ props.isActive }
-		onClick={ () => {
-			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"> </path></svg>', preserveWhiteSpace: true} );
-		
-			props.onChange( insert( props.value, iconRT ) );
-		} }
-	/>);
-};
-
-const Check2CircleButton = ( props ) => {
-    return (<RichTextToolbarButton
-		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>}
-		title={'Check 2 circle'}
-		isActive={ props.isActive }
-		onClick={ () => {
-			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"> </path><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"> </path></svg>', preserveWhiteSpace: true} );
-		
-			props.onChange( insert( props.value, iconRT ) );
-		} }
-	/>);
-};
-
-const ChevronRightButton = ( props ) => {
-    return (<RichTextToolbarButton
-		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>}
-		title={'Chevron right'}
-		isActive={ props.isActive }
-		onClick={ () => {
-			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"> </path></svg>', preserveWhiteSpace: true} );
-		
-			props.onChange( insert( props.value, iconRT ) );
-		} }
-	/>);
-};
-
-const ChevronLeftButton = ( props ) => {
-    return (<RichTextToolbarButton
-		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>}
-		title={'Chevron left'}
-		isActive={ props.isActive }
-		onClick={ () => {
-			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"> </path></svg>', preserveWhiteSpace: true} );
-		
-			props.onChange( insert( props.value, iconRT ) );
-		} }
-	/>);
-};
-
-const PlusButton = ( props ) => {
-    return (<RichTextToolbarButton
-		icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>}
-		title={'Plus'}
-		isActive={ props.isActive }
-		onClick={ () => {
-			var iconRT = create( {html:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"> </path></svg>', preserveWhiteSpace: true} );
-		
-			props.onChange( insert( props.value, iconRT ) );
-		} }
-	/>);
-};
-
-const ConditionalBoxArrowUpRight = compose(
-    withSelect( function( select ) {
-        return {
-            selectedBlock: select( 'core/editor' ).getSelectedBlock()
-        }
-    } ),
-    ifCondition( function( props ) {
-        return (
-            props.selectedBlock &&
-            props.selectedBlock.name === 'utksds/button'
-        );
-    } )
-)( BoxArrowUpRightButton );
-
-const ConditionalCheck2 = compose(
-    withSelect( function( select ) {
-        return {
-            selectedBlock: select( 'core/editor' ).getSelectedBlock()
-        }
-    } ),
-    ifCondition( function( props ) {
-        return (
-            props.selectedBlock &&
-            props.selectedBlock.name === 'utksds/button'
-        );
-    } )
-)( Check2Button );
-
-const ConditionalCheck2Circle = compose(
-    withSelect( function( select ) {
-        return {
-            selectedBlock: select( 'core/editor' ).getSelectedBlock()
-        }
-    } ),
-    ifCondition( function( props ) {
-        return (
-            props.selectedBlock &&
-            props.selectedBlock.name === 'utksds/button'
-        );
-    } )
-)( Check2CircleButton );
-
-const ConditionalChevronRight = compose(
-    withSelect( function( select ) {
-        return {
-            selectedBlock: select( 'core/editor' ).getSelectedBlock()
-        }
-    } ),
-    ifCondition( function( props ) {
-        return (
-            props.selectedBlock &&
-            props.selectedBlock.name === 'utksds/button'
-        );
-    } )
-)( ChevronRightButton );
-
-const ConditionalChevronLeft = compose(
-    withSelect( function( select ) {
-        return {
-            selectedBlock: select( 'core/editor' ).getSelectedBlock()
-        }
-    } ),
-    ifCondition( function( props ) {
-        return (
-            props.selectedBlock &&
-            props.selectedBlock.name === 'utksds/button'
-        );
-    } )
-)( ChevronLeftButton );
-
-const ConditionalPlus = compose(
-    withSelect( function( select ) {
-        return {
-            selectedBlock: select( 'core/editor' ).getSelectedBlock()
-        }
-    } ),
-    ifCondition( function( props ) {
-        return (
-            props.selectedBlock &&
-            props.selectedBlock.name === 'utksds/button'
-        );
-    } )
-)( PlusButton );
-
-registerFormatType(
-    'btnicons/boxarrowupright', {
-        title: 'Box arrow up-right',
-		tagName: 'xyz',
-		className: null,
-        edit: ConditionalBoxArrowUpRight,
-    }
-);
-
-registerFormatType(
-    'btnicons/check2', {
-        title: 'Check2',
-		tagName: 'qrs',
-		className: null,
-        edit: ConditionalCheck2,
-    }
-);
-
-registerFormatType(
-    'btnicons/check2circle', {
-        title: 'Check2 circle',
-		tagName: 'tuv',
-		className: null,
-        edit: ConditionalCheck2Circle,
-    }
-);
-
-registerFormatType(
-    'btnicons/chevronright', {
-        title: 'Chevron right',
-		tagName: 'wxy',
-		className: null,
-        edit: ConditionalChevronRight,
-    }
-);
-
-registerFormatType(
-    'btnicons/chevronleft', {
-        title: 'Chevron left',
-		tagName: 'abc',
-		className: null,
-        edit: ConditionalChevronLeft,
-    }
-);
-
-registerFormatType(
-    'btnicons/plus', {
-        title: 'Plus',
-		tagName: 'def',
-		className: null,
-        edit: ConditionalPlus,
-    }
-);
 
 registerBlockType( 'utksds/button', {
 	title: 'Button',
@@ -256,7 +77,7 @@ registerBlockType( 'utksds/button', {
 		text: {
 			type: 'string',
 			source: 'html',
-			selector: 'a'
+			selector: 'span'
 		},
 		linkTarget: {
 			type: 'string',
@@ -286,9 +107,21 @@ registerBlockType( 'utksds/button', {
 			type: 'boolean',
 			default: false
 		},
-		buttonSize:{
+		buttonSize: {
 			type: 'string',
 			default: ' btn-nrml'
+		},
+		iconCode: {
+			type: 'object',
+			default: { name:'', string:'', code:null }
+		},
+		iconSize: {
+			type: 'string',
+			default: '24',
+		},
+		useIcon: {
+			type: 'boolean',
+			default: false
 		},
 	},
 	
@@ -331,8 +164,18 @@ registerBlockType( 'utksds/button', {
 		function onButtonColorChange( newColor ) {
 			setAttributes( { buttonColor: newColor } );
 		}
+
+		if(attributes.iconCode.name !== ''){
+			var iconResults = AllIcons.find(obj => {
+				return obj.name === attributes.iconCode.name;
+			} );
 			
-		//console.log(wp.data.select( 'core/rich-text' ).getFormatTypes());
+			attributes.useIcon = false;
+		}else{
+			var iconResults = { name:'', string:'', code:null };
+		}
+			
+		//console.log(attributes.useIcon);
 
 		return ( [
 			<BlockControls>
@@ -383,6 +226,63 @@ registerBlockType( 'utksds/button', {
  						/>
                 	</Popover>
             		) }
+				</ToolbarGroup>
+				<ToolbarGroup>
+					<DropdownMenu
+				  			icon={ <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16"><path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/></svg> }
+        					label="Select an icon"
+				  			controls={ [
+            					{
+                					title: 'No Icon',
+                					icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-app" viewBox="0 0 16 16"><path d="M11 2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3h6zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4H5z"/></svg>,
+				  					onClick: () =>{
+										setAttributes( { iconCode:{ name:'', string:'', code:null }, useIcon:true } );
+									},
+            					},
+								{
+                					title: 'Box arrow up-right',
+                					icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>,
+				  					onClick: () =>{
+										setAttributes( { iconCode:{ name:'Box arrow up-right', string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>', code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>) }, useIcon:true } );
+									},
+            					},
+								{
+                					title: 'Check 2',
+                					icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>,
+				  					onClick: () =>{
+										setAttributes( { iconCode:{ name:'Check 2', string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>', code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>) }, useIcon:true } );
+									},
+            					},
+								{
+                					title: 'Check 2 circle',
+                					icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>,
+				  					onClick: () =>{
+										setAttributes( { iconCode:{ name:'Check 2 circle', string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>', code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>) }, useIcon:true } );
+									},
+            					},
+								{
+                					title: 'Chevron right',
+                					icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>,
+				  					onClick: () =>{
+										setAttributes( { iconCode:{ name:'Chevron right', string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>', code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>) }, useIcon:true } );
+									},
+            					},
+								{
+                					title: 'Chevron left',
+                					icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>,
+				  					onClick: () =>{
+										setAttributes( { iconCode:{ name:'Chevron left', string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>', code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>) }, useIcon:true } );
+									},
+            					},
+								{
+                					title: 'Plus',
+                					icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>,
+				  					onClick: () =>{
+										setAttributes( { iconCode:{ name:'Plus', string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>', code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>) }, useIcon:true } );
+									},
+            					},
+							] }
+				  		/>
 				</ToolbarGroup>
 			</BlockControls>,
 			<InspectorControls>
@@ -471,30 +371,50 @@ registerBlockType( 'utksds/button', {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
+			<div className={ 'btn ' + attributes.buttonColor.slug + attributes.buttonSize }>
 			<RichText 
-				tagName='a'
-				className={ 'btn ' + attributes.buttonColor.slug + attributes.buttonSize }
+				tagName='span'
 				placeholder={ attributes.placeholder }
 				value={ attributes.text }
-				allowedFormats={ [ 'core/bold', 'core/italic', 'btnicons/boxarrowupright', 'btnicons/check2', 'btnicons/check2circle', 'btnicons/chevronright', 'btnicons/chevronleft', 'btnicons/plus' ] }
+				allowedFormats={ [ 'core/bold', 'core/italic' ] }
 				onChange={ ( value ) => setAttributes( { text: value } ) }
 				withoutInteractiveFormatting
 			/>
+			{ iconResults.code !== null && attributes.useIcon === false && (
+			<Icon
+				icon={ iconResults.code }
+				size={ attributes.iconSize }
+			/>
+			) }
+			{ attributes.iconCode.code !== null && attributes.useIcon === true && (
+			<Icon
+				icon={ attributes.iconCode.code }
+				size={ attributes.iconSize }
+			/>
+			) }
+			</div>
 		] );
 	},
 	
-	save: ( { attributes } ) => {
+	save: ( { attributes } ) => {	
 		return(
-			<RichText.Content
-				tagName="a"
+			<a
 				type = 'button'
-				className={ 'btn ' + attributes.buttonColor.slug + attributes.buttonSize }
+				className={ 'btn save ' + attributes.buttonColor.slug + attributes.buttonSize }
 				href={ attributes.url }
 				title={ attributes.title }
-				value={ attributes.text }
 				target={ attributes.linkTarget }
 				rel={ attributes.rel }
-			/>
+			>
+				<RichText.Content
+					tagName="span"
+					value={ attributes.text }
+				/>
+				<RichText.Content
+					tagName="span"
+					value={ attributes.iconCode.string }
+				/>
+			</a>
 		);
 	},
 } );
