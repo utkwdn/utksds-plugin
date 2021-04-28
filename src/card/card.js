@@ -38,9 +38,9 @@ const bgColors = [
 ];
 
 const borderColors = [
-	{ name: 'Light', slug: 'border-light', color: '#F6F6F6'},
-	{ name: 'Primary', slug: 'border-primary', color: '#58595b'},
-	{ name: 'Secondary', slug: 'border-secondary', color: '#006c93'},
+	{ name: 'Light', slug: 'border-light', color: '#F6F6F6', text: ''},
+	{ name: 'Primary', slug: 'border-primary', color: '#58595b', text: ''},
+	{ name: 'Secondary', slug: 'border-secondary', color: '#006c93', text: ''},
 ];
 
 const textColors = [
