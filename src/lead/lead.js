@@ -17,11 +17,11 @@ registerBlockType( 'lead/main', {
 			type: 'string',
 			default: '',
 		},
-//    content: {
-//        type: 'string',
-//        source: 'text',
-//        selector: 'p',
-//    },
+   content: {
+       type: 'string',
+       //source: 'text',
+       //selector: 'p',
+    },
 	},
 	supports: {
     anchor: true,
@@ -32,10 +32,11 @@ registerBlockType( 'lead/main', {
 		return(
 			<RichText 
 				tagName='p'
+				placeholder='Lead text goes here.'
 				className={ className, 'lead' }
 				value={ attributes.content }
 				onChange={ ( content ) => setAttributes( { content } ) }
-				formattingControls={ [] }
+				withoutInteractiveFormatting
 			/>
 		);
 	},
