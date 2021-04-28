@@ -16,6 +16,9 @@ registerBlockType( 'utksds/columns', {
 	icon: 'editor-table',
 	category: 'utdesign_layout',
 	description: '',
+	supports: {
+		html: false,
+	},
 	attributes: {
 		rowClass: {
 			type: 'string',
@@ -232,6 +235,9 @@ registerBlockType( 'utksds/columns', {
 			
 registerBlockType( 'utksds/column', {
 	title: 'Column',
+	supports: {
+		html: false,
+	},
 	parent: [ 'utksds/columns' ],
 	usesContext: [ 'card/blockName' ],
 	icon: 'editor-justify',

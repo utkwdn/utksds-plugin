@@ -61,6 +61,9 @@ registerBlockType( 'utksds/button', {
 	),
 	category: 'design',
 	description: '',
+	supports: {
+		html: false,
+	},
 	attributes: {
 		url: {
 			type: 'string',
@@ -426,6 +429,9 @@ registerBlockType( 'utksds/buttongroup', {
 	),
 	category: 'design',
 	description: '',
+	supports: {
+		html: false,
+	},
 	attributes: {
 		orientation: {
 			type: 'string',
