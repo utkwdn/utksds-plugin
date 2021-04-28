@@ -30,7 +30,7 @@ import './editor.scss';
 
 		
 registerBlockType( 'strip/main', {
-	title: 'Strip',
+	title: 'Content Strip',
 	icon:<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 8h24v16h-24v-16zm0-8v6h24v-6h-24z"/></svg>,
   category: 'utdesign_layout',
 	attributes: {

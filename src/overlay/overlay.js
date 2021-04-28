@@ -63,7 +63,7 @@ registerBlockType( 'utksds/overlay', {
 		);
 
 		return ( [
-			<div className="card">
+			<div className="card wpeditor-card-overlay">
 				{ attributes.imageUrl !== '' && (
   				<img src={ attributes.imageUrl } className="card-img" alt={ attributes.imageAlt } />
 				) }
