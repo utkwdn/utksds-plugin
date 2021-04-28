@@ -35,7 +35,7 @@ registerBlockType( 'lead/main', {
 				className={ className, 'lead' }
 				value={ attributes.content }
 				onChange={ ( content ) => setAttributes( { content } ) }
-				formattingControls={ [] }
+				withoutInteractiveFormatting
 			/>
 		);
 	},
