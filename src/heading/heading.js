@@ -2,6 +2,9 @@
 import './editor.scss';
 
 const { registerBlockStyle } = wp.blocks;
+const { addFilter } = wp.hooks;
+
+const allowedBlocks = [ 'core/heading' ];
 
 registerBlockStyle('core/heading', {
 	name: 'display-1',
@@ -22,3 +25,22 @@ registerBlockStyle('core/heading', {
 	name: 'display-4',
 	label: 'Display 4'
 } );
+
+function addSupports( settings ) {
+	/*check if object exists for old Gutenberg version compatibility
+	add allowedBlocks restriction*/
+	if( typeof settings.supports !== 'undefined' && allowedBlocks.includes( settings.name ) ){
+		settings.supports = Object.assign( settings.supports, {
+			defaultStylePicker:false,
+			fontSize:false,
+		});
+	}
+	
+	return settings;
+}
+
+addFilter(
+	'blocks.registerBlockType',
+	'editorskit/custom-supports',
+	addSupports
+);
