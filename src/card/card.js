@@ -32,15 +32,15 @@ const IMAGE_TEMPLATE = [
 import './editor.scss';
 
 const bgColors = [
-	{ name: 'Light', slug: 'bg-light', color: '#F6F6F6'},
-	{ name: 'Primary', slug: 'bg-primary', color: '#58595b'},
-	{ name: 'Secondary', slug: 'bg-secondary', color: '#006c93'},
+	{ name: 'Light', slug: 'bg-light', color: '#F6F6F6', text: 'text-primary'},
+	{ name: 'Primary', slug: 'bg-primary', color: '#58595b', text: 'text-light'},
+	{ name: 'Secondary', slug: 'bg-secondary', color: '#006c93', text: 'text-light'},
 ];
 
 const borderColors = [
-	{ name: 'Light', slug: 'border-light', color: '#F6F6F6'},
-	{ name: 'Primary', slug: 'border-primary', color: '#58595b'},
-	{ name: 'Secondary', slug: 'border-secondary', color: '#006c93'},
+	{ name: 'Light', slug: 'border-light', color: '#F6F6F6', text: ''},
+	{ name: 'Primary', slug: 'border-primary', color: '#58595b', text: ''},
+	{ name: 'Secondary', slug: 'border-secondary', color: '#006c93', text: ''},
 ];
 
 const textColors = [
@@ -76,7 +76,7 @@ registerBlockType( 'utksds/card', {
 		},
 		cardColor: {
 			type: 'object',
-			default: { name: 'Light', slug: 'bg-light', color: '#F6F6F6'},
+			default: { name: 'Light', slug: 'bg-light', color: '#F6F6F6', text: 'text-primary'},
 		},
 		cardOutline: {
 			type: 'boolean',
@@ -252,7 +252,7 @@ registerBlockType( 'utksds/card', {
 				</PanelBody>
 			</InspectorControls>,
 			// eslint-disable-next-line react/jsx-key
-			<div className={'card card-edit ' + attributes.cardColor.slug }>
+			<div className={'card card-edit ' + attributes.cardColor.text + ' ' + attributes.cardColor.slug }>
 				<InnerBlocks allowedBlocks={ [ 'card/body', 'card/image', 'utksds/columns', 'card/topcap', ] } placeholder={ cardPlaceholder } templateLock={ 'all' } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>,
 		] );
