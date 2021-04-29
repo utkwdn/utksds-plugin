@@ -36,6 +36,9 @@ registerBlockType( 'utksds/tabs', {
 	icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-segmented-nav" viewBox="0 0 16 16"><path d="M0 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6zm6 3h4V5H6v4zm9-1V6a1 1 0 0 0-1-1h-3v4h3a1 1 0 0 0 1-1z"/></svg>,
 	category: 'design',
 	description: '',
+	supports: {
+		html: false,
+	},
 	attributes: {
 		tabID: {
 			type: 'string',
@@ -104,6 +107,9 @@ registerBlockType( 'tabs/tab', {
 	parent: [ 'utksds/tabs' ],
 	icon: <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M7 2c1.695 1.942 2.371 3 4 3h13v17h-24v-20h7zm4 5c-2.339 0-3.537-1.388-4.917-3h-4.083v16h20v-13h-11zm2 6h3v2h-3v3h-2v-3h-3v-2h3v-3h2v3z"/></svg>,
 	description: 'Contains all the text elements within a Card.',
+	supports: {
+		html: false,
+	},
 	attributes: {
 		tabName: {
 			type: 'string',
