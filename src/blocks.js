@@ -31,7 +31,7 @@ import './heading/heading.js';
 import './tabs/tabs.js';
 //import './remote-data/remote-data.js';
 import './overlay/overlay.js';
-import './document-settings/document-settings.js';
+//import './document-settings/document-settings.js';
 import './list/list.js';
 import './quote/quote.js';
 import './code/code.js';
