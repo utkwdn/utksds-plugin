@@ -62,6 +62,17 @@ function addAttributes( settings ) {
 		});
     
 	}
+	
+	if( typeof settings.supports !== 'undefined' && allowedBlocks.includes( settings.name ) ){
+		settings.supports = Object.assign( settings.supports, {
+			defaultStylePicker:false,
+			fontSize:false,
+			color:{
+				background:false,
+				text:false,
+			},
+		});
+	}
 
 	return settings;
 }
