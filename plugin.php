@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: utds — CGB Gutenberg Block Plugin
+ * Plugin Name: Design System Gutenberg Block Plugin
  * Description: utds — is a Gutenberg plugin created via create-guten-block.
- * Author: Patrick Werner
- * Author URI: http://patrickwerner.org/
+ * Author: University of Tennessee, Office of Communications and Marketing
+ * Author URI: https://communications.utk.edu/
  * Version: 1.0.0
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
@@ -173,12 +173,36 @@ add_filter( 'render_block', function( $block_content, $block ) {
 		}
 	}
 	
-	if ( $block['blockName'] === 'card/main' ) {
-		//remove Bootstrap class from figure container element
-		$block_content = str_replace(' card-img-top', '', $block_content);
+	if ( $block['blockName'] === 'core/image' ) {
+		/*$start = 'wp-block-image ';
+		$end = '">';
 		
-		//add Bootstrap class to img element
-		$block_content = str_replace('wp-image-', 'card-img-top wp-image-', $block_content);
+		$string = ' ' . $block_content;
+		$ini = strpos($string, $start);
+    	if ($ini == 0) return '';
+    	$ini += strlen($start);
+    	$len = strpos($string, $end, $ini) - $ini;
+    	$parsed_classes = substr($string, $ini, $len);
+		
+		//$custom_classes = explode( ' ', $parsed_classes );
+		
+		$block_content = strip_tags($block_content, ['a', 'img']);
+		
+		$block_content = str_replace(
+			'wp-image',
+			$parsed_classes.' wp-image',
+			$block_content
+		);
+		
+		$block_content = str_replace('is-style-framed', 'framed', $block_content);*/
+		
+		$block_content = str_replace('is-style-', '', $block_content);
+		$block_content = str_replace('<figure', '<div', $block_content);
+		$block_content = str_replace('</figure', '</div', $block_content);
+	}
+	
+	if ( $block['blockName'] === 'core/heading' ) {
+		$block_content = str_replace('is-style-', '', $block_content);
 	}
 
 	return $block_content;

@@ -1,212 +1,179 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable react/jsx-key */
-/* eslint-disable eqeqeq */
-/* eslint-disable linebreak-style */
-// import './style.scss';
-// Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
-const __ = wp.i18n.__;
-const registerBlockType = wp.blocks.registerBlockType;
-const { RichText, PlainText } = wp.editor;
+import { Path, SVG } from '@wordpress/components';
 
-registerBlockType( 'accordion/main', {
-	title: __( 'Accordion' ),
-	icon: 'list-view',
-	category: 'utdesign_system',
-	keywords: [ __( 'Accordion' ) ],
+const { registerBlockType } = wp.blocks;
+const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
+const { PanelBody, PanelRow, TextControl, ToggleControl } = wp.components;
+const { cleanForSlug } = wp.url;
 
+const ACCORDION_TEMPLATE = [
+    [ 'accordion/fold' ],
+];
+
+registerBlockType( 'utksds/accordion', {
+	title: 'Accordion',
+	icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16"><path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>,
+	category: 'design',
+	supports: {
+		html: false,
+	},
 	attributes: {
-		id: {
-			source: 'attribute',
-			selector: 'div.accordion-container',
-			attribute: 'id',
-		},
-		accordions: {
-			source: 'query',
-			default: [],
-			selector: '.accordion',
-			query: {
-
-				index: {
-					source: 'text',
-					selector: 'span.accordion-index',
-				},
-				content: {
-					source: 'text',
-					selector: 'div.accordion-panel div',
-				},
-				title: {
-					source: 'text',
-					selector: 'span.accordion-title',
-				},
-			},
+		accordionID: {
+			type: 'string',
+			default: 'newAccordion'
 		},
 	},
+	providesContext: {
+		'accordion/parentID':'accordionID',
+	},
 
-	edit: ( props ) => {
-		const { accordions } = props.attributes;
-
-		if ( ! props.attributes.id ) {
-			const id = `accordion${ Math.floor( Math.random() * 100 ) }`;
-			props.setAttributes( {
-				id,
-			} );
-		}
-
-		const accordionsList = accordions
-			.sort( ( a, b ) => a.index - b.index )
-			.map( ( accordion ) => {
-				return (
-					<div className="accordion">
-						<div className="accordion-item">
-							{ /* <label>Content:</label> */ }
-							<div className="accordion__heading">
-								<button
-									aria-expanded="false"
-									className="accordion-trigger"
-									aria-controls={ 'sect' + accordion.index }
-									id={ 'accordion' + accordion.index + 'id' }>
-
-									<PlainText
-										className="title-plain-text"
-										placeholder="Accordion title..."
-										value={ accordion.title }
-										onChange={ ( title ) => {
-											const newObject = Object.assign( {}, accordion, {
-												title: title,
-											} );
-											props.setAttributes( {
-												accordions: [
-													...accordions.filter(
-														( item ) => item.index != accordion.index
-													),
-													newObject,
-												],
-											} );
-										} }
-									/>
-									<span className="accordion-icon"></span>
-
-								</button>
-							</div>
-							<div id={ 'sect' + accordion.index }
-								role="region"
-								aria-labelledby={ 'accordion' + accordion.index + 'id' }
-								className="accordion-panel">
-								<RichText
-									className="content-plain-text"
-									style={ { height: 58 } }
-									placeholder="Accordion content..."
-									value={ accordion.content }
-									onChange={ ( content ) => {
-										const newObject = Object.assign( {}, accordion, {
-											content: content,
-										} );
-										props.setAttributes( {
-											accordions: [
-												...accordions.filter(
-													( item ) => item.index != accordion.index
-												),
-												newObject,
-											],
-										} );
-									} }
-								/>
-							</div>
-
-						</div>
-						<div className="rf-blocks-library--button-container--inner">
-							<button
-								className="remove-accordion"
-								onClick={ () => {
-									const newaccordions = accordions
-										.filter( ( item ) => item.index != accordion.index )
-										.map( ( t ) => {
-											if ( t.index > accordion.index ) {
-												t.index -= 1;
-											}
-
-											return t;
-										} );
-
-									props.setAttributes( {
-										accordions: newaccordions,
-									} );
-								} }
-							>
-								<span className="dashicons dashicons-remove"></span>Remove accordion
-							</button>
-						</div>
-					</div>
-				);
-			} );
-		return (
-			<div className={ props.className }>
-				{ accordionsList }
-				<div className="rf-blocks-library--button-container">
-					<button
-						className="add-more-accordion"
-						onClick={ ( content ) =>
-							props.setAttributes( {
-								accordions: [
-									...props.attributes.accordions,
-									{
-										index: props.attributes.accordions.length,
-										content: '',
-										title: '',
-									},
-								],
-							} )
-						}
-					>
-						<span className="dashicons dashicons-insert"></span> Add accordion
-					</button>
-				</div>
+	edit: ( { attributes, clientId, setAttributes } ) => {
+		
+		return ( [
+			<InspectorControls>
+				<PanelBody title='Accordion Properties' initialOpen={ true }>
+					<TextControl
+						label='Accordion ID'
+						help='The identifier for the accordion group.'
+						value={ attributes.accordionID }
+						onChange={ ( value ) =>{ setAttributes( {accordionID:value} ); } }
+					/>
+				</PanelBody>
+			</InspectorControls>,
+			<div className={ "accordion" } id={ attributes.accordionID }>
+				<InnerBlocks template={ ACCORDION_TEMPLATE } allowedBlocks={ [ 'accordion/fold', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
-		);
+		] );
 	},
 
-	save: ( props ) => {
-		const { id, accordions } = props.attributes;
+	save: ( { attributes } ) => {
+		
+		return(
+			<div className={ "accordion" } id={ attributes.accordionID }>
+				<InnerBlocks.Content />
+			</div>
+		)
+	},
+} );
 
-		const accordionsList = accordions.map( function( accordion ) {
-			return (
-				<div className="accordion">
-					<span className="accordion-index" style={ { display: 'none' } }>
-						{ accordion.index }
-					</span>
-					<div className="accordion__heading">
-						<button aria-expanded="false" className="accordion-trigger" data-toggle="collapse"
-							aria-controls={ 'sect' + id + accordion.index }
-							href={ '#accordion' + id + accordion.index }>
-							{ accordion.title && (
-								<span className="accordion-title accordion__title">
-									{ accordion.title }
-									<span className="accordion-icon"></span>
-								</span>
-							) }
-						</button>
-					</div>
-					{ accordion.content && (
-						<div id={ 'accordion' + id + accordion.index }
-							role="region"
-							aria-labelledby={ 'accordion' + id + accordion.index + 'id' }
-							className="accordion-panel collapse">
-							<div>
-								{ accordion.content }
-							</div>
-						</div>
-					) }
-				</div>
-			);
-		} );
-		if ( accordions.length > 0 ) {
-			return (
-				<div className="accordion-container" id={ id } data-allow-toggle data-allow-multiple>
-					{ accordionsList }
-				</div>
+registerBlockType( 'accordion/fold', {
+	title: 'Accordion Fold',
+	parent: [ 'utksds/accordion' ],
+	icon: 'list-view',
+	category: 'design',
+	supports: {
+		html: false,
+	},
+	usesContext: [ 'accordion/parentID', ],
+	attributes: {
+		foldName: {
+			type: 'string',
+			default: ''
+		},
+		foldNamePH: {
+			type: 'string',
+			default: 'New Section'
+		},
+		foldSlug: {
+			type: 'string',
+			default: 'new-fold'
+		},
+		show: {
+			type: 'boolean',
+			default: false
+		},
+		showS: {
+			type: 'string',
+			default: ''
+		},
+		collapseS: {
+			type: 'string',
+			default: ' collapsed'
+		},
+		parentID:{
+			type: 'string',
+			default: ''
+		},
+	},
 
-			);
-		} return null;
+	
+	edit: ( { attributes, context, clientId, setAttributes } ) => {
+		
+		setAttributes( { parentID:context['accordion/parentID'] } );
+		
+		return ( [
+			<InspectorControls>
+				<PanelBody title='Accordion Fold Settings' initialOpen={ true }>
+					<ToggleControl
+						label='Show'
+						help={ attributes.show ? 'Fold defaults to open.' : 'Fold defaults to closed.' }
+						checked={ attributes.show }
+						onChange={ () => {
+							setAttributes( { show: !attributes.show } );
+							//console.log(attributes.buttonOutline);
+								
+							if( !attributes.show === true ){
+								setAttributes( { showS:' show', collapseS:'' } );
+							}else{
+								setAttributes( { showS:'', collapseS:' collapsed' } );
+							}
+			
+							//console.log(attributes.buttonColor);
+						} }
+					/>
+				</PanelBody>
+			</InspectorControls>,
+			<div className="card">
+    			<div className="card-header" id={ "heading" + attributes.foldSlug }>
+      				<h2 class="mb-0">
+						<RichText
+							tagName='div'
+							className={ "btn btn-link btn-block text-left" + attributes.collapseS }
+							type='button'
+							data-toggle='collapse'
+							data-target={ "#collapse" + attributes.foldSlug }
+							aria-expanded={ attributes.show }
+							aria-controls={ "collapse" + attributes.foldSlug }
+							value={ attributes.foldName }
+							placeholder={ attributes.foldNamePH }
+							onChange={ ( value ) => setAttributes( { foldName: value, foldSlug: cleanForSlug(value) } ) }
+							allowedFormats ={ [] }
+							withoutInteractiveFormatting
+						/>
+      				</h2>
+    			</div>
+    			<div id={ "collapse" + attributes.foldSlug } className={ "collapse" + attributes.showS } aria-labelledby={ "heading" + attributes.foldSlug } data-parent={ "#" + attributes.parentID }>
+      				<div className="card-body">
+        				<InnerBlocks allowedBlocks={ [ 'utksds/button', 'core/paragraph', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
+      				</div>
+    			</div>
+  			</div>
+		] );
+	},
+	
+	save: ( { attributes } ) => {
+		return (
+			<div className="card">
+    			<div className="card-header" id={ "heading" + attributes.foldSlug }>
+      				<h2 class="mb-0">
+						<RichText.Content
+							tagName='button'
+							className={ "btn btn-link btn-block text-left" + attributes.collapseS }
+							type='button'
+							data-toggle='collapse'
+							data-target={ "#collapse" + attributes.foldSlug }
+							aria-expanded={ attributes.show }
+							aria-controls={ "collapse" + attributes.foldSlug }
+							value={ attributes.foldName }
+						/>
+      				</h2>
+    			</div>
+    			<div id={ "collapse" + attributes.foldSlug } className={ "collapse" + attributes.showS } aria-labelledby={ "heading" + attributes.foldSlug } data-parent={ "#" + attributes.parentID }>
+      				<div className="card-body">
+        				<InnerBlocks.Content />
+      				</div>
+    			</div>
+  			</div>
+		);
 	},
 } );

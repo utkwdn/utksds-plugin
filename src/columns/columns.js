@@ -1,28 +1,36 @@
-//import { dispatch } from '@wordpress/data';
+import { withDispatch, useDispatch } from '@wordpress/data';
 //import { select, useSelect } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
 //import { BlockVariationPicker } from '@wordpress/block-editor';
-//import { store as blocksStore } from '@wordpress/blocks';
+import { createBlocksFromInnerBlocksTemplate, store as blocksStore } from '@wordpress/blocks';
+import { InnerBlocks, InspectorControls, __experimentalBlockVariationPicker, store as blockEditorStore } from '@wordpress/block-editor';
 import './editor.scss';
 
-
-
-const { registerBlockType } = wp.blocks;
-const { InnerBlocks, InspectorControls } = wp.editor;
+const { registerBlockType, getBlockVariations } = wp.blocks;
 const { PanelBody, PanelRow } = wp.components;
 
 const ALLOWED_BLOCKS = [ 'utksds/column' ];
 
 registerBlockType( 'utksds/columns', {
-	title: 'UTK Columns',
+	title: 'Columns',
 	icon: 'editor-table',
-	category: 'utdesign_system',
+	category: 'utdesign_layout',
 	description: '',
+	supports: {
+		html: false,
+	},
 	attributes: {
 		rowClass: {
 			type: 'string',
 			default: '',
 		},
+		blockName: {
+			type: 'string',
+			default: 'utksds/columns',
+		},
+	},
+	providesContext: {
+    	'columns/blockName': 'blockName',
 	},
 	variations: [
 		{
@@ -30,22 +38,11 @@ registerBlockType( 'utksds/columns', {
 		title: 'Columns: 100',
 		description: 'One column',
 		icon: (
-			<SVG
-				width="48"
-				height="48"
-				viewBox="0 0 48 48"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<Path
-					fillRule="evenodd"
-					clipRule="evenodd"
-					d="m39.0625 14h-30.0625v20.0938h30.0625zm-30.0625-2c-1.10457 0-2 .8954-2 2v20.0938c0 1.1045.89543 2 2 2h30.0625c1.1046 0 2-.8955 2-2v-20.0938c0-1.1046-.8954-2-2-2z"
-				/>
-			</SVG>
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-columns" viewBox="0 0 16 16"><path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V2zm8.5 0v8H15V2H8.5zm0 9v3H15v-3H8.5zm-1-9H1v3h6.5V2zM1 14h6.5V6H1v8z"/></svg>
 		),
 		attributes: { rowClass: 'column-100' },
 		innerBlocks: [ [ 'utksds/column', { className: 'col-12' } ] ],
-		//scope: [ 'block' ],
+		scope: [ 'block' ],
 	},
 	{
 		name: 'two-columns-equal',
@@ -67,8 +64,11 @@ registerBlockType( 'utksds/columns', {
 		),
 		attributes: { rowClass: 'column-50-50' },
 		isDefault: true,
-		innerBlocks: [ [ 'utksds/column', { className: 'col-6' } ], [ 'utksds/column', { className: 'col-6' } ] ],
-		//scope: [ 'block' ],
+		innerBlocks: [ 
+		  [ 'utksds/column', { className: 'col-12 col-md-6' } ], 
+		  [ 'utksds/column', { className: 'col-12 col-md-6' } ] 
+		],
+		scope: [ 'block' ],
 	},
 	{
 		name: 'two-columns-one-third-two-thirds',
@@ -90,10 +90,10 @@ registerBlockType( 'utksds/columns', {
 		),
 		attributes: { rowClass: 'column-30-70' },
 		innerBlocks: [
-			[ 'utksds/column', { className: 'col-4' } ],
-			[ 'utksds/column', { className: 'col-8' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-8' } ],
 		],
-		//scope: [ 'block' ],
+		scope: [ 'block' ],
 	},
 	{
 		name: 'two-columns-two-thirds-one-third',
@@ -115,10 +115,10 @@ registerBlockType( 'utksds/columns', {
 		),
 		attributes: { rowClass: 'column-70-30' },
 		innerBlocks: [
-			[ 'utksds/column', { className: 'col-8' } ],
-			[ 'utksds/column', { className: 'col-4' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-8' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
 		],
-		//scope: [ 'block' ],
+		scope: [ 'block' ],
 	},
 	{
 		name: 'three-columns-equal',
@@ -143,7 +143,7 @@ registerBlockType( 'utksds/columns', {
 			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
 			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
 		],
-		//scope: [ 'block' ],
+		scope: [ 'block' ],
 	},
 	{
 		name: 'three-columns-wider-center',
@@ -164,11 +164,11 @@ registerBlockType( 'utksds/columns', {
 		),
 		attributes: { rowClass: 'column-25-50-25' },
 		innerBlocks: [
-			[ 'utksds/column', { className: 'col-3' } ],
-			[ 'utksds/column', { className: 'col-6' } ],
-			[ 'utksds/column', { className: 'col-3' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-3' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-6' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-3' } ],
 		],
-		//scope: [ 'block' ],
+		scope: [ 'block' ],
 	},
 	{
 		name: 'four-columns-equal',
@@ -181,22 +181,44 @@ registerBlockType( 'utksds/columns', {
 		),
 		attributes: { rowClass: 'column-25-25-25-25' },
 		innerBlocks: [
-			[ 'utksds/column', { className: 'col-3' } ],
-			[ 'utksds/column', { className: 'col-3' } ],
-			[ 'utksds/column', { className: 'col-3' } ],
-			[ 'utksds/column', { className: 'col-3' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-6 col-lg-3' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-6 col-lg-3' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-6 col-lg-3' } ],
+			[ 'utksds/column', { className: 'col-12 col-md-6 col-lg-3' } ],
 		],
-		//scope: [ 'block' ],
+		scope: [ 'block' ],
 	},
 	],
 	
-	edit: ( props ) => {
-		const{ attributes } = props;
-		const{ rowClass } = attributes;
+	edit: ( { clientId, attributes, setAttributes } ) => {
+		
+		const colVariations = getBlockVariations( 'utksds/columns' );
+		const { replaceInnerBlocks } = useDispatch( blockEditorStore );
+		
+		const colPlaceholder = (
+			<__experimentalBlockVariationPicker
+				label = 'Columns'
+				instructions = 'Choose a column layout.'
+				variations={ colVariations }
+				onSelect={ ( nextVariation ) =>{
+					//console.log( nextVariation );
+					setAttributes( nextVariation.attributes );
+					
+					replaceInnerBlocks(
+						clientId,
+						createBlocksFromInnerBlocksTemplate(
+							nextVariation.innerBlocks
+						),
+						true
+					);
+				} }
+			/>
+		);
+		
 		return (
 			<div className="container">
-				<div className={"row " + rowClass }>
-					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } templateLock={ 'all' } />
+				<div className={"row " + attributes.rowClass }>
+					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } placeholder={ colPlaceholder } templateLock={ 'all' } />
 				</div>
 			</div>
 		);
@@ -204,24 +226,33 @@ registerBlockType( 'utksds/columns', {
 	
 	save: ( { attributes } ) => {
 		return (
-			<div className="container">
 				<div className="row">
 					<InnerBlocks.Content />
 				</div>
-			</div>
 		);
 	},
 } );
 			
 registerBlockType( 'utksds/column', {
 	title: 'Column',
+	supports: {
+		html: false,
+	},
 	parent: [ 'utksds/columns' ],
+	usesContext: [ 'card/blockName' ],
 	icon: 'editor-justify',
 	
 	edit: ( props ) => {
+		if(typeof props.context['card/blockName'] !== 'undefined' && props.context['card/blockName'] === 'utksds/card'){
+			var these_blocks = [ 'card/body', 'card/image' ];
+		}else{
+			//var these_blocks = [ 'core/paragraph', 'core/heading', 'core/list', 'core/quote', 'core/table', 'core/image', 'core/gallery', 'core/file', 'core/video', 'core/freeform', 'core/code', 'core/navigation', 'core/shortcode', 'core/html', 'core/latest-posts', 'core/page-list', 'core/rss', 'core/social-link', 'core/embed', 'lead/main', 'media-object/main', 'utksds/tabs', 'horizontal-rule/main', 'alert/main', 'utksds/buttongroup', 'utksds/button', 'utksds/accordion', 'utksds/card', 'utksds/calendar' ] ;
+			var these_blocks = null;
+		}
+		
 		return (
 			<div className={ props.className } >
-				<InnerBlocks templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks allowedBlocks={ these_blocks } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>
 		)
 	},

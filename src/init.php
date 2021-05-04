@@ -20,7 +20,17 @@ function utdesign_blocks_category($categories, $post) {
 		array(
 			array(
 				'slug' => 'utdesign_system',
-				'title' => 'University of Tennessee UI Design System',
+				'title' => 'UT Components',
+				'icon' => 'welcome-learn-more'
+			),
+			array(
+				'slug' => 'utdesign_layout',
+				'title' => 'UT Layout',
+				'icon' => 'welcome-learn-more'
+			),
+			array(
+				'slug' => 'utdesign_content',
+				'title' => 'UT Content',
 				'icon' => 'welcome-learn-more'
 			)
 		)

@@ -1,20 +1,25 @@
 /*
-Error: File to import not found or unreadable: ./../../../../../design-system-build-files/node_modules/bootstrap/scss/card.
+Error: File to import not found or unreadable: ./../utksds-framework/node_modules/bootstrap/scss/type.
        Load paths:
          /Applications/Adobe Dreamweaver 2020/Configuration/SassFrameworks/bourbon
          /Applications/Adobe Dreamweaver 2020/Configuration/SassFrameworks/neat
          /Applications/Adobe Dreamweaver 2020/Configuration/SassFrameworks/base
-        on line 16 of /Users/cantrell/Documents/GitHub/gutenstrap/src/card/style.scss
+        on line 15 of /Users/cantrell/Documents/GitHub/utksds-plugin/src/list copy/editor.scss
 
-11: //   margin: 0 auto;
-12: //   max-width: 740px;
-13: //   padding: 2rem;
-14: // }
-15: 
-16: @import "./../../../../../design-system-build-files/node_modules/bootstrap/scss/card";
+10: //   margin-bottom: 2rem;
+11: //   background-color: #e9ecef;
+12: //   border-radius: 0.3rem;
+13: // }
+14: 
+15: @import "./../utksds-framework/node_modules/bootstrap/scss/type";
+16: 
+17: .editor-styles-wrapper {
+18:   .is-style-display-1 {
+19:     @extend .display-1;
+20:   }
 
 Backtrace:
-/Users/cantrell/Documents/GitHub/gutenstrap/src/card/style.scss:16
+/Users/cantrell/Documents/GitHub/utksds-plugin/src/list copy/editor.scss:15
 /Applications/Adobe Dreamweaver 2021/Adobe Dreamweaver 2021.app/Contents/Resources/gems/rubygems/gems/sass-3.7.4/lib/sass/tree/import_node.rb:67:in `rescue in import'
 /Applications/Adobe Dreamweaver 2021/Adobe Dreamweaver 2021.app/Contents/Resources/gems/rubygems/gems/sass-3.7.4/lib/sass/tree/import_node.rb:44:in `import'
 /Applications/Adobe Dreamweaver 2021/Adobe Dreamweaver 2021.app/Contents/Resources/gems/rubygems/gems/sass-3.7.4/lib/sass/tree/import_node.rb:28:in `imported_file'
@@ -51,4 +56,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: File to import not found or unreadable: ./../../../../../design-system-build-files/node_modules/bootstrap/scss/card.\A        Load paths:\A          /Applications/Adobe Dreamweaver 2020/Configuration/SassFrameworks/bourbon\A          /Applications/Adobe Dreamweaver 2020/Configuration/SassFrameworks/neat\A          /Applications/Adobe Dreamweaver 2020/Configuration/SassFrameworks/base\A         on line 16 of /Users/cantrell/Documents/GitHub/gutenstrap/src/card/style.scss\A \A 11: //   margin: 0 auto;\A 12: //   max-width: 740px;\A 13: //   padding: 2rem;\A 14: // }\A 15: \A 16: @import \"./../../../../../design-system-build-files/node_modules/bootstrap/scss/card\";"; }
+  content: "Error: File to import not found or unreadable: ./../utksds-framework/node_modules/bootstrap/scss/type.\A        Load paths:\A          /Applications/Adobe Dreamweaver 2020/Configuration/SassFrameworks/bourbon\A          /Applications/Adobe Dreamweaver 2020/Configuration/SassFrameworks/neat\A          /Applications/Adobe Dreamweaver 2020/Configuration/SassFrameworks/base\A         on line 15 of /Users/cantrell/Documents/GitHub/utksds-plugin/src/list copy/editor.scss\A \A 10: //   margin-bottom: 2rem;\A 11: //   background-color: #e9ecef;\A 12: //   border-radius: 0.3rem;\A 13: // }\A 14: \A 15: @import \"./../utksds-framework/node_modules/bootstrap/scss/type\";\A 16: \A 17: .editor-styles-wrapper {\A 18:   .is-style-display-1 {\A 19:     @extend .display-1;\A 20:   }"; }

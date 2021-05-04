@@ -10,9 +10,9 @@ import classnames from 'classnames';
 const { __ } = wp.i18n;
 const { addFilter } = wp.hooks;
 const { Fragment }	= wp.element;
-const { InspectorControls }	= wp.editor;
+const { InspectorControls }	= wp.blockEditor;
 const { createHigherOrderComponent } = wp.compose;
-const { RadioControl, ToggleControl } = wp.components;
+const { RadioControl, ToggleControl, PanelBody, PanelRow } = wp.components;
 
 //restrict to specific block names
 const allowedBlocks = [ 'core/table' ];
@@ -62,6 +62,17 @@ function addAttributes( settings ) {
 		});
     
 	}
+	
+	if( typeof settings.supports !== 'undefined' && allowedBlocks.includes( settings.name ) ){
+		settings.supports = Object.assign( settings.supports, {
+			defaultStylePicker:false,
+			fontSize:false,
+			color:{
+				background:false,
+				text:false,
+			},
+		});
+	}
 
 	return settings;
 }
@@ -99,6 +110,7 @@ const withAdvancedControls = createHigherOrderComponent( ( BlockEdit ) => {
 				<BlockEdit {...props} />
 				{ isSelected && allowedBlocks.includes( name ) &&
 					<InspectorControls>
+						<PanelBody title='Table Properties' initialOpen={ true }>
 						<ToggleControl
 							label='Dark Colors'
 							checked={ tblDark }
@@ -153,6 +165,7 @@ const withAdvancedControls = createHigherOrderComponent( ( BlockEdit ) => {
 							onChange={ (newValue) => setAttributes( { tblResponsive: newValue } ) }
 							help={ tblResponsive ? 'Responsive.' : 'Non-Responsive.' }
 						/>
+						</PanelBody>
 					</InspectorControls>
 				}
 
