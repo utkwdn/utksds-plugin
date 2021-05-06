@@ -31,7 +31,7 @@ import './heading/heading.js';
 import './tabs/tabs.js';
 //import './remote-data/remote-data.js';
 import './overlay/overlay.js';
-//import './document-settings/document-settings.js';
+import './document-settings/document-settings.js';
 import './list/list.js';
 import './quote/quote.js';
 import './code/code.js';
@@ -42,6 +42,7 @@ wp.domReady( function() {
 	wp.blocks.unregisterBlockStyle( 'core/button', 'outline' );
 	wp.blocks.unregisterBlockStyle( 'core/button', 'fill' );
 	wp.richText.unregisterFormatType( 'core/text-color' );
+	wp.richText.unregisterFormatType( 'core/image' );
 
 	const allowedEmbedBlocks = [
     	'twitter',
