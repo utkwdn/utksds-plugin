@@ -136,7 +136,7 @@
 }
 
 /* Width of "full-width" blocks */
-.wp-block[data-align="full"] {
+.wp-block[data-align="full"], .wp-block[data-type="strip/main"] {
     max-width: none;
 }
 
