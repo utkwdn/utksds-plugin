@@ -125,3 +125,23 @@ add_action( 'wp_print_styles', 'wps_deregister_styles', 100 );
 function wps_deregister_styles() {
     wp_dequeue_style( 'wp-block-library' );
 }
+
+//Add script for calendar block in the editor
+function utksds_calendar_scripts(){
+	wp_enqueue_script( 'calendar-script', 'https://calendar.utk.edu/widget/view' );
+	wp_add_inline_script( 'calendar-script', 'const CalScript = ' . json_encode( array(
+    	'schools' => 'utk',
+    	'venues' => null,
+		'departments' => null,
+		'groups' => null,
+		'types' => null,
+		'days' => '31',
+		'num' => '50',
+		'tags' => null,
+		'match' => null,
+		'exclude_types' => null,
+		'container' => 'localist-widget-1234',
+		'template' => 'modern',
+	) ), 'before' );
+}
+add_action( 'enqueue_block_editor_assets', 'utksds_calendar_scripts', 100 );

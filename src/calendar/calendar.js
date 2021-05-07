@@ -1,6 +1,7 @@
 const { registerBlockType } = wp.blocks;
 const { InnerBlocks, InspectorControls, ColorPalette, RichText } = wp.blockEditor;
 const { PanelBody, PanelRow, RangeControl, TextControl, SelectControl, CheckboxControl, } = wp.components;
+const { createElement, } = wp.element;
 
 // import './style.scss';
 // Commenting out the front style, as it will be handled by the bootstrap css pulled in.
@@ -662,6 +663,7 @@ registerBlockType( 'utksds/calendar', {
 		    <code>
 		      {"https://calendar.utk.edu/widget/" + attributes.widgetType + "?schools=utk&venues=" + attributes.place + "&departments=" +  attributes.department  + "&groups=" + attributes.group + "&types=" + attributes.all_types + "&days=" + attributes.daysAhead + "&num=" + attributes.numResults + "&tags=" + attributes.keywords + attributes.featuredS + attributes.sponsoredS + attributes.matchingS + attributes.pastS + attributes.hideDescS + attributes.truncateS + attributes.htmlDescS + attributes.evImageS + attributes.evTimeS + attributes.viewAllS + attributes.newWinS + attributes.hideDropS + "&match=" + attributes.mustMatch + "&exclude_types=" + attributes.exAll_types + "&container=localist-widget-12345" + attributes.incStyleS + "&template=" + attributes.template }
 		    </code>
+			<div id="localist-widget-12345" class="localist-widget"></div>
 		  </div>,
 		] );		
 	},
