@@ -42,6 +42,7 @@ wp.domReady( function() {
 	wp.blocks.unregisterBlockStyle( 'core/button', 'outline' );
 	wp.blocks.unregisterBlockStyle( 'core/button', 'fill' );
 	wp.richText.unregisterFormatType( 'core/text-color' );
+	wp.richText.unregisterFormatType( 'core/image' );
 
 	const allowedEmbedBlocks = [
     	'twitter',
