@@ -201,6 +201,11 @@ add_filter( 'render_block', function( $block_content, $block ) {
 		$block_content = str_replace('</figure', '</div', $block_content);
 	}
 	
+	if ( $block['blockName'] === 'core/list' ) {
+		
+		$block_content = str_replace('is-style-', '', $block_content);
+	}
+	
 	if ( $block['blockName'] === 'core/heading' ) {
 		$block_content = str_replace('is-style-', '', $block_content);
 	}
