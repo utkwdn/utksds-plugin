@@ -81,6 +81,7 @@ wp.domReady( function() {
     	'core/spacer',
     	'core/group',
 		//'core/embed',
+		'core/video',
 	];
 
 	const disabledBlocks = blocktodisable.map( blockSlug => wp.blocks.unregisterBlockType( blockSlug ) );
