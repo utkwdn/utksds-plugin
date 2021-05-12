@@ -6,6 +6,16 @@ const { addFilter } = wp.hooks;
 
 const allowedBlocks = [ 'core/list' ];
 
+registerBlockStyle('core/list', {
+	name: 'list-roman',
+	label: 'Roman Numerals'
+} );
+
+registerBlockStyle('core/list', {
+	name: 'list-letters',
+	label: 'Letters'
+} );
+
 function addSupports( settings ) {
 	/*check if object exists for old Gutenberg version compatibility
 	add allowedBlocks restriction*/
