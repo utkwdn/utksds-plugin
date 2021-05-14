@@ -89,7 +89,7 @@
 // @import "./../utksds-framework/src/scss/styles/orange_hr";
 // @import "./../utksds-framework/src/scss/styles/orange_mark";
 // @import "./../utksds-framework/src/scss/styles/search_forms";
-// @import "./../utksds-framework/src/scss/styles/typography";
+@import "./../utksds-framework/src/scss/styles/typography";
 // @import "./../utksds-framework/src/scss/styles/background";
 @import "./../utksds-framework/src/scss/styles/textcolors";
 // @import "./../utksds-framework/src/scss/styles/pagination";
@@ -114,8 +114,11 @@
 
 // Typography.
 // ===================================================================
-.has-info-color {
-  
+.editor-styles-wrapper ol.is-style-list-letters {
+  @extend .list-letters;
+}
+.editor-styles-wrapper ol.is-style-list-roman {
+  @extend .list-roman;
 }
 
 .block-editor-writing-flow {
@@ -136,7 +139,7 @@
 }
 
 /* Width of "full-width" blocks */
-.wp-block[data-align="full"], .wp-block[data-type="strip/main"] {
+.wp-block[data-align="full"] {
     max-width: none;
 }
 
