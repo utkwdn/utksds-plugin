@@ -113,6 +113,10 @@ registerBlockType( 'tabs/tab', {
 	attributes: {
 		tabName: {
 			type: 'string',
+			default: ''
+		},
+		tabPlaceholder: {
+			type: 'string',
 			default: 'New Tab'
 		},
 		tabSlug: {
@@ -148,6 +152,7 @@ registerBlockType( 'tabs/tab', {
 						tagName='h3'
 						className={ "tab-name" }
 						value={ attributes.tabName }
+						placeholder={ attributes.tabPlaceholder }
 						onChange={ ( value ) =>{ 
 							setAttributes( {tabName:value, tabSlug: 'tab-' + cleanForSlug(value)} );
 							
