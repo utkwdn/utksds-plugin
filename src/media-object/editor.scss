@@ -5,23 +5,13 @@
  * which makes it higher in priority.
  */
 
-// .jumbotron.jumbotron-edit {
-//   padding: 4rem 2rem;
-//   margin-bottom: 2rem;
-//   background-color: #e9ecef;
-//   border-radius: 0.3rem;
-// }
-
-
-@import "./../utksds-framework/node_modules/bootstrap/scss/media";
-
 
 .media {
   img {
     margin-right: 2rem;
   }
  .block-editor-inner-blocks {
-  @extend .media-body;
+  //@extend .media-body;
  } 
 }
 
