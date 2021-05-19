@@ -484,7 +484,6 @@ registerBlockType( 'utksds/buttongroup', {
             					{ label: 'Small', value: ' btn-group-sm' },
             					{ label: 'Normal', value: ' btn-group-nrml' },
 								{ label: 'Large', value: ' btn-group-lg' },
-								{ label: 'Block', value: ' btn-group-block' },
         					] }
 							onChange={ ( value ) =>{
 								setAttributes( { groupSize: value } );
