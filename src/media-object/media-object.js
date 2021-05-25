@@ -166,11 +166,11 @@ registerBlockType( 'media-object/main', {
 		};
 
 		return (
-			<div className="media d-flex">
+			<div className="d-flex align-items-center">
 				<div class="flex-shrink-0">
 					{ mediaImage( attributes.imageUrl, attributes.imageAlt, attributes.imageSize ) }
 				</div>
-				<div className="media-body flex-grow-1 ms-3">
+				<div className="flex-grow-1 ms-3">
 					<InnerBlocks.Content />
 				</div>
 			</div>
