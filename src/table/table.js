@@ -86,7 +86,15 @@ function addAttributes( settings ) {
  */
 const withAdvancedControls = createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
-
+		
+		if( ! allowedBlocks.includes(props.name)){
+			return (
+				<BlockEdit { ...props } />
+			);
+		}
+		
+		console.log(props);
+		
 		const {
 			name,
 			attributes,
@@ -102,19 +110,35 @@ const withAdvancedControls = createHigherOrderComponent( ( BlockEdit ) => {
 			tblHover,
 			tblSmall,
 			tblResponsive,
+			className,
 		} = attributes;
 		
+		const blockProps = {
+			...props,
+			attributes: {
+				...attributes,
+				className: classnames( className, {
+					'table-dark': tblDark,
+					'table-striped': tblStripedbs,
+					'table-hover': tblHover,
+					'table-sm': tblSmall,
+					'table-responsive': tblResponsive,
+				}, tblHeader, tblBorder ),
+			},
+		};
 		
 		return (
 			<Fragment>
-				<BlockEdit {...props} />
+				<BlockEdit {...blockProps} />
 				{ isSelected && allowedBlocks.includes( name ) &&
 					<InspectorControls>
 						<PanelBody title='Table Properties' initialOpen={ true }>
 						<ToggleControl
 							label='Dark Colors'
 							checked={ tblDark }
-							onChange={ (newValue) => setAttributes( { tblDark: newValue } ) }
+							onChange={ (newValue) =>{ 
+								setAttributes( { tblDark: newValue } );
+							} }
 							help={ tblDark ? 'Dark Colors.' : 'Normal Colors.' }
 						/>
 						<RadioControl
