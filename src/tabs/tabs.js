@@ -84,7 +84,7 @@ registerBlockType( 'utksds/tabs', {
 		if(Array.isArray(attributes.tabNames) && attributes.tabNames.length){
 			for(var thisTab of attributes.tabNames){
 				listItems.push(<li class="nav-item" role="presentation">
-    				<a className={ "nav-link " + thisTab.tabActive } id={ thisTab.tabSlug + "-tab" } data-toggle="tab" href={ "#" + thisTab.tabSlug } role="tab" aria-controls={ thisTab.tabSlug } aria-selected="true">{ thisTab.tabName }</a>
+    				<button className={ "nav-link " + thisTab.tabActive } id={ thisTab.tabSlug + "-tab" } data-bs-toggle="tab" data-bs-target={ "#" + thisTab.tabSlug } type="button" role="tab" aria-controls={ thisTab.tabSlug } aria-selected="true">{ thisTab.tabName }</button>
   				</li>);
 			}
 		}
@@ -112,6 +112,10 @@ registerBlockType( 'tabs/tab', {
 	},
 	attributes: {
 		tabName: {
+			type: 'string',
+			default: ''
+		},
+		tabPlaceholder: {
 			type: 'string',
 			default: 'New Tab'
 		},
@@ -148,6 +152,7 @@ registerBlockType( 'tabs/tab', {
 						tagName='h3'
 						className={ "tab-name" }
 						value={ attributes.tabName }
+						placeholder={ attributes.tabPlaceholder }
 						onChange={ ( value ) =>{ 
 							setAttributes( {tabName:value, tabSlug: 'tab-' + cleanForSlug(value)} );
 							

@@ -18,7 +18,9 @@
 }
 @import "./../utksds-framework/src/scss/components/strip";
 
-.strip {
+.wp-block .strip {
+  width: 120%;
+  margin-left: -10%;
   .block-editor-inner-blocks {
     padding-left: $spacer;
     padding-right: $spacer;

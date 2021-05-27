@@ -42,6 +42,7 @@ wp.domReady( function() {
 	wp.blocks.unregisterBlockStyle( 'core/button', 'outline' );
 	wp.blocks.unregisterBlockStyle( 'core/button', 'fill' );
 	wp.richText.unregisterFormatType( 'core/text-color' );
+	wp.richText.unregisterFormatType( 'core/image' );
 
 	const allowedEmbedBlocks = [
     	'twitter',
@@ -80,6 +81,7 @@ wp.domReady( function() {
     	'core/spacer',
     	'core/group',
 		//'core/embed',
+		'core/video',
 	];
 
 	const disabledBlocks = blocktodisable.map( blockSlug => wp.blocks.unregisterBlockType( blockSlug ) );

@@ -5,15 +5,24 @@
  * that are used across the project.
 */
 
+
+
+
+// scss-docs-start import-stack
+// Configuration
+
 @import "./../utksds-framework/node_modules/bootstrap/scss/functions";
 @import "./../utksds-framework/src/scss/custom_variables";
 @import "./../utksds-framework/node_modules/bootstrap/scss/variables";
 @import "./../utksds-framework/node_modules/bootstrap/scss/mixins";
-//@import "./../utksds-framework/node_modules/bootstrap/scss/root";
-//@import "./../utksds-framework/node_modules/bootstrap/scss/reboot";
-//@import "./../utksds-framework/node_modules/bootstrap/scss/type";
-//@import "./../utksds-framework/node_modules/bootstrap/scss/images";
-// @import "./../utksds-framework/node_modules/bootstrap/scss/code";
+@import "./../utksds-framework/node_modules/bootstrap/scss/utilities";
+
+// Layout & components
+ @import "./../utksds-framework/node_modules/bootstrap/scss/root";
+ @import "./../utksds-framework/node_modules/bootstrap/scss/reboot";
+ @import "./../utksds-framework/node_modules/bootstrap/scss/type";
+// @import "./../utksds-framework/node_modules/bootstrap/scss/images";
+// @import "./../utksds-framework/node_modules/bootstrap/scss/containers";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/grid";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/tables";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/forms";
@@ -21,28 +30,31 @@
 // @import "./../utksds-framework/node_modules/bootstrap/scss/transitions";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/dropdown";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/button-group";
-// @import "./../utksds-framework/node_modules/bootstrap/scss/input-group";
-// @import "./../utksds-framework/node_modules/bootstrap/scss/custom-forms";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/nav";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/navbar";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/card";
+// @import "./../utksds-framework/node_modules/bootstrap/scss/accordion";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/breadcrumb";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/pagination";
-//@import "./../utksds-framework/node_modules/bootstrap/scss/badge";
-// @import "./../utksds-framework/node_modules/bootstrap/scss/jumbotron";
+// @import "./../utksds-framework/node_modules/bootstrap/scss/badge";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/alert";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/progress";
-// @import "./../utksds-framework/node_modules/bootstrap/scss/media";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/list-group";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/close";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/toasts";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/modal";
-// import "./../utksds-framework/node_modules/bootstrap/scss/tooltip";
+// @import "./../utksds-framework/node_modules/bootstrap/scss/tooltip";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/popover";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/carousel";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/spinners";
- @import "./../utksds-framework/node_modules/bootstrap/scss/utilities";
-// @import "./../utksds-framework/node_modules/bootstrap/scss/print";
+// @import "./../utksds-framework/node_modules/bootstrap/scss/offcanvas";
+
+// Helpers
+@import "./../utksds-framework/node_modules/bootstrap/scss/helpers";
+
+// Utilities
+@import "./../utksds-framework/node_modules/bootstrap/scss/utilities/api";
+
 
 
 // Custom Texture
@@ -127,16 +139,16 @@
 // ===================================================================
 /* Main column width */
 .wp-block {
-    max-width: 1080px;
+    max-width: 1140px;
 }
 
 /* Width of "wide" blocks */
 .wp-block[data-align="wide"] {
-    max-width: 1880px;
+    max-width: 1320px;
 }
 
 /* Width of "full-width" blocks */
-.wp-block[data-align="full"], .wp-block[data-type="strip/main"] {
+.wp-block[data-align="full"] {
     max-width: none;
 }
 
