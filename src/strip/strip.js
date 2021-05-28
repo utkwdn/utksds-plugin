@@ -59,15 +59,14 @@ registerBlockType( 'strip/main', {
       		options={ [
       			{ label: 'White', value: 'strip strip-white' },
       			{ label: 'Gray 1', value: 'strip strip-gray1' },
-      			{ label: 'Gray 2', value: 'strip strip-gray2' },
       			{ label: 'Smokey', value: 'strip strip-smokey text-white' },
       			{ label: 'Pattern', value: 'strip strip-pattern text-white' },
       			{ label: 'Seal', value: 'strip strip-seal' },
       			{ label: 'Ayres', value: 'strip strip-ayres text-white' },
       			{ label: 'Library', value: 'strip strip-library' },
       			{ label: 'Mountains', value: 'strip strip-smokies text-white' },
-      			{ label: 'Mountains Illustration', value: 'strip strip-mountains' },
-      			{ label: 'Pedestrian Walkway', value: 'strip strip-ped text-white' },
+      			{ label: 'Gingham', value: 'strip strip-gingham text-white' },
+      			{ label: 'Rain', value: 'strip strip-rain text-white' },
       		] }
       		onChange={ onImagePositionChange }
       	/>
