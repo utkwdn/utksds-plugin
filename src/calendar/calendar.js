@@ -1,6 +1,6 @@
 const { registerBlockType } = wp.blocks;
 const { InnerBlocks, InspectorControls, ColorPalette, RichText } = wp.blockEditor;
-const { PanelBody, PanelRow, RangeControl, TextControl, SelectControl, CheckboxControl, } = wp.components;
+const { PanelBody, PanelRow, RangeControl, TextControl, SelectControl, CheckboxControl, SandBox } = wp.components;
 const { createElement, } = wp.element;
 
 // import './style.scss';
@@ -10,6 +10,8 @@ import './editor.scss';
 import all_places from './places.js';
 import all_groups from './groups.js';
 import all_departments from './departments.js';
+
+var hasLoadedExternalCal = false;
 		
 registerBlockType( 'utksds/calendar', {
 	title: 'Calendar',
@@ -204,6 +206,13 @@ registerBlockType( 'utksds/calendar', {
 	
 		attributes.all_types = attributes.type.concat(attributes.topic, attributes.audience);
 		attributes.exAll_types = attributes.exType.concat(attributes.exTopic, attributes.exAudience);
+	
+		//var urlParams = Object.entries(CalScript).map(([key, val]) => `${key}=${encodeURIComponent(val)}`).join('&');
+
+		const calScript = document.createElement( 'script' );
+		calScript.src = "https://calendar.utk.edu/widget/" + attributes.widgetType + "?schools=utk&venues=" + attributes.place + "&departments=" +  attributes.department  + "&groups=" + attributes.group + "&types=" + attributes.all_types + "&days=" + attributes.daysAhead + "&num=" + attributes.numResults + "&tags=" + attributes.keywords + attributes.featuredS + attributes.sponsoredS + attributes.matchingS + attributes.pastS + attributes.hideDescS + attributes.truncateS + attributes.htmlDescS + attributes.evImageS + attributes.evTimeS + attributes.viewAllS + attributes.newWinS + attributes.hideDropS + "&match=" + attributes.mustMatch + "&exclude_types=" + attributes.exAll_types + "&container=localist-widget-12345" + attributes.incStyleS + "&template=" + attributes.template;
+	
+		console.log(calScript);
 		
 		return ( [
 			<InspectorControls>
@@ -659,12 +668,10 @@ registerBlockType( 'utksds/calendar', {
 					) }
 				</PanelBody>
 			</InspectorControls>,
-		  <div className="container bg-light p-4">
-		    <code>
-		      {"https://calendar.utk.edu/widget/" + attributes.widgetType + "?schools=utk&venues=" + attributes.place + "&departments=" +  attributes.department  + "&groups=" + attributes.group + "&types=" + attributes.all_types + "&days=" + attributes.daysAhead + "&num=" + attributes.numResults + "&tags=" + attributes.keywords + attributes.featuredS + attributes.sponsoredS + attributes.matchingS + attributes.pastS + attributes.hideDescS + attributes.truncateS + attributes.htmlDescS + attributes.evImageS + attributes.evTimeS + attributes.viewAllS + attributes.newWinS + attributes.hideDropS + "&match=" + attributes.mustMatch + "&exclude_types=" + attributes.exAll_types + "&container=localist-widget-12345" + attributes.incStyleS + "&template=" + attributes.template }
-		    </code>
-			<div id="localist-widget-12345" class="localist-widget"></div>
-		  </div>,
+			<SandBox
+				html={ "<div id='localist-widget-12345' class='localist-widget'></div><script defer type='text/javascript' src='https://calendar.utk.edu/widget/" + attributes.widgetType + "?schools=utk&venues=" + attributes.place + "&departments=" +  attributes.department  + "&groups=" + attributes.group + "&types=" + attributes.all_types + "&days=" + attributes.daysAhead + "&num=" + attributes.numResults + "&tags=" + attributes.keywords + attributes.featuredS + attributes.sponsoredS + attributes.matchingS + attributes.pastS + attributes.hideDescS + attributes.truncateS + attributes.htmlDescS + attributes.evImageS + attributes.evTimeS + attributes.viewAllS + attributes.newWinS + attributes.hideDropS + "&match=" + attributes.mustMatch + "&exclude_types=" + attributes.exAll_types + "&container=localist-widget-12345" + attributes.incStyleS + "&template=" + attributes.template + "'></script>" }
+				type="embed"
+			/>,
 		] );		
 	},
 	
@@ -672,7 +679,7 @@ registerBlockType( 'utksds/calendar', {
 
 		return (
 			<div>
-			<div id="localist-widget-12345" class="localist-widget"></div>
+			<div id="localist-widget-12345" className="localist-widget"></div>
 			<script defer type="text/javascript"
 src={"https://calendar.utk.edu/widget/" + attributes.widgetType + "?schools=utk&venues=" + attributes.place + "&departments=" +  attributes.department  + "&groups=" + attributes.group + "&types=" + attributes.all_types + "&days=" + attributes.daysAhead + "&num=" + attributes.numResults + "&tags=" + attributes.keywords + attributes.featuredS + attributes.sponsoredS + attributes.matchingS + attributes.pastS + attributes.hideDescS + attributes.truncateS + attributes.htmlDescS + attributes.evImageS + attributes.evTimeS + attributes.viewAllS + attributes.newWinS + attributes.hideDropS + "&match=" + attributes.mustMatch + "&exclude_types=" + attributes.exAll_types + "&container=localist-widget-12345" + attributes.incStyleS + "&template=" + attributes.template}></script>
 			</div>
