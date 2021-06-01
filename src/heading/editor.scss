@@ -12,19 +12,23 @@
 //   border-radius: 0.3rem;
 // }
 
-@import "./../utksds-framework/node_modules/bootstrap/scss/type";
+//@import "./../utksds-framework/node_modules/bootstrap/scss/type";
 
 .editor-styles-wrapper {
+  .is-style-display-1, .is-style-display-2, .is-style-display-3, .is-style-display-4 {
+    font-weight: 300;
+    line-height: 1.2;    
+  }
   .is-style-display-1 {
-    @extend .display-1;
+    font-size: 5rem;
   }
   .is-style-display-2 {
-    @extend .display-2;
+    font-size: 4.5rem;
   }
   .is-style-display-3 {
-    @extend .display-3;
+    font-size: 4rem;
   }
   .is-style-display-4 {
-    @extend .display-4;
+    font-size: 3.5rem;
   }  
 }

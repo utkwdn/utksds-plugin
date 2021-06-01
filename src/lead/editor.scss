@@ -11,5 +11,6 @@
 
 
 .editor-styles-wrapper p.lead {
-  @extend .lead;
-}
+  @include font-size($lead-font-size);
+  font-weight: $lead-font-weight;
+  }

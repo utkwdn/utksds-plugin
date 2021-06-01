@@ -18,9 +18,9 @@
 @import "./../utksds-framework/node_modules/bootstrap/scss/utilities";
 
 // Layout & components
- @import "./../utksds-framework/node_modules/bootstrap/scss/root";
- @import "./../utksds-framework/node_modules/bootstrap/scss/reboot";
- @import "./../utksds-framework/node_modules/bootstrap/scss/type";
+// @import "./../utksds-framework/node_modules/bootstrap/scss/root";
+// @import "./../utksds-framework/node_modules/bootstrap/scss/reboot";
+// @import "./../utksds-framework/node_modules/bootstrap/scss/type";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/images";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/containers";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/grid";
@@ -50,10 +50,10 @@
 // @import "./../utksds-framework/node_modules/bootstrap/scss/offcanvas";
 
 // Helpers
-@import "./../utksds-framework/node_modules/bootstrap/scss/helpers";
+//@import "./../utksds-framework/node_modules/bootstrap/scss/helpers";
 
 // Utilities
-@import "./../utksds-framework/node_modules/bootstrap/scss/utilities/api";
+//@import "./../utksds-framework/node_modules/bootstrap/scss/utilities/api";
 
 
 
@@ -103,7 +103,7 @@
 // @import "./../utksds-framework/src/scss/styles/search_forms";
 // @import "./../utksds-framework/src/scss/styles/typography";
 // @import "./../utksds-framework/src/scss/styles/background";
-@import "./../utksds-framework/src/scss/styles/textcolors";
+//@import "./../utksds-framework/src/scss/styles/textcolors";
 // @import "./../utksds-framework/src/scss/styles/pagination";
 
 
@@ -123,32 +123,4 @@
 
 
 
-
-// Typography.
-// ===================================================================
-.has-info-color {
-  
-}
-
-.block-editor-writing-flow {
-  color: $utsmokey;
-  font-family: $font-family-sans-serif;
-}
-
-// Here we make the editor a bit wider than default.
-// ===================================================================
-/* Main column width */
-.wp-block {
-    max-width: 1140px;
-}
-
-/* Width of "wide" blocks */
-.wp-block[data-align="wide"] {
-    max-width: 1320px;
-}
-
-/* Width of "full-width" blocks */
-.wp-block[data-align="full"] {
-    max-width: none;
-}
 
