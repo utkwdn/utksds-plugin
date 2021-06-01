@@ -100,20 +100,6 @@ registerBlockType( 'utksds/card', {
 		scope: [ 'block' ],
 	},
 	{
-		name: 'header-footer',
-		title: 'Header and footer',
-		description: 'Card with header and footer',
-		icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-heading" viewBox="0 0 16 16"><path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/><path d="M3 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0-5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1z"/></svg>),
-		innerBlocks: [ 
-			[ 'card/main', {}, [
-				[ 'card/header' ],
-				[ 'card/body', {}, [ [ 'card/paragraph' ] ] ],
-				[ 'card/footer' ],
-			] ],
-		],
-		scope: [ 'block' ],
-	},
-	{
 		name: 'title-body',
 		title: 'Title and text',
 		description: 'Card with title and text',
@@ -122,16 +108,6 @@ registerBlockType( 'utksds/card', {
 			[ 'card/main', {}, [
 				[ 'card/body', {}, [ [ 'card/heading' ], [ 'card/paragraph' ] ] ],
 			] ],
-		],
-		scope: [ 'block' ],
-	},
-	{
-		name: 'blank',
-		title: 'Blank',
-		description: 'Blank card to build from scratch',
-		icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-square" viewBox="0 0 16 16"><path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/></svg>),
-		innerBlocks: [ 
-			[ 'card/main' ],
 		],
 		scope: [ 'block' ],
 	},
@@ -281,7 +257,7 @@ registerBlockType( 'card/main', {
 		}
 		
 		return(
-			<InnerBlocks allowedBlocks={ columns_blocks } placeholder={ 'Choose an image, body, or other card component to place here.' } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+			<InnerBlocks allowedBlocks={ columns_blocks } placeholder={ 'Choose an image, body, or other card component to place here.' } templateLock={ false } renderAppender={ () => ( <div className="d-none"></div> ) } />
 		);
 	},
 	
