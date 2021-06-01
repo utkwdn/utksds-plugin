@@ -257,7 +257,7 @@ registerBlockType( 'card/main', {
 		}
 		
 		return(
-			<InnerBlocks allowedBlocks={ columns_blocks } placeholder={ 'Choose an image, body, or other card component to place here.' } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+			<InnerBlocks allowedBlocks={ columns_blocks } placeholder={ 'Choose an image, body, or other card component to place here.' } templateLock={ false } renderAppender={ () => ( <div className="d-none"></div> ) } />
 		);
 	},
 	
