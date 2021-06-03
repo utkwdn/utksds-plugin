@@ -65,8 +65,8 @@ registerBlockType( 'strip/main', {
       			{ label: 'Ayres', value: 'strip strip-ayres text-white' },
       			{ label: 'Library', value: 'strip strip-library' },
       			{ label: 'Mountains', value: 'strip strip-smokies text-white' },
-      			{ label: 'Gingham', value: 'strip strip-gingham text-white' },
-      			{ label: 'Rain', value: 'strip strip-rain text-white' },
+      			{ label: 'Gingham', value: 'strip strip-gingham' },
+      			{ label: 'Rain', value: 'strip strip-rain' },
       		] }
       		onChange={ onImagePositionChange }
       	/>

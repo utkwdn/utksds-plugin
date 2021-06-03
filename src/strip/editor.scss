@@ -29,24 +29,48 @@
     border: 1px solid $utgray2;
   }
   &.strip-pattern {
-  	background-image: url('https://images.utk.edu/designsystem/2020/assets/i/strip_pattern.gif');
+  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_pattern.gif');
   }
   &.strip-seal {
-  	background-image: url('https://images.utk.edu/designsystem/2020/assets/i/strip_seal.jpg');
+  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_seal.jpg');
   }
   &.strip-ayres {
-  	background-image: url('https://images.utk.edu/designsystem/2020/assets/i/strip_ayres.jpg');
+  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_ayres.jpg');
   }
   &.strip-library {
-  	background-image: url('https://images.utk.edu/designsystem/2020/assets/i/strip_library.jpg');
+  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_library.jpg');
   }
   &.strip-smokies {
-  	background-image: url('https://images.utk.edu/designsystem/2020/assets/i/strip_smokies.jpg');
+  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_smokies.jpg');
   }
   &.strip-mountains {
-  	background-image: url('https://images.utk.edu/designsystem/2020/assets/i/strip_mountains.svg');
+  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_mountains.svg');
   }
   &.strip-ped {
-  	background-image: url('https://images.utk.edu/designsystem/2020/assets/i/i/strip_ped.jpg');
+  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_ped.jpg');
+  }
+  &.strip-gingham {
+    background-color: $utorange;
+  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_gingham.gif');
+  	background-repeat: repeat;
+  }
+  &.strip-rain {
+    background-color: $white;
+  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_rain.gif');
+  	background-size: cover;
+  }
+  &.p-sm {
+    padding-bottom: 1 * $spacer;
+    padding-top: 1 * $spacer;
+  }
+  &.p-lg {
+    padding-bottom: 6 * $spacer;
+    padding-top: 6 * $spacer;
+  }
+  &.pb-0 {
+    padding-bottom: 0;
+  }
+  &.pt-0 {
+    padding-top: 0;
   }
 }

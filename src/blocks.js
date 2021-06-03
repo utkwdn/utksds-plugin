@@ -78,7 +78,7 @@ wp.domReady( function() {
     	'core/more',
     	'core/nextpage',
     	'core/separator',
-    	'core/spacer',
+    	//'core/spacer',
     	'core/group',
 		//'core/embed',
 		'core/video',
