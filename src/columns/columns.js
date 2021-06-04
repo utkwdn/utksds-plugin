@@ -1,13 +1,16 @@
-import { withDispatch, useDispatch } from '@wordpress/data';
+import { dropRight, times } from 'lodash';
+
+import { withDispatch, useDispatch, select } from '@wordpress/data';
 //import { select, useSelect } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
 //import { BlockVariationPicker } from '@wordpress/block-editor';
-import { createBlocksFromInnerBlocksTemplate, store as blocksStore } from '@wordpress/blocks';
+import { createBlock, createBlocksFromInnerBlocksTemplate, store as blocksStore } from '@wordpress/blocks';
 import { InnerBlocks, InspectorControls, __experimentalBlockVariationPicker, store as blockEditorStore } from '@wordpress/block-editor';
 import './editor.scss';
 
-const { registerBlockType, getBlockVariations } = wp.blocks;
-const { PanelBody, PanelRow } = wp.components;
+const { registerBlockType, getBlockVariations, } = wp.blocks;
+//const { BlockControls, } = wp.blockEditor;
+const { PanelBody, PanelRow, RangeControl, } = wp.components;
 
 const ALLOWED_BLOCKS = [ 'utksds/column' ];
 
@@ -28,6 +31,14 @@ registerBlockType( 'utksds/columns', {
 			type: 'string',
 			default: 'utksds/columns',
 		},
+		numCols: {
+			type: 'integer',
+			default: 0,
+		},
+		colWidths: {
+			type: 'array',
+			default: [ '' ],
+		},
 	},
 	providesContext: {
     	'columns/blockName': 'blockName',
@@ -40,7 +51,7 @@ registerBlockType( 'utksds/columns', {
 		icon: (
 			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-columns" viewBox="0 0 16 16"><path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V2zm8.5 0v8H15V2H8.5zm0 9v3H15v-3H8.5zm-1-9H1v3h6.5V2zM1 14h6.5V6H1v8z"/></svg>
 		),
-		attributes: { rowClass: 'column-100' },
+		attributes: { rowClass: 'column-100', numCols: 1, colWidths: [ '12' ] },
 		innerBlocks: [ [ 'utksds/column', { className: 'col-12' } ] ],
 		scope: [ 'block' ],
 	},
@@ -62,11 +73,11 @@ registerBlockType( 'utksds/columns', {
 				/>
 			</SVG>
 		),
-		attributes: { rowClass: 'column-50-50' },
+		attributes: { rowClass: 'column-50-50', numCols: 2, colWidths: [ '6', '6' ] },
 		isDefault: true,
 		innerBlocks: [ 
-		  [ 'utksds/column', { className: 'col-12 col-md-6' } ], 
-		  [ 'utksds/column', { className: 'col-12 col-md-6' } ] 
+		  [ 'utksds/column', { colWidth: 6 } ], 
+		  [ 'utksds/column', { colWidth: 6 } ] 
 		],
 		scope: [ 'block' ],
 	},
@@ -88,10 +99,10 @@ registerBlockType( 'utksds/columns', {
 				/>
 			</SVG>
 		),
-		attributes: { rowClass: 'column-30-70' },
+		attributes: { rowClass: 'column-30-70', numCols: 2, colWidths: [ '4', '8' ] },
 		innerBlocks: [
-			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
-			[ 'utksds/column', { className: 'col-12 col-md-8' } ],
+			[ 'utksds/column', { colWidth: 4 } ],
+			[ 'utksds/column', { colWidth: 8 } ],
 		],
 		scope: [ 'block' ],
 	},
@@ -113,10 +124,10 @@ registerBlockType( 'utksds/columns', {
 				/>
 			</SVG>
 		),
-		attributes: { rowClass: 'column-70-30' },
+		attributes: { rowClass: 'column-70-30', numCols: 2, colWidths: [ '8', '4' ] },
 		innerBlocks: [
-			[ 'utksds/column', { className: 'col-12 col-md-8' } ],
-			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
+			[ 'utksds/column', { colWidth: 8 } ],
+			[ 'utksds/column', { colWidth: 4 } ],
 		],
 		scope: [ 'block' ],
 	},
@@ -137,11 +148,11 @@ registerBlockType( 'utksds/columns', {
 				/>
 			</SVG>
 		),
-		attributes: { rowClass: 'column-33-33-33' },
+		attributes: { rowClass: 'column-33-33-33', numCols: 3, colWidths: [ '4', '4', '4' ] },
 		innerBlocks: [
-			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
-			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
-			[ 'utksds/column', { className: 'col-12 col-md-4' } ],
+			[ 'utksds/column', { colWidth: 4 } ],
+			[ 'utksds/column', { colWidth: 4 } ],
+			[ 'utksds/column', { colWidth: 4 } ],
 		],
 		scope: [ 'block' ],
 	},
@@ -162,11 +173,11 @@ registerBlockType( 'utksds/columns', {
 				/>
 			</SVG>
 		),
-		attributes: { rowClass: 'column-25-50-25' },
+		attributes: { rowClass: 'column-25-50-25', numCols: 3, colWidths: [ '3', '6', '3' ] },
 		innerBlocks: [
-			[ 'utksds/column', { className: 'col-12 col-md-3' } ],
-			[ 'utksds/column', { className: 'col-12 col-md-6' } ],
-			[ 'utksds/column', { className: 'col-12 col-md-3' } ],
+			[ 'utksds/column', { colWidth: 3 } ],
+			[ 'utksds/column', { colWidth: 6 } ],
+			[ 'utksds/column', { colWidth: 3 } ],
 		],
 		scope: [ 'block' ],
 	},
@@ -179,12 +190,12 @@ registerBlockType( 'utksds/columns', {
   <path fill-rule="nonzero" d="M39 12a2 2 0 011.995 1.85L41 14v20a2 2 0 01-1.85 1.995L39 36H9a2 2 0 01-1.995-1.85L7 34V14a2 2 0 011.85-1.995L9 12h30zm-24 2H9v20h6V14zm8 0h-6v20h6V14zm2 0v20h6V14h-6zm8 20h6V14h-6v20z" />
 </svg>
 		),
-		attributes: { rowClass: 'column-25-25-25-25' },
+		attributes: { rowClass: 'column-25-25-25-25', numCols: 4, colWidths: [ '3', '3', '3', '3' ] },
 		innerBlocks: [
-			[ 'utksds/column', { className: 'col-12 col-md-6 col-lg-3' } ],
-			[ 'utksds/column', { className: 'col-12 col-md-6 col-lg-3' } ],
-			[ 'utksds/column', { className: 'col-12 col-md-6 col-lg-3' } ],
-			[ 'utksds/column', { className: 'col-12 col-md-6 col-lg-3' } ],
+			[ 'utksds/column', { colWidth: 3 } ],
+			[ 'utksds/column', { colWidth: 3 } ],
+			[ 'utksds/column', { colWidth: 3 } ],
+			[ 'utksds/column', { colWidth: 3 } ],
 		],
 		scope: [ 'block' ],
 	},
@@ -214,14 +225,97 @@ registerBlockType( 'utksds/columns', {
 				} }
 			/>
 		);
+	
+		//console.log(colVariations);
+	
+		//console.log(select( blockEditorStore ).getBlocks( clientId ));
+		//create numCols and colWidths attributes in columns
+		//on change of numCols, recalculate colWidths and push results to child blocks
+		//on change of child block width, push number up to parent, recalculate the others, and push down to children
+		//widths need to be percentage on front end
+		//as last resort write loop of colVariations to create each control in DropdownMenu, replace innerBlocks with selected colVariation
+	
+		function changeCols( origNum, newNum ){
+			const { getBlocks } = select( blockEditorStore );
+
+			let innerColBlocks = getBlocks( clientId );
+
+			if(newNum > origNum){
+				var numNew = newNum - origNum;
+				var takenWidth = numNew * 3;
+				var removeWidth = takenWidth / origNum;
+				
+				innerColBlocks.forEach( (element, index) =>{
+					if(index === 0){
+						//console.log(innerColBlocks[0].attributes.colWidth);
+						innerColBlocks[0].attributes.colWidth = element.attributes.colWidth - Math.ceil(removeWidth);
+						//console.log(innerColBlocks[0].attributes.colWidth);
+					}else{
+						innerColBlocks[index].attributes.colWidth = element.attributes.colWidth - Math.floor(removeWidth);
+					}
+				} );
+				
+				innerColBlocks = [
+					...innerColBlocks,
+					...times( newNum - origNum, () => {
+						return createBlock( 'utksds/column', { colWidth: 3} );
+					} ),
+				];
+			}else{
+				var numNew = origNum - newNum;
+				var totalWidth = 0;
+				innerColBlocks.forEach( (element, index) =>{
+					if(index < newNum){
+						totalWidth = totalWidth + innerColBlocks[index].attributes.colWidth;
+					}
+				} );
+				var addedWith = 12 - totalWidth;
+				var addWidth = addedWith / newNum;
+				
+				innerColBlocks.forEach( (element, index) =>{
+					if( index === 0){
+						//console.log(innerColBlocks[index].attributes.colWidth);
+						innerColBlocks[0].attributes.colWidth = element.attributes.colWidth + Math.ceil(addWidth);
+						//console.log(innerColBlocks[index].attributes.colWidth);
+					}else if( index < newNum ){
+						innerColBlocks[index].attributes.colWidth = element.attributes.colWidth + Math.floor(addWidth);
+					}
+				} );
+				
+				innerColBlocks = dropRight(
+					innerColBlocks,
+					origNum - newNum
+				);
+			}
+
+			replaceInnerBlocks( clientId, innerColBlocks );
+		};
 		
-		return (
+		return ( [
+			<InspectorControls>
+				<PanelBody>
+					{ attributes.numCols > 0 && (
+					<PanelRow>
+						<RangeControl
+        					label="Number of Columns"
+							value={ attributes.numCols }
+				  			min={ 1 }
+							max={ 4 }
+        					onChange={ ( value ) =>{ 
+								setAttributes( {numCols:value} ); 
+								changeCols( attributes.numCols, value );
+							} }
+    					/>
+					</PanelRow>
+					) }
+				</PanelBody>
+			</InspectorControls>,
 			<div className="container">
 				<div className={"row " + attributes.rowClass }>
 					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } placeholder={ colPlaceholder } templateLock={ 'all' } />
 				</div>
-			</div>
-		);
+			</div>,
+		] );
 	},
 	
 	save: ( { attributes } ) => {
@@ -241,6 +335,16 @@ registerBlockType( 'utksds/column', {
 	parent: [ 'utksds/columns' ],
 	usesContext: [ 'card/blockName' ],
 	icon: 'editor-justify',
+	attributes: {
+		colClass: {
+			type: 'string',
+			default: ''
+		},
+		colWidth: {
+			type: 'integer',
+			default: 3
+		}
+	},
 	
 	edit: ( props ) => {
 		if(typeof props.context['card/blockName'] !== 'undefined' && props.context['card/blockName'] === 'utksds/card'){
@@ -250,8 +354,10 @@ registerBlockType( 'utksds/column', {
 			var these_blocks = null;
 		}
 		
+		console.log(props.className + ' col-12 col-md-' + props.attributes.colWidth);
+		
 		return (
-			<div className={ props.className } >
+			<div className={ props.className + ' col-12 col-md-' + props.attributes.colWidth } >
 				<InnerBlocks allowedBlocks={ these_blocks } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>
 		)
@@ -259,7 +365,7 @@ registerBlockType( 'utksds/column', {
 	
 	save: ( props ) => {
 		return (
-			<div className={ props.className }>
+			<div className={ props.className + ' col-12 col-md-' + props.attributes.colWidth }>
 				<InnerBlocks.Content />
 			</div>
 		);
