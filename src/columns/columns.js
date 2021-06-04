@@ -35,13 +35,10 @@ registerBlockType( 'utksds/columns', {
 			type: 'integer',
 			default: 0,
 		},
-		colWidths: {
-			type: 'array',
-			default: [ '' ],
-		},
 	},
 	providesContext: {
     	'columns/blockName': 'blockName',
+		'columns/numCols': 'numCols',
 	},
 	variations: [
 		{
@@ -51,7 +48,7 @@ registerBlockType( 'utksds/columns', {
 		icon: (
 			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-columns" viewBox="0 0 16 16"><path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V2zm8.5 0v8H15V2H8.5zm0 9v3H15v-3H8.5zm-1-9H1v3h6.5V2zM1 14h6.5V6H1v8z"/></svg>
 		),
-		attributes: { rowClass: 'column-100', numCols: 1, colWidths: [ '12' ] },
+		attributes: { rowClass: 'column-100', numCols: 1 },
 		innerBlocks: [ [ 'utksds/column', { className: 'col-12' } ] ],
 		scope: [ 'block' ],
 	},
@@ -73,7 +70,7 @@ registerBlockType( 'utksds/columns', {
 				/>
 			</SVG>
 		),
-		attributes: { rowClass: 'column-50-50', numCols: 2, colWidths: [ '6', '6' ] },
+		attributes: { rowClass: 'column-50-50', numCols: 2 },
 		isDefault: true,
 		innerBlocks: [ 
 		  [ 'utksds/column', { colWidth: 6 } ], 
@@ -99,7 +96,7 @@ registerBlockType( 'utksds/columns', {
 				/>
 			</SVG>
 		),
-		attributes: { rowClass: 'column-30-70', numCols: 2, colWidths: [ '4', '8' ] },
+		attributes: { rowClass: 'column-30-70', numCols: 2 },
 		innerBlocks: [
 			[ 'utksds/column', { colWidth: 4 } ],
 			[ 'utksds/column', { colWidth: 8 } ],
@@ -124,7 +121,7 @@ registerBlockType( 'utksds/columns', {
 				/>
 			</SVG>
 		),
-		attributes: { rowClass: 'column-70-30', numCols: 2, colWidths: [ '8', '4' ] },
+		attributes: { rowClass: 'column-70-30', numCols: 2 },
 		innerBlocks: [
 			[ 'utksds/column', { colWidth: 8 } ],
 			[ 'utksds/column', { colWidth: 4 } ],
@@ -148,7 +145,7 @@ registerBlockType( 'utksds/columns', {
 				/>
 			</SVG>
 		),
-		attributes: { rowClass: 'column-33-33-33', numCols: 3, colWidths: [ '4', '4', '4' ] },
+		attributes: { rowClass: 'column-33-33-33', numCols: 3 },
 		innerBlocks: [
 			[ 'utksds/column', { colWidth: 4 } ],
 			[ 'utksds/column', { colWidth: 4 } ],
@@ -173,7 +170,7 @@ registerBlockType( 'utksds/columns', {
 				/>
 			</SVG>
 		),
-		attributes: { rowClass: 'column-25-50-25', numCols: 3, colWidths: [ '3', '6', '3' ] },
+		attributes: { rowClass: 'column-25-50-25', numCols: 3 },
 		innerBlocks: [
 			[ 'utksds/column', { colWidth: 3 } ],
 			[ 'utksds/column', { colWidth: 6 } ],
@@ -190,7 +187,7 @@ registerBlockType( 'utksds/columns', {
   <path fill-rule="nonzero" d="M39 12a2 2 0 011.995 1.85L41 14v20a2 2 0 01-1.85 1.995L39 36H9a2 2 0 01-1.995-1.85L7 34V14a2 2 0 011.85-1.995L9 12h30zm-24 2H9v20h6V14zm8 0h-6v20h6V14zm2 0v20h6V14h-6zm8 20h6V14h-6v20z" />
 </svg>
 		),
-		attributes: { rowClass: 'column-25-25-25-25', numCols: 4, colWidths: [ '3', '3', '3', '3' ] },
+		attributes: { rowClass: 'column-25-25-25-25', numCols: 4 },
 		innerBlocks: [
 			[ 'utksds/column', { colWidth: 3 } ],
 			[ 'utksds/column', { colWidth: 3 } ],
@@ -333,34 +330,156 @@ registerBlockType( 'utksds/column', {
 		html: false,
 	},
 	parent: [ 'utksds/columns' ],
-	usesContext: [ 'card/blockName' ],
+	usesContext: [ 'card/blockName', 'columns/numCols' ],
 	icon: 'editor-justify',
 	attributes: {
-		colClass: {
-			type: 'string',
-			default: ''
-		},
 		colWidth: {
 			type: 'integer',
 			default: 3
 		}
 	},
 	
-	edit: ( props ) => {
-		if(typeof props.context['card/blockName'] !== 'undefined' && props.context['card/blockName'] === 'utksds/card'){
+	edit: ( { context, attributes, className, setAttributes, clientId } ) => {
+		if(typeof context['card/blockName'] !== 'undefined' && context['card/blockName'] === 'utksds/card'){
 			var these_blocks = [ 'card/body', 'card/image' ];
 		}else{
 			//var these_blocks = [ 'core/paragraph', 'core/heading', 'core/list', 'core/quote', 'core/table', 'core/image', 'core/gallery', 'core/file', 'core/video', 'core/freeform', 'core/code', 'core/navigation', 'core/shortcode', 'core/html', 'core/latest-posts', 'core/page-list', 'core/rss', 'core/social-link', 'core/embed', 'lead/main', 'media-object/main', 'utksds/tabs', 'horizontal-rule/main', 'alert/main', 'utksds/buttongroup', 'utksds/button', 'utksds/accordion', 'utksds/card', 'utksds/calendar' ] ;
 			var these_blocks = null;
 		}
 		
-		console.log(props.className + ' col-12 col-md-' + props.attributes.colWidth);
+		const { replaceInnerBlocks } = useDispatch( blockEditorStore );
+		const { getBlockRootClientId } = select( blockEditorStore );
+		const rootId = getBlockRootClientId( clientId );
+		const maxWidth = 12 - (context['columns/numCols'] - 1);
 		
-		return (
-			<div className={ props.className + ' col-12 col-md-' + props.attributes.colWidth } >
+		function resizeCols( origWidth, newWidth ){
+			const { getBlocks } = select( blockEditorStore );
+			let innerColBlocks = getBlocks( rootId );
+			
+			if(newWidth > origWidth){
+				var takenWidth = newWidth - origWidth;
+				var takePerCol = takenWidth / ( context['columns/numCols'] - 1 );
+				var remainder = 0;
+				var startHere = false
+				
+				do{
+				innerColBlocks.forEach( (element, index) =>{
+					if(index === 0 && element.clientId !== clientId){
+						if( element.attributes.colWidth === 1 ){
+							remainder = Math.ceil(takePerCol);
+						}else if( element.attributes.colWidth - ( Math.ceil(takePerCol) + remainder ) < 1 ){
+							if( element.attributes.colWidth - ( Math.ceil(takePerCol) + remainder ) === 0 ){
+								remainder = 1;
+							}else{
+								remainder = ( Math.ceil(takePerCol) + remainder ) - element.attributes.colWidth;
+							}
+							innerColBlocks[0].attributes.colWidth = 1
+						}else{
+							innerColBlocks[0].attributes.colWidth = element.attributes.colWidth - ( Math.ceil(takePerCol) + remainder );
+						}
+					}else if(index === 0 && element.clientId === clientId){
+						startHere = true;
+					}else if(startHere){
+						if( element.attributes.colWidth === 1 ){
+							remainder = Math.ceil(takePerCol);
+						}else if( element.attributes.colWidth - ( Math.ceil(takePerCol) + remainder ) < 1 ){
+							if( element.attributes.colWidth - ( Math.ceil(takePerCol) + remainder ) === 0 ){
+								remainder = 1;
+							}else{
+								remainder = ( Math.ceil(takePerCol) + remainder ) - element.attributes.colWidth;
+							}
+							innerColBlocks[index].attributes.colWidth = 1
+						}else{
+							innerColBlocks[index].attributes.colWidth = element.attributes.colWidth - ( Math.ceil(takePerCol) + remainder );
+						}
+						startHere = false;
+					}else if(element.clientId !== clientId){
+						if( element.attributes.colWidth === 1 ){
+							remainder = Math.floor(takePerCol);
+						}else if( element.attributes.colWidth - ( Math.floor(takePerCol) + remainder ) < 1 ){
+							if( element.attributes.colWidth - ( Math.floor(takePerCol) + remainder ) === 0 ){
+								remainder = 1;
+							}else{
+								remainder = ( Math.floor(takePerCol) + remainder ) - element.attributes.colWidth;
+							}
+							innerColBlocks[index].attributes.colWidth = 1
+						}else{
+							innerColBlocks[index].attributes.colWidth = element.attributes.colWidth - ( Math.floor(takePerCol) + remainder );
+							remainder = 0;
+						}
+					}
+				} );
+				} while(remainder !== 0);
+			}else{
+				var addedWidth = origWidth - newWidth;
+				var addPerCol = addedWidth / ( context['columns/numCols'] - 1 );
+				var remainder = 0;
+				var startHere = false;
+				
+				do{
+				innerColBlocks.forEach( (element, index) =>{
+					if( index === 0 && element.clientId !== clientId ){
+						if( element.attributes.colWidth === maxWidth ){
+							remainder = Math.ceil(addPerCol);
+						}else if( element.attributes.colWidth + Math.ceil(addPerCol) + remainder > maxWidth ){
+							remainder = ( element.attributes.colWidth + Math.ceil(addPerCol) + remainder ) - maxWidth;
+							innerColBlocks[0].attributes.colWidth = maxWidth;
+						}else{
+							innerColBlocks[0].attributes.colWidth = element.attributes.colWidth + Math.ceil(addPerCol) + remainder;
+							remainder = 0;
+						}
+					}else if( index === 0 && element.clientId === clientId ){
+						startHere = true;
+					}else if(startHere){
+						if( element.attributes.colWidth === maxWidth ){
+							remainder = Math.ceil(addPerCol);
+						}else if( element.attributes.colWidth + Math.ceil(addPerCol) + remainder > maxWidth ){
+							remainder = ( element.attributes.colWidth + Math.ceil(addPerCol) + remainder ) - maxWidth;
+							innerColBlocks[index].attributes.colWidth = maxWidth;
+						}else{
+							innerColBlocks[index].attributes.colWidth = element.attributes.colWidth + Math.ceil(addPerCol) + remainder;
+							remainder = 0
+						}
+						startHere = false;
+					}else if(element.clientId !== clientId){
+						if( element.attributes.colWidth === maxWidth ){
+							remainder = Math.floor(addPerCol);
+						}else if( element.attributes.colWidth + Math.floor(addPerCol) + remainder > maxWidth ){
+							remainder = ( element.attributes.colWidth + Math.floor(addPerCol) + remainder ) - maxWidth;
+							innerColBlocks[index].attributes.colWidth = maxWidth;
+						}else{
+							innerColBlocks[index].attributes.colWidth = element.attributes.colWidth + Math.floor(addPerCol) + remainder;
+							remainder = 0;
+						}
+					}
+				} );
+				} while(remainder !== 0);
+			}
+			
+			replaceInnerBlocks( rootId, innerColBlocks );
+		};
+		
+		return ( [
+			<InspectorControls>
+				<PanelBody>
+					<PanelRow>
+						<RangeControl
+        					label="Column Width"
+							value={ attributes.colWidth }
+				  			min={ 1 }
+							max={ maxWidth }
+        					onChange={ ( value ) =>{ 
+								resizeCols( attributes.colWidth, value )		
+								setAttributes( {colWidth:value} ); 
+							} }
+    					/>
+					</PanelRow>
+				</PanelBody>
+			</InspectorControls>,
+			<div className={ className + ' col-12 col-md-' + attributes.colWidth } >
 				<InnerBlocks allowedBlocks={ these_blocks } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>
-		)
+		] )
 	},
 	
 	save: ( props ) => {
