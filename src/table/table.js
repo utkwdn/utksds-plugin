@@ -33,10 +33,10 @@ registerBlockStyle('core/table', {
 	label: 'Dark'
 } );
 
-registerBlockStyle('core/table', {
+/*registerBlockStyle('core/table', {
 	name: 'table-dark is-style-table-striped',
 	label: 'Dark Striped'
-} );
+} );*/
 
 function setBlockCustomClassName( className, blockName ) {
     return blockName === 'core/table' ? className + ' table' : className;
