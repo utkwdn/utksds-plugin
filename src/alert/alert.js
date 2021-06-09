@@ -84,7 +84,9 @@ registerBlockType( 'alert/main', {
 		const { imagePostion } = attributes;
 		
 		return (
-			<InnerBlocks.Content />
+		  <div className={ imagePostion }>
+   			<InnerBlocks.Content />
+			</div>
 		);
 	},
 			
