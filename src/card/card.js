@@ -235,7 +235,7 @@ registerBlockType( 'utksds/card', {
 		const { backgroundColor } = attributes;
 
 		return (
-			<div className={'card ' + attributes.cardColor.slug }>
+			<div className={'card ' + attributes.cardColor.text + ' ' + attributes.cardColor.slug }>
 				<InnerBlocks.Content />
 			</div>
 		);
