@@ -18,12 +18,26 @@
 }
 @import "./../utksds-framework/src/scss/components/strip";
 
+.block-editor-block-list__block[data-type="strip/main"] {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
 .wp-block .strip {
-  width: 120%;
-  margin-left: -10%;
+  width: calc(100% + 20px);
+  margin-left: -10px;
+  @media screen and (min-width: 1440px) {
+    width: calc(100vw - 280px);
+    margin-left: calc(-50vw + 705px);
+    //margin-left: -10%;
+  }
   .block-editor-inner-blocks {
     padding-left: $spacer;
     padding-right: $spacer;
+  }
+  &.py-0 {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
   }
   &.strip-white {
     border: 1px solid $utgray2;
