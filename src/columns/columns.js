@@ -459,18 +459,32 @@ registerBlockType( 'utksds/column', {
 			replaceInnerBlocks( rootId, innerColBlocks );
 		};
 		
+		function toInt(value){
+			var percent = value/100;
+			var colNum = 12 * percent;
+			
+			return Math.round(colNum);
+		};
+		
+		function toPercent(value){
+			var percent = value/12;
+			var colPercent = percent * 100;
+			
+			return Math.round(colPercent);
+		};
+		
 		return ( [
 			<InspectorControls>
 				<PanelBody>
 					<PanelRow>
 						<RangeControl
-        					label="Column Width"
-							value={ attributes.colWidth }
-				  			min={ 1 }
-							max={ maxWidth }
+        					label="Percent Width"
+							value={ toPercent(attributes.colWidth) }
+				  			min={ toPercent(1) }
+							max={ toPercent(maxWidth) }
         					onChange={ ( value ) =>{ 
-								resizeCols( attributes.colWidth, value )		
-								setAttributes( {colWidth:value} ); 
+								resizeCols( attributes.colWidth, toInt(value) )		
+								setAttributes( {colWidth:toInt(value)} ); 
 							} }
     					/>
 					</PanelRow>
