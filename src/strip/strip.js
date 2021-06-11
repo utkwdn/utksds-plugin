@@ -1,8 +1,8 @@
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, InspectorControls, ColorPalette, RichText } = wp.editor;
+const { InnerBlocks, InspectorControls, ColorPalette, RichText } = wp.blockEditor;
 const { PanelBody, PanelRow, RangeControl, RadioControl } = wp.components;
 const { withState } = wp.compose;
-const ALLOWED_BLOCKS = [  'core/button', 'core/separator', 'core/paragraph', 'core/heading', 'utksds/columns' ];
+const ALLOWED_BLOCKS = [  'utksds/button', 'core/separator', 'core/paragraph', 'core/heading', 'utksds/columns' ];
 
 /*
 const alertImgPosition = withState( {
@@ -24,10 +24,6 @@ const alertImgPosition = withState( {
 // import './style.scss';
 // Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
-
-
-
-
 		
 registerBlockType( 'strip/main', {
 	title: 'Content Strip',
@@ -41,6 +37,10 @@ registerBlockType( 'strip/main', {
 			type: 'string',
 			default: 'strip strip-gray1',
 		},
+		padding: {
+			type: 'integer',
+			default: 0,
+		},
 	},	 
 	edit: ( { attributes, setAttributes } ) => {
 		const { imagePostion } = attributes;
@@ -52,6 +52,13 @@ registerBlockType( 'strip/main', {
 		return ( [
 			<InspectorControls>
 				<PanelBody title='Style'>
+				<RangeControl
+					label="Margin"
+						value={ attributes.padding }
+        				onChange={ ( value ) =>{ setAttributes( {padding:value} ); } }
+						min={ 0 }
+						max={ 5 }
+				/>
 				<RadioControl
       		label="Background"
       		help="Choose a background."
@@ -72,7 +79,7 @@ registerBlockType( 'strip/main', {
       	/>
 				</PanelBody>
 			</InspectorControls>,
-		  <div className={ imagePostion }>
+		  <div className={ imagePostion + " gap-" + attributes.padding }>
 				<InnerBlocks templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>,
 		] );
@@ -82,7 +89,7 @@ registerBlockType( 'strip/main', {
 		const { imagePostion } = attributes;
 		
 		return (
-			<div className={ imagePostion }>
+			<div className={ imagePostion + " gap-" + attributes.padding }>
 			  <div className="container">
 				<InnerBlocks.Content />
 				</div>
