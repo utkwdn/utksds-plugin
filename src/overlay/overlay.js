@@ -39,6 +39,18 @@ registerBlockType( 'utksds/overlay', {
 			type: 'string',
 			default: '',
 		},
+		overColor: {
+			type: 'object',
+			default: { name: 'Primary', slug: 'bg-primary', color: '#58595b', text: 'text-light'}
+		},
+		overOpacity: {
+			type: 'integer',
+			default: 0,
+		},
+	},
+	providesContext: {
+		'overlay/bgColor': 'overColor',	
+		'overlay/opacity': 'overOpacity',
 	},
 				  
 	edit: ( { clientId, attributes, setAttributes } ) => {
@@ -65,8 +77,42 @@ registerBlockType( 'utksds/overlay', {
 				></MediaPlaceholder>
 		);
 
+		const colors = [
+			{ name: 'Primary', slug: 'bg-primary', color: '#58595b', text: 'text-light'},
+			{ name: 'Secondary', slug: 'bg-secondary', color: '#006c93', text: 'text-light'},
+			{ name: 'Light', slug: 'bg-light', color: '#F6F6F6', text: 'text-primary'},
+			{ name: 'Dark', slug: 'bg-dark', color: '#4b4b4b', text: 'text-light'},
+		];
+
 		return ( [
-			<div className="card wpeditor-card-overlay">
+			<InspectorControls>
+				<PanelBody>
+				<PanelRow>
+					<ColorPalette 
+							colors = { colors }
+							value={ attributes.overColor.color }
+							onChange={ ( value ) =>{
+								const thisColor = getColorObjectByColorValue( colors, value );
+								setAttributes( { overColor:thisColor } );
+								//console.log(thisColor);
+							} }
+							disableCustomColors={ true }
+							clearable={ false }
+						/>
+				</PanelRow>
+				<PanelRow>
+					<RangeControl
+        				label="Overlay Opacity"
+						value={ attributes.overOpacity }
+        				onChange={ ( value ) =>{ setAttributes( {overOpacity:value} ); } }
+						min={ 0 }
+						max={ 100 }
+						step={ 10 }
+    				/>
+				</PanelRow>
+				</PanelBody>
+			</InspectorControls>,
+			<div className={ "card wpeditor-card-overlay " + attributes.overColor.slug + " opacity-" + attributes.overOpacity + " " + attributes.overColor.text }>
 				{ attributes.imageUrl !== '' && (
   				<img src={ attributes.imageUrl } className="card-img" alt={ attributes.imageAlt } />
 				) }
@@ -79,15 +125,13 @@ registerBlockType( 'utksds/overlay', {
 	save: ( { attributes } ) => {
 		
 		return (
-			<div className="card">
+			<div className={ "card " + attributes.overColor.slug + " opacity-" + attributes.overOpacity + " " + attributes.overColor.text }>
 				<img
 					src={ attributes.imageUrl }
 					className={ 'card-img' }
 					alt={ attributes.imageAlt }
 				/>
-  				<div className="card-img-overlay">
-    				<InnerBlocks.Content />
-				</div>
+    			<InnerBlocks.Content />
 			</div>
 		);
 	},
@@ -100,10 +144,11 @@ registerBlockType( 'overlay/main', {
 	supports: {
 		html: false,
 	},
-	edit: ( props ) => {
+	usesContext: [ 'overlay/bgColor', 'overlay/opacity', ],
+	edit: ( { context } ) => {
 		
 		return(
-			<div className="card-img-overlay">
+			<div className={ "card-img-overlay" }>
 				<InnerBlocks allowedBlocks={ [ 'card/heading', 'card/paragraph', 'utksds/button', 'lead/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } /></div>
 		);
 	},
