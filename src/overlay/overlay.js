@@ -112,7 +112,7 @@ registerBlockType( 'utksds/overlay', {
 				</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<div className={ "card wpeditor-card-overlay" }>
+			<div className={ "card wpeditor-card-overlay " + attributes.overColor.slug + " opacity-" + attributes.overOpacity + " " + attributes.overColor.text }>
 				{ attributes.imageUrl !== '' && (
   				<img src={ attributes.imageUrl } className="card-img" alt={ attributes.imageAlt } />
 				) }
@@ -125,15 +125,13 @@ registerBlockType( 'utksds/overlay', {
 	save: ( { attributes } ) => {
 		
 		return (
-			<div className="card">
+			<div className={ "card " + attributes.overColor.slug + " opacity-" + attributes.overOpacity + " " + attributes.overColor.text }>
 				<img
 					src={ attributes.imageUrl }
 					className={ 'card-img' }
 					alt={ attributes.imageAlt }
 				/>
-  				<div className={ "card-img-overlay " + attributes.overColor.slug + " opacity-" + attributes.overOpacity + " " + attributes.overColor.text }>
-    				<InnerBlocks.Content />
-				</div>
+    			<InnerBlocks.Content />
 			</div>
 		);
 	},
@@ -150,7 +148,7 @@ registerBlockType( 'overlay/main', {
 	edit: ( { context } ) => {
 		
 		return(
-			<div className={ "card-img-overlay " + context['overlay/bgColor'].slug + " opacity-" + context['overlay/opacity'] + " " + context['overlay/bgColor'].text }>
+			<div className={ "card-img-overlay" }>
 				<InnerBlocks allowedBlocks={ [ 'card/heading', 'card/paragraph', 'utksds/button', 'lead/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } /></div>
 		);
 	},
