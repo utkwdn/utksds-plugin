@@ -37,10 +37,14 @@ registerBlockType( 'strip/main', {
 			type: 'string',
 			default: 'strip strip-gray1',
 		},
-		padding: {
+		spacing: {
 			type: 'integer',
 			default: 0,
 		},
+		padding:{
+			type: 'string',
+			default: 'py-0',
+		}
 	},	 
 	edit: ( { attributes, setAttributes } ) => {
 		const { imagePostion } = attributes;
@@ -53,9 +57,9 @@ registerBlockType( 'strip/main', {
 			<InspectorControls>
 				<PanelBody title='Style'>
 				<RangeControl
-					label="Margin"
-						value={ attributes.padding }
-        				onChange={ ( value ) =>{ setAttributes( {padding:value} ); } }
+					label="Spacing"
+						value={ attributes.spacing }
+        				onChange={ ( value ) =>{ setAttributes( {spacing:value} ); } }
 						min={ 0 }
 						max={ 5 }
 				/>
@@ -77,9 +81,23 @@ registerBlockType( 'strip/main', {
       		] }
       		onChange={ onImagePositionChange }
       	/>
+				<RadioControl
+      				label="Padding"
+      				help="Choose the amount of vertical padding."
+      				selected={ attributes.padding }
+      				options={ [
+      					{ label: 'No Padding', value: 'py-0' },
+      					{ label: 'Small', value: 'p-sm' },
+      					{ label: 'Medium', value: 'p-md' },
+      					{ label: 'Large', value: 'p-lg' },
+      					{ label: 'No Bottom Padding', value: 'pb-0' },
+      					{ label: 'No Top Padding', value: 'pt-0' },
+      				] }
+      				onChange={ ( value ) =>{ setAttributes( {padding:value} ); } }
+      			/>
 				</PanelBody>
 			</InspectorControls>,
-		  <div className={ imagePostion + " gap-" + attributes.padding }>
+		  <div className={ imagePostion + " " + attributes.padding " gap-" + attributes.spacing }>
 				<InnerBlocks templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>,
 		] );
@@ -89,7 +107,7 @@ registerBlockType( 'strip/main', {
 		const { imagePostion } = attributes;
 		
 		return (
-			<div className={ imagePostion + " gap-" + attributes.padding }>
+			<div className={ imagePostion + " " + attributes.padding " gap-" + attributes.spacing }>
 			  <div className="container">
 				<InnerBlocks.Content />
 				</div>
