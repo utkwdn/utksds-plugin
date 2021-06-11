@@ -97,7 +97,7 @@ registerBlockType( 'strip/main', {
       			/>
 				</PanelBody>
 			</InspectorControls>,
-		  <div className={ imagePostion + " " + attributes.padding + " gap-" + attributes.spacing }>
+		  <div className={ imagePostion + " " + attributes.padding + " my-" + attributes.spacing }>
 				<InnerBlocks templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>,
 		] );
@@ -107,7 +107,7 @@ registerBlockType( 'strip/main', {
 		const { imagePostion } = attributes;
 		
 		return (
-			<div className={ imagePostion + " " + attributes.padding + " gap-" + attributes.spacing }>
+			<div className={ imagePostion + " " + attributes.padding + " my-" + attributes.spacing }>
 			  <div className="container">
 				<InnerBlocks.Content />
 				</div>
