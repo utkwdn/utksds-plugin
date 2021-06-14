@@ -91,7 +91,11 @@ registerBlockType( 'media-object/main', {
 		const ovPlaceholder = (
 			<MediaPlaceholder
 				onSelect={ media => {
-					setAttributes( { imageAlt: media.alt, imageUrl: media.url, imageSize: media.width } );
+					if(media.width > 640){
+						setAttributes( { imageAlt: media.alt, imageUrl: media.url, imageSize: 640 } );
+					}else{
+						setAttributes( { imageAlt: media.alt, imageUrl: media.url, imageSize: media.width } );
+					}
 					
 					replaceInnerBlocks(
 						clientId,
@@ -116,7 +120,7 @@ registerBlockType( 'media-object/main', {
 						value={ attributes.imageSize }
         				onChange={ ( value ) =>{ setAttributes( {imageSize:value} ); } }
 						min={ 50 }
-						max={ 500 }
+						max={ 640 }
     				/>
 				</PanelBody>
 			</InspectorControls>,
