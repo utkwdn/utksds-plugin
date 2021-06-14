@@ -11,8 +11,20 @@ import './editor.scss';
 const { registerBlockType, getBlockVariations, } = wp.blocks;
 //const { BlockControls, } = wp.blockEditor;
 const { PanelBody, PanelRow, RangeControl, } = wp.components;
+const { createHigherOrderComponent } = wp.compose;
 
 const ALLOWED_BLOCKS = [ 'utksds/column' ];
+
+const withCustomClassName = createHigherOrderComponent((BlockListBlock) => {
+  return props => {
+	if(props.name === 'utksds/column'){
+    	return <BlockListBlock { ...props } className={ 'col-12 col-md-' + props.attributes.colWidth } />
+	}else{
+		return <BlockListBlock { ...props } />
+	}
+  }
+}, 'withCustomClassName')
+wp.hooks.addFilter('editor.BlockListBlock', 'my-plugin/with-custom-class-name', withCustomClassName)
 
 registerBlockType( 'utksds/columns', {
 	title: 'Columns',
@@ -339,7 +351,7 @@ registerBlockType( 'utksds/column', {
 		}
 	},
 	
-	edit: ( { context, attributes, className, setAttributes, clientId } ) => {
+	edit: ( { context, attributes, className, setAttributes, clientId, } ) => {
 		if(typeof context['card/blockName'] !== 'undefined' && context['card/blockName'] === 'utksds/card'){
 			var these_blocks = [ 'card/body', 'card/image' ];
 		}else{
