@@ -31,8 +31,6 @@ function addSupports( settings ) {
 	add allowedBlocks restriction*/
 	if( typeof settings.supports !== 'undefined' && allowedBlocks.includes( settings.name ) ){
 		
-		console.log(settings);
-		
 		settings.supports = Object.assign( settings.supports, {
 			defaultStylePicker:false,
 			fontSize:false,
