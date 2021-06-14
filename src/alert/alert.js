@@ -1,5 +1,5 @@
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, InspectorControls, ColorPalette, RichText } = wp.editor;
+const { InnerBlocks, InspectorControls, ColorPalette, RichText } = wp.blockEditor;
 const { PanelBody, PanelRow, RangeControl, RadioControl } = wp.components;
 const { withState } = wp.compose;
 const ALLOWED_BLOCKS = [ 'core/paragraph' ];
@@ -42,6 +42,11 @@ registerBlockType( 'alert/main', {
 			type: 'string',
 			default: 'alert alert-primary',
 		},
+		text: {
+			type: 'string',
+			source: 'html',
+			selector: 'span'
+		},
 	},
 				  
 	edit: ( { attributes, setAttributes } ) => {
@@ -74,8 +79,15 @@ registerBlockType( 'alert/main', {
       	/>
 				</PanelBody>
 			</InspectorControls>,
-		  <div className={ imagePostion }>
-				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
+		  	<div className={ imagePostion }>
+				<RichText 
+					tagName='span'
+					placeholder={ attributes.placeholder }
+					value={ attributes.text }
+					allowedFormats={ [ 'core/bold', 'core/italic' ] }
+					onChange={ ( value ) => setAttributes( { text: value } ) }
+					withoutInteractiveFormatting
+				/>
 			</div>,
 		] );
 	},
@@ -84,7 +96,12 @@ registerBlockType( 'alert/main', {
 		const { imagePostion } = attributes;
 		
 		return (
-			<InnerBlocks.Content />
+			<div className={ imagePostion }>
+				<RichText.Content
+					tagName="span"
+					value={ attributes.text }
+				/>
+			</div>
 		);
 	},
 			
