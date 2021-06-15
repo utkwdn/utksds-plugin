@@ -502,7 +502,7 @@ registerBlockType( 'utksds/column', {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<div className={ className + ' col-12 col-md-' + attributes.colWidth } >
+			<div className={ className } >
 				<InnerBlocks allowedBlocks={ these_blocks } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>
 		] )
