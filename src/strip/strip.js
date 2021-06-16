@@ -69,15 +69,15 @@ registerBlockType( 'strip/main', {
       		selected={ imagePostion }
       		options={ [
       			{ label: 'White', value: 'strip strip-white' },
-      			{ label: 'Gray 1', value: 'strip strip-gray1' },
+      			{ label: 'Light Gray', value: 'strip strip-gray1' },
       			{ label: 'Smokey', value: 'strip strip-smokey text-white' },
-      			{ label: 'Pattern', value: 'strip strip-pattern text-white' },
+      			//{ label: 'Pattern', value: 'strip strip-pattern text-white' },
       			{ label: 'Seal', value: 'strip strip-seal' },
-      			{ label: 'Ayres', value: 'strip strip-ayres text-white' },
-      			{ label: 'Library', value: 'strip strip-library' },
+      			//{ label: 'Ayres', value: 'strip strip-ayres text-white' },
+      			//{ label: 'Library', value: 'strip strip-library' },
       			{ label: 'Mountains', value: 'strip strip-smokies text-white' },
-      			{ label: 'Gingham', value: 'strip strip-gingham' },
-      			{ label: 'Rain', value: 'strip strip-rain' },
+      			//{ label: 'Gingham', value: 'strip strip-gingham' },
+      			//{ label: 'Rain', value: 'strip strip-rain' },
       		] }
       		onChange={ onImagePositionChange }
       	/>
