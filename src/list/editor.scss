@@ -14,10 +14,10 @@
 
 //@import "./../utksds-framework/node_modules/bootstrap/scss/type";
 
-.is-style-list-roman {
-  list-style: upper-roman;
+.editor-styles-wrapper ol.is-style-list-roman {
+  list-style-type: upper-roman;
 }
 
-.is-style-list-letters {
-  list-style: lower-alpha;
+.editor-styles-wrapper ol.is-style-list-letters {
+  list-style-type: lower-alpha;
 }
