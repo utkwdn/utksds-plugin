@@ -32,13 +32,12 @@
     //margin-left: -10%;
   }
   .block-editor-inner-blocks {
-    padding-left: $spacer;
-    padding-right: $spacer;
+    min-height: 1rem;
   }
-  &.py-0 {
-    padding-top: 0.25rem !important;
-    padding-bottom: 0.25rem !important;
-  }
+//  &.py-0 {
+//    padding-top: 0.25rem !important;
+//    padding-bottom: 0.25rem !important;
+//  }
   &.strip-white {
     border: 1px solid $utgray2;
   }
