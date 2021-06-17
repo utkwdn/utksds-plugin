@@ -374,7 +374,7 @@ registerBlockType( 'utksds/button', {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<div className={ 'btn ' + attributes.buttonColor.slug + attributes.buttonSize }>
+			<div className={ 'btn mb-3 ' + attributes.buttonColor.slug + attributes.buttonSize }>
 			<RichText 
 				tagName='span'
 				placeholder={ attributes.placeholder }
@@ -403,7 +403,7 @@ registerBlockType( 'utksds/button', {
 		return(
 			<a
 				type = 'button'
-				className={ 'btn save ' + attributes.buttonColor.slug + attributes.buttonSize }
+				className={ 'btn save mb-3 ' + attributes.buttonColor.slug + attributes.buttonSize }
 				href={ attributes.url }
 				title={ attributes.title }
 				target={ attributes.linkTarget }
