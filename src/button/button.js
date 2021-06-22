@@ -106,6 +106,10 @@ registerBlockType( 'utksds/button', {
 			type: 'object',
 			default: { name: 'Primary', slug: 'btn-primary', color: '#58595b'}
 		},
+		buttonText: {
+			type: 'boolean',
+			default: false,
+		},
 		buttonOutline: {
 			type: 'boolean',
 			default: false
@@ -290,12 +294,12 @@ registerBlockType( 'utksds/button', {
 			</BlockControls>,
 			<InspectorControls>
 				<PanelBody title='Colors' initialOpen={ true }>
-					{ ! attributes.buttonOutline && (
+					{ ! attributes.buttonOutline && ! attributes.buttonText && (
 					<PanelRow>
 						<p><strong>Select a Button color:</strong></p>
 					</PanelRow>
 					) }
-					{ ! attributes.buttonOutline && (
+					{ ! attributes.buttonOutline && ! attributes.buttonText && (
 					<PanelRow>
 						<ColorPalette 
 							colors = { colors }
@@ -310,12 +314,12 @@ registerBlockType( 'utksds/button', {
 						/>
 					</PanelRow>
 					) }
-					{ attributes.buttonOutline && (
+					{ attributes.buttonOutline && ! attributes.buttonText && (
 					<PanelRow>
 						<p><strong>Select a Button Outline color:</strong></p>
 					</PanelRow>
 					) }
-					{ attributes.buttonOutline && (
+					{ attributes.buttonOutline && ! attributes.buttonText && (
 					<PanelRow>
 						<ColorPalette 
 							colors = { outlineColors }
@@ -330,6 +334,7 @@ registerBlockType( 'utksds/button', {
 						/>
 					</PanelRow>
 					) }
+					{ ! attributes.buttonText && (
 					<PanelRow>
 						<ToggleControl
 							label='Button Fill'
@@ -345,6 +350,26 @@ registerBlockType( 'utksds/button', {
 								}else{
 									const thisColor = getColorObjectByColorValue( colors, attributes.buttonColor.color );
 									setAttributes( { buttonColor:thisColor } );
+								}
+			
+								//console.log(attributes.buttonColor);
+							} }
+						/>
+					</PanelRow>
+					) }
+					<PanelRow>
+						<ToggleControl
+							label='Text Link'
+							help={ attributes.buttonText ? 'Button is a text link.' : 'Button is a button.' }
+							checked={ attributes.buttonText }
+							onChange={ () => {
+								setAttributes( { buttonText: !attributes.buttonText } );
+								//console.log(attributes.buttonOutline);
+								
+								if( !attributes.buttonText === true ){
+									setAttributes( { buttonColor:{ name: 'Link', slug: 'btn-link', color: ''} } );
+								}else{
+									setAttributes( { buttonColor:{ name: 'Primary', slug: 'btn-primary', color: '#58595b'}, buttonOutline:false } );
 								}
 			
 								//console.log(attributes.buttonColor);
