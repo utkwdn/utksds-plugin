@@ -1,4 +1,6 @@
 import { Path, SVG } from '@wordpress/components';
+import { store as blocksStore } from '@wordpress/blocks';
+import { store as blockEditorStore } from '@wordpress/block-editor';
 //import svgr from '@svgr/core';
 import './editor.scss';
 
@@ -9,7 +11,7 @@ const { withState, compose, ifCondition } = wp.compose;
 const { Fragment, useCallback, useState, renderToString, createElement, isValidElement } = wp.element;
 const { rawShortcut, displayShortcut } = wp.keycodes;
 const { create, concat, registerFormatType, insert, insertObject, toHTMLString, removeFormat } = wp.richText;
-const { withSelect } = wp.data;
+const { withSelect, useDispatch, dispatch, select } = wp.data;
 
 const LinkControl = __experimentalLinkControl;
 
@@ -132,11 +134,43 @@ registerBlockType( 'utksds/button', {
 		},
 	},
 	
-	edit: ( { isSelected, attributes, ClassName, setAttributes } ) => {
+	edit: ( { isSelected, attributes, ClassName, setAttributes, clientId, } ) => {
 		//const { url, linkTarget } = attributes;
 
 		const urlIsSet = !! attributes.url;
 		const urlIsSetandSelected = urlIsSet && isSelected;
+		
+		const { getBlockRootClientId, getBlockAttributes } = select( blockEditorStore );
+		const { updateBlockAttributes } = dispatch( 'core/block-editor' );
+		const rootId = getBlockRootClientId( clientId );
+		//const par_attributes = getBlockAttributes(rootId);
+		
+		function makeBlockButton(rootID){
+			if(rootID && rootID !== ''){
+				var root_attributes = getBlockAttributes(rootID);
+			
+				if( root_attributes.className && ! root_attributes.className.includes("d-grid gap-2") ){
+					root_attributes.className = root_attributes.className + " d-grid gap-2";
+				}else if( ! root_attributes.className ){
+					root_attributes.className = "d-grid gap-2";
+				}
+				
+				updateBlockAttributes(rootID, { className: root_attributes.className } );
+			}
+		}
+	
+		function removeBlockButton(rootID){
+			if(rootID && rootID !== ''){
+				var root_attributes = getBlockAttributes(rootId);
+			
+				if( root_attributes.className && root_attributes.className.includes("d-grid gap-2") ){
+					root_attributes.className = root_attributes.className.replace(" d-grid gap-2", "" );
+					root_attributes.className = root_attributes.className.replace("d-grid gap-2", "" );
+				}
+				
+				updateBlockAttributes(rootID, { className: root_attributes.className } );
+			}
+		}
 
 		const unlinkButton = () => {
 			setAttributes( {
@@ -393,7 +427,12 @@ registerBlockType( 'utksds/button', {
         					] }
 							onChange={ ( value ) =>{
 								setAttributes( { buttonSize: value } );
-								//console.log(value);
+								
+								if(value === " btn-block"){
+									makeBlockButton(rootId);
+								}else{
+									 removeBlockButton(rootId);
+								}
 							} }
 						/>
 					</PanelRow>
