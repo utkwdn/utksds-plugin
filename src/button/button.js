@@ -120,6 +120,10 @@ registerBlockType( 'utksds/button', {
 			type: 'string',
 			default: ' btn-nrml'
 		},
+		blockClass: {
+			type: 'string',
+			default: '',
+		},
 		iconCode: {
 			type: 'object',
 			default: { name:'', string:'', code:null }
@@ -139,38 +143,6 @@ registerBlockType( 'utksds/button', {
 
 		const urlIsSet = !! attributes.url;
 		const urlIsSetandSelected = urlIsSet && isSelected;
-		
-		const { getBlockRootClientId, getBlockAttributes } = select( blockEditorStore );
-		const { updateBlockAttributes } = dispatch( 'core/block-editor' );
-		const rootId = getBlockRootClientId( clientId );
-		//const par_attributes = getBlockAttributes(rootId);
-		
-		function makeBlockButton(rootID){
-			if(rootID && rootID !== ''){
-				var root_attributes = getBlockAttributes(rootID);
-			
-				if( root_attributes.className && ! root_attributes.className.includes("d-grid gap-2") ){
-					root_attributes.className = root_attributes.className + " d-grid gap-2";
-				}else if( ! root_attributes.className ){
-					root_attributes.className = "d-grid gap-2";
-				}
-				
-				updateBlockAttributes(rootID, { className: root_attributes.className } );
-			}
-		}
-	
-		function removeBlockButton(rootID){
-			if(rootID && rootID !== ''){
-				var root_attributes = getBlockAttributes(rootId);
-			
-				if( root_attributes.className && root_attributes.className.includes("d-grid gap-2") ){
-					root_attributes.className = root_attributes.className.replace(" d-grid gap-2", "" );
-					root_attributes.className = root_attributes.className.replace("d-grid gap-2", "" );
-				}
-				
-				updateBlockAttributes(rootID, { className: root_attributes.className } );
-			}
-		}
 
 		const unlinkButton = () => {
 			setAttributes( {
@@ -216,7 +188,7 @@ registerBlockType( 'utksds/button', {
 			var iconResults = { name:'', string:'', code:null };
 		}
 			
-		//console.log(attributes.useIcon);
+		//console.log(buttonBody);
 
 		return ( [
 			<BlockControls>
@@ -429,42 +401,45 @@ registerBlockType( 'utksds/button', {
 								setAttributes( { buttonSize: value } );
 								
 								if(value === " btn-block"){
-									makeBlockButton(rootId);
+									setAttributes( { blockClass: "d-grid gap-2" } );
 								}else{
-									 removeBlockButton(rootId);
+									setAttributes( { blockClass: "" } );
 								}
 							} }
 						/>
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<div className={ 'btn mb-3 ' + attributes.buttonColor.slug + attributes.buttonSize }>
-			<RichText 
-				tagName='span'
-				placeholder={ attributes.placeholder }
-				value={ attributes.text }
-				allowedFormats={ [ 'core/bold', 'core/italic' ] }
-				onChange={ ( value ) => setAttributes( { text: value } ) }
-				withoutInteractiveFormatting
-			/>
-			{ iconResults.code !== null && attributes.useIcon === false && (
-			<Icon
-				icon={ iconResults.code }
-				size={ attributes.iconSize }
-			/>
-			) }
-			{ attributes.iconCode.code !== null && attributes.useIcon === true && (
-			<Icon
-				icon={ attributes.iconCode.code }
-				size={ attributes.iconSize }
-			/>
-			) }
+			<div className={ attributes.blockClass }>
+				<div className={ 'btn mb-3 ' + attributes.buttonColor.slug + attributes.buttonSize }>
+					<RichText 
+						tagName='span'
+						placeholder={ attributes.placeholder }
+						value={ attributes.text }
+						allowedFormats={ [ 'core/bold', 'core/italic' ] }
+						onChange={ ( value ) => setAttributes( { text: value } ) }
+						withoutInteractiveFormatting
+					/>
+					{ iconResults.code !== null && attributes.useIcon === false && (
+					<Icon
+						icon={ iconResults.code }
+						size={ attributes.iconSize }
+					/>
+					) }
+					{ attributes.iconCode.code !== null && attributes.useIcon === true && (
+					<Icon
+						icon={ iconResults.code }
+						size={ attributes.iconSize }
+					/>
+					) }
+				</div>
 			</div>
 		] );
 	},
 	
 	save: ( { attributes } ) => {	
 		return(
+			<div className={ attributes.blockClass }>
 			<a
 				type = 'button'
 				className={ 'btn save mb-3 ' + attributes.buttonColor.slug + attributes.buttonSize }
@@ -482,6 +457,7 @@ registerBlockType( 'utksds/button', {
 					value={ attributes.iconCode.string }
 				/>
 			</a>
+			</div>
 		);
 	},
 } );
