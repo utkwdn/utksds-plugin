@@ -115,13 +115,20 @@ function utds_cgb_block_assets() { // phpcs:ignore
 // Hook: Block assets.
 add_action( 'init', 'utds_cgb_block_assets' );
 
-
-
-
 /**
  * Deregister the gutenberg styles
  */
 add_action( 'wp_print_styles', 'wps_deregister_styles', 100 );
 function wps_deregister_styles() {
     wp_dequeue_style( 'wp-block-library' );
+}
+
+//Make Customizer secondary color value avaliable in Gutenberg//Add script for calendar block in the editor
+if( get_theme_mod('site_secondary_color') ){
+	function utksds_secondary_color_script(){
+		wp_register_script( 'sc-handle-header', '' );
+		wp_enqueue_script( 'sc-handle-header' );
+		wp_add_inline_script( 'sc-handle-header', 'const secondaryColor = ' . get_theme_mod('site_secondary_color') );
+	}
+	add_action( 'enqueue_block_editor_assets', 'utksds_secondary_color_script', 100 );
 }
