@@ -3,6 +3,7 @@ import { select } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
 import { store as blocksStore } from '@wordpress/blocks';
 import { store as blockEditorStore } from '@wordpress/block-editor';
+import { siteColors } from '../globals.js'
 
 const { registerBlockType, registerBlockVariation, getBlockVariations, createBlocksFromInnerBlocksTemplate } = wp.blocks;
 const { InnerBlocks, InspectorControls, ColorPalette, RichText, getColorObjectByColorValue, __experimentalBlockVariationPicker } = wp.blockEditor;
@@ -121,6 +122,9 @@ registerBlockType( 'utksds/card', {
 			name,
     		setAttributes
   		} = props;
+	
+		console.log(siteColors);
+		console.log(secondaryColor);
 	
 		const cardVariations = getBlockVariations( 'utksds/card' );
 		const { replaceInnerBlocks } = useDispatch( blockEditorStore );
