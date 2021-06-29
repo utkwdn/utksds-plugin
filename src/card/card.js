@@ -123,9 +123,6 @@ registerBlockType( 'utksds/card', {
     		setAttributes
   		} = props;
 	
-		console.log(siteColors);
-		console.log(secondaryColor);
-	
 		const cardVariations = getBlockVariations( 'utksds/card' );
 		const { replaceInnerBlocks } = useDispatch( blockEditorStore );
 	
