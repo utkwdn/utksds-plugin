@@ -3,7 +3,7 @@ import { select } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
 import { store as blocksStore } from '@wordpress/blocks';
 import { store as blockEditorStore } from '@wordpress/block-editor';
-import { siteColors } from '../globals.js'
+import { siteColors, textColors } from '../globals.js'
 
 const { registerBlockType, registerBlockVariation, getBlockVariations, createBlocksFromInnerBlocksTemplate } = wp.blocks;
 const { InnerBlocks, InspectorControls, ColorPalette, RichText, getColorObjectByColorValue, __experimentalBlockVariationPicker } = wp.blockEditor;
@@ -32,7 +32,7 @@ const IMAGE_TEMPLATE = [
 // Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
 
-const bgColors = [
+/*const bgColors = [
 	{ name: 'Light', slug: 'bg-light', color: '#F6F6F6', text: 'text-primary'},
 	{ name: 'Primary', slug: 'bg-primary', color: '#58595b', text: 'text-light'},
 	{ name: 'Secondary', slug: 'bg-secondary', color: '#006c93', text: 'text-light'},
@@ -48,7 +48,7 @@ const textColors = [
 	{ name: 'Light', slug: 'text-light', color: '#F6F6F6'},
 	{ name: 'Primary', slug: 'text-primary', color: '#58595b'},
 	{ name: 'Secondary', slug: 'text-secondary', color: '#006c93'},
-];
+];*/
 
 /*registerBlockVariation( 'core/image', {
 	name: 'captop',
@@ -170,10 +170,10 @@ registerBlockType( 'utksds/card', {
 					{ ! attributes.cardOutline && (
 					<PanelRow>
 						<ColorPalette 
-							colors = { bgColors }
+							colors = { siteColors }
 							value={ attributes.cardColor.color }
 							onChange={ ( value ) =>{
-								const thisColor = getColorObjectByColorValue( bgColors, value );
+								var thisColor = getColorObjectByColorValue( siteColors, value );
 								setAttributes( { cardColor:thisColor } );
 								//console.log(thisColor);
 							} }
@@ -190,12 +190,13 @@ registerBlockType( 'utksds/card', {
 					{ attributes.cardOutline && (
 					<PanelRow>
 						<ColorPalette 
-							colors = { borderColors }
+							colors = { siteColors }
 							value={ attributes.cardColor.color }
 							onChange={ ( value ) =>{
-								const thisColor = getColorObjectByColorValue( borderColors, value );
+								var thisColor = getColorObjectByColorValue( siteColors, value );
+								thisColor.slug = thisColor.slug.replace("bg-", "border-");
+								thisColor.text = "";
 								setAttributes( { cardColor:thisColor } );
-								//console.log(thisColor);
 							} }
 							disableCustomColors={ true }
 							clearable={ false }
@@ -212,10 +213,12 @@ registerBlockType( 'utksds/card', {
 								//console.log(attributes.buttonOutline);
 								
 								if( !attributes.cardOutline === true ){
-									const thisColor = getColorObjectByColorValue( borderColors, attributes.cardColor.color );
+									var thisColor = getColorObjectByColorValue( siteColors, attributes.cardColor.color );
+									thisColor.slug = thisColor.slug.replace("bg-", "border-");
+									thisColor.text = "";
 									setAttributes( { cardColor:thisColor } );
 								}else{
-									const thisColor = getColorObjectByColorValue( bgColors, attributes.cardColor.color );
+									var thisColor = getColorObjectByColorValue( siteColors, attributes.cardColor.color );
 									setAttributes( { cardColor:thisColor } );
 								}
 			
@@ -286,8 +289,8 @@ registerBlockType( 'card/body', {
 	edit: ( { attributes, context, setAttributes } ) => {
 	
 		if( context['card/cardOutline'] === true ){
-			const thisColor = getColorObjectByColorValue( textColors, context['card/cardColor'].color );
-			setAttributes( { textColor:thisColor.slug } );
+			const thisColor = context['card/cardColor'].slug.replace('border-', 'text-');
+			setAttributes( { textColor:thisColor } );
 		}
 		
 		if( context['card/cardOutline'] === false ){

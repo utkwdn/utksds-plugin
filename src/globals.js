@@ -7,4 +7,10 @@ let siteColors = [
 
 siteColors.push(secondaryColor);
 
-export { siteColors };
+let textColors = [
+	{ name: 'Light', slug: 'text-light', color: '#F6F6F6'},
+	{ name: 'Primary', slug: 'text-primary', color: '#58595b'},
+	{ name: 'Secondary', slug: 'text-secondary', color: '#006c93'},
+];
+
+export { siteColors, textColors };
