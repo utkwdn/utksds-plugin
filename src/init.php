@@ -148,21 +148,6 @@ function ukds_customizecolor_register( $wp_customize ) {
 							<div class="color_sample <?php echo esc_attr($color_attributes['text']); ?>" style="background-color: <?php echo esc_attr( $color_attributes['color'] ); ?>">Sample Text.</div>
 						</label>
 					</input>
-					<?php /*<input type="hidden" value="<?php echo esc_attr( $color_attributes['slug']); ?>" <?php 
-						if( $this->value('secondary_color_name') == $value ){
-							$this->link('secondary_color_slug');
-						}
-					?> />
-					<input type="hidden" value="<?php echo esc_attr($color_attributes['color']); ?>" <?php 
-						if( $this->value('secondary_color_name') == $value ){
-							$this->link('secondary_color_color');
-						}
-					?> />
-					<input type="hidden" value="<?php echo esc_attr($color_attributes['text']); ?>" <?php 
-						if( $this->value('secondary_color_name') == $value ){
-							$this->link('secondary_color_text');
-						}
-					?> /> */ ?>
 				<?php endforeach; ?>
 				</div>
 			</label>
@@ -221,7 +206,7 @@ function ukds_customizecolor_register( $wp_customize ) {
 
 add_action( 'customize_register', 'ukds_customizecolor_register' );
 
-//Make Customizer secondary color value avaliable in Gutenberg//Add script for calendar block in the editor
+//Make Customizer secondary color value avaliable in Gutenberg
 if( get_theme_mod('site_secondary_color') ){
 	function utksds_secondary_color_script(){
 		wp_register_script( 'sc-handle-header', '' );
