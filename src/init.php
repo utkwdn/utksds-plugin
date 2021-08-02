@@ -162,7 +162,7 @@ function ukds_customizecolor_register( $wp_customize ) {
     	'utk_secondary_color',
     	array(
         	'label' => __('Secondary Color Options'),
-        	'section' => 'color-settings',
+        	'section' => 'utkds-color-settings',
         	'settings' => [
             	'secondary_color' => 'site_secondary_color',
         	],
@@ -198,7 +198,7 @@ function ukds_customizecolor_register( $wp_customize ) {
     	)
 	));
 	
-	$wp_customize->add_section('color-settings' , array(
+	$wp_customize->add_section('utkds-color-settings' , array(
       'title' => __('Secondary Color','utthehill'),
       'description' => __('<p>This is the secondary color information used throughout the Gutenberg editor.</p>','utthehill'),
    ));
