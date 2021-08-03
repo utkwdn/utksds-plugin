@@ -157,6 +157,8 @@ function ukds_customizecolor_register( $wp_customize ) {
 	
 	$wp_customize->add_setting('site_secondary_color', array());
 	
+	include 'colors.php';
+	
 	$wp_customize->add_control(new UTK_Customize_Secondary_Color_Control(
     	$wp_customize,
     	'utk_secondary_color',
@@ -167,32 +169,7 @@ function ukds_customizecolor_register( $wp_customize ) {
             	'secondary_color' => 'site_secondary_color',
         	],
         	// specify the kind of input field
-        	'choices' => array (
-				'Torch' => array(
-					'name' => 'Torch',
-					'slug' => 'bg-torch',
-					'color' => '#E65933',
-					'text' => 'text-primary'
-				),
-				'Sunsphere' => array(
-					'name' => 'Sunsphere',
-					'slug' => 'bg-sunsphere',
-					'color' => '#FED535',
-					'text' => 'text-primary'
-				),
-				'Globe' => array(
-					'name' => 'Globe',
-					'slug' => 'bg-globe',
-					'color' => '#006C93',
-					'text' => 'text-light'
-				),
-				'Energy' => array(
-					'name' => 'Energy',
-					'slug' => 'bg-energy',
-					'color' => '#EE3E80',
-					'text' => 'text-primary'
-				),
-			),
+        	'choices' => $colors,
         	'description' => __('Choose a secondary color to appear throughout your site.'),
         	'priority' => 80
     	)
