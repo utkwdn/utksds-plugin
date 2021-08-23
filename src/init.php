@@ -115,13 +115,80 @@ function utds_cgb_block_assets() { // phpcs:ignore
 // Hook: Block assets.
 add_action( 'init', 'utds_cgb_block_assets' );
 
-
-
-
 /**
  * Deregister the gutenberg styles
  */
 add_action( 'wp_print_styles', 'wps_deregister_styles', 100 );
 function wps_deregister_styles() {
     wp_dequeue_style( 'wp-block-library' );
+}
+//Add secondary color control to Customizer
+function ukds_customizecolor_register( $wp_customize ) {
+		class UTK_Customize_Secondary_Color_Control extends WP_Customize_Control {
+
+		public $type = 'utk_secondary_color';
+
+		public function render_content() {
+		?>
+			<label>
+				<?php if ( ! empty( $this->label ) ){ ?>
+					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+				<?php }
+				if ( ! empty( $this->description ) ){ ?>
+					<span class="description customize-control-description"><?php echo esc_html( $this->description ); ?></span>
+				<?php } 
+				if ( ! empty( $this->value('secondary_color') ) ){ ?>
+					<span class="description customize-control-description">Chosen: <?php echo esc_html( $this->value('secondary_color') ); ?></span>
+				<?php } ?>
+				<div class="secondary-color-group">
+				<?php foreach ( $this->choices as $color_attributes ) : ?>
+					<input name="secondary_color_<?php echo esc_attr( $this->id ); ?>" id="secondary_color_<?php echo esc_attr( $this->id ); ?>_<?php echo esc_attr( $color_attributes['name'] ); ?>" type="radio" value="<?php echo esc_attr( json_encode($color_attributes) ); ?>" <?php $this->link('secondary_color'); checked( $this->value('secondary_color'), json_encode($color_attributes) ); ?> >
+						<label for="secondary_color_<?php echo esc_attr( $this->id ); ?>_<?php echo esc_attr( $color_attributes['name'] ); ?>" class="color-option">
+							<span><?php echo esc_attr( $color_attributes['name'] ); ?></span>
+							<div class="color_sample <?php echo esc_attr($color_attributes['text']); ?>" style="background-color: <?php echo esc_attr( $color_attributes['color'] ); ?>">Sample Text.</div>
+						</label>
+					</input>
+				<?php endforeach; ?>
+				</div>
+			</label>
+		<?php }
+
+	}
+	
+	$wp_customize->add_setting('site_secondary_color', array());
+	
+	include 'colors.php';
+	
+	$wp_customize->add_control(new UTK_Customize_Secondary_Color_Control(
+    	$wp_customize,
+    	'utk_secondary_color',
+    	array(
+        	'label' => __('Secondary Color Options'),
+        	'section' => 'utkds-color-settings',
+        	'settings' => [
+            	'secondary_color' => 'site_secondary_color',
+        	],
+        	// specify the kind of input field
+        	'choices' => $colors,
+        	'description' => __('Choose a secondary color to appear throughout your site.'),
+        	'priority' => 80
+    	)
+	));
+	
+	$wp_customize->add_section('utkds-color-settings' , array(
+      'title' => __('Secondary Color','utthehill'),
+      'description' => __('<p>This is the secondary color information used throughout the Gutenberg editor.</p>','utthehill'),
+   ));
+}
+
+add_action( 'customize_register', 'ukds_customizecolor_register' );
+
+//Make Customizer secondary color value avaliable in Gutenberg
+if( get_theme_mod('site_secondary_color') ){
+	function utksds_secondary_color_script(){
+		wp_register_script( 'sc-handle-header', '' );
+		wp_enqueue_script( 'sc-handle-header' );
+		wp_add_inline_script( 'sc-handle-header', 'const secondaryColor = ' . get_theme_mod('site_secondary_color') );
+	}
+	add_action( 'enqueue_block_editor_assets', 'utksds_secondary_color_script', 100 );
 }
