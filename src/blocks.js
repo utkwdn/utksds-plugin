@@ -39,8 +39,7 @@ import './paragraph/paragraph.js';
 
 // remove default button styles, declare default and/or plugin created blocks to selectively disable
 wp.domReady( function() {
-	wp.blocks.unregisterBlockStyle( 'core/button', 'outline' );
-	wp.blocks.unregisterBlockStyle( 'core/button', 'fill' );
+	
 	wp.richText.unregisterFormatType( 'core/text-color' );
 	wp.richText.unregisterFormatType( 'core/image' );
 
