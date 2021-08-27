@@ -24,25 +24,122 @@
 }
 
 .wp-block .strip {
-  width: calc(100% + 20px);
-  margin-left: -10px;
-  @media screen and (min-width: 1440px) {
-    width: calc(100vw - 280px);
-    margin-left: calc(-50vw + 705px);
-    //margin-left: -10%;
-  }
+  width: calc(100vw - 160px);
+  margin-left: -($spacer / 2);
   .block-editor-inner-blocks {
-    min-height: 1rem;
+    padding: ($spacer / 2);
   }
-//  &.py-0 {
-//    padding-top: 0.25rem !important;
-//    padding-bottom: 0.25rem !important;
+   @include media-breakpoint-up(sm) {
+  //  max-width: 540px;  
+  margin-left: -($spacer / 2);
+
+  }
+  @include media-breakpoint-up(md) {
+  //  max-width: 720px;  
+  margin-left: -($spacer / 2);
+
+  }
+  @include media-breakpoint-up(lg) {
+  //  max-width: 1060px;  
+  margin-left: -($spacer / 2);
+
+  }
+  @include media-breakpoint-up(xl) {
+   margin-left: calc(-50vw + 651px);
+  -ms-margin-left: calc(-50vw + 641px);
+  }
+  @include media-breakpoint-up(xxl) {
+   margin-left: calc(-50vw + 651px);
+  -ms-margin-left: calc(-50vw + 641px);
+  }
+}
+
+
+body.is-fullscreen-mode {
+  .wp-block .strip {
+    width: 100vw;
+    margin-left: -($spacer / 2);
+    .block-editor-inner-blocks {
+      padding: ($spacer / 2);
+    }
+     @include media-breakpoint-up(sm) {
+    //  max-width: 540px;  
+    margin-left: -($spacer / 2);
+  
+    }
+    @include media-breakpoint-up(md) {
+    //  max-width: 720px;  
+    margin-left: -($spacer / 2);
+  
+    }
+    @include media-breakpoint-up(lg) {
+    //  max-width: 1060px;  
+    margin-left: -($spacer / 2);
+  
+    }
+    @include media-breakpoint-up(xl) {
+     margin-left: calc(-50vw + 570px);
+    -ms-margin-left: calc(-50vw + 560px);
+    }
+    @include media-breakpoint-up(xxl) {
+     margin-left: calc(-50vw + 570px);
+    -ms-margin-left: calc(-50vw + 560px);
+    }
+  }
+}
+
+
+div.is-sidebar-opened {
+  .wp-block .strip {
+    width: calc(100vw - 280px);
+    @include media-breakpoint-up(xl) {
+     margin-left: -($spacer / 2);
+    }
+    @media (min-width: 1450px) {
+     margin-left: calc(-50vw + 710px);
+    -ms-margin-left: calc(-50vw + 700px);
+    }
+    @include media-breakpoint-up(xxl) {
+     margin-left: calc(-50vw + 710px);
+    -ms-margin-left: calc(-50vw + 700px);
+    }
+  }
+}
+
+body:not(.is-fullscreen-mode) {
+  div.is-sidebar-opened {
+    .wp-block .strip {
+      width: calc(100vw - 440px);
+      @include media-breakpoint-up(xl) {
+       margin-left: -($spacer / 2);
+      }
+      @include media-breakpoint-up(xxl) {
+       margin-left: calc(-50vw + 790px);
+      -ms-margin-left: calc(-50vw + 700px);
+      }
+    }
+  }
+}
+
+
+
+
+.wp-block .strip {
+//  width: calc(100% + 20px);
+//  margin-left: -10px;
+//  @media screen and (min-width: 1440px) {
+//    width: calc(100vw - 280px);
+//    margin-left: calc(-50vw + 705px);
+//    //margin-left: -10%;
 //  }
+  .block-editor-inner-blocks {
+    min-height: 3rem;
+  }
+
+
+
   &.strip-white {
     border: 1px solid $utgray2;
-  }
-  &.strip-pattern {
-  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_pattern.gif');
   }
   &.strip-seal {
   	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_seal.jpg');
@@ -59,19 +156,7 @@
   &.strip-mountains {
   	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_mountains.svg');
   }
-  &.strip-ped {
-  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_ped.jpg');
-  }
-  &.strip-gingham {
-    background-color: $utorange;
-  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_gingham.gif');
-  	background-repeat: repeat;
-  }
-  &.strip-rain {
-    background-color: $white;
-  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_rain.gif');
-  	background-size: cover;
-  }
+
   &.p-sm {
     padding-bottom: 1 * $spacer;
     padding-top: 1 * $spacer;
