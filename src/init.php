@@ -37,7 +37,11 @@ function utdesign_blocks_category($categories, $post) {
 	);
 };
 
-add_filter('block_categories', 'utdesign_blocks_category', 10, 2);
+if(class_exists('WP_Block_Editor_Context')){
+	add_filter('block_categories_all', 'utdesign_blocks_category', 10, 2);
+}else{
+	add_filter('block_categories', 'utdesign_blocks_category', 10, 2);
+}
 
 /**
  * Enqueue Gutenberg block assets for both frontend + backend.
@@ -192,3 +196,8 @@ if( get_theme_mod('site_secondary_color') ){
 	}
 	add_action( 'enqueue_block_editor_assets', 'utksds_secondary_color_script', 100 );
 }
+
+//$post_editor_context = new WP_Block_Editor_Context( array( 'post' => get_post() ) );
+
+//$js_code = '<script>console.log(' . json_encode($post_editor_context, JSON_HEX_TAG) . ')</script>';
+//echo $js_code;
