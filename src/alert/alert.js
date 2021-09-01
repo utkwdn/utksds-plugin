@@ -47,6 +47,10 @@ registerBlockType( 'alert/main', {
 			source: 'html',
 			selector: 'span'
 		},
+		placeholder: {
+			type: 'string',
+			default: 'Enter alert text here.',
+		},
 	},
 				  
 	edit: ( { attributes, setAttributes } ) => {

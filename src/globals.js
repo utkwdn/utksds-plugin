@@ -5,7 +5,9 @@ let siteColors = [
 	{ name: 'Secondary', slug: 'bg-secondary', color: '#006c93', text: 'text-light'},
 ];
 
-siteColors.push(secondaryColor);
+if(typeof secondaryColor !== 'undefined'){
+	siteColors.push(secondaryColor);
+}
 
 let textColors = [
 	{ name: 'Light', slug: 'text-light', color: '#F6F6F6'},
