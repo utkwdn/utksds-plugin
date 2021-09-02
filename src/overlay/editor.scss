@@ -1,0 +1,35 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+
+
+// @import "./../utksds-framework/src/scss/styles/orange_hr";
+@import "./../utksds-framework/node_modules/bootstrap/scss/card";
+
+
+// This extension is editor only, and probably temporary until we get the editors to add proper classes.
+
+
+.wp-block .card {
+  min-height: 15rem;
+
+}
+
+.wpeditor-card-overlay {
+  > .block-editor-inner-blocks {
+    @extend .card-img-overlay;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    //border: 1px solid black;
+    .card-img-overlay {
+      position: relative;
+      top: auto;
+      bottom: auto;
+      left: auto;
+      right: auto;
+    }
+  }
+}

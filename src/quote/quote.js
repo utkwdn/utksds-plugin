@@ -1,14 +1,10 @@
+// Commenting out the front style, as it will be handled by the bootstrap css pulled in.
+import './editor.scss';
+
 const { registerBlockStyle } = wp.blocks;
 const { addFilter } = wp.hooks;
 
-const allowedBlocks = [ 'core/image' ];
-
-import './editor.scss';
-
-registerBlockStyle('core/image', {
-	name: 'framed',
-	label: 'Orange Frame'
-} );
+const allowedBlocks = [ 'core/quote' ];
 
 function addSupports( settings ) {
 	/*check if object exists for old Gutenberg version compatibility

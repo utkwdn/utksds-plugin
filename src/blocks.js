@@ -30,12 +30,18 @@ import './horizontal-rule/horizontal-rule.js';
 import './heading/heading.js';
 import './tabs/tabs.js';
 //import './remote-data/remote-data.js';
-
+import './overlay/overlay.js';
+//import './document-settings/document-settings.js';
+import './list/list.js';
+import './quote/quote.js';
+import './code/code.js';
+import './paragraph/paragraph.js';
 
 // remove default button styles, declare default and/or plugin created blocks to selectively disable
 wp.domReady( function() {
-	wp.blocks.unregisterBlockStyle( 'core/button', 'outline' );
-	wp.blocks.unregisterBlockStyle( 'core/button', 'fill' );
+	
+	wp.richText.unregisterFormatType( 'core/text-color' );
+	wp.richText.unregisterFormatType( 'core/image' );
 
 	const allowedEmbedBlocks = [
     	'twitter',
@@ -71,9 +77,10 @@ wp.domReady( function() {
     	'core/more',
     	'core/nextpage',
     	'core/separator',
-    	'core/spacer',
+    	//'core/spacer',
     	'core/group',
 		//'core/embed',
+		'core/video',
 	];
 
 	const disabledBlocks = blocktodisable.map( blockSlug => wp.blocks.unregisterBlockType( blockSlug ) );

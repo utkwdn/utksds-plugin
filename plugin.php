@@ -128,6 +128,8 @@ add_filter( 'render_block', function( $block_content, $block ) {
 		$class_needle = 'wp-block-table '.$parsed_classes;
 		$block_content = str_replace($class_needle, 'wp-block-table', $block_content);
 		
+		$parsed_classes = str_replace('is-style-', '', $parsed_classes);
+		
 		//turn $parsed_classes into array
 		$custom_classes = explode( ' ', $parsed_classes );
 		
@@ -199,6 +201,11 @@ add_filter( 'render_block', function( $block_content, $block ) {
 		$block_content = str_replace('is-style-', '', $block_content);
 		$block_content = str_replace('<figure', '<div', $block_content);
 		$block_content = str_replace('</figure', '</div', $block_content);
+	}
+	
+	if ( $block['blockName'] === 'core/list' ) {
+		
+		$block_content = str_replace('is-style-', '', $block_content);
 	}
 	
 	if ( $block['blockName'] === 'core/heading' ) {
