@@ -149,23 +149,21 @@ registerBlockType( 'accordion/fold', {
 	
 	save: ( { attributes } ) => {
 		return (
-			<div className="card">
-    			<div className="card-header" id={ "heading" + attributes.foldSlug }>
-      				<h2 class="mb-0">
+			<div className="accordion-item">
+      				<h2 className="accordion-header" id={ "heading" + attributes.foldSlug }>
 						<RichText.Content
 							tagName='button'
-							className={ "btn btn-link btn-block text-left" + attributes.collapseS }
+							className={ "accordion-button" + attributes.collapseS }
 							type='button'
-							data-toggle='collapse'
-							data-target={ "#collapse" + attributes.foldSlug }
+							data-bs-toggle='collapse'
+							data-bs-target={ "#collapse" + attributes.foldSlug }
 							aria-expanded={ attributes.show }
 							aria-controls={ "collapse" + attributes.foldSlug }
 							value={ attributes.foldName }
 						/>
       				</h2>
-    			</div>
-    			<div id={ "collapse" + attributes.foldSlug } className={ "collapse" + attributes.showS } aria-labelledby={ "heading" + attributes.foldSlug } data-parent={ "#" + attributes.parentID }>
-      				<div className="card-body">
+    			<div id={ "collapse" + attributes.foldSlug } className={ "accordion-collapse collapse" + attributes.showS } aria-labelledby={ "heading" + attributes.foldSlug } data-bs-paren={ "#" + attributes.parentID }>
+      				<div className="accordion-body">
         				<InnerBlocks.Content />
       				</div>
     			</div>

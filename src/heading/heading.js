@@ -30,6 +30,7 @@ function addSupports( settings ) {
 	/*check if object exists for old Gutenberg version compatibility
 	add allowedBlocks restriction*/
 	if( typeof settings.supports !== 'undefined' && allowedBlocks.includes( settings.name ) ){
+		
 		settings.supports = Object.assign( settings.supports, {
 			defaultStylePicker:false,
 			fontSize:false,
@@ -38,6 +39,8 @@ function addSupports( settings ) {
 				text:false,
 			},
 		});
+		
+		settings.description = "Traditional heading elements are designed to work best in the meat of your page content. When you need a heading to stand out, consider using a display heading — a larger, slightly more opinionated heading style."
 	}
 	
 	return settings;

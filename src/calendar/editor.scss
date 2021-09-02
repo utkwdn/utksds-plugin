@@ -12,39 +12,17 @@
 //   border-radius: 0.3rem;
 // }
 
-.align-items-center {
-    -ms-flex-align: center !important;
-    align-items: center !important;
-}
-@import "./../utksds-framework/src/scss/components/strip";
 
-.strip {
-  .block-editor-inner-blocks {
-    padding-left: $spacer;
-    padding-right: $spacer;
-  }
-  &.strip-white {
-    border: 1px solid $utgray2;
-  }
-  &.strip-pattern {
-  	background-image: url('https://images.utk.edu/designsystem/2020/assets/i/strip_pattern.gif');
-  }
-  &.strip-seal {
-  	background-image: url('https://images.utk.edu/designsystem/2020/assets/i/strip_seal.jpg');
-  }
-  &.strip-ayres {
-  	background-image: url('https://images.utk.edu/designsystem/2020/assets/i/strip_ayres.jpg');
-  }
-  &.strip-library {
-  	background-image: url('https://images.utk.edu/designsystem/2020/assets/i/strip_library.jpg');
-  }
-  &.strip-smokies {
-  	background-image: url('https://images.utk.edu/designsystem/2020/assets/i/strip_smokies.jpg');
-  }
-  &.strip-mountains {
-  	background-image: url('https://images.utk.edu/designsystem/2020/assets/i/strip_mountains.svg');
-  }
-  &.strip-ped {
-  	background-image: url('https://images.utk.edu/designsystem/2020/assets/i/i/strip_ped.jpg');
+div[data-title="Calendar"] {
+  padding: 2rem;
+  border: 1px solid $utgray1;
+  &::before {
+    content: " ";
+    top: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: transparent;
   }
 }
