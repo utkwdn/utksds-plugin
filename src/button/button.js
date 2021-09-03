@@ -1,4 +1,6 @@
 import { Path, SVG } from '@wordpress/components';
+import { store as blocksStore } from '@wordpress/blocks';
+import { store as blockEditorStore } from '@wordpress/block-editor';
 //import svgr from '@svgr/core';
 import './editor.scss';
 
@@ -9,7 +11,7 @@ const { withState, compose, ifCondition } = wp.compose;
 const { Fragment, useCallback, useState, renderToString, createElement, isValidElement } = wp.element;
 const { rawShortcut, displayShortcut } = wp.keycodes;
 const { create, concat, registerFormatType, insert, insertObject, toHTMLString, removeFormat } = wp.richText;
-const { withSelect } = wp.data;
+const { withSelect, useDispatch, dispatch, select } = wp.data;
 
 const LinkControl = __experimentalLinkControl;
 
@@ -106,6 +108,10 @@ registerBlockType( 'utksds/button', {
 			type: 'object',
 			default: { name: 'Primary', slug: 'btn-primary', color: '#58595b'}
 		},
+		buttonText: {
+			type: 'boolean',
+			default: false,
+		},
 		buttonOutline: {
 			type: 'boolean',
 			default: false
@@ -113,6 +119,10 @@ registerBlockType( 'utksds/button', {
 		buttonSize: {
 			type: 'string',
 			default: ' btn-nrml'
+		},
+		blockClass: {
+			type: 'string',
+			default: '',
 		},
 		iconCode: {
 			type: 'object',
@@ -128,7 +138,7 @@ registerBlockType( 'utksds/button', {
 		},
 	},
 	
-	edit: ( { isSelected, attributes, ClassName, setAttributes } ) => {
+	edit: ( { isSelected, attributes, ClassName, setAttributes, clientId, } ) => {
 		//const { url, linkTarget } = attributes;
 
 		const urlIsSet = !! attributes.url;
@@ -178,7 +188,7 @@ registerBlockType( 'utksds/button', {
 			var iconResults = { name:'', string:'', code:null };
 		}
 			
-		//console.log(attributes.useIcon);
+		//console.log(buttonBody);
 
 		return ( [
 			<BlockControls>
@@ -290,12 +300,12 @@ registerBlockType( 'utksds/button', {
 			</BlockControls>,
 			<InspectorControls>
 				<PanelBody title='Colors' initialOpen={ true }>
-					{ ! attributes.buttonOutline && (
+					{ ! attributes.buttonOutline && ! attributes.buttonText && (
 					<PanelRow>
 						<p><strong>Select a Button color:</strong></p>
 					</PanelRow>
 					) }
-					{ ! attributes.buttonOutline && (
+					{ ! attributes.buttonOutline && ! attributes.buttonText && (
 					<PanelRow>
 						<ColorPalette 
 							colors = { colors }
@@ -310,12 +320,12 @@ registerBlockType( 'utksds/button', {
 						/>
 					</PanelRow>
 					) }
-					{ attributes.buttonOutline && (
+					{ attributes.buttonOutline && ! attributes.buttonText && (
 					<PanelRow>
 						<p><strong>Select a Button Outline color:</strong></p>
 					</PanelRow>
 					) }
-					{ attributes.buttonOutline && (
+					{ attributes.buttonOutline && ! attributes.buttonText && (
 					<PanelRow>
 						<ColorPalette 
 							colors = { outlineColors }
@@ -330,6 +340,7 @@ registerBlockType( 'utksds/button', {
 						/>
 					</PanelRow>
 					) }
+					{ ! attributes.buttonText && (
 					<PanelRow>
 						<ToggleControl
 							label='Button Fill'
@@ -345,6 +356,26 @@ registerBlockType( 'utksds/button', {
 								}else{
 									const thisColor = getColorObjectByColorValue( colors, attributes.buttonColor.color );
 									setAttributes( { buttonColor:thisColor } );
+								}
+			
+								//console.log(attributes.buttonColor);
+							} }
+						/>
+					</PanelRow>
+					) }
+					<PanelRow>
+						<ToggleControl
+							label='Text Link'
+							help={ attributes.buttonText ? 'Button is a text link.' : 'Button is a button.' }
+							checked={ attributes.buttonText }
+							onChange={ () => {
+								setAttributes( { buttonText: !attributes.buttonText } );
+								//console.log(attributes.buttonOutline);
+								
+								if( !attributes.buttonText === true ){
+									setAttributes( { buttonColor:{ name: 'Link', slug: 'btn-link', color: ''} } );
+								}else{
+									setAttributes( { buttonColor:{ name: 'Primary', slug: 'btn-primary', color: '#58595b'}, buttonOutline:false } );
 								}
 			
 								//console.log(attributes.buttonColor);
@@ -368,42 +399,50 @@ registerBlockType( 'utksds/button', {
         					] }
 							onChange={ ( value ) =>{
 								setAttributes( { buttonSize: value } );
-								//console.log(value);
+								
+								if(value === " btn-block"){
+									setAttributes( { blockClass: "d-grid gap-2" } );
+								}else{
+									setAttributes( { blockClass: "" } );
+								}
 							} }
 						/>
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<div className={ 'btn ' + attributes.buttonColor.slug + attributes.buttonSize }>
-			<RichText 
-				tagName='span'
-				placeholder={ attributes.placeholder }
-				value={ attributes.text }
-				allowedFormats={ [ 'core/bold', 'core/italic' ] }
-				onChange={ ( value ) => setAttributes( { text: value } ) }
-				withoutInteractiveFormatting
-			/>
-			{ iconResults.code !== null && attributes.useIcon === false && (
-			<Icon
-				icon={ iconResults.code }
-				size={ attributes.iconSize }
-			/>
-			) }
-			{ attributes.iconCode.code !== null && attributes.useIcon === true && (
-			<Icon
-				icon={ attributes.iconCode.code }
-				size={ attributes.iconSize }
-			/>
-			) }
+			<div className={ attributes.blockClass }>
+				<div className={ 'btn mb-3 ' + attributes.buttonColor.slug + attributes.buttonSize }>
+					<RichText 
+						tagName='span'
+						placeholder={ attributes.placeholder }
+						value={ attributes.text }
+						allowedFormats={ [ 'core/bold', 'core/italic' ] }
+						onChange={ ( value ) => setAttributes( { text: value } ) }
+						withoutInteractiveFormatting
+					/>
+					{ iconResults.code !== null && attributes.useIcon === false && (
+					<Icon
+						icon={ iconResults.code }
+						size={ attributes.iconSize }
+					/>
+					) }
+					{ attributes.iconCode.code !== null && attributes.useIcon === true && (
+					<Icon
+						icon={ iconResults.code }
+						size={ attributes.iconSize }
+					/>
+					) }
+				</div>
 			</div>
 		] );
 	},
 	
 	save: ( { attributes } ) => {	
 		return(
+			<div className={ attributes.blockClass }>
 			<a
 				type = 'button'
-				className={ 'btn save ' + attributes.buttonColor.slug + attributes.buttonSize }
+				className={ 'btn save mb-3 ' + attributes.buttonColor.slug + attributes.buttonSize }
 				href={ attributes.url }
 				title={ attributes.title }
 				target={ attributes.linkTarget }
@@ -418,6 +457,7 @@ registerBlockType( 'utksds/button', {
 					value={ attributes.iconCode.string }
 				/>
 			</a>
+			</div>
 		);
 	},
 } );
@@ -484,7 +524,6 @@ registerBlockType( 'utksds/buttongroup', {
             					{ label: 'Small', value: ' btn-group-sm' },
             					{ label: 'Normal', value: ' btn-group-nrml' },
 								{ label: 'Large', value: ' btn-group-lg' },
-								{ label: 'Block', value: ' btn-group-block' },
         					] }
 							onChange={ ( value ) =>{
 								setAttributes( { groupSize: value } );

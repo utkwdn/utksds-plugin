@@ -2,20 +2,52 @@ import './editor.scss';
 /**
  * External Dependencies
  */
-import classnames from 'classnames';
+//import classnames from 'classnames';
 
 /**
  * WordPress Dependencies
  */
-const { __ } = wp.i18n;
+//const { __ } = wp.i18n;
 const { addFilter } = wp.hooks;
-const { Fragment }	= wp.element;
-const { InspectorControls }	= wp.blockEditor;
-const { createHigherOrderComponent } = wp.compose;
-const { RadioControl, ToggleControl, PanelBody, PanelRow } = wp.components;
+//const { Fragment }	= wp.element;
+//const { InspectorControls }	= wp.blockEditor;
+//const { createHigherOrderComponent } = wp.compose;
+//const { RadioControl, ToggleControl, PanelBody, PanelRow } = wp.components;
+const { registerBlockStyle, unregisterBlockStyle } = wp.blocks;
 
 //restrict to specific block names
 const allowedBlocks = [ 'core/table' ];
+
+wp.domReady( function () {
+	unregisterBlockStyle( 'core/table', 'regular' );
+	unregisterBlockStyle( 'core/table', 'stripes' );
+} );
+
+registerBlockStyle('core/table', {
+	name: 'table-striped',
+	label: 'Striped'
+} );
+
+registerBlockStyle('core/table', {
+	name: 'table-dark',
+	label: 'Dark'
+} );
+
+/*registerBlockStyle('core/table', {
+	name: 'table-dark is-style-table-striped',
+	label: 'Dark Striped'
+} );*/
+
+function setBlockCustomClassName( className, blockName ) {
+    return blockName === 'core/table' ? className + ' table' : className;
+}
+ 
+// Adding the filter
+addFilter(
+    'blocks.getBlockDefaultClassName',
+    'utksds/set-table-class-name',
+    setBlockCustomClassName
+);
 
 /**
  * Add custom attributes to allow settings for Bootstrap button attributes, including color, fill, and size.
@@ -28,7 +60,7 @@ function addAttributes( settings ) {
 	
 	/*check if object exists for old Gutenberg version compatibility
 	add allowedBlocks restriction*/
-	if( typeof settings.attributes !== 'undefined' && allowedBlocks.includes( settings.name ) ){
+	/*if( typeof settings.attributes !== 'undefined' && allowedBlocks.includes( settings.name ) ){
 	
 		settings.attributes = Object.assign( settings.attributes, {
 			tblDark:{
@@ -61,7 +93,7 @@ function addAttributes( settings ) {
 			},
 		});
     
-	}
+	}*/
 	
 	if( typeof settings.supports !== 'undefined' && allowedBlocks.includes( settings.name ) ){
 		settings.supports = Object.assign( settings.supports, {
@@ -84,9 +116,17 @@ function addAttributes( settings ) {
  *
  * @return {function} BlockEdit Modified block edit component.
  */
-const withAdvancedControls = createHigherOrderComponent( ( BlockEdit ) => {
+/*const withAdvancedControls = createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
-
+		
+		if( ! allowedBlocks.includes(props.name)){
+			return (
+				<BlockEdit { ...props } />
+			);
+		}
+		
+		console.log(props);
+		
 		const {
 			name,
 			attributes,
@@ -102,19 +142,35 @@ const withAdvancedControls = createHigherOrderComponent( ( BlockEdit ) => {
 			tblHover,
 			tblSmall,
 			tblResponsive,
+			className,
 		} = attributes;
 		
+		const blockProps = {
+			...props,
+			attributes: {
+				...attributes,
+				className: classnames( className, {
+					'table-dark': tblDark,
+					'table-striped': tblStripedbs,
+					'table-hover': tblHover,
+					'table-sm': tblSmall,
+					'table-responsive': tblResponsive,
+				}, tblHeader, tblBorder ),
+			},
+		};
 		
 		return (
 			<Fragment>
-				<BlockEdit {...props} />
+				<BlockEdit {...blockProps} />
 				{ isSelected && allowedBlocks.includes( name ) &&
 					<InspectorControls>
 						<PanelBody title='Table Properties' initialOpen={ true }>
 						<ToggleControl
 							label='Dark Colors'
 							checked={ tblDark }
-							onChange={ (newValue) => setAttributes( { tblDark: newValue } ) }
+							onChange={ (newValue) =>{ 
+								setAttributes( { tblDark: newValue } );
+							} }
 							help={ tblDark ? 'Dark Colors.' : 'Normal Colors.' }
 						/>
 						<RadioControl
@@ -172,7 +228,7 @@ const withAdvancedControls = createHigherOrderComponent( ( BlockEdit ) => {
 			</Fragment>
 		);
 	};
-}, 'withAdvancedControls');
+}, 'withAdvancedControls');*/
 
 /**
  * Add custom element class in save element.
@@ -183,7 +239,7 @@ const withAdvancedControls = createHigherOrderComponent( ( BlockEdit ) => {
  *
  * @return {Object} extraProps Modified block element.
  */
-function applyExtraClass( extraProps, blockType, attributes ) {
+/*function applyExtraClass( extraProps, blockType, attributes ) {
 
 	const { tblDark, tblHeader, tblStripedbs, tblBorder, tblHover, tblSmall, tblResponsive } = attributes;
 	
@@ -213,7 +269,7 @@ function applyExtraClass( extraProps, blockType, attributes ) {
 	}
 
 	return extraProps;
-}
+}*/
 
 //add filters
 
@@ -223,7 +279,7 @@ addFilter(
 	addAttributes
 );
 
-addFilter(
+/*addFilter(
 	'editor.BlockEdit',
 	'editorskit/custom-advanced-control',
 	withAdvancedControls
@@ -233,4 +289,4 @@ addFilter(
 	'blocks.getSaveContent.extraProps',
 	'editorskit/applyExtraClass',
 	applyExtraClass
-);
+);*/
