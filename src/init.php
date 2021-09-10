@@ -197,6 +197,21 @@ if( get_theme_mod('site_secondary_color') ){
 	add_action( 'enqueue_block_editor_assets', 'utksds_secondary_color_script', 100 );
 }
 
+
+function utksds_current_screen(){
+		
+	$current_screen = get_current_screen();
+		
+	wp_register_script( 'screen-handle-header', '' );
+	wp_enqueue_script( 'screen-handle-header' );
+		
+	//$js_code = 'console.log(' . json_encode($current_screen, JSON_HEX_TAG) . ')';
+	//wp_add_inline_script( 'screen-handle-header', $js_code );
+		
+	wp_add_inline_script( 'screen-handle-header', 'const currentScreen = ' . json_encode($current_screen, JSON_HEX_TAG) );
+}
+add_action( 'enqueue_block_editor_assets', 'utksds_current_screen', 100 );
+
 //$post_editor_context = new WP_Block_Editor_Context( array( 'post' => get_post() ) );
 
 //$js_code = '<script>console.log(' . json_encode($post_editor_context, JSON_HEX_TAG) . ')</script>';
