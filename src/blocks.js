@@ -108,8 +108,6 @@ wp.domReady( function() {
 		]
 	}
 	
-	console.log(currentScreen);
-	
 	if(typeof utksdsAllowedBlocks !== 'undefined'){
 		wp.blocks.getBlockTypes().forEach( function ( utksdsBlockSetup ) {
     		if ( -1 === utksdsAllowedBlocks.indexOf( utksdsBlockSetup.name )) {
