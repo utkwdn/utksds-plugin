@@ -105,10 +105,15 @@ wp.domReady( function() {
 			'core/navigation',
 			'core/embed',
 			'utksds/calendar',
+			'core/group',
+			'core/widget-area',
 		]
 	}
 	
 	if(typeof utksdsAllowedBlocks !== 'undefined'){
+		
+		console.log(wp.blocks.getBlockTypes());
+		
 		wp.blocks.getBlockTypes().forEach( function ( utksdsBlockSetup ) {
     		if ( -1 === utksdsAllowedBlocks.indexOf( utksdsBlockSetup.name )) {
       			wp.blocks.unregisterBlockType( utksdsBlockSetup.name );
