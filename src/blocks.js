@@ -110,10 +110,7 @@ wp.domReady( function() {
 		]
 	}
 	
-	if(typeof utksdsAllowedBlocks !== 'undefined'){
-		
-		console.log(wp.blocks.getBlockTypes());
-		
+	if(typeof utksdsAllowedBlocks !== 'undefined'){		
 		wp.blocks.getBlockTypes().forEach( function ( utksdsBlockSetup ) {
     		if ( -1 === utksdsAllowedBlocks.indexOf( utksdsBlockSetup.name )) {
       			wp.blocks.unregisterBlockType( utksdsBlockSetup.name );
