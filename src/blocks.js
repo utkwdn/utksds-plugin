@@ -56,34 +56,66 @@ wp.domReady( function() {
     	}
   	});
 	
-	const blocktodisable = [
-		'core/verse',
-		'core/pullquote',
-		'core/tag-cloud',
-		'core/archives',
-		'core/calendar',
-		'core/categories',
-		'core/latest-comments',
-		'core/search',
-		//'core/social-icons',
-		'core/audio',
-		'core/cover',
-		'core/preformatted',
-		'core/media-text',
-    	'core/text-columns',
-		'core/columns',
-		'core/button',
-		'core/buttons',
-    	'core/more',
-    	'core/nextpage',
-    	'core/separator',
-    	//'core/spacer',
-    	'core/group',
-		//'core/embed',
-		'core/video',
-	];
-
-	const disabledBlocks = blocktodisable.map( blockSlug => wp.blocks.unregisterBlockType( blockSlug ) );
-	return disabledBlocks;
+	if(currentScreen.is_block_editor === true && currentScreen.id !== 'widgets'){
+		var utksdsAllowedBlocks = [
+			'core/paragraph',
+			'core/heading',
+			'core/list',
+			'core/quote',
+			'core/code',
+			'core/freeform',
+			'core/table',
+			'lead/main',
+			'core/image',
+			'core/gallery',
+			'core/file',
+			'media-object/main',
+			'core/spacer',
+			'utksds/overlay',
+			'utksds/tabs',
+			'core/separator',
+			'alert/main',
+			'utksds/buttongroup',
+			'utksds/button',
+			'utksds/accordion',
+			'utksds/card',
+			'core/shortcode',
+			'core/html',
+			'core/embed',
+			'utksds/calendar',
+			'utksds/columns',
+			'strip/main',
+		]
+	}else if(currentScreen.is_block_editor === true && currentScreen.id === 'widgets'){
+		var utksdsAllowedBlocks = [
+			'core/paragraph',
+			'core/heading',
+			'core/list',
+			'core/code',
+			'core/image',
+			'core/file',
+			'utksds/button',
+			'utksds/buttongroup',
+			'core/shortcode',
+			'core/html',
+			'core/latest-posts',
+			'core/page-list',
+			'core/rss',
+			'core/social-links',
+			'core/navigation',
+			'core/embed',
+			'utksds/calendar',
+		]
+	}
+	
+	console.log(currentScreen);
+	
+	if(typeof utksdsAllowedBlocks !== 'undefined'){
+		wp.blocks.getBlockTypes().forEach( function ( utksdsBlockSetup ) {
+    		if ( -1 === utksdsAllowedBlocks.indexOf( utksdsBlockSetup.name )) {
+      			wp.blocks.unregisterBlockType( utksdsBlockSetup.name );
+    		}
+  		});
+	}
 	
 } );
