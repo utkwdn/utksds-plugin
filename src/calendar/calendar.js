@@ -229,6 +229,7 @@ registerBlockType( 'utksds/calendar', {
       						{ label: 'Hill Modern', value: 'hill-modern' },
       						{ label: 'Hill Modern No Description', value: 'hill-modern-no-description' },
       						{ label: 'Hill Simple List', value: 'hill-simple-list' },
+      						{ label: 'Hill Simple Columns', value: 'hill-simple-columns' },
 							{ label: 'UTIA Events', value: 'utia-events' },
       					] }
       					onChange={ (value) =>{
