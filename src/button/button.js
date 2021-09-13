@@ -441,7 +441,6 @@ registerBlockType( 'utksds/button', {
 		return(
 			<div className={ attributes.blockClass }>
 			<a
-				type = 'button'
 				className={ 'btn save mb-3 ' + attributes.buttonColor.slug + attributes.buttonSize }
 				href={ attributes.url }
 				title={ attributes.title }
