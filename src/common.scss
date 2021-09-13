@@ -17,8 +17,10 @@
 @import "./../utksds-framework/node_modules/bootstrap/scss/mixins";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/utilities";
 
+.editor-styles-wrapper {
+
 // Layout & components
-// @import "./../utksds-framework/node_modules/bootstrap/scss/root";
+@import "./../utksds-framework/node_modules/bootstrap/scss/root";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/reboot";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/type";
 // @import "./../utksds-framework/node_modules/bootstrap/scss/images";
@@ -119,7 +121,7 @@
 
 
 
-
+}
 
 
 
