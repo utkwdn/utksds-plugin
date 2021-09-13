@@ -70,20 +70,34 @@ wp.domReady( function() {
 			'core/gallery',
 			'core/file',
 			'media-object/main',
+			'media/content',
 			'core/spacer',
 			'utksds/overlay',
+			'overlay/main',
 			'utksds/tabs',
-			'core/separator',
+			'tabs/tab',
+			//'core/separator',
+			'horizontal-rule/main',
 			'alert/main',
 			'utksds/buttongroup',
 			'utksds/button',
 			'utksds/accordion',
+			'accordion/fold',
 			'utksds/card',
+			'card/main',
+			'card/body',
+			'card/paragraph',
+			'card/heading',
+			'card/image',
+			'card/topcap',
+			'card/header',
+			'card/footer',
 			'core/shortcode',
 			'core/html',
 			'core/embed',
 			'utksds/calendar',
 			'utksds/columns',
+			'utksds/column',
 			'strip/main',
 		]
 	}else if(currentScreen.is_block_editor === true && currentScreen.id === 'widgets'){
@@ -102,15 +116,20 @@ wp.domReady( function() {
 			'core/page-list',
 			'core/rss',
 			'core/social-links',
+			'core/social-link',
 			'core/navigation',
 			'core/embed',
 			'utksds/calendar',
 			'core/group',
 			'core/widget-area',
+			'core/legacy-widget',
 		]
 	}
 	
-	if(typeof utksdsAllowedBlocks !== 'undefined'){		
+	if(typeof utksdsAllowedBlocks !== 'undefined'){
+		
+		//console.log(wp.blocks.getBlockTypes());
+		
 		wp.blocks.getBlockTypes().forEach( function ( utksdsBlockSetup ) {
     		if ( -1 === utksdsAllowedBlocks.indexOf( utksdsBlockSetup.name )) {
       			wp.blocks.unregisterBlockType( utksdsBlockSetup.name );
