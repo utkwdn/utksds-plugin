@@ -123,6 +123,8 @@ wp.domReady( function() {
 			'core/group',
 			'core/widget-area',
 			'core/legacy-widget',
+			'core/archives',
+			'core/categories',
 		]
 	}
 	
