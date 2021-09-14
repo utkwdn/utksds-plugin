@@ -56,34 +56,87 @@ wp.domReady( function() {
     	}
   	});
 	
-	const blocktodisable = [
-		'core/verse',
-		'core/pullquote',
-		'core/tag-cloud',
-		'core/archives',
-		'core/calendar',
-		'core/categories',
-		'core/latest-comments',
-		'core/search',
-		//'core/social-icons',
-		'core/audio',
-		'core/cover',
-		'core/preformatted',
-		'core/media-text',
-    	'core/text-columns',
-		'core/columns',
-		'core/button',
-		'core/buttons',
-    	'core/more',
-    	'core/nextpage',
-    	'core/separator',
-    	//'core/spacer',
-    	'core/group',
-		//'core/embed',
-		'core/video',
-	];
-
-	const disabledBlocks = blocktodisable.map( blockSlug => wp.blocks.unregisterBlockType( blockSlug ) );
-	return disabledBlocks;
+	if(currentScreen.is_block_editor === true && currentScreen.id !== 'widgets'){
+		var utksdsAllowedBlocks = [
+			'core/paragraph',
+			'core/heading',
+			'core/list',
+			'core/quote',
+			'core/code',
+			'core/freeform',
+			'core/table',
+			'lead/main',
+			'core/image',
+			'core/gallery',
+			'core/file',
+			'media-object/main',
+			'media/content',
+			'core/spacer',
+			'utksds/overlay',
+			'overlay/main',
+			'utksds/tabs',
+			'tabs/tab',
+			//'core/separator',
+			'horizontal-rule/main',
+			'alert/main',
+			'utksds/buttongroup',
+			'utksds/button',
+			'utksds/accordion',
+			'accordion/fold',
+			'utksds/card',
+			'card/main',
+			'card/body',
+			'card/paragraph',
+			'card/heading',
+			'card/image',
+			'card/topcap',
+			'card/header',
+			'card/footer',
+			'core/shortcode',
+			'core/html',
+			'core/embed',
+			'utksds/calendar',
+			'utksds/columns',
+			'utksds/column',
+			'strip/main',
+		]
+	}else if(currentScreen.is_block_editor === true && currentScreen.id === 'widgets'){
+		var utksdsAllowedBlocks = [
+			'core/paragraph',
+			'core/heading',
+			'core/list',
+			'core/code',
+			'core/image',
+			'core/file',
+			'utksds/button',
+			'utksds/buttongroup',
+			'core/shortcode',
+			'core/html',
+			'core/latest-posts',
+			'core/page-list',
+			'core/rss',
+			'core/social-links',
+			'core/social-link',
+			'core/navigation',
+			'core/embed',
+			'utksds/calendar',
+			'core/group',
+			'core/widget-area',
+			'core/legacy-widget',
+			'core/archives',
+			'core/categories',
+		]
+	}
+	
+	if(typeof utksdsAllowedBlocks !== 'undefined'){
+		
+		//console.log(wp.blocks.getBlockTypes());
+		
+		wp.blocks.getBlockTypes().forEach( function ( utksdsBlockSetup ) {
+    		if ( -1 === utksdsAllowedBlocks.indexOf( utksdsBlockSetup.name )) {
+      			wp.blocks.unregisterBlockType( utksdsBlockSetup.name );
+    		}
+  		});
+	}
 	
 } );
