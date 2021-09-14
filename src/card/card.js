@@ -80,6 +80,10 @@ registerBlockType( 'utksds/card', {
 			type: 'boolean',
 			default: false,
 		},
+		textColor: {
+			type: 'string',
+			default: 'text-primary',
+		},
 	},
 	providesContext: {
     	'card/blockName': 'blockName',
@@ -174,8 +178,9 @@ registerBlockType( 'utksds/card', {
 							value={ attributes.cardColor.color }
 							onChange={ ( value ) =>{
 								var thisColor = getColorObjectByColorValue( siteColors, value );
-								setAttributes( { cardColor:thisColor } );
-								//console.log(thisColor);
+								thisColor.slug = thisColor.slug.replace("border-", "bg-");
+								setAttributes( { cardColor:thisColor, textColor:thisColor.text } );
+								console.log(thisColor);
 							} }
 							disableCustomColors={ true }
 							clearable={ false }
@@ -195,8 +200,8 @@ registerBlockType( 'utksds/card', {
 							onChange={ ( value ) =>{
 								var thisColor = getColorObjectByColorValue( siteColors, value );
 								thisColor.slug = thisColor.slug.replace("bg-", "border-");
-								thisColor.text = "";
-								setAttributes( { cardColor:thisColor } );
+								setAttributes( { cardColor:thisColor, textColor:"" } );
+								console.log(thisColor);
 							} }
 							disableCustomColors={ true }
 							clearable={ false }
@@ -215,11 +220,13 @@ registerBlockType( 'utksds/card', {
 								if( !attributes.cardOutline === true ){
 									var thisColor = getColorObjectByColorValue( siteColors, attributes.cardColor.color );
 									thisColor.slug = thisColor.slug.replace("bg-", "border-");
-									thisColor.text = "";
-									setAttributes( { cardColor:thisColor } );
+									setAttributes( { cardColor:thisColor, textColor:"" } );
+									console.log(thisColor);
 								}else{
 									var thisColor = getColorObjectByColorValue( siteColors, attributes.cardColor.color );
-									setAttributes( { cardColor:thisColor } );
+									thisColor.slug = thisColor.slug.replace("border-", "bg-");
+									setAttributes( { cardColor:thisColor, textColor:thisColor.text } );
+									console.log(thisColor);
 								}
 			
 								//console.log(attributes.buttonColor);
@@ -229,7 +236,7 @@ registerBlockType( 'utksds/card', {
 				</PanelBody>
 			</InspectorControls>,
 			// eslint-disable-next-line react/jsx-key
-			<div className={'card card-edit ' + attributes.cardColor.text + ' ' + attributes.cardColor.slug }>
+			<div className={'card card-edit ' + attributes.textColor + ' ' + attributes.cardColor.slug }>
 				<InnerBlocks allowedBlocks={ [ 'card/body', 'card/image', 'utksds/columns', 'card/topcap', ] } placeholder={ cardPlaceholder } templateLock={ 'all' } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>,
 		] );
@@ -239,7 +246,7 @@ registerBlockType( 'utksds/card', {
 		const { backgroundColor } = attributes;
 
 		return (
-			<div className={'card ' + attributes.cardColor.text + ' ' + attributes.cardColor.slug }>
+			<div className={'card ' + attributes.textColor + ' ' + attributes.cardColor.slug }>
 				<InnerBlocks.Content />
 			</div>
 		);
