@@ -180,7 +180,7 @@ registerBlockType( 'utksds/card', {
 								var thisColor = getColorObjectByColorValue( siteColors, value );
 								thisColor.slug = thisColor.slug.replace("border-", "bg-");
 								setAttributes( { cardColor:thisColor, textColor:thisColor.text } );
-								console.log(thisColor);
+								//console.log(thisColor);
 							} }
 							disableCustomColors={ true }
 							clearable={ false }
@@ -201,7 +201,7 @@ registerBlockType( 'utksds/card', {
 								var thisColor = getColorObjectByColorValue( siteColors, value );
 								thisColor.slug = thisColor.slug.replace("bg-", "border-");
 								setAttributes( { cardColor:thisColor, textColor:"" } );
-								console.log(thisColor);
+								//console.log(thisColor);
 							} }
 							disableCustomColors={ true }
 							clearable={ false }
@@ -221,12 +221,12 @@ registerBlockType( 'utksds/card', {
 									var thisColor = getColorObjectByColorValue( siteColors, attributes.cardColor.color );
 									thisColor.slug = thisColor.slug.replace("bg-", "border-");
 									setAttributes( { cardColor:thisColor, textColor:"" } );
-									console.log(thisColor);
+									//console.log(thisColor);
 								}else{
 									var thisColor = getColorObjectByColorValue( siteColors, attributes.cardColor.color );
 									thisColor.slug = thisColor.slug.replace("border-", "bg-");
 									setAttributes( { cardColor:thisColor, textColor:thisColor.text } );
-									console.log(thisColor);
+									//console.log(thisColor);
 								}
 			
 								//console.log(attributes.buttonColor);

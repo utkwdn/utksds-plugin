@@ -1,6 +1,7 @@
 import { Path, SVG } from '@wordpress/components';
 import { store as blocksStore } from '@wordpress/blocks';
 import { store as blockEditorStore } from '@wordpress/block-editor';
+import { siteColors, textColors } from '../globals.js'
 //import svgr from '@svgr/core';
 import './editor.scss';
 
@@ -106,7 +107,7 @@ registerBlockType( 'utksds/button', {
 		},
 		buttonColor: {
 			type: 'object',
-			default: { name: 'Primary', slug: 'btn-primary', color: '#58595b'}
+			default: { name: 'Primary', slug: 'bg-primary', color: '#58595b', text: 'text-light'}
 		},
 		buttonText: {
 			type: 'boolean',
@@ -160,19 +161,7 @@ registerBlockType( 'utksds/button', {
 		const [ NewTab, setNewTab ] = useState( attributes.linkTab );
 		//const toggleNewTab = () => setNewTab(value => !value);
 		
-		const colors = [
-			{ name: 'Primary', slug: 'btn-primary', color: '#58595b'},
-			{ name: 'Secondary', slug: 'btn-secondary', color: '#006c93'},
-			{ name: 'Light', slug: 'btn-light', color: '#F6F6F6'},
-			{ name: 'Dark', slug: 'btn-dark', color: '#4b4b4b'},
-		];
-		
-		const outlineColors = [
-			{ name: 'Primary', slug: 'btn-outline-primary', color: '#58595b'},
-			{ name: 'Secondary', slug: 'btn-outline-secondary', color: '#006c93'},
-			{ name: 'Light', slug: 'btn-outline-light', color: '#F6F6F6'},
-			{ name: 'Dark', slug: 'btn-outline-dark', color: '#4b4b4b'},
-		];
+		//console.log(siteColors);
 		
 		function onButtonColorChange( newColor ) {
 			setAttributes( { buttonColor: newColor } );
@@ -308,10 +297,12 @@ registerBlockType( 'utksds/button', {
 					{ ! attributes.buttonOutline && ! attributes.buttonText && (
 					<PanelRow>
 						<ColorPalette 
-							colors = { colors }
+							colors = { siteColors }
 							value={ attributes.buttonColor.color }
 							onChange={ ( value ) =>{
-								const thisColor = getColorObjectByColorValue( colors, value );
+								var thisColor = getColorObjectByColorValue( siteColors, value );
+								thisColor.slug = thisColor.slug.replace("bg-", "btn-");
+								thisColor.slug = thisColor.slug.replace("btn-outline-", "btn-");
 								setAttributes( { buttonColor:thisColor } );
 								//console.log(thisColor);
 							} }
@@ -328,10 +319,15 @@ registerBlockType( 'utksds/button', {
 					{ attributes.buttonOutline && ! attributes.buttonText && (
 					<PanelRow>
 						<ColorPalette 
-							colors = { outlineColors }
+							colors = { siteColors }
 							value={ attributes.buttonColor.color }
 							onChange={ ( value ) =>{
-								const thisColor = getColorObjectByColorValue( outlineColors, value );
+								var thisColor = getColorObjectByColorValue( siteColors, value );
+								thisColor.slug = thisColor.slug.replace("bg-", "btn-outline-");
+								if(thisColor.slug.indexOf("outline-") === -1){
+									thisColor.slug = thisColor.slug.replace("btn-", "btn-outline-");
+								}
+								//var thisTextColor = getColorObjectByColorValue( textColors, value );
 								setAttributes( { buttonColor:thisColor } );
 								//console.log(thisColor);
 							} }
@@ -351,11 +347,23 @@ registerBlockType( 'utksds/button', {
 								//console.log(attributes.buttonOutline);
 								
 								if( !attributes.buttonOutline === true ){
-									const thisColor = getColorObjectByColorValue( outlineColors, attributes.buttonColor.color );
+									//const thisColor = getColorObjectByColorValue( outlineColors, attributes.buttonColor.color );
+									
+									var thisColor = getColorObjectByColorValue( siteColors, attributes.buttonColor.color );
+									thisColor.slug = thisColor.slug.replace("bg-", "btn-outline-");
+									if(thisColor.slug.indexOf("outline-") === -1){
+										thisColor.slug = thisColor.slug.replace("btn-", "btn-outline-");
+									}
+									//var thisTextColor = getColorObjectByColorValue( textColors, value );
 									setAttributes( { buttonColor:thisColor } );
+									//console.log(thisColor);
 								}else{
-									const thisColor = getColorObjectByColorValue( colors, attributes.buttonColor.color );
+									//const thisColor = getColorObjectByColorValue( colors, attributes.buttonColor.color );
+									var thisColor = getColorObjectByColorValue( siteColors, attributes.buttonColor.color );
+									thisColor.slug = thisColor.slug.replace("bg-", "btn-");
+									thisColor.slug = thisColor.slug.replace("btn-outline-", "btn-");
 									setAttributes( { buttonColor:thisColor } );
+									//console.log(thisColor);
 								}
 			
 								//console.log(attributes.buttonColor);
@@ -373,9 +381,9 @@ registerBlockType( 'utksds/button', {
 								//console.log(attributes.buttonOutline);
 								
 								if( !attributes.buttonText === true ){
-									setAttributes( { buttonColor:{ name: 'Link', slug: 'btn-link', color: ''} } );
+									setAttributes( { buttonColor:{ name: 'Link', slug: 'btn-link', color: '', text: ''} } );
 								}else{
-									setAttributes( { buttonColor:{ name: 'Primary', slug: 'btn-primary', color: '#58595b'}, buttonOutline:false } );
+									setAttributes( { buttonColor:{ name: 'Primary', slug: 'btn-primary', color: '#58595b', text: 'text-light'}, buttonOutline:false } );
 								}
 			
 								//console.log(attributes.buttonColor);
