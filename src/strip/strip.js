@@ -114,7 +114,7 @@ registerBlockType( 'strip/main', {
                                     	naturalWidth={ attributes.bgImage.width }
                                         naturalHeight={ attributes.bgImage.height }
                                     >
-                                    	<img src={ attributes.bgImage.url } alt={ attributes.bgImage.alt } />
+										<img src={ attributes.bgImage.url } alt={ attributes.bgImage.alt } style={ { "maxHeight":attributes.bgImage.height, "maxWidth":attributes.bgImage.width } } />
                                     </ResponsiveWrapper>
 								) }
 							</Button>
