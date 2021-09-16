@@ -6,7 +6,8 @@ let siteColors = [
 ];
 
 if(typeof secondaryColor !== 'undefined'){
-	siteColors.push(secondaryColor);
+	var bgSecondaryColor = Object.entries(secondaryColor);
+	siteColors.push(Object.fromEntries(bgSecondaryColor));
 }
 
 let textColors = [
@@ -14,5 +15,16 @@ let textColors = [
 	{ name: 'Primary', slug: 'text-primary', color: '#58595b'},
 	{ name: 'Secondary', slug: 'text-secondary', color: '#006c93'},
 ];
+
+if(typeof secondaryColor !== 'undefined'){
+	var textSecondaryColor = Object.entries(secondaryColor);
+	textColors.push(Object.fromEntries(textSecondaryColor));
+	textColors.forEach( function(textColor){
+		if(textColor.color === secondaryColor.color){
+			textColor.slug = textColor.slug.replace("bg-", "text-");
+		}
+		delete textColor.text;
+	} );
+}
 
 export { siteColors, textColors };
