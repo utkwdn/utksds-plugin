@@ -10,7 +10,7 @@ const { InnerBlocks, InspectorControls, ColorPalette, RichText, getColorObjectBy
 const { PanelBody, PanelRow, RangeControl, RadioControl, ToggleControl, SelectControl } = wp.components;
 const { withState } = wp.compose;
 
-const ALLOWED_BLOCKS = [ 'utksds/button', 'card/paragraph', 'card/heading', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ];
+const ALLOWED_BLOCKS = [ 'utksds/button', 'utksds/buttongroup', 'card/paragraph', 'card/heading', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ];
 
 const PARAGRAPH_TEMPLATE = [
     [ 'core/paragraph', { className: 'card-text' } ],
