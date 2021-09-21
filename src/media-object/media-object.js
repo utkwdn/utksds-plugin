@@ -3,10 +3,11 @@ import { select } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
 import { store as blocksStore } from '@wordpress/blocks';
 import { store as blockEditorStore } from '@wordpress/block-editor';
+import { __experimentalText as Text } from '@wordpress/components';
 
 const { registerBlockType, createBlocksFromInnerBlocksTemplate } = wp.blocks;
 const { MediaUpload, BlockIcon, MediaPlaceholder, InnerBlocks, InspectorControls, ColorPalette } = wp.blockEditor;
-const { Button, PanelBody, PanelRow, RangeControl } = wp.components;
+const { Button, PanelBody, PanelRow, RangeControl, text } = wp.components;
 const ALLOWED_BLOCKS = [ 'utksds/button', 'horizontal-rule/main', 'core/paragraph', 'core/heading' ];
 
 // import './style.scss';
@@ -59,12 +60,15 @@ registerBlockType( 'media-object/main', {
 		const getImageButton = ( openEvent ) => {
 			if ( attributes.imageUrl ) {
 				return (
+					<div>
 					<img
 						src={ attributes.imageUrl }
-						style={ { width:attributes.imageSize } }
+						style={ { width:248 } }
 						onClick={ openEvent }
 						className="image"
 					/>
+					<Text variant="muted">Click above to change image.</Text>
+					</div>
 				);
 			}
 
@@ -123,16 +127,25 @@ registerBlockType( 'media-object/main', {
 						max={ 640 }
     				/>
 				</PanelBody>
+				{ attributes.imageUrl && (
+				<PanelBody title='Selected Image' initialOpen={ true }>
+					<MediaUpload
+						onSelect={ media => {
+							setAttributes( { imageAlt: media.alt, imageUrl: media.url, imageSize: media.width } );
+						} }
+						type="image"
+						value={ attributes.imageID }
+						render={ ( { open } ) => getImageButton( open ) }
+					/>
+				</PanelBody>
+				) }
 			</InspectorControls>,
 			<div className="media">
 				{ attributes.imageUrl && (
-				<MediaUpload
-					onSelect={ media => {
-						setAttributes( { imageAlt: media.alt, imageUrl: media.url, imageSize: media.width } );
-					} }
-					type="image"
-					value={ attributes.imageID }
-					render={ ( { open } ) => getImageButton( open ) }
+				<img
+					src={ attributes.imageUrl }
+					style={ { width:attributes.imageSize } }
+					className="image"
 				/>
 				) }
 				<InnerBlocks allowedBlocks={ [ 'media/content' ] } placeholder={ ovPlaceholder } templateLock={ true } />
