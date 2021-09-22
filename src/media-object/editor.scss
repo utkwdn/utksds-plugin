@@ -4,12 +4,12 @@
  * CSS for just Backend enqueued after style.scss
  * which makes it higher in priority.
  */
- 
+
 
 .media {
   display: flex;
   img {
-    max-width: 200px;
+    // max-width: 200px;
     height: max-content;
     flex-shrink: 0;
   }
@@ -18,8 +18,5 @@
 //  @extend .ms-3
   margin-left: 1rem;
   flex-grow: 1;
- } 
+ }
 }
-
-
-
