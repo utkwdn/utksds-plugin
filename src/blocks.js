@@ -36,6 +36,7 @@ import './list/list.js';
 import './quote/quote.js';
 import './code/code.js';
 import './paragraph/paragraph.js';
+import './contact-info/contact-info.js';
 
 // remove default button styles, declare default and/or plugin created blocks to selectively disable
 wp.domReady( function() {
@@ -99,6 +100,10 @@ wp.domReady( function() {
 			'utksds/columns',
 			'utksds/column',
 			'strip/main',
+			'utksds/contact',
+			'utksds/phones',
+			'utksds/socials',
+			'utksds/phone',
 		]
 	}else if(currentScreen.is_block_editor === true && currentScreen.id === 'widgets'){
 		var utksdsAllowedBlocks = [
