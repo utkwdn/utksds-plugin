@@ -1,5 +1,5 @@
 const { registerBlockType } = wp.blocks;
-const { InspectorControls, ColorPalette, RichText } = wp.editor;
+const { AlignmentControl, BlockControls, ColorPalette, RichText } = wp.blockEditor;
 const { Button, PanelBody, RadioControl } = wp.components;
 const ALLOWED_BLOCKS = [ 'core/paragraph' ];
 
@@ -17,32 +17,43 @@ registerBlockType( 'lead/main', {
 			type: 'string',
 			default: '',
 		},
-   content: {
-       type: 'string',
-       //source: 'text',
-       //selector: 'p',
-    },
+		align: {
+        	type: 'string',
+			default: 'left',
+    	},
+   		content: {
+       		type: 'string',
+       		//source: 'text',
+       		//selector: 'p',
+    	},
 	},
 	supports: {
     anchor: true,
-    align: true
   },
 	
 	edit: ( { className, attributes, setAttributes } ) => {
-		return(
+		return( [
+			<BlockControls group="block">
+				<AlignmentControl
+					value={ attributes.align }
+					onChange={ ( newAlign ) =>
+						setAttributes( { align: newAlign } )
+					}
+				/>
+			</BlockControls>,
 			<RichText 
 				tagName='p'
 				placeholder='Lead text goes here.'
-				className={ className, 'lead' }
+				className={ className, 'lead', 'has-text-align-' + attributes.align }
 				value={ attributes.content }
 				onChange={ ( content ) => setAttributes( { content } ) }
 				withoutInteractiveFormatting
 			/>
-		);
+		] );
 	},
 				  
 	save: ( { className, attributes } ) => {
-		return <RichText.Content tagName="p" className="lead" value={ attributes.content } />;
+		return <RichText.Content tagName="p" className={ className, 'lead', 'has-text-align-' + attributes.align } value={ attributes.content } />;
 	},
 
 } );

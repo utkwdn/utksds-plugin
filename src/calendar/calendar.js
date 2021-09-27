@@ -222,14 +222,12 @@ registerBlockType( 'utksds/calendar', {
       					label="Template"
       					value={ attributes.calTemplate }
       					options={ [
-      						{ label: 'Default', value: '' },
-      						{ label: 'Hill Cards', value: 'hill-cards' },
-      						{ label: 'Hill List', value: 'hill-list' },
-      						{ label: 'Hill List Alt', value: 'hill-list-alt' },
-      						{ label: 'Hill Modern', value: 'hill-modern' },
-      						{ label: 'Hill Modern No Description', value: 'hill-modern-no-description' },
-      						{ label: 'Hill Simple List', value: 'hill-simple-list' },
-							{ label: 'UTIA Events', value: 'utia-events' },
+      						{ label: 'Cards', value: 'hill-cards' },
+      						{ label: 'List', value: 'hill-simple-list' },
+      						{ label: 'List Alt', value: 'hill-list-alt' },
+      						{ label: 'Modern', value: 'hill-modern' },
+      						{ label: 'Modern No Description', value: 'hill-modern-no-description' },
+      						{ label: 'Simple Columns', value: 'hill-simple-columns' },
       					] }
       					onChange={ (value) =>{
 							setAttributes( {calTemplate:value} );
