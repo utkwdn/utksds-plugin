@@ -26,21 +26,25 @@
 .wp-block .strip {
   width: calc(100vw - 160px);
   margin-left: -($spacer / 2);
+  &.py-0 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
   .block-editor-inner-blocks {
     padding: ($spacer / 2);
   }
    @include media-breakpoint-up(sm) {
-  //  max-width: 540px;  
+  //  max-width: 540px;
   margin-left: -($spacer / 2);
 
   }
   @include media-breakpoint-up(md) {
-  //  max-width: 720px;  
+  //  max-width: 720px;
   margin-left: -($spacer / 2);
 
   }
   @include media-breakpoint-up(lg) {
-  //  max-width: 1060px;  
+  //  max-width: 1060px;
   margin-left: -($spacer / 2);
 
   }
@@ -63,19 +67,19 @@ body.is-fullscreen-mode {
       padding: ($spacer / 2);
     }
      @include media-breakpoint-up(sm) {
-    //  max-width: 540px;  
+    //  max-width: 540px;
     margin-left: -($spacer / 2);
-  
+
     }
     @include media-breakpoint-up(md) {
-    //  max-width: 720px;  
+    //  max-width: 720px;
     margin-left: -($spacer / 2);
-  
+
     }
     @include media-breakpoint-up(lg) {
-    //  max-width: 1060px;  
+    //  max-width: 1060px;
     margin-left: -($spacer / 2);
-  
+
     }
     @include media-breakpoint-up(xl) {
      margin-left: calc(-50vw + 570px);
