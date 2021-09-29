@@ -24,7 +24,7 @@ const alertImgPosition = withState( {
 // import './style.scss';
 // Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
-		
+
 registerBlockType( 'strip/main', {
 	title: 'Content Strip',
 	icon:<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 8h24v16h-24v-16zm0-8v6h24v-6h-24z"/></svg>,
@@ -48,18 +48,18 @@ registerBlockType( 'strip/main', {
 		bgImage:{
 			type: 'object',
 		},
-	},	 
+	},
 	edit: ( { attributes, setAttributes } ) => {
 		const { imagePostion } = attributes;
 
 		function onImagePositionChange( newValue ) {
 			setAttributes( { imagePostion: newValue } );
 		}
-	
+
 		const onRemoveImage = () => {
             setAttributes( { bgImage: undefined, } );
         };
-		
+
 		return ( [
 			<InspectorControls>
 				<PanelBody title='Style'>
@@ -99,14 +99,14 @@ registerBlockType( 'strip/main', {
 					<MediaUpload
 						onSelect={ ( media ) =>{
 							setAttributes( {bgImage: media} );
-			
+
 							console.log(media);
 						} }
 						allowedTypes={ [ 'image' ] }
 						value={ attributes.bgImage }
 						render={ ( { open } ) => (
-							<Button 
-								className={ ! attributes.bgImage ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview' }	
+							<Button
+								className={ ! attributes.bgImage ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview' }
 								onClick={ open }>
 								{ attributes.bgImage === undefined && ( 'Select a Background Image' ) }
 								{ attributes.bgImage && (
@@ -163,7 +163,7 @@ registerBlockType( 'strip/main', {
 				</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<span>
+			<div>
 			{ attributes.bgImage === undefined && (
 		  	<div className={ imagePostion + " " + attributes.padding + " my-" + attributes.spacing } >
 				<InnerBlocks templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
@@ -174,15 +174,15 @@ registerBlockType( 'strip/main', {
 				<InnerBlocks templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>
 			}
-			</span>,
+			</div>,
 		] );
 	},
-	
+
 	save: ( { attributes } ) => {
 		const { imagePostion } = attributes;
-		
+
 		return (
-			<span>
+			<div>
 			{ attributes.bgImage === undefined && (
 			<div className={ imagePostion + " " + attributes.padding + " my-" + attributes.spacing } >
 			  <div className="container">
@@ -197,8 +197,8 @@ registerBlockType( 'strip/main', {
 				</div>
 			</div>
 			) }
-			</span>
+			</div>
 		);
 	},
-			
+
 } );
