@@ -112,7 +112,7 @@ registerBlockType( 'utksds/overlay', {
 				</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<div className={ "card wpeditor-card-overlay overlay " + attributes.overColor.slug + " opacity-" + attributes.overOpacity + " " + attributes.overColor.text }>
+			<div className={ "card wpeditor-card-overlay overlay " + attributes.overColor.slug + " overlay-" + attributes.overOpacity + " " + attributes.overColor.text }>
 				{ attributes.imageUrl !== '' && (
   				<img src={ attributes.imageUrl } className="card-img" alt={ attributes.imageAlt } />
 				) }
@@ -125,7 +125,7 @@ registerBlockType( 'utksds/overlay', {
 	save: ( { attributes } ) => {
 		
 		return (
-			<div className={ "card overlay " + attributes.overColor.slug + " opacity-" + attributes.overOpacity + " " + attributes.overColor.text }>
+			<div className={ "card overlay " + attributes.overColor.slug + " overlay-" + attributes.overOpacity + " " + attributes.overColor.text }>
 				<img
 					src={ attributes.imageUrl }
 					className={ 'card-img' }
