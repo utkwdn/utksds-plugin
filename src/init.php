@@ -134,35 +134,42 @@ function ukds_customizecolor_register( $wp_customize ) {
 
 		public function render_content() {
 		?>
-			<label>
+		<ul>
+      	<li class="customize-section-description-container section-meta">
 				<?php if ( ! empty( $this->label ) ){ ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+
 				<?php }
 				if ( ! empty( $this->description ) ){ ?>
 					<span class="description customize-control-description"><?php echo esc_html( $this->description ); ?></span>
-				<?php } 
+
+				<?php }
 				if ( ! empty( $this->value('secondary_color') ) ){ ?>
-					<span class="description customize-control-description">Chosen: <?php echo esc_html( $this->value('secondary_color') ); ?></span>
+					<!-- <span class="description customize-control-description">Chosen: <?php echo esc_html( $this->value('secondary_color') ); ?></span> -->
 				<?php } ?>
-				<div class="secondary-color-group">
+			</li>
+				<li class="customize-control customize-control-radio">
 				<?php foreach ( $this->choices as $color_attributes ) : ?>
+					<span class="customize-inside-control-row">
 					<input name="secondary_color_<?php echo esc_attr( $this->id ); ?>" id="secondary_color_<?php echo esc_attr( $this->id ); ?>_<?php echo esc_attr( $color_attributes['name'] ); ?>" type="radio" value="<?php echo esc_attr( json_encode($color_attributes) ); ?>" <?php $this->link('secondary_color'); checked( $this->value('secondary_color'), json_encode($color_attributes) ); ?> >
-						<label for="secondary_color_<?php echo esc_attr( $this->id ); ?>_<?php echo esc_attr( $color_attributes['name'] ); ?>" class="color-option">
-							<span><?php echo esc_attr( $color_attributes['name'] ); ?></span>
-							<div class="color_sample <?php echo esc_attr($color_attributes['text']); ?>" style="background-color: <?php echo esc_attr( $color_attributes['color'] ); ?>">Sample Text.</div>
+						<label for="secondary_color_<?php echo esc_attr( $this->id ); ?>_<?php echo esc_attr( $color_attributes['name'] ); ?>">
+
+							<div class="color_sample <?php echo esc_attr($color_attributes['text']); ?>" style="background-color: <?php echo esc_attr( $color_attributes['color'] ); ?>; width: 1rem; height: 1rem;display: inline-block;margin-bottom: -0.2rem;"></div>
+
+              <?php echo esc_attr( $color_attributes['name'] ); ?>
 						</label>
 					</input>
+				</span>
 				<?php endforeach; ?>
-				</div>
-			</label>
+			</li>
 		<?php }
 
 	}
-	
+
 	$wp_customize->add_setting('site_secondary_color', array());
-	
+
 	include 'colors.php';
-	
+
 	$wp_customize->add_control(new UTK_Customize_Secondary_Color_Control(
     	$wp_customize,
     	'utk_secondary_color',
@@ -178,7 +185,7 @@ function ukds_customizecolor_register( $wp_customize ) {
         	'priority' => 80
     	)
 	));
-	
+
 	$wp_customize->add_section('utkds-color-settings' , array(
       'title' => __('Secondary Color','utthehill'),
       'description' => __('<p>This is the secondary color information used throughout the Gutenberg editor.</p>','utthehill'),
@@ -199,15 +206,15 @@ if( get_theme_mod('site_secondary_color') ){
 
 
 function utksds_current_screen(){
-		
+
 	$current_screen = get_current_screen();
-		
+
 	wp_register_script( 'screen-handle-header', '' );
 	wp_enqueue_script( 'screen-handle-header' );
-		
+
 	//$js_code = 'console.log(' . json_encode($current_screen, JSON_HEX_TAG) . ')';
 	//wp_add_inline_script( 'screen-handle-header', $js_code );
-		
+
 	wp_add_inline_script( 'screen-handle-header', 'const currentScreen = ' . json_encode($current_screen, JSON_HEX_TAG) );
 }
 add_action( 'enqueue_block_editor_assets', 'utksds_current_screen', 100 );
