@@ -100,10 +100,6 @@ wp.domReady( function() {
 			'utksds/columns',
 			'utksds/column',
 			'strip/main',
-			'utksds/contact',
-			'utksds/phones',
-			'utksds/socials',
-			'utksds/phone',
 		]
 	}else if(currentScreen.is_block_editor === true && currentScreen.id === 'widgets'){
 		var utksdsAllowedBlocks = [
@@ -130,6 +126,10 @@ wp.domReady( function() {
 			'core/legacy-widget',
 			'core/archives',
 			'core/categories',
+			'utksds/contact',
+			'utksds/phones',
+			'utksds/socials',
+			'utksds/phone',
 		]
 	}
 	

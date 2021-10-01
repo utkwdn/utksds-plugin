@@ -23,6 +23,10 @@ const PHONE_TEMPLATE = [
 	[ 'utksds/phone', {} ],
 ]
 
+const SOCIAL_TEMPLATE = [
+	[ 'core/social-links', {} ],
+]
+
 // import './style.scss';
 // Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
@@ -206,8 +210,19 @@ registerBlockType( 'utksds/socials', {
 	
 	edit: ( props ) => {
 		return( [
-			<div>social media goes here</div>
+			<div className="socialMedia col-auto">
+			<InnerBlocks allowedBlocks={ [ 'core/social-links' ] } template={ SOCIAL_TEMPLATE } templateLock={ false } renderAppender={ false } />
+			</div>
 		] );
+	},
+		
+	save: ( { attributes } ) => {
+
+		return (
+			<div className="socialMedia col-auto">
+			<InnerBlocks.Content />
+			</div>
+		);
 	},
 } );
 
