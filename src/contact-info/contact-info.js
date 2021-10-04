@@ -186,7 +186,7 @@ registerBlockType( 'utksds/contact', {
 				{ attributes.email !== undefined && (
 				<small className="emailList">Email:&nbsp; 
 				<a
-					className={ 'email' }
+					className={ 'email text-reset' }
 					href={ 'mailto:' + attributes.email }
 					target={ attributes.linkTarget }
 				>
@@ -290,7 +290,10 @@ registerBlockType( 'utksds/phone', {
 					placeholder='Enter phone number'
 					value={ attributes.phoneNum }
 					allowedFormats={ [ 'core/bold', 'core/italic' ] }
-					onChange={ ( value ) => setAttributes( { phoneNum: value } ) }
+					onChange={ ( value ) => {
+						let newPhone = value.replace(/\D/g, '');
+						setAttributes( { phoneNum: newPhone } );
+					} }
 					withoutInteractiveFormatting
 				/>
 			</small>
@@ -298,17 +301,23 @@ registerBlockType( 'utksds/phone', {
 	},
 		
 	save: ( { attributes } ) => {
-
+		let match = attributes.phoneNum.match(/^(\d{3})(\d{3})(\d{4})$/);
+		let formattedPhone = match[1] + '-' + match[2] + '-' + match[3];
+		
 		return (
 			<small className="phoneNumber">
 				<RichText.Content
 					tagName="span"
 					value={ attributes.phoneName }
 				/>:&nbsp;
-				<RichText.Content
-					tagName="span"
-					value={ attributes.phoneNum }
-				/>
+			
+				<a
+					className={ 'tel' }
+					href={ 'tel:' + attributes.phoneNum }
+					target={ attributes.linkTarget }
+				>
+					{ formattedPhone }
+				</a>
 			</small>
 		);
 	},
