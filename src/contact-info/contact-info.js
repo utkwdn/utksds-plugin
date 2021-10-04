@@ -44,6 +44,9 @@ registerBlockType( 'utksds/contact', {
 			type: 'string',
 			default: 'Enter address here.',
 		},
+		email: {
+			type: 'string',		  
+		},
 		url: {
 			type: 'string',
 			default: undefined,
@@ -139,6 +142,16 @@ registerBlockType( 'utksds/contact', {
 					withoutInteractiveFormatting
 				/>
 				</div>
+				<small className="emailList col-auto">
+				<RichText 
+					tagName='span'
+					placeholder={ 'E-Mail' }
+					value={ attributes.email }
+					allowedFormats={ [ 'core/bold', 'core/italic' ] }
+					onChange={ ( value ) => setAttributes( { email: value } ) }
+					withoutInteractiveFormatting
+				/>
+				</small>
 				<InnerBlocks allowedBlocks={ [ 'utksds/phones', 'utksds/socials', ] } template={ CONTACT_TEMPLATE } templateLock={ 'all' } renderAppender={ false } />
 			</div>
 		] );
@@ -151,7 +164,7 @@ registerBlockType( 'utksds/contact', {
 				<div className="address col-auto">
 				<svg class="meta-address" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"></path></svg>
 				<a
-					className={ 'map-link text-white' }
+					className={ 'map-link' }
 					href={ attributes.url }
 					target={ attributes.linkTarget }
 				>
@@ -169,6 +182,20 @@ registerBlockType( 'utksds/contact', {
 					value={ attributes.address }
 				/>
 				</div>
+				) }
+				{ attributes.email !== undefined && (
+				<small className="emailList">Email:&nbsp; 
+				<a
+					className={ 'email' }
+					href={ 'mailto:' + attributes.email }
+					target={ attributes.linkTarget }
+				>
+					<RichText.Content
+						tagName="span"
+						value={ attributes.email }
+					/>
+				</a>
+				</small>
 				) }
 				<InnerBlocks.Content />
 			</div>
@@ -249,7 +276,7 @@ registerBlockType( 'utksds/phone', {
   		} = props;
 	
 		return( [
-			<small className="phoneNumber text-white">
+			<small className="phoneNumber">
 				<RichText 
 					tagName='span'
 					placeholder='Enter phone name'
@@ -273,7 +300,7 @@ registerBlockType( 'utksds/phone', {
 	save: ( { attributes } ) => {
 
 		return (
-			<small className="phoneNumber text-white">
+			<small className="phoneNumber">
 				<RichText.Content
 					tagName="span"
 					value={ attributes.phoneName }
