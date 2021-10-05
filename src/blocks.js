@@ -36,6 +36,7 @@ import './list/list.js';
 import './quote/quote.js';
 import './code/code.js';
 import './paragraph/paragraph.js';
+import './contact-info/contact-info.js';
 
 // remove default button styles, declare default and/or plugin created blocks to selectively disable
 wp.domReady( function() {
@@ -125,6 +126,10 @@ wp.domReady( function() {
 			'core/legacy-widget',
 			'core/archives',
 			'core/categories',
+			'utksds/contact',
+			'utksds/phones',
+			'utksds/socials',
+			'utksds/phone',
 		]
 	}
 	
