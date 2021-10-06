@@ -192,10 +192,13 @@ add_filter( 'render_block', function( $block_content, $block ) {
 			$caption_start = '<figcaption>';
 			$caption_end = '</figcaption>';
 			$caption_ini = strpos($string, $caption_start);
-    		if ($caption_ini == 0) return '';
-    		$caption_ini += strlen($caption_start);
-    		$caption_len = strpos($string, $caption_end, $caption_ini) - $caption_ini;
-    		$parsed_caption = substr($string, $caption_ini, $caption_len);
+    		if ($caption_ini != 0){
+    			$caption_ini += strlen($caption_start);
+    			$caption_len = strpos($string, $caption_end, $caption_ini) - $caption_ini;
+    			$parsed_caption = substr($string, $caption_ini, $caption_len);
+			}else{
+				$parsed_caption = '';
+			}
 			
 			$block_content = strip_tags($block_content, ['a', 'img']);
 			
