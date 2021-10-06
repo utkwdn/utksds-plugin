@@ -44,7 +44,7 @@ registerBlockType( 'lead/main', {
 			<RichText 
 				tagName='p'
 				placeholder='Lead text goes here.'
-				className={ className, 'lead', 'has-text-align-' + attributes.align }
+				className={ 'lead has-text-align-' + attributes.align }
 				value={ attributes.content }
 				onChange={ ( content ) => setAttributes( { content } ) }
 				withoutInteractiveFormatting
@@ -53,7 +53,7 @@ registerBlockType( 'lead/main', {
 	},
 				  
 	save: ( { className, attributes } ) => {
-		return <RichText.Content tagName="p" className={ className, 'lead', 'has-text-align-' + attributes.align } value={ attributes.content } />;
+		return <RichText.Content tagName="p" className={ 'lead has-text-align-' + attributes.align } value={ attributes.content } />;
 	},
 
 } );
