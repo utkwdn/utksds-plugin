@@ -13,7 +13,7 @@ const { withState } = wp.compose;
 const ALLOWED_BLOCKS = [ 'utksds/button', 'utksds/buttongroup', 'card/paragraph', 'card/heading', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ];
 
 const PARAGRAPH_TEMPLATE = [
-    [ 'core/paragraph', { className: 'card-text' } ],
+    [ 'core/paragraph', { className: 'card-text', placeholder: 'Click the + button to add a new paragraph. Press Enter for a new line.' } ],
 ];
 
 const HEADING_TEMPLATE = [
@@ -329,7 +329,7 @@ registerBlockType( 'card/paragraph', {
 				  
 	edit: () => {
 		return (
-			<InnerBlocks template={ PARAGRAPH_TEMPLATE } allowedBlocks={ 'core/paragraph' } templateLock={ 'all' } />
+			<InnerBlocks template={ PARAGRAPH_TEMPLATE } allowedBlocks={ 'core/paragraph' } placeholder={ 'Click the + button to add a new paragraph. Press Enter for a new line.' } templateLock={ 'all' } />
 		)
 	},
 	
