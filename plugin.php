@@ -200,6 +200,19 @@ add_filter( 'render_block', function( $block_content, $block ) {
 				$parsed_caption = '';
 			}
 			
+			$figclass_start = '<figure class="';
+			$figclass_end = '">';
+			$figclass_ini = strpos($string, $figclass_start);
+    		if ($figclass_ini != 0){
+    			$figclass_ini += strlen($figclass_start);
+    			$figclass_len = strpos($string, $figclass_end, $figclass_ini) - $figclass_ini;
+    			$figclass = substr($string, $figclass_ini, $figclass_len);
+			}else{
+				$figclass = '';
+			}
+			
+			$figclasses = explode( ' ', $figclass );
+			
 			$block_content = strip_tags($block_content, ['a', 'img']);
 			
 			$new_content = '<div class="';
@@ -210,10 +223,18 @@ add_filter( 'render_block', function( $block_content, $block ) {
 					}else{
 						$new_content .= $class.' ';
 					}
+				}else{
+					if($id==0){
+						$new_content .= 'wp-block-image ';
+					}
 				}
 			}
 			$new_content .= '">';
-			$new_content .= '<figure class="framed-figure"><div class="framed">';
+			$new_content .= '<figure class="framed-figure ';
+			foreach($figclasses as $figure_class){
+				$new_content .= $figure_class.' ';
+			}
+			$new_content .= '"><div class="framed">';
 			$new_content .= str_replace($parsed_caption, '', $block_content);
 			$new_content .= '</div>';
 			if(isset($parsed_caption) && $parsed_caption != ''){
