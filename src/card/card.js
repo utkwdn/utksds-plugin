@@ -10,11 +10,7 @@ const { InnerBlocks, InspectorControls, ColorPalette, RichText, getColorObjectBy
 const { PanelBody, PanelRow, RangeControl, RadioControl, ToggleControl, SelectControl } = wp.components;
 const { withState } = wp.compose;
 
-const ALLOWED_BLOCKS = [ 'utksds/button', 'utksds/buttongroup', 'card/paragraph', 'card/heading', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ];
-
-const PARAGRAPH_TEMPLATE = [
-    [ 'core/paragraph', { className: 'card-text', placeholder: 'Click the + button below to add a new paragraph. Press Enter for a new line.' } ],
-];
+const ALLOWED_BLOCKS = [ 'utksds/button', 'utksds/buttongroup', 'core/paragraph', 'card/heading', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ];
 
 const HEADING_TEMPLATE = [
 	[ 'core/heading', { className: 'card-title' } ],
@@ -99,7 +95,7 @@ registerBlockType( 'utksds/card', {
 		innerBlocks: [
 			[ 'card/main', {}, [
 				[ 'card/topcap' ],
-				[ 'card/body', {}, [ [ 'card/heading' ], [ 'card/paragraph' ], [ 'utksds/button' ] ] ],
+				[ 'card/body', {}, [ [ 'card/heading' ], [ 'core/paragraph' ], [ 'utksds/button' ] ] ],
 			] ],
 		],
 		scope: [ 'block' ],
@@ -111,7 +107,7 @@ registerBlockType( 'utksds/card', {
 		icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16"><path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/><path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/></svg>),
 		innerBlocks: [
 			[ 'card/main', {}, [
-				[ 'card/body', {}, [ [ 'card/heading' ], [ 'card/paragraph' ] ] ],
+				[ 'card/body', {}, [ [ 'card/heading' ], [ 'core/paragraph' ] ] ],
 			] ],
 		],
 		scope: [ 'block' ],
@@ -316,26 +312,6 @@ registerBlockType( 'card/body', {
 			<div className={ 'card-body ' + attributes.textColor }>
 				<InnerBlocks.Content />
 			</div>
-		);
-	},
-			
-} );
-
-registerBlockType( 'card/paragraph', {
-	title: 'Paragraph',
-	parent: [ 'card/body' ],
-	icon: 'editor-paragraph',
-	category: 'design',
-				  
-	edit: () => {
-		return (
-			<InnerBlocks template={ PARAGRAPH_TEMPLATE } allowedBlocks={ 'core/paragraph' } templateLock={ 'all' } />
-		)
-	},
-	
-	save: () => {
-		return (
-			<InnerBlocks.Content />
 		);
 	},
 			
