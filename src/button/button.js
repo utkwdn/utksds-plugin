@@ -107,7 +107,7 @@ registerBlockType( 'utksds/button', {
 		},
 		buttonColor: {
 			type: 'object',
-			default: { name: 'Primary', slug: 'bg-primary', color: '#58595b', text: 'text-light'}
+			default: { name: 'Primary', slug: 'btn-primary', color: '#58595b', text: 'text-light'}
 		},
 		buttonText: {
 			type: 'boolean',

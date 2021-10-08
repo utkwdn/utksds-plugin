@@ -176,7 +176,7 @@ add_filter( 'render_block', function( $block_content, $block ) {
 	}
 	
 	if ( $block['blockName'] === 'core/image' ) {
-		/*$start = 'wp-block-image ';
+		$start = 'wp-block-image ';
 		$end = '">';
 		
 		$string = ' ' . $block_content;
@@ -186,9 +186,67 @@ add_filter( 'render_block', function( $block_content, $block ) {
     	$len = strpos($string, $end, $ini) - $ini;
     	$parsed_classes = substr($string, $ini, $len);
 		
-		//$custom_classes = explode( ' ', $parsed_classes );
+		$custom_classes = explode( ' ', $parsed_classes );
 		
-		$block_content = strip_tags($block_content, ['a', 'img']);
+		if(in_array('is-style-framed', $custom_classes)){
+			$caption_start = '<figcaption>';
+			$caption_end = '</figcaption>';
+			$caption_ini = strpos($string, $caption_start);
+    		if ($caption_ini != 0){
+    			$caption_ini += strlen($caption_start);
+    			$caption_len = strpos($string, $caption_end, $caption_ini) - $caption_ini;
+    			$parsed_caption = substr($string, $caption_ini, $caption_len);
+			}else{
+				$parsed_caption = '';
+			}
+			
+			$figclass_start = '<figure class="';
+			$figclass_end = '">';
+			$figclass_ini = strpos($string, $figclass_start);
+    		if ($figclass_ini != 0){
+    			$figclass_ini += strlen($figclass_start);
+    			$figclass_len = strpos($string, $figclass_end, $figclass_ini) - $figclass_ini;
+    			$figclass = substr($string, $figclass_ini, $figclass_len);
+			}else{
+				$figclass = '';
+			}
+			
+			$figclasses = explode( ' ', $figclass );
+			
+			$block_content = strip_tags($block_content, ['a', 'img']);
+			
+			$new_content = '<div class="';
+			foreach($custom_classes as $id=>$class){
+				if($class != 'is-style-framed'){
+					if($id==0){
+						$new_content .= 'wp-block-image '.$class.' ';
+					}else{
+						$new_content .= $class.' ';
+					}
+				}else{
+					if($id==0){
+						$new_content .= 'wp-block-image ';
+					}
+				}
+			}
+			$new_content .= '">';
+			$new_content .= '<figure class="framed-figure ';
+			foreach($figclasses as $figure_class){
+				$new_content .= $figure_class.' ';
+			}
+			$new_content .= '"><div class="framed">';
+			$new_content .= str_replace($parsed_caption, '', $block_content);
+			$new_content .= '</div>';
+			if(isset($parsed_caption) && $parsed_caption != ''){
+				$new_content .= '<figcaption>'.$parsed_caption.'</figcaption>';
+			}
+			$new_content .= '</figure></div>';
+			
+			$block_content = $new_content;
+			
+		}
+		
+		/*$block_content = strip_tags($block_content, ['a', 'img']);
 		
 		$block_content = str_replace(
 			'wp-image',
@@ -196,11 +254,11 @@ add_filter( 'render_block', function( $block_content, $block ) {
 			$block_content
 		);
 		
-		$block_content = str_replace('is-style-framed', 'framed', $block_content);*/
+		$block_content = str_replace('is-style-framed', 'framed', $block_content);
 		
 		$block_content = str_replace('is-style-', '', $block_content);
 		$block_content = str_replace('<figure', '<div', $block_content);
-		$block_content = str_replace('</figure', '</div', $block_content);
+		$block_content = str_replace('</figure', '</div', $block_content);*/
 	}
 	
 	if ( $block['blockName'] === 'core/list' ) {

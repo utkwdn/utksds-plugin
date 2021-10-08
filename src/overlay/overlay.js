@@ -3,6 +3,7 @@ import { select } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
 import { store as blocksStore } from '@wordpress/blocks';
 import { store as blockEditorStore } from '@wordpress/block-editor';
+import { siteColors, textColors } from '../globals.js'
 
 const { registerBlockType, registerBlockVariation, getBlockVariations, createBlocksFromInnerBlocksTemplate } = wp.blocks;
 const { InnerBlocks, InspectorControls, ColorPalette, RichText, getColorObjectByColorValue, MediaPlaceholder, BlockIcon, __experimentalBlockVariationPicker } = wp.blockEditor;
@@ -77,22 +78,22 @@ registerBlockType( 'utksds/overlay', {
 				></MediaPlaceholder>
 		);
 
-		const colors = [
-			{ name: 'Primary', slug: 'bg-primary', color: '#58595b', text: 'text-light'},
-			{ name: 'Secondary', slug: 'bg-secondary', color: '#006c93', text: 'text-light'},
-			{ name: 'Light', slug: 'bg-light', color: '#F6F6F6', text: 'text-primary'},
-			{ name: 'Dark', slug: 'bg-dark', color: '#4b4b4b', text: 'text-light'},
-		];
+		//const colors = [
+			//{ name: 'Primary', slug: 'bg-primary', color: '#58595b', text: 'text-light'},
+			//{ name: 'Secondary', slug: 'bg-secondary', color: '#006c93', text: 'text-light'},
+			//{ name: 'Light', slug: 'bg-light', color: '#F6F6F6', text: 'text-primary'},
+			//{ name: 'Dark', slug: 'bg-dark', color: '#4b4b4b', text: 'text-light'},
+		//];
 
 		return ( [
 			<InspectorControls>
 				<PanelBody>
 				<PanelRow>
 					<ColorPalette 
-							colors = { colors }
+							colors = { siteColors }
 							value={ attributes.overColor.color }
 							onChange={ ( value ) =>{
-								const thisColor = getColorObjectByColorValue( colors, value );
+								const thisColor = getColorObjectByColorValue( siteColors, value );
 								setAttributes( { overColor:thisColor } );
 								//console.log(thisColor);
 							} }
