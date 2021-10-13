@@ -1,29 +1,29 @@
-<?php 
+<?php
 //master list of secondary colors
 $colors = array(
 	0 => array(
 		'name' => 'Torch',
 		'slug' => 'bg-torch',
 		'color' => '#E65933',
-		'text' => 'text-primary'
+		'text' => 'text-white'
 	),
 	1 => array(
 		'name' => 'Sunsphere',
 		'slug' => 'bg-sunsphere',
 		'color' => '#FED535',
-		'text' => 'text-primary'
+		'text' => 'text-dark'
 	),
 	2 => array(
 		'name' => 'Globe',
 		'slug' => 'bg-globe',
 		'color' => '#006C93',
-		'text' => 'text-light'
+		'text' => 'text-white'
 	),
 	3 => array(
-		'name' => 'Energy',
-		'slug' => 'bg-energy',
-		'color' => '#EE3E80',
-		'text' => 'text-primary'
+		'name' => 'Valley',
+		'slug' => 'bg-valley',
+		'color' => '#00746F',
+		'text' => 'text-dark'
 	),
 	4 => array(
 		'name' => 'Switchgrass',
@@ -32,9 +32,9 @@ $colors = array(
 		'text' => 'text-primary'
 	),
 	5 => array(
-		'name' => 'Regalia',
-		'slug' => 'bg-regalia',
-		'color' => '#754A7E',
+		'name' => 'LeConte',
+		'slug' => 'bg-leconte',
+		'color' => '#8D2048',
 		'text' => 'text-light'
 	),
 );

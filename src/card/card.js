@@ -70,7 +70,7 @@ registerBlockType( 'utksds/card', {
 		},
 		cardColor: {
 			type: 'object',
-			default: { name: 'Light', slug: 'bg-light', color: '#F6F6F6', text: 'text-primary'},
+			default: { name: 'Light', slug: 'bg-light', color: '#F6F6F6', text: 'text-dark'},
 		},
 		cardOutline: {
 			type: 'boolean',
@@ -78,7 +78,7 @@ registerBlockType( 'utksds/card', {
 		},
 		textColor: {
 			type: 'string',
-			default: 'text-primary',
+			default: 'text-dark',
 		},
 	},
 	providesContext: {
@@ -122,10 +122,10 @@ registerBlockType( 'utksds/card', {
 			name,
     		setAttributes
   		} = props;
-	
+
 		const cardVariations = getBlockVariations( 'utksds/card' );
 		const { replaceInnerBlocks } = useDispatch( blockEditorStore );
-	
+
 		var cardPlaceholder = (
 			<__experimentalBlockVariationPicker
 				label = 'Card Template'
@@ -134,7 +134,7 @@ registerBlockType( 'utksds/card', {
 				onSelect={ ( nextVariation ) =>{
 					//console.log( nextVariation );
 					setAttributes( nextVariation.attributes );
-					
+
 					replaceInnerBlocks(
 						clientId,
 						createBlocksFromInnerBlocksTemplate(
@@ -149,11 +149,11 @@ registerBlockType( 'utksds/card', {
 		function onBackgroundColorChange( newColor ) {
 			setAttributes( { backgroundColor: newColor } );
 		}
-		
+
 		select( 'core/block-editor' ).getBlock( props.clientId ).innerBlocks.map( childrenBlock => {
   			dispatch( 'core/block-editor' ).updateBlockAttributes( childrenBlock.clientId, {
- 
-				parentBlockName: props.name, 
+
+				parentBlockName: props.name,
 
   			} );
 		} );
@@ -169,7 +169,7 @@ registerBlockType( 'utksds/card', {
 					) }
 					{ ! attributes.cardOutline && (
 					<PanelRow>
-						<ColorPalette 
+						<ColorPalette
 							colors = { siteColors }
 							value={ attributes.cardColor.color }
 							onChange={ ( value ) =>{
@@ -190,7 +190,7 @@ registerBlockType( 'utksds/card', {
 					) }
 					{ attributes.cardOutline && (
 					<PanelRow>
-						<ColorPalette 
+						<ColorPalette
 							colors = { siteColors }
 							value={ attributes.cardColor.color }
 							onChange={ ( value ) =>{
@@ -212,7 +212,7 @@ registerBlockType( 'utksds/card', {
 							onChange={ () => {
 								setAttributes( { cardOutline: !attributes.cardOutline } );
 								//console.log(attributes.buttonOutline);
-								
+
 								if( !attributes.cardOutline === true ){
 									var thisColor = getColorObjectByColorValue( siteColors, attributes.cardColor.color );
 									thisColor.slug = thisColor.slug.replace("bg-", "border-");
@@ -224,7 +224,7 @@ registerBlockType( 'utksds/card', {
 									setAttributes( { cardColor:thisColor, textColor:thisColor.text } );
 									//console.log(thisColor);
 								}
-			
+
 								//console.log(attributes.buttonColor);
 							} }
 						/>
@@ -254,20 +254,20 @@ registerBlockType( 'card/main', {
 	parent: [ 'utksds/card' ],
 	description: 'Inner blocks container for Card.',
 	usesContext: [ 'columns/blockName', ],
-	
+
 	edit: ( { context } ) => {
-		
+
 		if( context['columns/blockName'] == 'utksds/columns' ){
 			var columns_blocks = [ 'card/body', 'card/image', 'card/overlay', 'card/topcap', ];
 		}else{
 			var columns_blocks = [ 'card/body', 'card/image', 'utksds/columns', 'card/overlay', 'card/topcap', ];
 		}
-		
+
 		return(
 			<InnerBlocks allowedBlocks={ columns_blocks } placeholder={ 'Choose an image, body, or other card component to place here.' } templateLock={ false } renderAppender={ () => ( <div className="d-none"></div> ) } />
 		);
 	},
-	
+
 	save: ( { attributes } ) => {
 
 		return (
@@ -288,25 +288,25 @@ registerBlockType( 'card/body', {
 			type: 'string',
 		},
 	},
-				  
+
 	edit: ( { attributes, context, setAttributes } ) => {
-	
+
 		if( context['card/cardOutline'] === true ){
 			const thisColor = context['card/cardColor'].slug.replace('border-', 'text-');
 			setAttributes( { textColor:thisColor } );
 		}
-		
+
 		if( context['card/cardOutline'] === false ){
 			attributes.textColor = '';
 		}
-	
+
 		return (
 			<div className={ 'card-body ' + attributes.textColor }>
 				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } placeholder={ 'Click the + button to add a title, text, button, or other body component.' } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 		)
 	},
-	
+
 	save: ( { attributes } ) => {
 		return (
 			<div className={ 'card-body ' + attributes.textColor }>
@@ -314,67 +314,67 @@ registerBlockType( 'card/body', {
 			</div>
 		);
 	},
-			
+
 } );
-		
+
 registerBlockType( 'card/heading', {
 	title: 'Heading',
 	parent: [ 'card/body' ],
 	icon: 'heading',
 	category: 'design',
-				  
+
 	edit: () => {
 		return (
 			<InnerBlocks template={ HEADING_TEMPLATE } allowedBlocks={ 'core/heading' } templateLock={ 'all' } />
 		)
 	},
-	
+
 	save: () => {
 		return (
 			<InnerBlocks.Content />
 		);
 	},
-			
+
 } );
-		
+
 registerBlockType( 'card/image', {
 	title: 'Image',
 	parent: [ 'utksds/card' ],
 	icon: (<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img" aria-hidden="true" focusable="false"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 4.5h14c.3 0 .5.2.5.5v8.4l-3-2.9c-.3-.3-.8-.3-1 0L11.9 14 9 12c-.3-.2-.6-.2-.8 0l-3.6 2.6V5c-.1-.3.1-.5.4-.5zm14 15H5c-.3 0-.5-.2-.5-.5v-2.4l4.1-3 3 1.9c.3.2.7.2.9-.1L16 12l3.5 3.4V19c0 .3-.2.5-.5.5z"></path></svg>),
 	category: 'design',
-				  
+
 	edit: () => {
 		return (
 			<InnerBlocks template={ IMAGE_TEMPLATE } allowedBlocks={ 'core/image' } templateLock={ 'all' } />
 		)
 	},
-	
+
 	save: () => {
 		return (
 			<InnerBlocks.Content />
 		);
 	},
-			
+
 } );
-		
+
 registerBlockType( 'card/topcap', {
 	title: 'Image Cap Top',
 	parent: [ 'utksds/card' ],
 	icon: (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18 18h6v6h-6v-6zm-9 6h6v-6h-6v6zm-9 0h6v-6h-6v6zm0-8h24v-16h-24v16z"/></svg>),
 	category: 'design',
-				  
+
 	edit: () => {
 		return (
 			<InnerBlocks template={ TOP_CAP_TEMPLATE } allowedBlocks={ 'core/image' } templateLock={ 'all' } />
 		)
 	},
-	
+
 	save: () => {
 		return (
 			<InnerBlocks.Content />
 		);
 	},
-			
+
 } );
 
 registerBlockType( 'card/header', {
@@ -394,9 +394,9 @@ registerBlockType( 'card/header', {
 			default: 'div'
 		}
 	},
-	
+
 	edit: ( { attributes, setAttributes } ) => {
-		
+
 		return( [
 			<InspectorControls>
 				<PanelBody title='Card Header' initialOpen={ true }>
@@ -412,37 +412,37 @@ registerBlockType( 'card/header', {
 								{ label: 'H1', value: 'h1'},
 							] }
 							value={ attributes.tagName }
-							onChange={ ( value ) =>{ 
+							onChange={ ( value ) =>{
 								setAttributes( { tagName:value } );
 							} }
 						/>
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<RichText 
+			<RichText
 				tagName={ attributes.tagName }
 				className={ 'card-header' }
 				placeholder='Type header here'
 				value={ attributes.content }
-				onChange={ ( value ) =>{ 
+				onChange={ ( value ) =>{
 					setAttributes( { content:value } );
 				} }
 				withoutInteractiveFormatting
 			/>
 		] );
 	},
-				  
+
 	save: ( { attributes } ) => {
-		return( 
-			<RichText.Content 
-				tagName={ attributes.tagName } 
+		return(
+			<RichText.Content
+				tagName={ attributes.tagName }
 				className={ 'card-header' }
 				value={ attributes.content }
 			/>
 		);
 	},
 } );
-	
+
 registerBlockType( 'card/footer', {
 	title: 'Card Footer',
 	parent: [ 'utksds/card' ],
@@ -464,7 +464,7 @@ registerBlockType( 'card/footer', {
 			default: '',
 		}
 	},
-	
+
 	edit: ( { attributes, setAttributes } ) => {
 		return( [
 			<InspectorControls>
@@ -476,7 +476,7 @@ registerBlockType( 'card/footer', {
 							checked={ attributes.muted }
 							onChange={ () => {
 								setAttributes( { muted: !attributes.muted } );
-								
+
 								if( !attributes.muted === true ){
 									setAttributes( { mutedClass:'text-muted' } );
 								}else{
@@ -487,7 +487,7 @@ registerBlockType( 'card/footer', {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<RichText 
+			<RichText
 				tagName='div'
 				className={ 'card-footer ' + attributes.mutedClass }
 				placeholder='Type footer here'
@@ -497,7 +497,7 @@ registerBlockType( 'card/footer', {
 			/>
 		] );
 	},
-				  
+
 	save: ( { attributes } ) => {
 		return <RichText.Content tagName="div" className={ 'card-footer ' + attributes.mutedClass } value={ attributes.content } />;
 	},

@@ -1,8 +1,12 @@
 //define the site colors to be usable in all the blocks
 let siteColors = [
-	{ name: 'Light', slug: 'bg-light', color: '#F6F6F6', text: 'text-primary'},
-	{ name: 'Primary', slug: 'bg-primary', color: '#58595b', text: 'text-light'},
-	{ name: 'Secondary', slug: 'bg-secondary', color: '#006c93', text: 'text-light'},
+	{ name: 'Orange',  slug: 'bg-orange',  color: '#ff8200', text: 'text-white'},
+	{ name: 'Dark',    slug: 'bg-dark',    color: '#4b4b4b', text: 'text-white'},
+	{ name: 'Smokey',  slug: 'bg-smokey',  color: '#58595B', text: 'text-white'},
+	{ name: 'Gray2',   slug: 'bg-gray2',   color: '#E0E0E0', text: 'text-dark'},
+	{ name: 'Light',   slug: 'bg-light',   color: '#F6F6F6', text: 'text-dark'},
+	{ name: 'Summitt', slug: 'bg-summitt', color: '#B9E1E2', text: 'text-dark'},
+	{ name: 'Link',    slug: 'bg-utlink',    color: '#1a73c5', text: 'text-white'},
 ];
 
 if(typeof secondaryColor !== 'undefined'){
@@ -11,9 +15,14 @@ if(typeof secondaryColor !== 'undefined'){
 }
 
 let textColors = [
-	{ name: 'Light', slug: 'text-light', color: '#F6F6F6'},
-	{ name: 'Primary', slug: 'text-primary', color: '#58595b'},
-	{ name: 'Secondary', slug: 'text-secondary', color: '#006c93'},
+	{ name: 'Light',   slug: 'text-light',   color: '#F6F6F6'},
+	{ name: 'Orange',  slug: 'text-orange',  color: '#ff8200'},
+	{ name: 'Dark',    slug: 'text-dark',    color: '#4b4b4b'},
+	{ name: 'Smokey',  slug: 'text-smokey',  color: '#58595B'},
+	{ name: 'Gray2',   slug: 'text-gray2',   color: '#E0E0E0'},
+	{ name: 'Light',   slug: 'text-light',   color: '#F6F6F6'},
+	{ name: 'Summitt', slug: 'text-summitt', color: '#B9E1E2'},
+	{ name: 'Link',    slug: 'text-utlink',    color: '#1a73c5'},
 ];
 
 if(typeof secondaryColor !== 'undefined'){

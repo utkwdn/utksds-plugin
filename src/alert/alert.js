@@ -27,8 +27,8 @@ import './editor.scss';
 
 
 
-		
-		
+
+
 registerBlockType( 'alert/main', {
 	title: 'Alert',
 	icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
@@ -40,7 +40,7 @@ registerBlockType( 'alert/main', {
 	attributes: {
 		imagePostion: {
 			type: 'string',
-			default: 'alert alert-primary',
+			default: 'alert alert-torch',
 		},
 		text: {
 			type: 'string',
@@ -52,14 +52,14 @@ registerBlockType( 'alert/main', {
 			default: 'Enter alert text here.',
 		},
 	},
-				  
+
 	edit: ( { attributes, setAttributes } ) => {
 		const { imagePostion } = attributes;
 
 		function onImagePositionChange( newValue ) {
 			setAttributes( { imagePostion: newValue } );
 		}
-		
+
 		return ( [
 			<InspectorControls>
 				<PanelBody title='Style'>
@@ -84,7 +84,7 @@ registerBlockType( 'alert/main', {
 				</PanelBody>
 			</InspectorControls>,
 		  	<div className={ imagePostion }>
-				<RichText 
+				<RichText
 					tagName='span'
 					placeholder={ attributes.placeholder }
 					value={ attributes.text }
@@ -95,10 +95,10 @@ registerBlockType( 'alert/main', {
 			</div>,
 		] );
 	},
-	
+
 	save: ( { attributes } ) => {
 		const { imagePostion } = attributes;
-		
+
 		return (
 			<div className={ imagePostion }>
 				<RichText.Content
@@ -108,5 +108,5 @@ registerBlockType( 'alert/main', {
 			</div>
 		);
 	},
-			
+
 } );
