@@ -1,5 +1,7 @@
+import { siteColors, textColors } from '../globals.js'
+
 const { registerBlockType } = wp.blocks;
-const { MediaUpload, MediaUploadCheck, InnerBlocks, InspectorControls, ColorPalette, RichText } = wp.blockEditor;
+const { MediaUpload, MediaUploadCheck, InnerBlocks, InspectorControls, ColorPalette, getColorObjectByColorValue, RichText } = wp.blockEditor;
 const { Button, ResponsiveWrapper, PanelBody, PanelRow, RangeControl, RadioControl } = wp.components;
 const { withState } = wp.compose;
 const ALLOWED_BLOCKS = [  'utksds/button', 'core/separator', 'core/paragraph', 'core/heading', 'utksds/columns' ];
@@ -34,8 +36,8 @@ registerBlockType( 'strip/main', {
 	},
 	attributes: {
 		imagePostion: {
-			type: 'string',
-			default: 'strip strip-gray1',
+			type: 'object',
+			default: { name: 'Smokey', slug: 'strip-smokey', color: '#58595B', text: 'text-white'}
 		},
 		spacing: {
 			type: 'integer',
@@ -51,10 +53,6 @@ registerBlockType( 'strip/main', {
 	},
 	edit: ( { attributes, setAttributes } ) => {
 		const { imagePostion } = attributes;
-
-		function onImagePositionChange( newValue ) {
-			setAttributes( { imagePostion: newValue } );
-		}
 
 		const onRemoveImage = () => {
             setAttributes( { bgImage: undefined, } );
@@ -74,25 +72,19 @@ registerBlockType( 'strip/main', {
 				</PanelRow>
 				{ attributes.bgImage === undefined &&
 				<PanelRow>
-				<RadioControl
-      				label="Background"
-      				help="Choose a background."
-      				selected={ imagePostion }
-      				options={ [
-      					{ label: 'White', value: 'strip strip-white' },
-      					{ label: 'Light Gray', value: 'strip strip-gray1' },
-      					{ label: 'Smokey', value: 'strip strip-smokey text-white' },
-      					//{ label: 'Pattern', value: 'strip strip-pattern text-white' },
-      					{ label: 'Seal', value: 'strip strip-seal' },
-      					//{ label: 'Ayres', value: 'strip strip-ayres text-white' },
-      					//{ label: 'Library', value: 'strip strip-library' },
-      					{ label: 'Mountains', value: 'strip strip-smokies text-white' },
-      					//{ label: 'Gingham', value: 'strip strip-gingham' },
-      					//{ label: 'Rain', value: 'strip strip-rain' },
-      				] }
-      				onChange={ onImagePositionChange }
-      			/>
-				</PanelRow>
+						<ColorPalette
+							colors = { siteColors }
+							value={ attributes.imagePostion.color }
+							onChange={ ( value ) =>{
+								var thisColor = getColorObjectByColorValue( siteColors, value );
+								thisColor.slug = thisColor.slug.replace("bg-", "strip-");
+								setAttributes( { imagePostion:thisColor } );
+								//console.log(thisColor);
+							} }
+							disableCustomColors={ true }
+							clearable={ false }
+						/>
+					</PanelRow>
 				}
 				<PanelRow>
 				<MediaUploadCheck>
@@ -165,7 +157,7 @@ registerBlockType( 'strip/main', {
 			</InspectorControls>,
 			<div>
 			{ attributes.bgImage === undefined && (
-		  	<div className={ imagePostion + " " + attributes.padding + " my-" + attributes.spacing } >
+		  	<div className={ "strip " + imagePostion.slug + " " + imagePostion.text + " " + attributes.padding + " my-" + attributes.spacing } >
 				<InnerBlocks templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>
 			) }
@@ -184,7 +176,7 @@ registerBlockType( 'strip/main', {
 		return (
 			<div>
 			{ attributes.bgImage === undefined && (
-			<div className={ imagePostion + " " + attributes.padding + " my-" + attributes.spacing } >
+			<div className={ "strip " + imagePostion.slug + " " + imagePostion.text + " " + attributes.padding + " my-" + attributes.spacing } >
 			  <div className="container">
 				<InnerBlocks.Content />
 				</div>
