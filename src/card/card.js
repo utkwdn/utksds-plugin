@@ -28,24 +28,6 @@ const IMAGE_TEMPLATE = [
 // Commenting out the front style, as it will be handled by the bootstrap css pulled in.
 import './editor.scss';
 
-/*const bgColors = [
-	{ name: 'Light', slug: 'bg-light', color: '#F6F6F6', text: 'text-primary'},
-	{ name: 'Primary', slug: 'bg-primary', color: '#58595b', text: 'text-light'},
-	{ name: 'Secondary', slug: 'bg-secondary', color: '#006c93', text: 'text-light'},
-];
-
-const borderColors = [
-	{ name: 'Light', slug: 'border-light', color: '#F6F6F6', text: ''},
-	{ name: 'Primary', slug: 'border-primary', color: '#58595b', text: ''},
-	{ name: 'Secondary', slug: 'border-secondary', color: '#006c93', text: ''},
-];
-
-const textColors = [
-	{ name: 'Light', slug: 'text-light', color: '#F6F6F6'},
-	{ name: 'Primary', slug: 'text-primary', color: '#58595b'},
-	{ name: 'Secondary', slug: 'text-secondary', color: '#006c93'},
-];*/
-
 /*registerBlockVariation( 'core/image', {
 	name: 'captop',
 	title: 'Image Cap Top',
