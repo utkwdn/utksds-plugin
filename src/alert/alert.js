@@ -1,5 +1,7 @@
+import { siteColors, textColors } from '../globals.js'
+
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, InspectorControls, ColorPalette, RichText } = wp.blockEditor;
+const { InnerBlocks, InspectorControls, ColorPalette, getColorObjectByColorValue, RichText } = wp.blockEditor;
 const { PanelBody, PanelRow, RangeControl, RadioControl } = wp.components;
 const { withState } = wp.compose;
 const ALLOWED_BLOCKS = [ 'core/paragraph' ];
@@ -39,8 +41,8 @@ registerBlockType( 'alert/main', {
 	},
 	attributes: {
 		imagePostion: {
-			type: 'string',
-			default: 'alert alert-torch',
+			type: 'object',
+			default: { name: 'Smokey', slug: 'alert-smokey', color: '#58595B', text: 'text-white'}
 		},
 		text: {
 			type: 'string',
@@ -56,34 +58,26 @@ registerBlockType( 'alert/main', {
 	edit: ( { attributes, setAttributes } ) => {
 		const { imagePostion } = attributes;
 
-		function onImagePositionChange( newValue ) {
-			setAttributes( { imagePostion: newValue } );
-		}
-
 		return ( [
 			<InspectorControls>
 				<PanelBody title='Style'>
-				<RadioControl
-      		label="Color"
-      		help="The color of the alert."
-      		selected={ imagePostion }
-      		options={ [
-      			{ label: 'Primary', value: 'alert alert-primary' },
-      			{ label: 'Orange', value: 'alert alert-orange' },
-      			{ label: 'Smokey', value: 'alert alert-smokey' },
-      			{ label: 'Secondary', value: 'alert alert-secondary' },
-      			{ label: 'Success', value: 'alert alert-success' },
-      			{ label: 'Danger', value: 'alert alert-danger' },
-      			{ label: 'Warning', value: 'alert alert-warning' },
-      			{ label: 'Info', value: 'alert alert-info' },
-      			{ label: 'Light', value: 'alert alert-light' },
-      			{ label: 'Dark', value: 'alert alert-dark' },
-      		] }
-      		onChange={ onImagePositionChange }
-      	/>
+				<PanelRow>
+						<ColorPalette
+							colors = { siteColors }
+							value={ attributes.imagePostion.color }
+							onChange={ ( value ) =>{
+								var thisColor = getColorObjectByColorValue( siteColors, value );
+								thisColor.slug = thisColor.slug.replace("bg-", "alert-");
+								setAttributes( { imagePostion:thisColor } );
+								//console.log(thisColor);
+							} }
+							disableCustomColors={ true }
+							clearable={ false }
+						/>
+					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-		  	<div className={ imagePostion }>
+		  	<div className={ 'alert ' + imagePostion.slug }>
 				<RichText
 					tagName='span'
 					placeholder={ attributes.placeholder }
@@ -100,7 +94,7 @@ registerBlockType( 'alert/main', {
 		const { imagePostion } = attributes;
 
 		return (
-			<div className={ imagePostion }>
+			<div className={ 'alert ' + imagePostion.slug }>
 				<RichText.Content
 					tagName="span"
 					value={ attributes.text }
