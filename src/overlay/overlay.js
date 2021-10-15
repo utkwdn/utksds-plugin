@@ -14,7 +14,7 @@ const ALLOWED_BLOCKS = [ 'utksds/button', 'card/paragraph', 'card/heading', 'cor
 
 const OVERLAY_TEMPLATE = [
     [ 'overlay/main', {}, [
-		[ 'card/heading' ], 
+		[ 'card/heading' ],
 		[ 'card/paragraph' ],
 	] ],
 ];
@@ -42,7 +42,7 @@ registerBlockType( 'utksds/overlay', {
 		},
 		overColor: {
 			type: 'object',
-			default: { name: 'Primary', slug: 'bg-primary', color: '#58595b', text: 'text-light'}
+			default: { name: 'Dark', slug: 'bg-dark', color: '#4b4b4b', text: 'text-white'}
 		},
 		overOpacity: {
 			type: 'integer',
@@ -50,19 +50,19 @@ registerBlockType( 'utksds/overlay', {
 		},
 	},
 	providesContext: {
-		'overlay/bgColor': 'overColor',	
+		'overlay/bgColor': 'overColor',
 		'overlay/opacity': 'overOpacity',
 	},
-				  
+
 	edit: ( { clientId, attributes, setAttributes } ) => {
-	
+
 		const { replaceInnerBlocks } = useDispatch( blockEditorStore );
-	
+
 		const ovPlaceholder = (
 			<MediaPlaceholder
 				onSelect={ media => {
 					setAttributes( { imageAlt: media.alt, imageUrl: media.url } );
-					
+
 					replaceInnerBlocks(
 						clientId,
 						createBlocksFromInnerBlocksTemplate(
@@ -89,7 +89,7 @@ registerBlockType( 'utksds/overlay', {
 			<InspectorControls>
 				<PanelBody>
 				<PanelRow>
-					<ColorPalette 
+					<ColorPalette
 							colors = { siteColors }
 							value={ attributes.overColor.color }
 							onChange={ ( value ) =>{
@@ -120,11 +120,11 @@ registerBlockType( 'utksds/overlay', {
     			<InnerBlocks allowedBlocks={ [ 'overlay/main' ] } placeholder={ ovPlaceholder } templateLock={ true } />
 			</div>
 		] );
-	
+
 	},
-				  
+
 	save: ( { attributes } ) => {
-		
+
 		return (
 			<div className={ "card overlay " + attributes.overColor.slug + " overlay-" + attributes.overOpacity + " " + attributes.overColor.text }>
 				<img
@@ -147,13 +147,13 @@ registerBlockType( 'overlay/main', {
 	},
 	usesContext: [ 'overlay/bgColor', 'overlay/opacity', ],
 	edit: ( { context } ) => {
-		
+
 		return(
 			<div className={ "card-img-overlay" }>
 				<InnerBlocks allowedBlocks={ [ 'card/heading', 'card/paragraph', 'utksds/button', 'lead/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } /></div>
 		);
 	},
-	
+
 	save: ( { attributes } ) => {
 
 		return (
