@@ -18,8 +18,8 @@ const LinkControl = __experimentalLinkControl;
 
 const AllIcons = [
 	{
-		name:'Box arrow up-right', 
-		string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>', 
+		name:'Box arrow up-right',
+		string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>',
 		code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>)
 	},
 	{
@@ -107,7 +107,7 @@ registerBlockType( 'utksds/button', {
 		},
 		buttonColor: {
 			type: 'object',
-			default: { name: 'Primary', slug: 'btn-primary', color: '#58595b', text: 'text-light'}
+			default: { name: 'Link', slug: 'btn-utlink', color: '#1a73c5', text: 'text-white'}
 		},
 		buttonText: {
 			type: 'boolean',
@@ -138,7 +138,7 @@ registerBlockType( 'utksds/button', {
 			default: false
 		},
 	},
-	
+
 	edit: ( { isSelected, attributes, ClassName, setAttributes, clientId, } ) => {
 		//const { url, linkTarget } = attributes;
 
@@ -154,15 +154,15 @@ registerBlockType( 'utksds/button', {
 			} );
 			setisVisible( false );
 		};
-		
+
 		const [ isVisible, setisVisible ] = useState( false );
 		const toggleVisible = () => setisVisible(value => !value);
-		
+
 		const [ NewTab, setNewTab ] = useState( attributes.linkTab );
 		//const toggleNewTab = () => setNewTab(value => !value);
-		
+
 		//console.log(siteColors);
-		
+
 		function onButtonColorChange( newColor ) {
 			setAttributes( { buttonColor: newColor } );
 		}
@@ -171,12 +171,12 @@ registerBlockType( 'utksds/button', {
 			var iconResults = AllIcons.find(obj => {
 				return obj.name === attributes.iconCode.name;
 			} );
-			
+
 			attributes.useIcon = false;
 		}else{
 			var iconResults = { name:'', string:'', code:null };
 		}
-			
+
 		//console.log(buttonBody);
 
 		return ( [
@@ -208,23 +208,23 @@ registerBlockType( 'utksds/button', {
 								opensInNewTab: NewTab
 							} ) => {
 								//console.log(NewTab);
-								
+
 								setAttributes( { url: newurl, opensInNewTab: setNewTab(value => !value) } );
-			
+
 								attributes.url = newurl;
 								attributes.linkTab = NewTab;
-			
+
 								if ( attributes.linkTab === true ) {
 									attributes.linkTarget = '_blank';
 								} else {
 									attributes.linkTarget = undefined;
 								}
-			
+
 								//console.log(attributes.linkTarget);
 								//setisVisible(false);
-			
+
 							} }
-			
+
  						/>
                 	</Popover>
             		) }
@@ -296,7 +296,7 @@ registerBlockType( 'utksds/button', {
 					) }
 					{ ! attributes.buttonOutline && ! attributes.buttonText && (
 					<PanelRow>
-						<ColorPalette 
+						<ColorPalette
 							colors = { siteColors }
 							value={ attributes.buttonColor.color }
 							onChange={ ( value ) =>{
@@ -318,7 +318,7 @@ registerBlockType( 'utksds/button', {
 					) }
 					{ attributes.buttonOutline && ! attributes.buttonText && (
 					<PanelRow>
-						<ColorPalette 
+						<ColorPalette
 							colors = { siteColors }
 							value={ attributes.buttonColor.color }
 							onChange={ ( value ) =>{
@@ -345,10 +345,10 @@ registerBlockType( 'utksds/button', {
 							onChange={ () => {
 								setAttributes( { buttonOutline: !attributes.buttonOutline } );
 								//console.log(attributes.buttonOutline);
-								
+
 								if( !attributes.buttonOutline === true ){
 									//const thisColor = getColorObjectByColorValue( outlineColors, attributes.buttonColor.color );
-									
+
 									var thisColor = getColorObjectByColorValue( siteColors, attributes.buttonColor.color );
 									thisColor.slug = thisColor.slug.replace("bg-", "btn-outline-");
 									if(thisColor.slug.indexOf("outline-") === -1){
@@ -365,7 +365,7 @@ registerBlockType( 'utksds/button', {
 									setAttributes( { buttonColor:thisColor } );
 									//console.log(thisColor);
 								}
-			
+
 								//console.log(attributes.buttonColor);
 							} }
 						/>
@@ -379,13 +379,13 @@ registerBlockType( 'utksds/button', {
 							onChange={ () => {
 								setAttributes( { buttonText: !attributes.buttonText } );
 								//console.log(attributes.buttonOutline);
-								
+
 								if( !attributes.buttonText === true ){
 									setAttributes( { buttonColor:{ name: 'Link', slug: 'btn-link', color: '', text: ''} } );
 								}else{
-									setAttributes( { buttonColor:{ name: 'Primary', slug: 'btn-primary', color: '#58595b', text: 'text-light'}, buttonOutline:false } );
+									setAttributes( { buttonColor:{ name: 'Link', slug: 'btn-utlink', color: '#1a73c5', text: 'text-light'}, buttonOutline:false } );
 								}
-			
+
 								//console.log(attributes.buttonColor);
 							} }
 						/>
@@ -407,7 +407,7 @@ registerBlockType( 'utksds/button', {
         					] }
 							onChange={ ( value ) =>{
 								setAttributes( { buttonSize: value } );
-								
+
 								if(value === " btn-block"){
 									setAttributes( { blockClass: "d-grid gap-2" } );
 								}else{
@@ -420,7 +420,7 @@ registerBlockType( 'utksds/button', {
 			</InspectorControls>,
 			<div className={ attributes.blockClass }>
 				<div className={ 'btn mb-3 ' + attributes.buttonColor.slug + attributes.buttonSize }>
-					<RichText 
+					<RichText
 						tagName='span'
 						placeholder={ attributes.placeholder }
 						value={ attributes.text }
@@ -444,8 +444,8 @@ registerBlockType( 'utksds/button', {
 			</div>
 		] );
 	},
-	
-	save: ( { attributes } ) => {	
+
+	save: ( { attributes } ) => {
 		return(
 			<div className={ attributes.blockClass }>
 			<a
@@ -493,7 +493,7 @@ registerBlockType( 'utksds/buttongroup', {
 			default: ' btn-group-nrml'
 		},
 	},
-	
+
 	edit: ( { attributes, ClassName, setAttributes } ) => {
 		return ( [
 			// eslint-disable-next-line react/jsx-key
@@ -507,13 +507,13 @@ registerBlockType( 'utksds/buttongroup', {
 							onChange={ () => {
 								setAttributes( { orientationSetting: !attributes.orientationSetting } );
 								//console.log(attributes.buttonOutline);
-								
+
 								if( !attributes.orientationSetting === true ){
 									setAttributes( { orientation: 'btn-group-vertical' } );
 								}else{
 									setAttributes( { orientation: 'btn-group' } );;
 								}
-			
+
 								//console.log(attributes.buttonColor);
 							} }
 						/>
@@ -546,7 +546,7 @@ registerBlockType( 'utksds/buttongroup', {
 			</div>,
 		] );
 	},
-	
+
 	save: ( { attributes } ) => {
 
 		return (
