@@ -1,23 +1,28 @@
-![Power T](https://images.utk.edu/designsystem/2020/assets/i/icon-114x114.png)
+<p align="center">
+  <a href="https://www.utk.edu/">
+    <img src="https://images.utk.edu/designsystem/2020/assets/i/icon-114x114.png" alt="Power T">
+  </a>
+</p>
 
-# University of Tennessee, Knoxville Design System WordPress Plugin
+<h3 align="center">University of Tennessee, Knoxville Design System Plugin</h3>
 
-## Requirements
-
-- npm [npm Docs: Installing Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-- Node.js 14 (using a [Node version manager](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-node-js-and-npm) is highly recommended)
-- [The UT Design System Framework](https://github.utk.edu/ocm/utkds-framework)
-
-It is required that the design framework project be placed **in the same directory** as this project, since they share resources.
+---
 
 ## Installing this project
 
-1.  make sure you are running Node.js 14 prior to install
-2.  run `npm install` to install dependencies
+### Step 1, Installing the requirements:
 
-## Recommended development configuration
+The UTKSDS Plugin uses Node to compile and compress Javascript and CSS from source files.
 
-To test or develop this project locally, install WordPress, but do not install this plugin. Instead, create symlink to the root directory of this project and place that symlink in your WordPress installation's plugins directory.
+1. Not required, but highly recommended. [Install NVM by following these instructions](https://github.com/nvm-sh/nvm#installing-and-updating). **Mac Users**: If you get an "nvm: command not found" error after running the install script (and you likely will), be sure to [follow the troubleshooting steps](https://github.com/nvm-sh/nvm#troubleshooting-on-macos).
+2. Install Node.js [Install using NVM (recommended)](https://www.linode.com/docs/guides/how-to-install-use-node-version-manager-nvm/#using-nvm-to-install-node).
+
+### Step 2, Installing the this project:
+
+1. Download or `git clone` this project by typing `git clone git@github.com:utkwdn/utksds-plugin.git`.
+2. In your terminal, change to the new `/utksds-plugin/` directory.
+3. Type `npm install` to install dependencies.
+
 
 ## Creating New Blocks
 
