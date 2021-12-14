@@ -5,7 +5,7 @@
   "scripts": {
     "start": "cgb-scripts start",
     "build": "cgb-scripts build",
-    "dist":  "gulp package",
+    "dist": "cgb-scripts build && gulp package",
     "eject": "cgb-scripts eject"
   },
   "dependencies": {

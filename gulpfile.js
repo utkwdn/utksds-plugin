@@ -17,7 +17,7 @@ gulp.task('distchecker', function () {
 });
 // copy the readme
 gulp.task('distread', function () {
-      return gulp.src('README.md')
+      return gulp.src('README.txt')
       .pipe( gulp.dest('packaged/utksds-plugin') );
 });
 // copy the plugin.php
