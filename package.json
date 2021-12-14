@@ -5,14 +5,16 @@
   "scripts": {
     "start": "cgb-scripts start",
     "build": "cgb-scripts build",
+    "dist": "cgb-scripts build && gulp package",
     "eject": "cgb-scripts eject"
   },
   "dependencies": {
     "utksds-framework": "0.0.9",
-    "cgb-scripts": "1.23.1",
-    "gulp": "^4.0.2"
+    "cgb-scripts": "1.23.1"
   },
   "devDependencies": {
-    "classnames": "^2.3.1"
+    "classnames": "^2.3.1",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0"
   }
 }
