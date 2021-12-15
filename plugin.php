@@ -4,7 +4,7 @@
  * Description: utds — is a Gutenberg plugin created via create-guten-block.
  * Author: University of Tennessee, Office of Communications and Marketing
  * Author URI: https://communications.utk.edu/
- * Version: 1.0.0
+ * Version: 0.0.0
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  *
