@@ -4,12 +4,23 @@
  * Description: utds — is a Gutenberg plugin created via create-guten-block.
  * Author: University of Tennessee, Office of Communications and Marketing
  * Author URI: https://communications.utk.edu/
- * Version: 1.0.0
+ * Version: 0.0.9
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  *
  * @package CGB
  */
+
+require 'plugin-update-checker/plugin-update-checker.php';
+$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+	'https://github.com/utkwdn/utksds-plugin',
+	__FILE__,
+	'utksds-plugin'
+);
+
+//Set the branch that contains the stable release.
+//$myUpdateChecker->setBranch('main');
+$myUpdateChecker->getVcsApi()->enableReleaseAssets();
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
