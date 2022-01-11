@@ -40,7 +40,7 @@ import './contact-info/contact-info.js';
 
 // remove default button styles, declare default and/or plugin created blocks to selectively disable
 wp.domReady( function() {
-	
+
 	wp.richText.unregisterFormatType( 'core/text-color' );
 	wp.richText.unregisterFormatType( 'core/image' );
 
@@ -56,7 +56,7 @@ wp.domReady( function() {
       		wp.blocks.unregisterBlockVariation( 'core/embed', blockVariation.name );
     	}
   	});
-	
+
 	if(currentScreen.is_block_editor === true && currentScreen.id !== 'widgets'){
 		var utksdsAllowedBlocks = [
 			'core/paragraph',
@@ -77,6 +77,10 @@ wp.domReady( function() {
 			'overlay/main',
 			'utksds/tabs',
 			'tabs/tab',
+      'core/group',
+      'core/latest-posts',
+      'core/query',
+      'core/query-loop',
 			//'core/separator',
 			'horizontal-rule/main',
 			'alert/main',
@@ -132,16 +136,16 @@ wp.domReady( function() {
 			'utksds/phone',
 		]
 	}
-	
+
 	if(typeof utksdsAllowedBlocks !== 'undefined'){
-		
+
 		//console.log(wp.blocks.getBlockTypes());
-		
+
 		wp.blocks.getBlockTypes().forEach( function ( utksdsBlockSetup ) {
     		if ( -1 === utksdsAllowedBlocks.indexOf( utksdsBlockSetup.name )) {
       			wp.blocks.unregisterBlockType( utksdsBlockSetup.name );
     		}
   		});
 	}
-	
+
 } );
