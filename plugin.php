@@ -284,3 +284,57 @@ add_filter( 'render_block', function( $block_content, $block ) {
 	return $block_content;
 
 }, 5, 2 );
+
+//adds patterns to available patterns list
+function utksds_register_patterns() {
+	register_block_pattern(
+		'utksds/profile-pattern',
+    array(
+        'title'       => __( 'Person Profile', 'UTKSDS' ),
+        'description' => _x( 'A profile of a single person, including an image, their name, title, bio, and contact information.', 'Block pattern description', 'UTKSDS' ),
+        'content'     => "<!-- wp:utksds/columns {\"rowClass\":\"column-25-50-25\",\"numCols\":3} -->
+		<div class=\"wp-block-utksds-columns row\"><!-- wp:utksds/column -->
+		<div class=\"wp-block-utksds-column undefined col-12 col-md-3\"></div>
+		<!-- /wp:utksds/column -->
+		
+		<!-- wp:utksds/column {\"colWidth\":6} -->
+		<div class=\"wp-block-utksds-column undefined col-12 col-md-6\"><!-- wp:utksds/columns {\"rowClass\":\"column-30-70\",\"numCols\":2} -->
+		<div class=\"wp-block-utksds-columns row\"><!-- wp:utksds/column {\"colWidth\":4} -->
+		<div class=\"wp-block-utksds-column undefined col-12 col-md-4\"><!-- wp:image {\"id\":2261,\"sizeSlug\":\"medium\",\"linkDestination\":\"none\",\"className\":\"is-style-framed\"} -->
+		<figure class=\"wp-block-image size-medium is-style-framed\"><img src=\"https://spinupprocedure-dev.utk.edu/wp-content/uploads/sites/40/2022/01/icon-200x300.gif\" alt=\"\" class=\"wp-image-2261\"/></figure>
+		<!-- /wp:image --></div>
+		<!-- /wp:utksds/column -->
+		
+		<!-- wp:utksds/column {\"colWidth\":8} -->
+		<div class=\"wp-block-utksds-column undefined col-12 col-md-8\"><!-- wp:heading {\"className\":\"is-style-display-3 mb-0\"} -->
+		<h2 class=\"is-style-display-3 mb-0\">John Doe</h2>
+		<!-- /wp:heading -->
+		
+		<!-- wp:lead/main {\"content\":\"Job Title or Position\"} -->
+		<p class=\"wp-block-lead-main has-text-align-left\">Job Title or Position</p>
+		<!-- /wp:lead/main -->
+		
+		<!-- wp:horizontal-rule/main -->
+		<hr class=\"wp-block-horizontal-rule-main hr\"/>
+		<!-- /wp:horizontal-rule/main -->
+		
+		<!-- wp:paragraph -->
+		<p><strong>Brief bio.</strong> Sint in cum totam. Officiis nihil aut voluptatem maiores. Aperiam repellendus provident sint aut. Culpa illo beatae earum alias. Quae deleniti at omnis dicta nobis et sint. Provident sint et fugiat sequi quis et.</p>
+		<!-- /wp:paragraph -->
+		
+		<!-- wp:paragraph -->
+		<p>Phone: 865-974-XXXX<br>Email: <a href=\"mailto:netid@utk.edu\">netid@utk.edu</a><br></p>
+		<!-- /wp:paragraph --></div>
+		<!-- /wp:utksds/column --></div>
+		<!-- /wp:utksds/columns --></div>
+		<!-- /wp:utksds/column -->
+		
+		<!-- wp:utksds/column -->
+		<div class=\"wp-block-utksds-column undefined col-12 col-md-3\"></div>
+		<!-- /wp:utksds/column --></div>
+		<!-- /wp:utksds/columns -->",
+    )
+	);
+  }
+   
+  add_action( 'init', 'utksds_register_patterns' );
