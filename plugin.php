@@ -287,6 +287,9 @@ add_filter( 'render_block', function( $block_content, $block ) {
 
 //adds patterns to available patterns list
 function utksds_register_patterns() {
+
+	remove_theme_support( 'core-block-patterns' );
+
 	register_block_pattern(
 		'utksds/profile-pattern',
     array(
