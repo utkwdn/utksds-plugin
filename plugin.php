@@ -285,16 +285,30 @@ add_filter( 'render_block', function( $block_content, $block ) {
 
 }, 5, 2 );
 
+//disables loading remote patterns
+function utksds_disable_remote_patterns(){
+	return false;
+}
+add_filter( 'should_load_remote_block_patterns', 'utksds_disable_remote_patterns' );
+
 //adds patterns to available patterns list
 function utksds_register_patterns() {
 
-	remove_theme_support( 'core-block-patterns' );
+	//disables built-in core patterns
+	unregister_block_pattern( 'core/query-standard-posts' );
+	unregister_block_pattern( 'core/query-medium-posts' );
+	unregister_block_pattern( 'core/query-small-posts' );
+	unregister_block_pattern( 'core/query-grid-posts' );
+	unregister_block_pattern( 'core/query-large-title-posts' );
+	unregister_block_pattern( 'core/query-offset-posts' );
+	unregister_block_pattern( 'core/social-links-shared-background-color' );
 
 	register_block_pattern(
 		'utksds/profile-pattern',
     array(
         'title'       => __( 'Person Profile', 'UTKSDS' ),
         'description' => _x( 'A profile of a single person, including an image, their name, title, bio, and contact information.', 'Block pattern description', 'UTKSDS' ),
+		'categories'  => array( 'buttons' ),
         'content'     => "<!-- wp:utksds/columns {\"rowClass\":\"column-25-50-25\",\"numCols\":3} -->
 		<div class=\"wp-block-utksds-columns row\"><!-- wp:utksds/column -->
 		<div class=\"wp-block-utksds-column undefined col-12 col-md-3\"></div>
