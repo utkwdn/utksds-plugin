@@ -309,49 +309,155 @@ function utksds_register_patterns() {
         'title'       => __( 'Person Profile', 'UTKSDS' ),
         'description' => _x( 'A profile of a single person, including an image, their name, title, bio, and contact information.', 'Block pattern description', 'UTKSDS' ),
 		'categories'  => array( 'buttons' ),
-        'content'     => "<!-- wp:utksds/columns {\"rowClass\":\"column-25-50-25\",\"numCols\":3} -->
-		<div class=\"wp-block-utksds-columns row\"><!-- wp:utksds/column -->
-		<div class=\"wp-block-utksds-column undefined col-12 col-md-3\"></div>
-		<!-- /wp:utksds/column -->
-		
-		<!-- wp:utksds/column {\"colWidth\":6} -->
-		<div class=\"wp-block-utksds-column undefined col-12 col-md-6\"><!-- wp:utksds/columns {\"rowClass\":\"column-30-70\",\"numCols\":2} -->
-		<div class=\"wp-block-utksds-columns row\"><!-- wp:utksds/column {\"colWidth\":4} -->
-		<div class=\"wp-block-utksds-column undefined col-12 col-md-4\"><!-- wp:image {\"id\":2261,\"sizeSlug\":\"medium\",\"linkDestination\":\"none\",\"className\":\"is-style-framed\"} -->
-		<figure class=\"wp-block-image size-medium is-style-framed\"><img src=\"https://spinupprocedure-dev.utk.edu/wp-content/uploads/sites/40/2022/01/icon-200x300.gif\" alt=\"\" class=\"wp-image-2261\"/></figure>
+        'content'     => "<!-- wp:group {\"className\":\"col-lg-4 border border-dark\"} -->
+		<div class=\"wp-block-group col-lg-4 border border-dark\"><!-- wp:utksds/columns {\"rowClass\":\"column-100\",\"numCols\":1,\"className\":\"bg-orange justify-content-center w-100 gx-0\"} -->
+		<div class=\"wp-block-utksds-columns row bg-orange justify-content-center w-100 gx-0\"><!-- wp:utksds/column {\"colWidth\":12} -->
+		<div class=\"wp-block-utksds-column undefined col-12 col-md-12\"><!-- wp:image {\"align\":\"center\",\"id\":550,\"width\":200,\"height\":200,\"sizeSlug\":\"full\",\"linkDestination\":\"none\",\"className\":\"is-style-rounded mb-n5 mt-3\"} -->
+		<div class=\"wp-block-image is-style-rounded mb-n5 mt-3\"><figure class=\"aligncenter size-full is-resized\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/smokey-x-01.png\" alt=\"\" class=\"wp-image-550\" width=\"200\" height=\"200\"/></figure></div>
 		<!-- /wp:image --></div>
-		<!-- /wp:utksds/column -->
+		<!-- /wp:utksds/column --></div>
+		<!-- /wp:utksds/columns -->
 		
-		<!-- wp:utksds/column {\"colWidth\":8} -->
-		<div class=\"wp-block-utksds-column undefined col-12 col-md-8\"><!-- wp:heading {\"className\":\"is-style-display-3 mb-0\"} -->
-		<h2 class=\"is-style-display-3 mb-0\">John Doe</h2>
+		<!-- wp:utksds/columns {\"rowClass\":\"column-100\",\"numCols\":1,\"className\":\"p-5\"} -->
+		<div class=\"wp-block-utksds-columns row p-5\"><!-- wp:utksds/column {\"colWidth\":12} -->
+		<div class=\"wp-block-utksds-column undefined col-12 col-md-12\"><!-- wp:heading -->
+		<h2>Smokey X</h2>
 		<!-- /wp:heading -->
 		
-		<!-- wp:lead/main {\"content\":\"Job Title or Position\"} -->
-		<p class=\"wp-block-lead-main has-text-align-left\">Job Title or Position</p>
-		<!-- /wp:lead/main -->
-		
-		<!-- wp:horizontal-rule/main -->
-		<hr class=\"wp-block-horizontal-rule-main hr\"/>
-		<!-- /wp:horizontal-rule/main -->
-		
 		<!-- wp:paragraph -->
-		<p><strong>Brief bio.</strong> Sint in cum totam. Officiis nihil aut voluptatem maiores. Aperiam repellendus provident sint aut. Culpa illo beatae earum alias. Quae deleniti at omnis dicta nobis et sint. Provident sint et fugiat sequi quis et.</p>
+		<p><strong><em>Volunteer's Best Friend</em></strong></p>
 		<!-- /wp:paragraph -->
 		
 		<!-- wp:paragraph -->
-		<p>Phone: 865-974-XXXX<br>Email: <a href=\"mailto:netid@utk.edu\">netid@utk.edu</a><br></p>
+		<p>865-234-1235 | <a href=\"mailto:smokeyx@utk.edu\"><a href=\"mailto:smokeyx@utk.edu\">smokeyx@utk.edu</a></a></p>
+		<!-- /wp:paragraph -->
+		
+		<!-- wp:paragraph -->
+		<p>Etiam lacus nisl, congue vel vehicula ac, porta nec quam. Vestibulum a tempus neque, vitae posuere tellus. Sed imperdiet quam eu gravida commodo. In arcu sapien, imperdiet eu lobortis et, hendrerit vitae metus. Ut orci tellus, egestas sit amet euismod sit amet, mattis ac enim. Donec condimentum velit sit amet justo consectetur facilis.</p>
 		<!-- /wp:paragraph --></div>
 		<!-- /wp:utksds/column --></div>
 		<!-- /wp:utksds/columns --></div>
-		<!-- /wp:utksds/column -->
-		
-		<!-- wp:utksds/column -->
-		<div class=\"wp-block-utksds-column undefined col-12 col-md-3\"></div>
-		<!-- /wp:utksds/column --></div>
-		<!-- /wp:utksds/columns -->",
+		<!-- /wp:group -->",
     )
 	);
+
+	register_block_pattern(
+		'utksds/page-pattern',
+    array(
+        'title'       => __( 'Starter Page', 'UTKSDS' ),
+        'description' => _x( 'A sample page layout to get started.', 'Block pattern description', 'UTKSDS' ),
+		'categories'  => array( 'buttons' ),
+        'content'     => "<!-- wp:spacer {\"height\":50} -->
+		<div style=\"height:50px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>
+		<!-- /wp:spacer -->
+		
+		<!-- wp:utksds/columns {\"rowClass\":\"column-30-70\",\"numCols\":2} -->
+		<div class=\"wp-block-utksds-columns row\"><!-- wp:utksds/column {\"className\":\"border-end pe-3 mb-5\"} -->
+		<div class=\"wp-block-utksds-column undefined col-12 col-md-3 border-end pe-3 mb-5\"><!-- wp:image {\"id\":223,\"sizeSlug\":\"medium\",\"linkDestination\":\"none\",\"className\":\"is-style-framed\"} -->
+		<figure class=\"wp-block-image size-medium is-style-framed\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-02.png\" alt=\"\" class=\"wp-image-223\"/></figure>
+		<!-- /wp:image -->
+		
+		<!-- wp:paragraph -->
+		<p><strong>Duis Lacinia Nis</strong></p>
+		<!-- /wp:paragraph -->
+		
+		<!-- wp:paragraph {\"fontSize\":\"normal\"} -->
+		<p class=\"has-normal-font-size\"><em>Nunc pretium nibh ac quam finibus, rutrum tempor odio lacinia. Proin id orci in nisl molestie tincidunt non id ligula. Phasellus cursus scelerisque orci ut aliquet. Curabitur vel orci cursus, aliquam diam.</em></p>
+		<!-- /wp:paragraph --></div>
+		<!-- /wp:utksds/column -->
+		
+		<!-- wp:utksds/column {\"colWidth\":9,\"className\":\"ps-5\"} -->
+		<div class=\"wp-block-utksds-column undefined col-12 col-md-9 ps-5\"><!-- wp:heading {\"className\":\"is-style-default\"} -->
+		<h2 class=\"is-style-default\">Nam et Vestibulum</h2>
+		<!-- /wp:heading -->
+		
+		<!-- wp:spacer {\"height\":25} -->
+		<div style=\"height:25px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>
+		<!-- /wp:spacer -->
+		
+		<!-- wp:paragraph -->
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam finibus maximus massa vel lobortis. Pellentesque id sem aliquet, facilisis arcu nec, sagittis est. Aliquam quis eleifend urna. Donec hendrerit, purus eu elementum rhoncus, orci metus ultrices erat, congue viverra urna leo eget quam. Aenean diam leo, lobortis at euismod et, fermentum in metus. Nunc pretium nibh ac quam finibus, rutrum tempor odio lacinia. Proin id orci in nisl molestie tincidunt non id ligula. Phasellus cursus scelerisque orci ut aliquet. Curabitur vel orci cursus, aliquam diam et, sollicitudin mi. Praesent sit amet felis sed est feugiat euismod quis vulputate turpis. Suspendisse ut metus pharetra, luctus lacus a, ornare ante. In aliquet commodo diam, quis varius enim. Nulla posuere metus turpis, vel eleifend massa gravida sed.</p>
+		<!-- /wp:paragraph -->
+		
+		<!-- wp:image {\"align\":\"right\",\"id\":223,\"width\":292,\"height\":292,\"sizeSlug\":\"thumbnail\",\"linkDestination\":\"none\",\"className\":\"d-inline-block float-end\"} -->
+		<div class=\"wp-block-image d-inline-block float-end\"><figure class=\"alignright size-thumbnail is-resized\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-02.png\" alt=\"\" class=\"wp-image-223\" width=\"292\" height=\"292\"/></figure></div>
+		<!-- /wp:image -->
+		
+		<!-- wp:paragraph -->
+		<p>Nunc aliquam varius commodo. Nam et vestibulum ante. Nunc in est tellus. Nam quis odio non sem faucibus faucibus vel in erat. Nulla risus mauris, vulputate nec commodo tempus, euismod vitae nunc. Vestibulum eget dapibus justo. Duis at lacinia nisl. Aenean fringilla venenatis tempor. Donec efficitur velit nec ante tincidunt accumsan sed in enim. Praesent auctor justo mattis augue tincidunt suscipit.</p>
+		<!-- /wp:paragraph -->
+		
+		<!-- wp:paragraph -->
+		<p>Suspendisse a mauris sed quam ultricies sodales nec id orci. Donec vitae auctor leo, et auctor enim. Donec vitae velit pretium, vulputate tellus eu, interdum felis. Curabitur nec mattis enim. Integer magna felis, placerat eu sollicitudin id, dignissim at nibh. Proin tempus accumsan lorem, a ornare velit vehicula tincidunt. Morbi vel lacus arcu. Nunc eu volutpat metus, in convallis nisi. Mauris pulvinar dolor at magna consequat, et auctor diam facilisis. Integer faucibus vulputate ante non semper. Duis in neque sit amet mi dictum imperdiet. Cras non consequat lorem, eget facilisis purus. Pellentesque vel massa ultrices, porta dolor ac, ornare lectus. Maecenas venenatis consequat arcu, eget dapibus ligula auctor at.</p>
+		<!-- /wp:paragraph -->
+		
+		<!-- wp:group {\"className\":\"my-5\"} -->
+		<div class=\"wp-block-group my-5\"><!-- wp:utksds/button {\"buttonColor\":{\"name\":\"Link\",\"slug\":\"btn-utlink\",\"color\":\"#1a73c5\",\"text\":\"text-white\"},\"className\":\"d-inline-block\"} -->
+		<div class=\"wp-block-utksds-button d-inline-block\"><a class=\"btn save mb-3 btn-utlink btn-nrml\"><span>Explore Area 02</span><span></span></a></div>
+		<!-- /wp:utksds/button -->
+		
+		<!-- wp:utksds/button {\"buttonColor\":{\"name\":\"Link\",\"slug\":\"btn-utlink\",\"color\":\"#1a73c5\",\"text\":\"text-white\"},\"className\":\"d-inline-block\"} -->
+		<div class=\"wp-block-utksds-button d-inline-block\"><a class=\"btn save mb-3 btn-utlink btn-nrml\"><span>Explore Area 01</span><span></span></a></div>
+		<!-- /wp:utksds/button -->
+		
+		<!-- wp:utksds/button {\"buttonColor\":{\"name\":\"Link\",\"slug\":\"btn-utlink\",\"color\":\"#1a73c5\",\"text\":\"text-white\"},\"className\":\"d-inline-block\"} -->
+		<div class=\"wp-block-utksds-button d-inline-block\"><a class=\"btn save mb-3 btn-utlink btn-nrml\"><span>Explore Area 03</span><span></span></a></div>
+		<!-- /wp:utksds/button --></div>
+		<!-- /wp:group --></div>
+		<!-- /wp:utksds/column --></div>
+		<!-- /wp:utksds/columns -->
+		
+		<!-- wp:spacer {\"height\":50} -->
+		<div style=\"height:50px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>
+		<!-- /wp:spacer -->
+		
+		<!-- wp:strip/main {\"padding\":\"p-md\"} -->
+		<div class=\"wp-block-strip-main\"><div class=\"strip strip-smokey text-white p-md my-0\"><div class=\"container\"><!-- wp:utksds/columns {\"rowClass\":\"column-70-30\",\"numCols\":2} -->
+		<div class=\"wp-block-utksds-columns row\"><!-- wp:utksds/column {\"colWidth\":8} -->
+		<div class=\"wp-block-utksds-column undefined col-12 col-md-8\"><!-- wp:quote {\"className\":\"text-white\"} -->
+		<blockquote class=\"wp-block-quote text-white\"><p>Maecenas et turpis metus. Integer ut volutpat augue. Vestibulum ante lectus, aliquet vel sem in, viverra ornare dui. Mauris id nisi tortor. Quisque risus ante, tristique non vulputate aliquet, rutrum non risus. Aliquam vulputate elementum diam, ut molestie ligula egestas sit amet.</p><cite>Aliquam Volutpat</cite></blockquote>
+		<!-- /wp:quote --></div>
+		<!-- /wp:utksds/column -->
+		
+		<!-- wp:utksds/column {\"colWidth\":4} -->
+		<div class=\"wp-block-utksds-column undefined col-12 col-md-4\"><!-- wp:image {\"id\":223,\"sizeSlug\":\"large\",\"linkDestination\":\"none\"} -->
+		<figure class=\"wp-block-image size-large\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-02.png\" alt=\"\" class=\"wp-image-223\"/></figure>
+		<!-- /wp:image --></div>
+		<!-- /wp:utksds/column --></div>
+		<!-- /wp:utksds/columns --></div></div></div>
+		<!-- /wp:strip/main -->
+		
+		<!-- wp:spacer -->
+		<div style=\"height:100px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>
+		<!-- /wp:spacer -->
+		
+		<!-- wp:utksds/columns {\"rowClass\":\"column-50-50\",\"numCols\":2} -->
+		<div class=\"wp-block-utksds-columns row\"><!-- wp:utksds/column {\"colWidth\":6} -->
+		<div class=\"wp-block-utksds-column undefined col-12 col-md-6\"><!-- wp:heading {\"level\":3} -->
+		<h3><p>Vulputate Aliquet</p></h3>
+		<!-- /wp:heading -->
+		
+		<!-- wp:paragraph -->
+		<p>Aliquam erat volutpat. Morbi et dictum elit, sed sagittis urna. Nam quis tempor justo, quis tempor augue. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque elit tortor, aliquam sed nisi ac, semper laoreet nulla. Nullam in finibus urna. Sed gravida sapien dapibus tortor facilisis pretium. Aenean accumsan arcu a enim semper, quis porta ligula tincidunt. In hac habitasse platea dictumst. Cras tempor velit eget massa convallis, bibendum aliquam felis cursus.</p>
+		<!-- /wp:paragraph -->
+		
+		<!-- wp:utksds/button {\"buttonColor\":{\"name\":\"Link\",\"slug\":\"btn-utlink\",\"color\":\"#1a73c5\",\"text\":\"text-white\"}} -->
+		<div class=\"wp-block-utksds-button\"><a class=\"btn save mb-3 btn-utlink btn-nrml\"><span>Explore Vulputate</span><span></span></a></div>
+		<!-- /wp:utksds/button --></div>
+		<!-- /wp:utksds/column -->
+		
+		<!-- wp:utksds/column {\"colWidth\":6} -->
+		<div class=\"wp-block-utksds-column undefined col-12 col-md-6\"><!-- wp:gallery {\"ids\":[223,217,526,527],\"columns\":2,\"linkTo\":\"none\",\"align\":\"center\"} -->
+		<figure class=\"wp-block-gallery aligncenter columns-2 is-cropped\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-02.png\" alt=\"\" data-id=\"223\" data-link=\"http://localhost:8888/wp-utk/pattern-page/5x7-placeholder-02/\" class=\"wp-image-223\"/></figure></li><li class=\"blocks-gallery-item\"><figure><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder.png\" alt=\"\" data-id=\"217\" data-link=\"http://localhost:8888/wp-utk/pattern-page/5x7-placeholder/\" class=\"wp-image-217\"/></figure></li><li class=\"blocks-gallery-item\"><figure><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-03.png\" alt=\"\" data-id=\"526\" data-full-url=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-03.png\" data-link=\"http://localhost:8888/wp-utk/page-2/5x7-placeholder-03/\" class=\"wp-image-526\"/></figure></li><li class=\"blocks-gallery-item\"><figure><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-04.png\" alt=\"\" data-id=\"527\" data-full-url=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-04.png\" data-link=\"http://localhost:8888/wp-utk/page-2/5x7-placeholder-04/\" class=\"wp-image-527\"/></figure></li></ul><figcaption class=\"blocks-gallery-caption\">Duis in neque sit amet mi dictum</figcaption></figure>
+		<!-- /wp:gallery --></div>
+		<!-- /wp:utksds/column --></div>
+		<!-- /wp:utksds/columns -->
+		
+		<!-- wp:spacer {\"height\":50} -->
+		<div style=\"height:50px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>
+		<!-- /wp:spacer -->",
+		)
+		);
   }
    
   add_action( 'init', 'utksds_register_patterns' );
