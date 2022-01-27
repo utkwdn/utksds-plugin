@@ -10,12 +10,12 @@ const { InnerBlocks, InspectorControls, ColorPalette, RichText, getColorObjectBy
 const { PanelBody, PanelRow, Button, RangeControl, RadioControl, ToggleControl, SelectControl } = wp.components;
 const { withState } = wp.compose;
 
-const ALLOWED_BLOCKS = [ 'utksds/button', 'card/paragraph', 'card/heading', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ];
+const ALLOWED_BLOCKS = [ 'utksds/button', 'core/paragraph', 'card/heading', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ];
 
 const OVERLAY_TEMPLATE = [
     [ 'overlay/main', {}, [
 		[ 'card/heading' ],
-		[ 'card/paragraph' ],
+		[ 'core/paragraph' ],
 	] ],
 ];
 
@@ -150,7 +150,7 @@ registerBlockType( 'overlay/main', {
 
 		return(
 			<div className={ "card-img-overlay" }>
-				<InnerBlocks allowedBlocks={ [ 'card/heading', 'card/paragraph', 'utksds/button', 'lead/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } /></div>
+				<InnerBlocks allowedBlocks={ [ 'card/heading', 'core/paragraph', 'utksds/button', 'lead/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } /></div>
 		);
 	},
 
