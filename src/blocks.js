@@ -59,77 +59,31 @@ wp.domReady( function() {
 	
 	if(currentScreen.is_block_editor === true && currentScreen.id !== 'widgets'){
 		var utksdsAllowedBlocks = [
-			'core/paragraph',
-			'core/heading',
-			'core/list',
-			'core/quote',
-			'core/code',
-			'core/freeform',
-			'core/table',
-			'lead/main',
-			'core/image',
-			'core/gallery',
-			'core/file',
-			'media-object/main',
-			'media/content',
-			'core/spacer',
-			'utksds/overlay',
-			'overlay/main',
-			'utksds/tabs',
-			'tabs/tab',
-			//'core/separator',
-			'horizontal-rule/main',
-			'alert/main',
-			'utksds/buttongroup',
-			'utksds/button',
-			'utksds/accordion',
-			'accordion/fold',
-			'utksds/card',
-			'card/main',
-			'card/body',
-			'card/paragraph',
-			'card/heading',
-			'card/image',
-			'card/topcap',
-			'card/header',
-			'card/footer',
-			'core/shortcode',
-			'core/html',
-			'core/embed',
-			'utksds/calendar',
-			'utksds/columns',
-			'utksds/column',
-			'strip/main',
-		]
-	}else if(currentScreen.is_block_editor === true && currentScreen.id === 'widgets'){
-		var utksdsAllowedBlocks = [
-			'core/paragraph',
-			'core/heading',
-			'core/list',
-			'core/code',
-			'core/image',
-			'core/file',
-			'utksds/button',
-			'utksds/buttongroup',
-			'core/shortcode',
-			'core/html',
-			'core/latest-posts',
-			'core/page-list',
-			'core/rss',
-			'core/social-links',
-			'core/social-link',
-			'core/navigation',
-			'core/embed',
-			'utksds/calendar',
-			'core/group',
-			'core/widget-area',
-			'core/legacy-widget',
-			'core/archives',
-			'core/categories',
 			'utksds/contact',
 			'utksds/phones',
 			'utksds/socials',
 			'utksds/phone',
+			'core/button',
+			'core/buttons',
+			'core/columns',
+			'core/column',
+			'core/cover',
+			'core/media-text',
+			'core/pullquote',
+			'core/search',
+			'core/verse',
+		]
+	}else if(currentScreen.is_block_editor === true && currentScreen.id === 'widgets'){
+		var utksdsAllowedBlocks = [
+			'core/button',
+			'core/buttons',
+			'core/columns',
+			'core/column',
+			'core/cover',
+			'core/media-text',
+			'core/pullquote',
+			'core/search',
+			'core/verse',
 		]
 	}
 	
@@ -138,7 +92,7 @@ wp.domReady( function() {
 		//console.log(wp.blocks.getBlockTypes());
 		
 		wp.blocks.getBlockTypes().forEach( function ( utksdsBlockSetup ) {
-    		if ( -1 === utksdsAllowedBlocks.indexOf( utksdsBlockSetup.name )) {
+    		if ( 0 <= utksdsAllowedBlocks.indexOf( utksdsBlockSetup.name )) {
       			wp.blocks.unregisterBlockType( utksdsBlockSetup.name );
     		}
   		});
