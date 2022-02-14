@@ -9,7 +9,7 @@
     "eject": "cgb-scripts eject"
   },
   "dependencies": {
-    "utksds-framework": "0.0.9",
+    "utksds-framework": "0.1.0",
     "cgb-scripts": "1.23.1"
   },
   "devDependencies": {
