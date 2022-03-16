@@ -1,6 +1,5 @@
 const { registerBlockType } = wp.blocks;
-const { PostFeaturedImage } = wp.editor;
-const { InnerBlocks, InspectorControls, } = wp.blockEditor;
+const { PostFeaturedImage, InnerBlocks, InspectorControls, } = wp.blockEditor;
 const { PanelBody, } = wp.components;
 
 import './editor.scss';

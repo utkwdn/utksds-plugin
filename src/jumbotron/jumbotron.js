@@ -1,5 +1,5 @@
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, InspectorControls, ColorPalette } = wp.editor;
+const { InnerBlocks, InspectorControls, ColorPalette } = wp.blockEditor;
 const { PanelBody, RangeControl } = wp.components;
 const ALLOWED_BLOCKS = [ 'core/button', 'core/column', 'core/columns', 'core/separator', 'core/paragraph', 'core/heading', 'core/cover', 'core/image' ];
 

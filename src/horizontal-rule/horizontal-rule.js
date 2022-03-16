@@ -1,5 +1,5 @@
 const { registerBlockType } = wp.blocks;
-const { InspectorControls, ColorPalette, RichText } = wp.editor;
+const { InspectorControls, ColorPalette, RichText } = wp.blockEditor;
 const { PanelBody, PanelRow, RangeControl, RadioControl } = wp.components;
 const { withState } = wp.compose;
 
