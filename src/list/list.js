@@ -81,9 +81,11 @@ const withAdvancedControls = createHigherOrderComponent( ( BlockEdit ) => {
 					</PanelBody>
 				</InspectorControls>
 				) }
-				{ isSelected && allowedBlocks.includes( props.name ) && attributes.ordered === false && (
-				attributes.className = ''
-				) }
+				{ isSelected && allowedBlocks.includes( props.name ) && attributes.ordered === false && attributes.className && (
+				attributes.className = attributes.className.replace('is-style-list-roman', ''),
+				attributes.className = attributes.className.replace('is-style-list-letters', '')
+				) 
+				}
 			</Fragment>
 		);
 
