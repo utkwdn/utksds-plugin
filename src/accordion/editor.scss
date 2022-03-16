@@ -7,6 +7,55 @@
 // Bring in editor styles
 
 
+.editor-styles-wrapper {
+  h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+      margin-top: 0;
+      margin-bottom: .5rem;
+      font-weight: 800;
+      line-height: 1.1;
+  }
+  h1 {
+  //  @extend %heading;
+    @include font-size($h1-font-size);
+  }
+
+  h2 {
+  //  @extend %heading;
+    @include font-size($h2-font-size);
+  }
+
+  h3 {
+  //  @extend %heading;
+    @include font-size($h3-font-size);
+  }
+
+  h4 {
+  //  @extend %heading;
+    @include font-size($h4-font-size);
+  }
+
+  h5 {
+  //  @extend %heading;
+    @include font-size($h5-font-size);
+  }
+
+  h6 {
+  //  @extend %heading;
+    @include font-size($h6-font-size);
+  }
+
+
+  // Reset margins on paragraphs
+  //
+  // Similarly, the top margin on `<p>`s get reset. However, we also reset the
+  // bottom margin to use `rem` units instead of `em`.
+
+  p {
+    margin-top: 0;
+    margin-bottom: $paragraph-margin-bottom;
+  }
+}
+
 // Typography.
 // ===================================================================
 
@@ -33,12 +82,18 @@
     max-width: none;
 }
 
+
+
+// The Accordion Fold.
+// ===================================================================
+
+
 .editor-styles-wrapper {
-  
+
 
 
  .wp-block {
- 	
+
  	.rf-blocks-library--button-container {
  		display:inline-block;
  		text-align:center;
@@ -49,7 +104,7 @@
  			background:transparent;
  		}
  	}
-    
+
  	.rf-blocks-library--button-container--inner {
  	   display: inline-flex;
  	   text-align: center;
@@ -69,7 +124,7 @@
  		margin:0 0 10px 0;
  		padding:15px;
  		border: 1px solid rgba(145,151,162,.25);
- 		
+
    	h2 {
      	margin-top: 0;
    	}
@@ -86,15 +141,15 @@
  		text-align: left;
  		width: 100%;
  		outline: none;
- 		border-bottom: 1px solid rgba(145,151,162,.25); 
+ 		border-bottom: 1px solid rgba(145,151,162,.25);
  	  }
- 	
+
  	  .accordion-panel {
  		  padding: 10px !important;
  	  }
- 	
- 	
- 	
+
+
+
  	  .accordion *:first-child .accordion-trigger {
  		border-radius: 5px 5px 0 0;
  	  }
@@ -106,11 +161,11 @@
  	  button {
  		border-style: none;
  	  }
- 	  
+
  	  .accordion button::-moz-focus-inner {
  		border: 0;
  	  }
- 	  
+
  	  .accordion-title {
  		display: block;
  		pointer-events: none;
@@ -119,11 +174,11 @@
  		padding: 0.25em;
  		outline: none;
  	  }
- 	  
+
  	  .accordion-trigger:focus .accordion-title {
  		border-color: hsl(216, 94%, 73%);
  	  }
- 	  
+
  	  .accordion-icon {
  		border: solid hsl(0, 0%, 62%);
  		border-width: 0 2px 2px 0;
@@ -135,20 +190,20 @@
  		transform: translateY(-60%) rotate(45deg);
  		width: 0.5rem;
  	  }
- 	  
+
  	  .accordion-trigger:focus .accordion-icon,
  	  .accordion-trigger:hover .accordion-icon {
  		border-color: hsl(216, 94%, 73%);
  	  }
- 	  
+
  	  .accordion-trigger[aria-expanded="true"] .accordion-icon {
  		transform: translateY(-50%) rotate(-135deg);
  	  }
- 	  
+
  	  /* For Edge bug https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/4806035/ */
  	  .accordion-panel[hidden] {
  		display: none;
  	  }
  }
- 
+
  }

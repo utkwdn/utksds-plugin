@@ -5,8 +5,7 @@
  * which makes it higher in priority.
  */
 .editor-styles-wrapper {
-@import "./node_modules/bootstrap/scss/button-group";
-@import "./node_modules/bootstrap/scss/buttons";
+
 
 
 // This extension is editor only, and probably temporary until we get the editors to add proper classes.
@@ -23,8 +22,6 @@
   -ms-user-select: auto;
   user-select: auto;
   }
-
-
 .btn-group  .block-editor-block-list__layout {
     @extend .btn-group;
     .block-list-appender {
@@ -52,6 +49,5 @@
         line-height: 1.5;
       }
     }
-}
-
+  }
 }
