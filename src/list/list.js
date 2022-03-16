@@ -31,6 +31,8 @@ function addSupports( settings ) {
 				background:false,
 				text:false,
 			},
+			className:true,
+			customClassName:true,
 		});
 	}
 	
