@@ -1,0 +1,94 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+
+ @import "./node_modules/bootstrap/scss/root";
+ @import "./node_modules/bootstrap/scss/reboot";
+ @import "./node_modules/bootstrap/scss/type";
+
+
+//   // Helpers
+  @import "./node_modules/bootstrap/scss/helpers";
+//
+//   // Utilities
+  @import "./node_modules/bootstrap/scss/utilities/api";
+//   // scss-docs-end import-stack
+
+
+ .editor-styles-wrapper {
+   h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+       margin-top: 0;
+       margin-bottom: .5rem;
+       font-weight: 800;
+       line-height: 1.1;
+   }
+   h1 {
+   //  @extend %heading;
+     @include font-size($h1-font-size);
+   }
+
+   h2 {
+   //  @extend %heading;
+     @include font-size($h2-font-size);
+   }
+
+   h3 {
+   //  @extend %heading;
+     @include font-size($h3-font-size);
+   }
+
+   h4 {
+   //  @extend %heading;
+     @include font-size($h4-font-size);
+   }
+
+   h5 {
+   //  @extend %heading;
+     @include font-size($h5-font-size);
+   }
+
+   h6 {
+   //  @extend %heading;
+     @include font-size($h6-font-size);
+   }
+
+
+   // Reset margins on paragraphs
+   //
+   // Similarly, the top margin on `<p>`s get reset. However, we also reset the
+   // bottom margin to use `rem` units instead of `em`.
+
+   p {
+     margin-top: 0;
+     margin-bottom: $paragraph-margin-bottom;
+   }
+ }
+
+ // Typography.
+ // ===================================================================
+
+
+ .block-editor-writing-flow {
+   color: $utsmokey;
+   font-family: $font-family-sans-serif;
+ }
+
+ // Here we make the editor a bit wider than default.
+ // ===================================================================
+ /* Main column width */
+ .wp-block {
+     max-width: 1140px;
+ }
+
+ /* Width of "wide" blocks */
+ .wp-block[data-align="wide"] {
+     max-width: 1320px;
+ }
+
+ /* Width of "full-width" blocks */
+ .wp-block[data-align="full"] {
+     max-width: none;
+ }

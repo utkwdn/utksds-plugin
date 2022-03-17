@@ -13,6 +13,7 @@ import { registerBlockType } from '@wordpress/blocks';
 
 //to create a new block, either create a new directory, along with js and scss files, or copy an existing directory with a new name. The block will be available once it is assigned a new name, and imported below
 
+import './styles/index.js';
 import './card/card.js';
 import './accordion/accordion.js';
 //import './jumbotron/jumbotron.js';
@@ -40,7 +41,7 @@ import './contact-info/contact-info.js';
 
 // remove default button styles, declare default and/or plugin created blocks to selectively disable
 wp.domReady( function() {
-	
+
 	wp.richText.unregisterFormatType( 'core/text-color' );
 	wp.richText.unregisterFormatType( 'core/image' );
 
@@ -56,7 +57,7 @@ wp.domReady( function() {
       		wp.blocks.unregisterBlockVariation( 'core/embed', blockVariation.name );
     	}
   	});
-	
+
 	if(currentScreen.is_block_editor === true && currentScreen.id !== 'widgets'){
 		var utksdsAllowedBlocks = [
 			'utksds/contact',
@@ -86,16 +87,16 @@ wp.domReady( function() {
 			'core/verse',
 		]
 	}
-	
+
 	if(typeof utksdsAllowedBlocks !== 'undefined'){
-		
+
 		//console.log(wp.blocks.getBlockTypes());
-		
+
 		wp.blocks.getBlockTypes().forEach( function ( utksdsBlockSetup ) {
     		if ( 0 <= utksdsAllowedBlocks.indexOf( utksdsBlockSetup.name )) {
       			wp.blocks.unregisterBlockType( utksdsBlockSetup.name );
     		}
   		});
 	}
-	
+
 } );
