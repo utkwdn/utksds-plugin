@@ -7,7 +7,8 @@
 
 
 .editor-styles-wrapper {
-  @import "./node_modules/utksds-framework/src/scss/styles/orange_hr";  
+  @import "./node_modules/utksds-framework/src/scss/styles/orange_hr";
+  @import "./node_modules/utksds-framework/src/scss/styles/orange_mark";
 }
 
 
@@ -16,5 +17,4 @@
   margin-bottom: 1rem;
   background: none;
   border-top: 1px solid black;
-
 }

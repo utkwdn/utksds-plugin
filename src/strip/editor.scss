@@ -4,25 +4,18 @@
  * CSS for just Backend enqueued after style.scss
  * which makes it higher in priority.
  */
-
-// .jumbotron.jumbotron-edit {
-//   padding: 4rem 2rem;
-//   margin-bottom: 2rem;
-//   background-color: #e9ecef;
-//   border-radius: 0.3rem;
-// }
-
+@import "./node_modules/utksds-framework/src/scss/components/strip";
 .align-items-center {
     -ms-flex-align: center !important;
     align-items: center !important;
 }
-@import "./node_modules/utksds-framework/src/scss/components/strip";
 
 .block-editor-block-list__block[data-type="strip/main"] {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
 
+// There are several 'settings' for the Gutenberg editor. (full screen mode, with the settings rail open or closed, etc. The following code adjusts the width of the content ribbon accordingly.)
 .wp-block .strip {
   width: calc(100vw - 160px);
   margin-left: -($spacer / 2);
@@ -140,26 +133,10 @@ body:not(.is-fullscreen-mode) {
     min-height: 3rem;
   }
 
-
-
   &.strip-white {
     border: 1px solid $utgray2;
   }
-  &.strip-seal {
-  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_seal.jpg');
-  }
-  &.strip-ayres {
-  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_ayres.jpg');
-  }
-  &.strip-library {
-  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_library.jpg');
-  }
-  &.strip-smokies {
-  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_smokies.jpg');
-  }
-  &.strip-mountains {
-  	background-image: url('https://images.utk.edu/designsystem/v1/latest/assets/i/strip_mountains.svg');
-  }
+
 
   &.p-sm {
     padding-bottom: 1 * $spacer;
