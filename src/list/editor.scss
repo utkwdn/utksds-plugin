@@ -4,16 +4,8 @@
  * CSS for just Backend enqueued after style.scss
  * which makes it higher in priority.
  */
-
-// .jumbotron.jumbotron-edit {
-//   padding: 4rem 2rem;
-//   margin-bottom: 2rem;
-//   background-color: #e9ecef;
-//   border-radius: 0.3rem;
-// }
-
-//@import "./../utksds-framework/node_modules/bootstrap/scss/type";
-
+@import "./node_modules/bootstrap/scss/list-group";
+@import "./node_modules/utksds-framework/src/scss/styles/typography";
 .editor-styles-wrapper ol.is-style-list-roman {
   list-style-type: upper-roman;
 }

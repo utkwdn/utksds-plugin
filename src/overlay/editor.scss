@@ -6,17 +6,13 @@
  */
 
 
-// @import "./../utksds-framework/src/scss/styles/orange_hr";
-@import "./node_modules/bootstrap/scss/card";
-@import "./node_modules/utksds-framework/src/scss/components/cards";
 
 
 // This extension is editor only, and probably temporary until we get the editors to add proper classes.
 
-
+//@import "./node_modules/utksds-framework/src/scss/styles/background";
 .wp-block .card.overlay {
   min-height: 15rem;
-
 }
 
 .wpeditor-card-overlay {
@@ -24,7 +20,6 @@
     @extend .card-img-overlay;
     padding-left: 4rem;
     padding-right: 4rem;
-    //border: 1px solid black;
     .card-img-overlay {
       position: relative;
       top: auto;

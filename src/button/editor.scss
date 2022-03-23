@@ -4,9 +4,14 @@
  * CSS for just Backend enqueued after style.scss
  * which makes it higher in priority.
  */
+
+ @import "./node_modules/bootstrap/scss/buttons";
+ @import "./node_modules/utksds-framework/src/scss/styles/buttons";
+ @import "./node_modules/utksds-framework/src/scss/styles/gutenberg";
+ @import "./node_modules/bootstrap/scss/button-group";
+
 .editor-styles-wrapper {
-@import "./node_modules/bootstrap/scss/button-group";
-@import "./node_modules/bootstrap/scss/buttons";
+
 
 
 // This extension is editor only, and probably temporary until we get the editors to add proper classes.
@@ -23,8 +28,6 @@
   -ms-user-select: auto;
   user-select: auto;
   }
-
-
 .btn-group  .block-editor-block-list__layout {
     @extend .btn-group;
     .block-list-appender {
@@ -52,6 +55,5 @@
         line-height: 1.5;
       }
     }
-}
-
+  }
 }

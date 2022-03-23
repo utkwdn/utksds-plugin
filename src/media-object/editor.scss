@@ -9,13 +9,10 @@
 .media {
   display: flex;
   img {
-    // max-width: 200px;
     height: max-content;
     flex-shrink: 0;
   }
  .block-editor-inner-blocks {
-  //@extend .media-body;
-//  @extend .ms-3
   margin-left: 1rem;
   flex-grow: 1;
  }
