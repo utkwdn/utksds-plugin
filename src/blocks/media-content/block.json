@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utksds/media-content",
+	"version": "0.1.0",
+	"title": "Media Conten",
+	"icon": "editor-table",
+	"description": "Inner blocks container for Media Object.",
+	"supports": {
+		"html": false
+	},
+	"parent": [ "utksds/media-object" ],
+	"textdomain": "utksds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

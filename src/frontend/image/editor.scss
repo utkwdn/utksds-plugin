@@ -1,0 +1,13 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+*/
+
+@import '../../common.scss';
+@import "../../../node_modules/utksds-framework/src/scss/styles/frame";
+
+.is-style-framed .components-resizable-box__container {
+  @extend .framed;
+}

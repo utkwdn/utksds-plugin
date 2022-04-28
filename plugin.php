@@ -1,14 +1,17 @@
 <?php
 /**
- * Plugin Name: Design System Gutenberg Block Plugin
- * Description: utds — is a Gutenberg plugin created via create-guten-block.
- * Author: University of Tennessee, Office of Communications and Marketing
- * Author URI: https://communications.utk.edu/
- * Version: 0.1.0
- * License: GPL2+
- * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
+ * Plugin Name:       Design System Gutenberg Block Plugin
+ * Description:       utksds is a Gutenberg plugin created via Create Block tool.
+ * Requires at least: 5.8
+ * Requires PHP:      7.0
+ * Version:           0.1.0
+ * Author:            University of Tennessee, Office of Communications and Marketing
+ * Author URI:		  https://communications.utk.edu/
+ * License:           GPL2+
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       utksds
  *
- * @package CGB
+ * @package           create-block
  */
 
 require 'plugin-update-checker/plugin-update-checker.php';
@@ -18,14 +21,73 @@ $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 	'utksds-plugin'
 );
 
-//Set the branch that contains the stable release.
-//$myUpdateChecker->setBranch('main');
-$myUpdateChecker->getVcsApi()->enableReleaseAssets();
-
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+//Set the branch that contains the stable release.
+//$myUpdateChecker->setBranch('main');
+$myUpdateChecker->getVcsApi()->enableReleaseAssets();
+
+/**
+ * Registers the block using the metadata loaded from the `block.json` file.
+ * Behind the scenes, it registers also all assets so they can be enqueued
+ * through the block editor in the corresponding context.
+ *
+ * @see https://developer.wordpress.org/reference/functions/register_block_type/
+ */
+function create_block_block_test_block_init() {
+	$block_list = [
+		'accordion',
+		'accordion-fold',
+		'alert',
+		'button',
+		'button-group',
+		'calendar',
+		'card',
+		'card-body',
+		'card-footer',
+		'card-header',
+		'card-heading',
+		'card-image',
+		'card-main',
+		'card-topcap',
+		'column',
+		'columns',
+		'contact',
+		'horizontal-rule',
+		'lead',
+		'media-content',
+		'media-object',
+		'overlay',
+		'overlay-main',
+		'phone',
+		'phones',
+		'socials',
+		'strip',
+		'tab',
+		'tabs'
+	];
+	foreach($block_list as $this_block){
+		register_block_type( __DIR__ . '/build/blocks/' . $this_block );
+	}
+}
+add_action( 'init', 'create_block_block_test_block_init' );
+
+function utksds_scripts_init(){
+	wp_register_script( 'disable', plugins_url('block-test') . '/build/frontend/disable.js', array( 'wp-blocks', 'wp-block-library', 'wp-i18n', 'wp-element', 'wp-editor' ), null, true );
+	//wp_enqueue_script( 'disable' );
+	
+	register_block_type(
+		'cgb/block-utds', array(
+			// Enqueue blocks.build.js in the editor only.
+			'editor_script' => 'disable',
+		)
+	);
+
+}
+add_action( 'init', 'utksds_scripts_init' );
 
 /**
  * Block Initializer.

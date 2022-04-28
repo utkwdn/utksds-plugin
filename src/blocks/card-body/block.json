@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utksds/card-body",
+	"version": "0.1.0",
+	"title": "Card Body",
+	"category": "design",
+	"icon": "media-text",
+	"description": "Contains all the text elements within a Card.",
+	"parent": [ "utksds/card-main" ],
+	"usesContext": [ "card/cardColor", "card/cardOutline" ],
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"textColor": {
+			"type": "string"
+		}
+	},
+	"textdomain": "utksds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

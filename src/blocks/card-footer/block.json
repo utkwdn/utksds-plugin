@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utksds/card-footer",
+	"version": "0.1.0",
+	"title": "Card Footer",
+	"category": "design",
+	"icon": "table-row-after",
+	"description": "",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"content": {
+			"type": "string"
+		},
+		"muted": {
+			"type": "boolean",
+			"default": false
+		},
+		"mutedClass": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"parent": [ "utksds/card" ],
+	"textdomain": "utksds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

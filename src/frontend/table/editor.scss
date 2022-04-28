@@ -1,0 +1,19 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+
+ @import '../../common.scss';
+ @import "../../../node_modules/bootstrap/scss/tables";
+
+.wp-block-table table {
+  @extend .table;
+}
+.is-style-table-striped table {
+  @extend .table-striped;
+}
+.is-style-table-dark table {
+  @extend .table-dark;
+}

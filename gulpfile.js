@@ -7,8 +7,8 @@ var gulp      = require('gulp');
 
 // copy the dist directoy
 gulp.task('distdist', function () {
-      return gulp.src('dist/**')
-      .pipe( gulp.dest('packaged/utksds-plugin/dist') );
+      return gulp.src('build/**')
+      .pipe( gulp.dest('packaged/utksds-plugin/build') );
 });
 // copy the plugin-update-checker directoy
 gulp.task('distchecker', function () {

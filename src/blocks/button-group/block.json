@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utksds/buttongroup",
+	"version": "0.1.0",
+	"title": "Button Group",
+	"category": "design",
+	"icon": "list-view",
+	"description": "",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"orientation": {
+			"type": "string",
+			"default": "btn-group"
+		},
+		"orientationSetting": {
+			"type": "boolean",
+			"default": false
+		},
+		"groupSize": {
+			"type": "string",
+			"default": " btn-group-nrml"
+		}
+	},
+	"textdomain": "utksds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

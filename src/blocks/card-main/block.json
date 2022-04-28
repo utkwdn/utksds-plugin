@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utksds/card-main",
+	"version": "0.1.0",
+	"title": "Card Main",
+	"icon": "list-view",
+	"description": "Inner blocks container for Card.",
+	"supports": {
+		"html": false
+	},
+	"parent": [ "utksds/card" ],
+	"usesContext": [ "columns/blockName" ],
+	"textdomain": "utksds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

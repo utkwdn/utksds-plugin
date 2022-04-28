@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utksds/overlay-main",
+	"version": "0.1.0",
+	"title": "Overlay Main",
+	"category": "",
+	"icon": "editor-table",
+	"description": "Inner blocks container for Overlay.",
+	"supports": {
+		"html": false
+	},
+	"parent": [ "utksds/overlay" ],
+	"usesContext": [ "overlay/bgColor", "overlay/opacity" ],
+	"textdomain": "utksds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

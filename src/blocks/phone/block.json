@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utksds/phone",
+	"version": "0.1.0",
+	"title": "Add Phone",
+	"category": "",
+	"icon": "editor-table",
+	"description": "Add a phone number.",
+	"supports": {
+		"html": false
+	},
+	"parent": [ "utksds/phones" ],
+	"attributes": {
+		"phoneName": {
+			"type": "string"
+		},
+		"phoneNum": {
+			"type": "string"
+		}
+	},
+	"textdomain": "utksds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

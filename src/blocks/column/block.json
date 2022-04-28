@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utksds/column",
+	"version": "0.1.0",
+	"title": "Column",
+	"category": "utdesign_layout",
+	"icon": "editor-justify",
+	"description": "",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"colWidth": {
+			"type": "integer",
+			"default": 3
+		}
+	},
+	"parent": [ "utksds/columns" ],
+	"usesContext": [ "card/blockName", "columns/numCols" ],
+	"textdomain": "utksds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

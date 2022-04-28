@@ -1,0 +1,199 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utksds/calendar",
+	"version": "0.1.0",
+	"title": "Calendar",
+	"category": "embed",
+	"icon": "list-view",
+	"description": "",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"calTemplate": {
+			"type": "string",
+			"default": ""
+		},
+		"numResults":{
+			"type": "number",
+			"default": 5
+		},
+		"daysAhead":{
+			"type": "number",
+			"default": 31
+		},
+		"department": {
+			"type": "array",
+			"default": ""
+		},
+		"place": {
+			"type": "array",
+			"default": ""
+		},
+		"group": {
+			"type": "array",
+			"default": ""
+		},
+		"type": {
+			"type": "array",
+			"default": ""
+		},
+		"topic": {
+			"type": "array",
+			"default": ""
+		},
+		"audience": {
+			"type": "array",
+			"default": ""
+		},
+		"all_types": {
+			"type": "array",
+			"default": ""
+		},
+		"keywords": {
+			"type": "string",
+			"default": ""
+		},
+		"featured": {
+			"type": "boolean",
+			"default": false
+		},
+		"featuredS": {
+			"type": "string",
+			"default": ""
+		},
+		"sponsored": {
+			"type": "boolean",
+			"default": false
+		},
+		"sponsoredS": {
+			"type": "string",
+			"default": ""
+		},
+		"matching": {
+			"type": "boolean",
+			"default": false
+		},
+		"matchingS": {
+			"type": "string",
+			"default": ""
+		},
+		"past": {
+			"type": "boolean",
+			"default": false
+		},
+		"pastS": {
+			"type": "string",
+			"default": ""
+		},
+		"mustMatch": {
+			"type": "string",
+			"default": ""
+		},
+		"exType": {
+			"type": "array",
+			"default": ""
+		},
+		"exTopic": {
+			"type": "array",
+			"default": ""
+		},
+		"exAudience": {
+			"type": "array",
+			"default": ""
+		},
+		"exAll_types": {
+			"type": "array",
+			"default": ""
+		},
+		"widgetType": {
+			"type": "string",
+			"default": "view"
+		},
+		"style": {
+			"type": "string",
+			"default": "modern"
+		},
+		"template": {
+			"type": "string",
+			"default": "modern"
+		},
+		"hideDesc": {
+			"type": "boolean",
+			"default": false
+		},
+		"hideDescS": {
+			"type": "string",
+			"default": ""
+		},
+		"truncate": {
+			"type": "boolean",
+			"default": false
+		},
+		"truncateS": {
+			"type": "string",
+			"default": ""
+		},
+		"htmlDesc": {
+			"type": "boolean",
+			"default": false
+		},
+		"htmlDescS": {
+			"type": "string",
+			"default": ""
+		},
+		"evImage": {
+			"type": "boolean",
+			"default": false
+		},
+		"evImageS": {
+			"type": "string",
+			"default": ""
+		},
+		"evTime": {
+			"type": "boolean",
+			"default": false
+		},
+		"evTimeS": {
+			"type": "string",
+			"default": ""
+		},
+		"viewAll": {
+			"type": "boolean",
+			"default": false
+		},
+		"viewAllS": {
+			"type": "string",
+			"default": ""
+		},
+		"newWin": {
+			"type": "boolean",
+			"default": false
+		},
+		"newWinS": {
+			"type": "string",
+			"default": ""
+		},
+		"hideDrop": {
+			"type": "boolean",
+			"default": false
+		},
+		"hideDropS": {
+			"type": "string",
+			"default": ""
+		},
+		"incStyle": {
+			"type": "boolean",
+			"default": true
+		},
+		"incStyleS": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"textdomain": "utksds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

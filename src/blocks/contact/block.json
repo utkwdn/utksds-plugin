@@ -1,0 +1,40 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utksds/contact",
+	"version": "0.1.0",
+	"title": "Contact Info",
+	"category": "utdesign_layout",
+	"icon": "editor-table",
+	"description": "Add an address, phone numbers, and social media links.",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"address": {
+			"type": "string"
+		},
+		"address_default": {
+			"type": "string",
+			"default": "Enter address here."
+		},
+		"email": {
+			"type": "string"  
+		},
+		"url": {
+			"type": "string",
+			"default": null
+		},
+		"linkTab": {
+			"type": "boolean",
+			"default": false
+		},
+		"linkTarget": {
+			"type": "string"
+		}
+	},
+	"textdomain": "utksds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

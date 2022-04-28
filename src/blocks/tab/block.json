@@ -1,0 +1,40 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utksds/tab",
+	"version": "0.1.0",
+	"title": "Tab",
+	"category": "design",
+	"icon": "editor-table",
+	"description": "",
+	"supports": {
+		"html": false
+	},
+	"parent": [ "utksds/tabs" ],
+	"attributes": {
+		"tabName": {
+			"type": "string",
+			"default": ""
+		},
+		"tabPlaceholder": {
+			"type": "string",
+			"default": "New Tab"
+		},
+		"tabSlug": {
+			"type": "string",
+			"default": "new-tab"
+		},
+		"tabActive": {
+			"type": "string",
+			"default": ""
+		},
+		"tabShow": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"textdomain": "utksds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

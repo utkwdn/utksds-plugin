@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utksds/media-object",
+	"version": "0.1.0",
+	"title": "Media Object",
+	"category": "media",
+	"icon": "editor-table",
+	"description": "Horizontally oriented text and picture",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"backgroundColor": {
+			"type": "string",
+			"default": ""
+		},
+		"imageAlt": {
+			"type": "string",
+			"attribute": "alt",
+			"selector": ".mr-3"
+		},
+		"imageUrl": {
+			"type": "string",
+			"attribute": "src",
+			"selector": ".mr-3"
+		},
+		"imageSize": {
+			"type": "string",
+			"attribute": "width",
+			"selector": ".mr-3"
+		}
+	},
+	"textdomain": "utksds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
