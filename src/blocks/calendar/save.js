@@ -22,8 +22,8 @@ import { __ } from '@wordpress/i18n';
  *
  * @return {WPElement} Element to render.
  */
-export default function save() {
-	const { attributes } = useBlockProps;
+export default function save( props ) {
+	const { attributes } = props;
 
 	return (
 		<div>

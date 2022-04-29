@@ -41,11 +41,11 @@ const MEDIA_TEMPLATE = [
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+export default function Edit( props ) {
 	const {
 		attributes,
     	setAttributes
-	  } = useBlockProps;
+	  } = props;
 
 		return ( [
 			<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } templateLock={ false } />

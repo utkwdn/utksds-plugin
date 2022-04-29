@@ -14,7 +14,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
-import { useBlockProps, InspectorControls, ColorPalette, getColorObjectByColorValue, RichText } from '@wordpress/block-editor';
+import { InspectorControls, ColorPalette, getColorObjectByColorValue, RichText } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -32,8 +32,8 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
-	const { attributes, setAttributes } = useBlockProps;
+export default function Edit( props ) {
+	const { attributes, setAttributes } = props;
 	const { imagePostion } = attributes;
 
 		return ( [

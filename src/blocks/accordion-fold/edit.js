@@ -32,8 +32,9 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
-	const { attributes, context, clientId, setAttribute } = useBlockProps;
+export default function Edit( props ) {
+	const { attributes, context, clientId, setAttribute } = props;
+
 	setAttributes( { parentID:context['accordion/parentID'] } );
 
 		return ( [

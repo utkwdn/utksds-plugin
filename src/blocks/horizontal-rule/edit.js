@@ -31,11 +31,11 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+export default function Edit( props ) {
 	const {
 		attributes,
     	setAttributes
-	  } = useBlockProps;
+	  } = props;
 
 	  const { imagePostion } = attributes;
 

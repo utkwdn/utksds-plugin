@@ -49,13 +49,13 @@ const IMAGE_TEMPLATE = [
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+export default function Edit( props ) {
 	const {
 		attributes,
 		clientId,
 		name,
 		setAttributes
-	  } = useBlockProps;
+	  } = props;
 
 	const cardVariations = getBlockVariations( 'utksds/card' );
 	const { replaceInnerBlocks } = useDispatch( blockEditorStore );

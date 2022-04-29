@@ -43,10 +43,10 @@ const OVERLAY_TEMPLATE = [
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+export default function Edit( props ) {
 	const {
 		context
-	  } = useBlockProps;
+	  } = props;
 
 		return ( [
 			<div className={ "card-img-overlay" }>

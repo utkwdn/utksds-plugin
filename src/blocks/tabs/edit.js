@@ -54,12 +54,12 @@ function setTabNames( parentID ){
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+export default function Edit( props ) {
 	const {
 		attributes,
     	setAttributes,
 		clientId
-	  } = useBlockProps;
+	  } = props;
 
 	  var listItems = [];
 	  if(Array.isArray(attributes.tabNames) && attributes.tabNames.length){

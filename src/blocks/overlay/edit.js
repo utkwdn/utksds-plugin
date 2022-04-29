@@ -43,12 +43,12 @@ const OVERLAY_TEMPLATE = [
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+export default function Edit( props ) {
 	const {
 		attributes,
     	setAttributes,
 		clientId
-	  } = useBlockProps;
+	  } = props;
 
 	  const { replaceInnerBlocks } = useDispatch( blockEditorStore );
 

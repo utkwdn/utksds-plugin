@@ -33,11 +33,11 @@ const ALLOWED_BLOCKS = [ 'core/paragraph' ];
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+export default function Edit( props ) {
 	const {
 		attributes,
     	setAttributes
-	  } = useBlockProps;
+	  } = props;
 
 		return ( [
 			<BlockControls group="block">

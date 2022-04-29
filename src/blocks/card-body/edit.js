@@ -43,12 +43,12 @@ const IMAGE_TEMPLATE = [
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+export default function Edit( props ) {
 	const {
 		attributes,
 		context,
 		setAttributes
-	  } = useBlockProps;
+	  } = props;
 
 	  if( context['card/cardOutline'] === true ){
 		const thisColor = context['card/cardColor'].slug.replace('border-', 'text-');

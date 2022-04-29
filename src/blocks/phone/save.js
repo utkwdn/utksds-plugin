@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { InnerBlocks } from '@wordpress/block-editor';
 
 /**
  * The save function defines the way in which the different attributes should
@@ -22,8 +22,8 @@ import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
  *
  * @return {WPElement} Element to render.
  */
-export default function save() {
-	const { attributes } = useBlockProps;
+export default function save( props ) {
+	const { attributes } = props;
 
 	let match = attributes.phoneNum.match(/^(\d{3})(\d{3})(\d{4})$/);
 	let formattedPhone = match[1] + '-' + match[2] + '-' + match[3];

@@ -47,12 +47,12 @@ const SOCIAL_TEMPLATE = [
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+export default function Edit( props ) {
 	const {
 		attributes,
     	setAttributes,
 		isSelected,
-	  } = useBlockProps;
+	  } = props;
 
 		return ( [
 			<div className="phoneNumbers col-auto">

@@ -22,8 +22,8 @@ import { InnerBlocks } from '@wordpress/block-editor';
  *
  * @return {WPElement} Element to render.
  */
-export default function save() {
-	const { attributes } = useBlockProps;
+export default function save( props ) {
+	const { attributes } = props;
 
 	return (
 		<div className={ 'card-body ' + attributes.textColor }>

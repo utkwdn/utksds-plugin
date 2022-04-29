@@ -43,10 +43,10 @@ const IMAGE_TEMPLATE = [
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+export default function Edit( props ) {
 	const {
 		context
-	  } = useBlockProps;
+	  } = props;
 
 	if( context['columns/blockName'] == 'utksds/columns' ){
 		var columns_blocks = [ 'card/body', 'card/image', 'card/overlay', 'card/topcap', ];

@@ -45,14 +45,14 @@ wp.hooks.addFilter('editor.BlockListBlock', 'my-plugin/with-custom-class-name', 
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+export default function Edit( props ) {
 	const {
 		attributes,
 		clientId,
 		setAttributes,
 		context,
 		className
-	  } = useBlockProps;
+	  } = props;
 
 	  if(typeof context['card/blockName'] !== 'undefined' && context['card/blockName'] === 'utksds/card'){
 		var these_blocks = [ 'card/body', 'card/image' ];

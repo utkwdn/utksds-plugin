@@ -47,12 +47,12 @@ wp.hooks.addFilter('editor.BlockListBlock', 'my-plugin/with-custom-class-name', 
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+export default function Edit( props ) {
 	const {
 		attributes,
 		clientId,
 		setAttributes
-	  } = useBlockProps;
+	  } = props;
 
 	  const colVariations = getBlockVariations( 'utksds/columns' );
 	  const { replaceInnerBlocks } = useDispatch( blockEditorStore );

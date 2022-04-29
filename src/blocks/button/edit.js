@@ -75,8 +75,8 @@ const LinkControl = __experimentalLinkControl;
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
-	const { isSelected, attributes, setAttributes } = useBlockProps;
+export default function Edit( props ) {
+	const { isSelected, attributes, setAttributes } = props;
 	//const { url, linkTarget } = attributes;
 
 	const urlIsSet = !! attributes.url;

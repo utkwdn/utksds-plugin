@@ -54,12 +54,12 @@ function setTabNames( parentID ){
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+export default function Edit( props ) {
 	const {
 		attributes,
     	setAttributes,
 		clientId
-	  } = useBlockProps;
+	  } = props;
 
 	  var parentID = '';
 		const parentBlocks = wp.data.select( 'core/block-editor' ).getBlockParents(clientId);

@@ -35,8 +35,8 @@ const BUTTON_TEMPLATE = [
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
-	const { attributes, setAttributes } = useBlockProps;
+export default function Edit( props ) {
+	const { attributes, setAttributes } = props;
 
 	if(attributes.iconCode.name !== ''){
 		var iconResults = AllIcons.find(obj => {

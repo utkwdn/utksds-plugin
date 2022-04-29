@@ -35,8 +35,8 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
-	const { attributes, setAttributes } = useBlockProps;
+export default function Edit( props ) {
+	const { attributes, setAttributes } = props;
 
 	attributes.all_types = attributes.type.concat(attributes.topic, attributes.audience);
 		attributes.exAll_types = attributes.exType.concat(attributes.exTopic, attributes.exAudience);
