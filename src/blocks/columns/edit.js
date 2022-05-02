@@ -2,6 +2,7 @@ import { dropRight, times } from 'lodash';
 import { withDispatch, useDispatch, select } from '@wordpress/data';
 import { PanelBody, PanelRow, Path, SVG } from '@wordpress/components';
 import { createBlock, createBlocksFromInnerBlocksTemplate, store as blocksStore } from '@wordpress/blocks';
+import { createHigherOrderComponent } from '@wordpress/compose';
 
 /**
  * Retrieves the translation of text.
