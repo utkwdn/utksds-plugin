@@ -76,7 +76,7 @@ function create_block_block_test_block_init() {
 add_action( 'init', 'create_block_block_test_block_init' );
 
 function utksds_scripts_init(){
-	wp_register_script( 'disable', plugins_url('block-test') . '/build/frontend/disable.js', array( 'wp-blocks', 'wp-block-library', 'wp-i18n', 'wp-element', 'wp-editor' ), null, true );
+	wp_register_script( 'disable', plugins_url('utksds-plugin') . '/build/frontend/disable.js', array( 'wp-blocks', 'wp-block-library', 'wp-i18n', 'wp-element', 'wp-editor' ), null, true );
 	//wp_enqueue_script( 'disable' );
 	
 	register_block_type(
