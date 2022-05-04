@@ -1,5 +1,5 @@
 import { siteColors } from '../../globals.js'
-import { PanelBody, PanelRow, RadioControl, Button, ButtonGroup, Popover, ToggleControl, ToolbarButton, ToolbarGroup, SelectControl, DropdownMenu, Icon } from '@wordpress/components';
+import { PanelBody, PanelRow, RadioControl, Popover, ToggleControl, ToolbarButton, ToolbarGroup, DropdownMenu, Icon} from '@wordpress/components';
 
 /**
  * Retrieves the translation of text.
@@ -14,7 +14,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
-import { InnerBlocks, InspectorControls, RichText, BlockControls, ColorPalette, getColorObjectByColorValue, __experimentalLinkControl } from '@wordpress/block-editor';
+import { InspectorControls, RichText, BlockControls, ColorPalette, getColorObjectByColorValue, __experimentalLinkControl } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.

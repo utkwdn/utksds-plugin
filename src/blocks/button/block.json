@@ -7,8 +7,6 @@
 	"category": "design",
 	"icon": "list-view",
 	"description": "",
-	"parent": [ "utksds/accordion" ],
-	"usesContext": [ "accordion/parentID" ],
 	"supports": {
 		"html": false
 	},
