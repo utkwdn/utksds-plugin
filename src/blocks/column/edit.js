@@ -1,5 +1,5 @@
 import { withDispatch, useDispatch, select } from '@wordpress/data';
-import { PanelBody, PanelRow, Path, SVG } from '@wordpress/components';
+import { PanelBody, PanelRow, RangeControl, Path, SVG } from '@wordpress/components';
 import { createHigherOrderComponent } from '@wordpress/compose';
 
 /**
