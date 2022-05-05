@@ -33,7 +33,7 @@ import './editor.scss';
  * @return {WPElement} Element to render.
  */
 export default function Edit( props ) {
-	const { attributes, context, clientId, setAttribute } = props;
+	const { attributes, context, clientId, setAttributes } = props;
 
 	setAttributes( { parentID:context['accordion/parentID'] } );
 

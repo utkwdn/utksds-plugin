@@ -23,6 +23,10 @@ import { InnerBlocks, InspectorControls } from '@wordpress/block-editor';
  */
 import './editor.scss';
 
+const ACCORDION_TEMPLATE = [
+    [ 'utksds/accordion-fold' ],
+];
+
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
@@ -46,7 +50,7 @@ export default function Edit( props ) {
 				</PanelBody>
 			</InspectorControls>,
 			<div className={ "accordion" } id={ attributes.accordionID }>
-				<InnerBlocks template={ ACCORDION_TEMPLATE } allowedBlocks={ [ 'accordion/fold', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks template={ ACCORDION_TEMPLATE } allowedBlocks={ [ 'utksds/accordion-fold', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 		] );
 }
