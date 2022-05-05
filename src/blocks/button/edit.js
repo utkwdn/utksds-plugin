@@ -15,7 +15,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
-import { InspectorControls, RichText, BlockControls, ColorPalette, getColorObjectByColorValue, __experimentalLinkControl } from '@wordpress/block-editor';
+import { InspectorControls, RichText, BlockControls, ColorPalette, getColorObjectByColorValue, __experimentalLinkControl, useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -79,6 +79,8 @@ const LinkControl = __experimentalLinkControl;
 export default function Edit( props ) {
 	const { isSelected, attributes, setAttributes } = props;
 	//const { url, linkTarget } = attributes;
+
+	const blockProps = useBlockProps();
 
 	const urlIsSet = !! attributes.url;
 	const urlIsSetandSelected = urlIsSet && isSelected;
@@ -354,7 +356,7 @@ export default function Edit( props ) {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<div className={ attributes.blockClass }>
+			<div className={ attributes.blockClass } { ...blockProps }>
 				<div className={ 'btn mb-3 ' + attributes.buttonColor.slug + attributes.buttonSize }>
 					<RichText
 						tagName='span'
