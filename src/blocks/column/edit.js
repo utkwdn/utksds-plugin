@@ -55,6 +55,8 @@ export default function Edit( props ) {
 		className
 	  } = props;
 
+	  const blockProps = useBlockProps();
+
 	  if(typeof context['card/blockName'] !== 'undefined' && context['card/blockName'] === 'utksds/card'){
 		var these_blocks = [ 'card/body', 'card/image' ];
 	}else{
@@ -205,7 +207,7 @@ export default function Edit( props ) {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<div className={ className } >
+			<div className={ className } { ...blockProps }>
 				<InnerBlocks allowedBlocks={ these_blocks } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>
 		] );

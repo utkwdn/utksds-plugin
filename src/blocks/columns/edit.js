@@ -55,6 +55,8 @@ export default function Edit( props ) {
 		setAttributes
 	  } = props;
 
+	  const blockProps = useBlockProps();
+
 	  const colVariations = getBlockVariations( 'utksds/columns' );
 	  const { replaceInnerBlocks } = useDispatch( blockEditorStore );
 	  
@@ -162,7 +164,7 @@ export default function Edit( props ) {
 					) }
 				</PanelBody>
 			</InspectorControls>,
-			<div className="container">
+			<div className="container" { ...blockProps }>
 				<div className={"row " + attributes.rowClass }>
 					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } placeholder={ colPlaceholder } templateLock={ 'all' } />
 				</div>
