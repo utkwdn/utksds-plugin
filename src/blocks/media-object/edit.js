@@ -44,7 +44,8 @@ const MEDIA_TEMPLATE = [
 export default function Edit( props ) {
 	const {
 		attributes,
-    	setAttributes
+    	setAttributes,
+		clientId
 	  } = props;
 
 	  const { backgroundColor } = attributes;
