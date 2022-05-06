@@ -14,7 +14,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
-import { InnerBlocks, InspectorControls, RichText } from '@wordpress/block-editor';
+import { InnerBlocks, InspectorControls, RichText, useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -34,6 +34,8 @@ import './editor.scss';
  */
 export default function Edit( props ) {
 	const { attributes, context, clientId, setAttributes } = props;
+
+	const blockProps = useBlockProps();
 
 	setAttributes( { parentID:context['accordion/parentID'] } );
 
@@ -59,7 +61,7 @@ export default function Edit( props ) {
 					/>
 				</PanelBody>
 			</InspectorControls>,
-			<div className="card">
+			<div className="card" { ...blockProps }>
     			<div className="card-header" id={ "heading" + attributes.foldSlug }>
       				<h2 class="mb-0">
 						<RichText

@@ -53,8 +53,10 @@ export default function Edit( props ) {
     	setAttributes,
 	  } = props;
 
+	  const blockProps = useBlockProps();
+
 		return ( [
-			<small className="phoneNumber">
+			<small className="phoneNumber" { ...blockProps }>
 				<RichText 
 					tagName='span'
 					placeholder='Enter phone name'

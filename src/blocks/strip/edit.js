@@ -42,6 +42,8 @@ export default function Edit( props ) {
 
 	  const { imagePostion } = attributes;
 
+	  const blockProps = useBlockProps();
+
 		const onRemoveImage = () => {
             setAttributes( { bgImage: undefined, } );
         };
@@ -143,7 +145,7 @@ export default function Edit( props ) {
 				</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<div>
+			<div { ...blockProps }>
 			{ attributes.bgImage === undefined && (
 		  	<div className={ "strip " + imagePostion.slug + " " + imagePostion.text + " " + attributes.padding + " my-" + attributes.spacing } >
 				<InnerBlocks templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />

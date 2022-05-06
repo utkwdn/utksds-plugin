@@ -54,8 +54,10 @@ export default function Edit( props ) {
 		isSelected,
 	  } = props;
 
+	  const blockProps = useBlockProps();
+
 		return ( [
-			<div className="socialMedia col-auto">
+			<div className="socialMedia col-auto" { ...blockProps }>
 			<InnerBlocks allowedBlocks={ [ 'core/social-links' ] } template={ SOCIAL_TEMPLATE } templateLock={ false } renderAppender={ false } />
 			</div>
 		] );

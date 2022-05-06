@@ -17,7 +17,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
-import { InspectorControls } from '@wordpress/block-editor';
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -37,6 +37,8 @@ import './editor.scss';
  */
 export default function Edit( props ) {
 	const { attributes, setAttributes } = props;
+
+	const blockProps = useBlockProps();
 
 	attributes.all_types = attributes.type.concat(attributes.topic, attributes.audience);
 		attributes.exAll_types = attributes.exType.concat(attributes.exTopic, attributes.exAudience);
@@ -500,9 +502,11 @@ export default function Edit( props ) {
 					) }
 				</PanelBody>
 			</InspectorControls>,
+			<div { ...blockProps } >
 			<SandBox
 				html={ "<div id='localist-widget-12345' class='localist-widget'></div><script defer type='text/javascript' src='https://calendar.utk.edu/widget/" + attributes.widgetType + "?schools=utk&venues=" + attributes.place + "&departments=" +  attributes.department  + "&groups=" + attributes.group + "&types=" + attributes.all_types + "&days=" + attributes.daysAhead + "&num=" + attributes.numResults + "&tags=" + attributes.keywords + attributes.featuredS + attributes.sponsoredS + attributes.matchingS + attributes.pastS + attributes.hideDescS + attributes.truncateS + attributes.htmlDescS + attributes.evImageS + attributes.evTimeS + attributes.viewAllS + attributes.newWinS + attributes.hideDropS + "&match=" + attributes.mustMatch + "&exclude_types=" + attributes.exAll_types + "&container=localist-widget-12345" + attributes.incStyleS + "&template=" + attributes.template + "'></script>" }
 				type="embed"
-			/>,
+			/>
+			</div>,
 		] );
 }

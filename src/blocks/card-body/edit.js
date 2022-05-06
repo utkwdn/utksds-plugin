@@ -50,6 +50,8 @@ export default function Edit( props ) {
 		setAttributes
 	  } = props;
 
+	  const blockProps = useBlockProps();
+
 	  if( context['card/cardOutline'] === true ){
 		const thisColor = context['card/cardColor'].slug.replace('border-', 'text-');
 		setAttributes( { textColor:thisColor } );
@@ -60,7 +62,7 @@ export default function Edit( props ) {
 	}
 
 		return (
-			<div className={ 'card-body ' + attributes.textColor }>
+			<div className={ 'card-body ' + attributes.textColor } { ...blockProps }>
 				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } placeholder={ 'Click the + button to add a title, text, button, or other body component.' } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 		);

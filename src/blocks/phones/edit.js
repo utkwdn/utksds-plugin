@@ -54,8 +54,10 @@ export default function Edit( props ) {
 		isSelected,
 	  } = props;
 
+	  const blockProps = useBlockProps();
+
 		return ( [
-			<div className="phoneNumbers col-auto">
+			<div className="phoneNumbers col-auto" { ...blockProps }>
 			<InnerBlocks allowedBlocks={ [ 'utksds/phone', ] } template={ PHONE_TEMPLATE } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 		] );

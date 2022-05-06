@@ -37,6 +37,8 @@ export default function Edit( props ) {
     	setAttributes
 	  } = props;
 
+	  const blockProps = useBlockProps();
+
 	  const { imagePostion } = attributes;
 
 	  function onImagePositionChange( newValue ) {
@@ -59,7 +61,7 @@ export default function Edit( props ) {
       	/>
 				</PanelBody>
 			</InspectorControls>,
-		  <hr className={ imagePostion } />
+		  <hr className={ imagePostion } { ...blockProps } />
 			,
 		] );
 }

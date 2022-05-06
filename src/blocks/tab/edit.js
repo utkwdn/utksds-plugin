@@ -61,6 +61,8 @@ export default function Edit( props ) {
 		clientId
 	  } = props;
 
+	  const blockProps = useBlockProps();
+
 	  var parentID = '';
 		const parentBlocks = wp.data.select( 'core/block-editor' ).getBlockParents(clientId);
 	
@@ -72,7 +74,7 @@ export default function Edit( props ) {
 		}
 
 		return ( [
-			<div className={ "tab-pane fade " + attributes.tabShow + " " + attributes.tabActive } id={ attributes.tabSlug } role="tabpanel" aria-labelledby={ attributes.tabSlug + "-tab" }>
+			<div className={ "tab-pane fade " + attributes.tabShow + " " + attributes.tabActive } id={ attributes.tabSlug } role="tabpanel" aria-labelledby={ attributes.tabSlug + "-tab" } { ...blockProps }>
 				<div className="tab-header">
 					<RichText
 						tagName='h3'

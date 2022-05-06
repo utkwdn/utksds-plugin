@@ -50,6 +50,8 @@ export default function Edit( props ) {
 		clientId
 	  } = props;
 
+	  const blockProps = useBlockProps();
+
 	  const { replaceInnerBlocks } = useDispatch( blockEditorStore );
 
 		const ovPlaceholder = (
@@ -100,7 +102,7 @@ export default function Edit( props ) {
 				</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<div className={ "card wpeditor-card-overlay overlay " + attributes.overColor.slug + " overlay-" + attributes.overOpacity + " " + attributes.overColor.text }>
+			<div className={ "card wpeditor-card-overlay overlay " + attributes.overColor.slug + " overlay-" + attributes.overOpacity + " " + attributes.overColor.text } { ...blockProps }>
 				{ attributes.imageUrl !== '' && (
   				<img src={ attributes.imageUrl } className="card-img" alt={ attributes.imageAlt } />
 				) }

@@ -48,6 +48,8 @@ export default function Edit( props ) {
 		clientId
 	  } = props;
 
+	  const blockProps = useBlockProps();
+
 	  const { backgroundColor } = attributes;
 	
 		const { replaceInnerBlocks } = useDispatch( blockEditorStore );
@@ -138,7 +140,7 @@ export default function Edit( props ) {
 				</PanelBody>
 				) }
 			</InspectorControls>,
-			<div className="media">
+			<div className="media" { ...blockProps }>
 				{ attributes.imageUrl && (
 				<img
 					src={ attributes.imageUrl }

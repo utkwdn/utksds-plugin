@@ -17,7 +17,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
-import { InnerBlocks, InspectorControls, ColorPalette, getColorObjectByColorValue, __experimentalBlockVariationPicker, store as blockEditorStore } from '@wordpress/block-editor';
+import { InnerBlocks, InspectorControls, ColorPalette, getColorObjectByColorValue, __experimentalBlockVariationPicker, useBlockProps, store as blockEditorStore } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -56,6 +56,8 @@ export default function Edit( props ) {
 		name,
 		setAttributes
 	  } = props;
+
+	const blockProps = useBlockProps();
 
 	const cardVariations = getBlockVariations( 'utksds/card' );
 	const { replaceInnerBlocks } = useDispatch( blockEditorStore );
@@ -166,7 +168,7 @@ export default function Edit( props ) {
 				</PanelBody>
 			</InspectorControls>,
 			// eslint-disable-next-line react/jsx-key
-			<div className={'card card-edit ' + attributes.textColor + ' ' + attributes.cardColor.slug }>
+			<div className={'card card-edit ' + attributes.textColor + ' ' + attributes.cardColor.slug } { ...blockProps }>
 				<InnerBlocks allowedBlocks={ [ 'utksds/card-body', 'utksds/card-image', 'utksds/columns', 'utksds/card-topcap', ] } placeholder={ cardPlaceholder } templateLock={ 'all' } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>,
 		] );

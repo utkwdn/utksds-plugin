@@ -54,6 +54,8 @@ export default function Edit( props ) {
 		isSelected,
 	  } = props;
 
+	  const blockProps = useBlockProps();
+
 	  const urlIsSet = !! attributes.url;
 	  const urlIsSetandSelected = urlIsSet && isSelected;
 
@@ -118,7 +120,7 @@ export default function Edit( props ) {
             		) }
 				</ToolbarGroup>
 			</BlockControls>,
-			<div className="contact_info">
+			<div className="contact_info" { ...blockProps }>
 				<div className="address col-auto">
 				<RichText 
 					tagName='span'

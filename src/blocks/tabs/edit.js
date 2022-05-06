@@ -61,6 +61,8 @@ export default function Edit( props ) {
 		clientId
 	  } = props;
 
+	  const blockProps = useBlockProps();
+
 	  var listItems = [];
 	  if(Array.isArray(attributes.tabNames) && attributes.tabNames.length){
 		  for(var thisTab of attributes.tabNames){
@@ -81,7 +83,7 @@ export default function Edit( props ) {
 					/>
 				</PanelBody>
 			</InspectorControls>,
-			<div class="tab-content" id="myTabContent">
+			<div class="tab-content" id="myTabContent" { ...blockProps }>
 				<InnerBlocks template={ TAB_TEMPLATE } allowedBlocks={ [ 'tabs/tab', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>,
 		] );

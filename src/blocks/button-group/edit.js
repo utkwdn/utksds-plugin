@@ -13,7 +13,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
-import { InnerBlocks, InspectorControls } from '@wordpress/block-editor';
+import { InnerBlocks, InspectorControls, useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -37,6 +37,8 @@ const BUTTON_TEMPLATE = [
  */
 export default function Edit( props ) {
 	const { attributes, setAttributes } = props;
+
+	const blockProps = useBlockProps();
 
 	if(attributes.iconCode.name !== ''){
 		var iconResults = AllIcons.find(obj => {
@@ -94,7 +96,7 @@ export default function Edit( props ) {
 				</PanelBody>
 			</InspectorControls>,
 			// eslint-disable-next-line react/jsx-key
-			<div className={ attributes.orientation + attributes.groupSize } role='group'>
+			<div className={ attributes.orientation + attributes.groupSize } role='group' { ...blockProps }>
 				<InnerBlocks template={ BUTTON_TEMPLATE } allowedBlocks={ [ 'utksds/button' ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>,
 		] );
