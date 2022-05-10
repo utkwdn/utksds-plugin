@@ -164,9 +164,11 @@ export default function Edit( props ) {
 					) }
 				</PanelBody>
 			</InspectorControls>,
-			<div className="container" { ...blockProps }>
+			<div { ...blockProps }>
+				<div className="container">
 				<div className={"row " + attributes.rowClass }>
 					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } placeholder={ colPlaceholder } templateLock={ 'all' } />
+				</div>
 				</div>
 			</div>,
 		] );

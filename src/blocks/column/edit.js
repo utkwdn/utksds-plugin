@@ -57,6 +57,8 @@ export default function Edit( props ) {
 
 	  const blockProps = useBlockProps();
 
+	  console.log( blockProps.className.replace("wp-block-utksds-column", "") );
+
 	  if(typeof context['card/blockName'] !== 'undefined' && context['card/blockName'] === 'utksds/card'){
 		var these_blocks = [ 'card/body', 'card/image' ];
 	}else{
@@ -207,8 +209,10 @@ export default function Edit( props ) {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<div className={ className } { ...blockProps }>
+			<div { ...blockProps } className={ blockProps.className.replace("wp-block-utksds-column", "") }>
+				<div className="wp-block-utksds-column">
 				<InnerBlocks allowedBlocks={ these_blocks } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
+				</div>
 			</div>
 		] );
 }
