@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
-import { InnerBlocks } from '@wordpress/block-editor';
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -44,8 +44,11 @@ const IMAGE_TEMPLATE = [
  * @return {WPElement} Element to render.
  */
 export default function Edit() {
+	const blockProps = useBlockProps();
 
 		return (
+			<div { ...blockProps }>
 			<InnerBlocks template={ IMAGE_TEMPLATE } allowedBlocks={ 'core/image' } templateLock={ 'all' } />
+			</div>
 		);
 }

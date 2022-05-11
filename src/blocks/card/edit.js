@@ -168,8 +168,10 @@ export default function Edit( props ) {
 				</PanelBody>
 			</InspectorControls>,
 			// eslint-disable-next-line react/jsx-key
-			<div className={'card card-edit ' + attributes.textColor + ' ' + attributes.cardColor.slug } { ...blockProps }>
+			<div { ...blockProps }>
+			<div className={'card card-edit ' + attributes.textColor + ' ' + attributes.cardColor.slug }>
 				<InnerBlocks allowedBlocks={ [ 'utksds/card-body', 'utksds/card-image', 'utksds/columns', 'utksds/card-topcap', ] } placeholder={ cardPlaceholder } templateLock={ 'all' } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+			</div>
 			</div>,
 		] );
 }

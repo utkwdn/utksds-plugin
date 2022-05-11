@@ -50,8 +50,10 @@ export default function Edit( props ) {
 					/>
 				</PanelBody>
 			</InspectorControls>,
-			<div className={ "accordion" } id={ attributes.accordionID } { ...blockProps }>
+			<div { ...blockProps }>
+			<div className={ "accordion" } id={ attributes.accordionID }>
 				<InnerBlocks template={ ACCORDION_TEMPLATE } allowedBlocks={ [ 'utksds/accordion-fold', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+			</div>
 			</div>
 		] );
 }

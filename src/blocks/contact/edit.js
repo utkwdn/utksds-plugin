@@ -120,7 +120,8 @@ export default function Edit( props ) {
             		) }
 				</ToolbarGroup>
 			</BlockControls>,
-			<div className="contact_info" { ...blockProps }>
+			<div { ...blockProps }>
+			<div className="contact_info">
 				<div className="address col-auto">
 				<RichText 
 					tagName='span'
@@ -142,6 +143,7 @@ export default function Edit( props ) {
 				/>
 				</small>
 				<InnerBlocks allowedBlocks={ [ 'utksds/phones', 'utksds/socials', ] } template={ CONTACT_TEMPLATE } templateLock={ 'all' } renderAppender={ false } />
+			</div>
 			</div>
 		] );
 }

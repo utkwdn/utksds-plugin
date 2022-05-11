@@ -74,7 +74,8 @@ export default function Edit( props ) {
 		}
 
 		return ( [
-			<div className={ "tab-pane fade " + attributes.tabShow + " " + attributes.tabActive } id={ attributes.tabSlug } role="tabpanel" aria-labelledby={ attributes.tabSlug + "-tab" } { ...blockProps }>
+			<div { ...blockProps }>
+			<div className={ "tab-pane fade " + attributes.tabShow + " " + attributes.tabActive } id={ attributes.tabSlug } role="tabpanel" aria-labelledby={ attributes.tabSlug + "-tab" }>
 				<div className="tab-header">
 					<RichText
 						tagName='h3'
@@ -91,6 +92,7 @@ export default function Edit( props ) {
 					/>
 				</div>
 				<InnerBlocks allowedBlocks={ [ 'utksds/button', 'core/paragraph', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
+			</div>
 			</div>
 		] );
 }

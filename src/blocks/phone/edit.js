@@ -56,7 +56,8 @@ export default function Edit( props ) {
 	  const blockProps = useBlockProps();
 
 		return ( [
-			<small className="phoneNumber" { ...blockProps }>
+			<div { ...blockProps }>
+			<small className="phoneNumber">
 				<RichText 
 					tagName='span'
 					placeholder='Enter phone name'
@@ -77,5 +78,6 @@ export default function Edit( props ) {
 					withoutInteractiveFormatting
 				/>
 			</small>
+			</div>
 		] );
 }

@@ -57,7 +57,8 @@ export default function Edit( props ) {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-		  	<div className={ 'alert ' + imagePostion.slug } { ...blockProps }>
+			<div { ...blockProps }>
+		  	<div className={ 'alert ' + imagePostion.slug }>
 				<RichText
 					tagName='span'
 					key={ clientId }
@@ -67,6 +68,7 @@ export default function Edit( props ) {
 					onChange={ ( value ) => setAttributes( { text: value } ) }
 					withoutInteractiveFormatting
 				/>
+			</div>
 			</div>,
 		] );
 }

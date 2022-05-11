@@ -61,7 +61,8 @@ export default function Edit( props ) {
 					/>
 				</PanelBody>
 			</InspectorControls>,
-			<div className="card" { ...blockProps }>
+			<div { ...blockProps }>
+			<div className="card">
     			<div className="card-header" id={ "heading" + attributes.foldSlug }>
       				<h2 class="mb-0">
 						<RichText
@@ -86,5 +87,6 @@ export default function Edit( props ) {
       				</div>
     			</div>
   			</div>
+			</div>
 		] );
 }

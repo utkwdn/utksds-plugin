@@ -356,7 +356,8 @@ export default function Edit( props ) {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<div className={ attributes.blockClass } { ...blockProps }>
+			<div { ...blockProps }>
+			<div className={ attributes.blockClass } >
 				<div className={ 'btn mb-3 ' + attributes.buttonColor.slug + attributes.buttonSize }>
 					<RichText
 						tagName='span'
@@ -379,6 +380,7 @@ export default function Edit( props ) {
 					/>
 					) }
 				</div>
+			</div>
 			</div>
 		] );
 }

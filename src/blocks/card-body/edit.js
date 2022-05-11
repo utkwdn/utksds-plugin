@@ -62,8 +62,10 @@ export default function Edit( props ) {
 	}
 
 		return (
-			<div className={ 'card-body ' + attributes.textColor } { ...blockProps }>
+			<div { ...blockProps }>
+			<div className={ 'card-body ' + attributes.textColor }>
 				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } placeholder={ 'Click the + button to add a title, text, button, or other body component.' } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+			</div>
 			</div>
 		);
 }

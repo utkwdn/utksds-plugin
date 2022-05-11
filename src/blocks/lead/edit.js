@@ -39,6 +39,8 @@ export default function Edit( props ) {
     	setAttributes
 	  } = props;
 
+	  const blockProps = useBlockProps();
+
 		return ( [
 			<BlockControls group="block">
 				<AlignmentControl
@@ -48,6 +50,7 @@ export default function Edit( props ) {
 					}
 				/>
 			</BlockControls>,
+			<div { ...blockProps }>
 			<RichText 
 				tagName='p'
 				placeholder='Lead text goes here.'
@@ -56,5 +59,6 @@ export default function Edit( props ) {
 				onChange={ ( content ) => setAttributes( { content } ) }
 				withoutInteractiveFormatting
 			/>
+			</div>
 		] );
 }

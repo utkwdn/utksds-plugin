@@ -48,6 +48,8 @@ export default function Edit( props ) {
 		context
 	  } = props;
 
+	  const blockProps = useBlockProps();
+
 	if( context['columns/blockName'] == 'utksds/columns' ){
 		var columns_blocks = [ 'card/body', 'card/image', 'card/overlay', 'card/topcap', ];
 	}else{
@@ -56,6 +58,8 @@ export default function Edit( props ) {
 
 
 	return (
+		<div { ...blockProps }>
 		<InnerBlocks allowedBlocks={ columns_blocks } placeholder={ 'Choose an image, body, or other card component to place here.' } templateLock={ false } renderAppender={ () => ( <div className="d-none"></div> ) } />
+		</div>
 	);
 }

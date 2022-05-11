@@ -51,13 +51,10 @@ export default function Edit( props ) {
 		attributes,
 		clientId,
 		setAttributes,
-		context,
-		className
+		context
 	  } = props;
 
 	  const blockProps = useBlockProps();
-
-	  console.log( blockProps.className.replace("wp-block-utksds-column", "") );
 
 	  if(typeof context['card/blockName'] !== 'undefined' && context['card/blockName'] === 'utksds/card'){
 		var these_blocks = [ 'card/body', 'card/image' ];

@@ -47,7 +47,11 @@ export default function Edit( props ) {
     	setAttributes
 	  } = props;
 
+	  const blockProps = useBlockProps();
+
 		return ( [
+			<div { ...blockProps }>
 			<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } templateLock={ false } />
+			</div>
 		] );
 }

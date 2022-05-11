@@ -140,7 +140,8 @@ export default function Edit( props ) {
 				</PanelBody>
 				) }
 			</InspectorControls>,
-			<div className="media" { ...blockProps }>
+			<div { ...blockProps }>
+			<div className="media">
 				{ attributes.imageUrl && (
 				<img
 					src={ attributes.imageUrl }
@@ -149,6 +150,7 @@ export default function Edit( props ) {
 				/>
 				) }
 				<InnerBlocks allowedBlocks={ [ 'media/content' ] } placeholder={ ovPlaceholder } templateLock={ true } />
+			</div>
 			</div>
 		] );
 }

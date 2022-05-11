@@ -51,6 +51,8 @@ export default function Edit( props ) {
 		setAttributes
 	  } = props;
 
+	  const blockProps = useBlockProps();
+
 		return ( [
 			<InspectorControls>
 				<PanelBody title='Card Footer' initialOpen={ true }>
@@ -72,6 +74,7 @@ export default function Edit( props ) {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
+			<div { ...blockProps }>
 			<RichText
 				tagName='div'
 				className={ 'card-footer ' + attributes.mutedClass }
@@ -80,5 +83,6 @@ export default function Edit( props ) {
 				onChange={ ( content ) => setAttributes( { content } ) }
 				withoutInteractiveFormatting
 			/>
+			</div>
 		] );
 }

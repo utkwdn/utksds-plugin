@@ -96,8 +96,10 @@ export default function Edit( props ) {
 				</PanelBody>
 			</InspectorControls>,
 			// eslint-disable-next-line react/jsx-key
-			<div className={ attributes.orientation + attributes.groupSize } role='group' { ...blockProps }>
+			<div { ...blockProps }>
+			<div className={ attributes.orientation + attributes.groupSize } role='group'>
 				<InnerBlocks template={ BUTTON_TEMPLATE } allowedBlocks={ [ 'utksds/button' ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+			</div>
 			</div>,
 		] );
 }

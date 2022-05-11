@@ -61,7 +61,8 @@ export default function Edit( props ) {
       	/>
 				</PanelBody>
 			</InspectorControls>,
-		  <hr className={ imagePostion } { ...blockProps } />
-			,
+			<div { ...blockProps }>
+		  <hr className={ imagePostion } />
+		  </div>,
 		] );
 }

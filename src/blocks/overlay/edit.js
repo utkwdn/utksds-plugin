@@ -102,11 +102,13 @@ export default function Edit( props ) {
 				</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<div className={ "card wpeditor-card-overlay overlay " + attributes.overColor.slug + " overlay-" + attributes.overOpacity + " " + attributes.overColor.text } { ...blockProps }>
+			<div { ...blockProps }>
+			<div className={ "card wpeditor-card-overlay overlay " + attributes.overColor.slug + " overlay-" + attributes.overOpacity + " " + attributes.overColor.text }>
 				{ attributes.imageUrl !== '' && (
   				<img src={ attributes.imageUrl } className="card-img" alt={ attributes.imageAlt } />
 				) }
     			<InnerBlocks allowedBlocks={ [ 'overlay/main' ] } placeholder={ ovPlaceholder } templateLock={ true } />
+			</div>
 			</div>
 		] );
 }
