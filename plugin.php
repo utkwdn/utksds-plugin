@@ -77,12 +77,19 @@ add_action( 'init', 'create_block_block_test_block_init' );
 
 function utksds_scripts_init(){
 	wp_register_script( 'disable', plugins_url('utksds-plugin') . '/build/frontend/disable.js', array( 'wp-blocks', 'wp-block-library', 'wp-i18n', 'wp-element', 'wp-editor' ), null, true );
-	//wp_enqueue_script( 'disable' );
+	//wp_enqueue_editor( 'editor-style', plugins_url('utksds-plugin') . '/build/frontend/disable.css' );
+
+	wp_register_style(
+		'editor-style-utds', // Handle.
+		plugins_url( plugins_url('utksds-plugin') . '/build/frontend/disable.css' ), // Block editor CSS.
+		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
+		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
+	);
 	
 	register_block_type(
 		'cgb/block-utds', array(
-			// Enqueue blocks.build.js in the editor only.
 			'editor_script' => 'disable',
+			'editor_style'  => 'editor-style-utds',
 		)
 	);
 
