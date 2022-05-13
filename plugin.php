@@ -81,7 +81,7 @@ function utksds_scripts_init(){
 
 	wp_register_style(
 		'editor-style-utds', // Handle.
-		plugins_url( plugins_url('utksds-plugin') . '/build/frontend/disable.css' ), // Block editor CSS.
+		plugins_url( 'utksds-plugin' ) . '/build/frontend/disable.css', // Block editor CSS.
 		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
 		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
 	);
