@@ -26,7 +26,7 @@ export default function save( props ) {
 	const { attributes } = props;
 
 	return (
-		<div className={ attributes.orientation + attributes.groupSize } role='group'>
+		<div className={'card ' + attributes.textColor + ' ' + attributes.cardColor.slug }>
 				<InnerBlocks.Content />
 			</div>
 	);
