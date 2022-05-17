@@ -26,6 +26,8 @@ export default function save( props ) {
 	const { attributes } = props;
 
 	const mediaImage = ( src, alt, width ) => {
+		console.log(width);
+
 		if ( ! src ) {
 			return null;
 		}
