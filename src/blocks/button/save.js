@@ -26,7 +26,7 @@ export default function save( props ) {
 	const { attributes } = props;
 
 	return (
-		<div className={ attributes.blockClass }>
+		<div className={ attributes.className }>
 			<a
 				className={ 'btn save mb-3 ' + attributes.buttonColor.slug + attributes.buttonSize }
 				href={ attributes.url }
