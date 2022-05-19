@@ -43,7 +43,6 @@ function create_block_block_test_block_init() {
 		'accordion-fold',
 		'alert',
 		'button',
-		'button-group',
 		'calendar',
 		'card',
 		'card-body',
