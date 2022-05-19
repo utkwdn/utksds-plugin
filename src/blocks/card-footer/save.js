@@ -26,6 +26,6 @@ export default function save( props ) {
 	const { attributes } = props;
 
 	return (
-		<RichText.Content tagName="div" className={ 'card-footer ' + attributes.mutedClass } value={ attributes.content } />
+		<RichText.Content tagName="div" className={ 'card-footer ' + attributes.mutedClass + ' ' + attributes.className } value={ attributes.content } />
 	);
 }

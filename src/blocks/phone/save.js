@@ -29,7 +29,7 @@ export default function save( props ) {
 	let formattedPhone = match[1] + '-' + match[2] + '-' + match[3];
 
 	return (
-		<small className="phoneNumber">
+		<small className={ "phoneNumber " + attributes.className }>
 				<RichText.Content
 					tagName="span"
 					value={ attributes.phoneName }

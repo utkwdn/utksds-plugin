@@ -26,7 +26,7 @@ export default function save( props ) {
 	const { attributes } = props;
 
 	return (
-		<div className={ "tab-pane fade " + attributes.tabShow + " " + attributes.tabActive } id={ attributes.tabSlug } role="tabpanel" aria-labelledby={ attributes.tabSlug + "-tab" }>
+		<div className={ "tab-pane fade " + attributes.tabShow + " " + attributes.tabActive + " " + attributes.className } id={ attributes.tabSlug } role="tabpanel" aria-labelledby={ attributes.tabSlug + "-tab" }>
 				<InnerBlocks.Content />
 			</div>
 	);

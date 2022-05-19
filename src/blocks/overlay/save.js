@@ -26,7 +26,7 @@ export default function save( props ) {
 	const { attributes } = props;
 
 	return (
-		<div className={ "card overlay " + attributes.overColor.slug + " overlay-" + attributes.overOpacity + " " + attributes.overColor.text }>
+		<div className={ "card overlay " + attributes.overColor.slug + " overlay-" + attributes.overOpacity + " " + attributes.overColor.text + " " + attributes.className }>
 				<img
 					src={ attributes.imageUrl }
 					className={ 'card-img' }

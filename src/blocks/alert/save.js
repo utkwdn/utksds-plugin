@@ -27,7 +27,7 @@ export default function save( props ) {
 	const { imagePostion } = attributes;
 
 	return (
-		<div className={ 'alert ' + imagePostion.slug }>
+		<div className={ 'alert ' + imagePostion.slug + " " + attributes.className }>
 				<RichText.Content
 					tagName="span"
 					value={ attributes.text }

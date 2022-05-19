@@ -28,7 +28,7 @@ export default function save( props ) {
 	const { imagePostion } = attributes;
 
 	return (
-		<div>
+		<div className={ attributes.className }>
 			{ attributes.bgImage === undefined && (
 			<div className={ "strip " + imagePostion.slug + " " + imagePostion.text + " " + attributes.padding + " my-" + attributes.spacing } >
 			  <div className="container">

@@ -56,7 +56,7 @@ export default function save( props ) {
 	};
 
 	return (
-		<div className="d-flex align-items-center">
+		<div className={ "d-flex align-items-center " + attributes.className }>
 				<div class="flex-shrink-0">
 					{ mediaImage( attributes.imageUrl, attributes.imageAlt, attributes.imageSize ) }
 				</div>

@@ -26,7 +26,7 @@ export default function save( props ) {
 	const { attributes, className } = props;
 
 	return (
-		<div className={ className + ' col-12 col-md-' + attributes.colWidth }>
+		<div className={ className + ' col-12 col-md-' + attributes.colWidth + ' ' + attributes.className }>
 				<InnerBlocks.Content />
 			</div>
 	);

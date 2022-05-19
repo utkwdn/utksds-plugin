@@ -26,7 +26,7 @@ export default function save( props ) {
 	const { attributes } = props;
 
 	return (
-		<div className="accordion-item">
+		<div className={"accordion-item " + attributes.className}>
       				<h2 className="accordion-header" id={ "heading" + attributes.foldSlug }>
 						<RichText.Content
 							tagName='button'

@@ -28,7 +28,7 @@ export default function save( props ) {
 	return (
 		<RichText.Content
 				tagName={ attributes.tagName }
-				className={ 'card-header' }
+				className={ 'card-header ' + attributes.className }
 				value={ attributes.content }
 			/>
 	);

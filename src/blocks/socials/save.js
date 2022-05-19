@@ -26,7 +26,7 @@ export default function save( props ) {
 	const { attributes } = props;
 
 	return (
-		<div className="socialMedia col-auto">
+		<div className={ "socialMedia col-auto " + attributes.className }>
 			<InnerBlocks.Content />
 			</div>
 	);

@@ -28,6 +28,6 @@ export default function save( props ) {
 	const { imagePostion } = attributes;
 
 	return (
-		<hr className={ imagePostion } />
+		<hr className={ imagePostion + ' ' + attributes.className } />
 	);
 }

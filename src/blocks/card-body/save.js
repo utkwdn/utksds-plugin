@@ -26,7 +26,7 @@ export default function save( props ) {
 	const { attributes } = props;
 
 	return (
-		<div className={ 'card-body ' + attributes.textColor }>
+		<div className={ 'card-body ' + attributes.textColor + ' ' + attributes.className }>
 				<InnerBlocks.Content />
 			</div>
 	);

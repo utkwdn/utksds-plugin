@@ -35,7 +35,7 @@ export default function save( props ) {
 		}
 
 	return (
-		<div>
+		<div className={ attributes.className }>
 			<ul className={ "nav nav-tabs" } id={ attributes.tabID } role="tablist">
 				{ listItems }
 			</ul>

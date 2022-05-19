@@ -26,7 +26,7 @@ export default function save( props ) {
 	const { attributes } = props;
 
 	return (
-		<div className="phoneNumbers col-auto">
+		<div className={ "phoneNumbers col-auto " + attributes.className }>
 			<InnerBlocks.Content />
 			</div>
 	);

@@ -26,7 +26,7 @@ export default function save( props ) {
 	const { attributes } = props;
 
 	return (
-		<div className="card-img-overlay">
+		<div className={ "card-img-overlay " + attributes.className }>
 			<InnerBlocks.Content />
 			</div>
 	);

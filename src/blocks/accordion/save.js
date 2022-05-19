@@ -26,7 +26,7 @@ export default function save( props ) {
 	const { attributes } = props;
 
 	return (
-		<div className={ "accordion" } id={ attributes.accordionID }>
+		<div className={ "accordion " + attributes.className } id={ attributes.accordionID }>
 			<InnerBlocks.Content />
 		</div>
 	);
