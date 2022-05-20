@@ -51,6 +51,7 @@ add_action( 'wp_print_styles', 'wps_deregister_styles', 100 );
 function wps_deregister_styles() {
     wp_dequeue_style( 'wp-block-library' );
 }
+
 //Add secondary color control to Customizer
 function ukds_customizecolor_register( $wp_customize ) {
 		class UTK_Customize_Secondary_Color_Control extends WP_Customize_Control {
