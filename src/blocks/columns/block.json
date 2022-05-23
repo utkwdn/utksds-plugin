@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "utksds/columns",
+	"name": "utkwds/columns",
 	"version": "0.1.0",
 	"title": "Columns",
 	"category": "utdesign_layout",
@@ -17,7 +17,7 @@
 		},
 		"blockName": {
 			"type": "string",
-			"default": "utksds/columns"
+			"default": "utkwds/columns"
 		},
 		"numCols": {
 			"type": "integer",
@@ -28,7 +28,7 @@
     	"columns/blockName": "blockName",
 		"columns/numCols": "numCols"
 	},
-	"textdomain": "utksds",
+	"textdomain": "utkwds",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"
 }

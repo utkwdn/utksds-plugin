@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "utksds/media-object",
+	"name": "utkwds/media-object",
 	"version": "0.1.0",
 	"title": "Media Object",
 	"category": "media",
@@ -31,7 +31,7 @@
 			"selector": ".mr-3"
 		}
 	},
-	"textdomain": "utksds",
+	"textdomain": "utkwds",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"
 }

@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "utksds/card-main",
+	"name": "utkwds/card-main",
 	"version": "0.1.0",
 	"title": "Card Main",
 	"icon": "list-view",
@@ -9,9 +9,9 @@
 	"supports": {
 		"html": false
 	},
-	"parent": [ "utksds/card" ],
+	"parent": [ "utkwds/card" ],
 	"usesContext": [ "columns/blockName" ],
-	"textdomain": "utksds",
+	"textdomain": "utkwds",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"
 }

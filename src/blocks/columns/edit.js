@@ -27,11 +27,11 @@ import { useBlockProps, InnerBlocks, InspectorControls, __experimentalBlockVaria
  */
 import './editor.scss';
 
-const ALLOWED_BLOCKS = [ 'utksds/column' ];
+const ALLOWED_BLOCKS = [ 'utkwds/column' ];
 
 const withCustomClassName = createHigherOrderComponent((BlockListBlock) => {
   return props => {
-	if(props.name === 'utksds/column'){
+	if(props.name === 'utkwds/column'){
     	return <BlockListBlock { ...props } className={ 'col-12 col-md-' + props.attributes.colWidth } />
 	}else{
 		return <BlockListBlock { ...props } />
@@ -57,7 +57,7 @@ export default function Edit( props ) {
 
 	  const blockProps = useBlockProps();
 
-	  const colVariations = getBlockVariations( 'utksds/columns' );
+	  const colVariations = getBlockVariations( 'utkwds/columns' );
 	  const { replaceInnerBlocks } = useDispatch( blockEditorStore );
 	  
 	  const colPlaceholder = (
@@ -112,7 +112,7 @@ export default function Edit( props ) {
 			  innerColBlocks = [
 				  ...innerColBlocks,
 				  ...times( newNum - origNum, () => {
-					  return createBlock( 'utksds/column', { colWidth: 3} );
+					  return createBlock( 'utkwds/column', { colWidth: 3} );
 				  } ),
 			  ];
 		  }else{

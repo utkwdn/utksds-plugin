@@ -24,15 +24,15 @@ import { useBlockProps, InnerBlocks, RichText, __experimentalLinkControl, BlockC
  */
 import './editor.scss';
 
-const ALLOWED_BLOCKS = [ 'utksds/button', 'utksds/buttongroup', 'core/paragraph', 'utksds/card-heading', 'core/list', 'core/quote', 'utksds/lead', 'utksds/horizontal-rule' ];
+const ALLOWED_BLOCKS = [ 'utkwds/button', 'utkwds/buttongroup', 'core/paragraph', 'utkwds/card-heading', 'core/list', 'core/quote', 'utkwds/lead', 'utkwds/horizontal-rule' ];
 
 const CONTACT_TEMPLATE = [
-	[ 'utksds/phones', {} ],
-	[ 'utksds/socials', {} ],
+	[ 'utkwds/phones', {} ],
+	[ 'utkwds/socials', {} ],
 ];
 
 const PHONE_TEMPLATE = [
-	[ 'utksds/phone', {} ],
+	[ 'utkwds/phone', {} ],
 ]
 
 const SOCIAL_TEMPLATE = [
@@ -142,7 +142,7 @@ export default function Edit( props ) {
 					withoutInteractiveFormatting
 				/>
 				</small>
-				<InnerBlocks allowedBlocks={ [ 'utksds/phones', 'utksds/socials', ] } template={ CONTACT_TEMPLATE } templateLock={ 'all' } renderAppender={ false } />
+				<InnerBlocks allowedBlocks={ [ 'utkwds/phones', 'utkwds/socials', ] } template={ CONTACT_TEMPLATE } templateLock={ 'all' } renderAppender={ false } />
 			</div>
 			</div>
 		] );

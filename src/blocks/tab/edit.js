@@ -26,7 +26,7 @@ import { useBlockProps, InnerBlocks, InspectorControls, RichText } from '@wordpr
 import './editor.scss';
 
 const TAB_TEMPLATE = [
-    [ 'utksds/tab' ],
+    [ 'utkwds/tab' ],
 ];
 
 function setTabNames( parentID ){
@@ -68,7 +68,7 @@ export default function Edit( props ) {
 	
 		for(var thisParent of parentBlocks){
 			var thisBlock = select( 'core/editor' ).getBlock( thisParent );
-			if( thisBlock.name === 'utksds/tabs'){
+			if( thisBlock.name === 'utkwds/tabs'){
 				parentID = thisBlock.clientId;
 			}
 		}
@@ -91,7 +91,7 @@ export default function Edit( props ) {
 						withoutInteractiveFormatting
 					/>
 				</div>
-				<InnerBlocks allowedBlocks={ [ 'utksds/button', 'core/paragraph', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
+				<InnerBlocks allowedBlocks={ [ 'utkwds/button', 'core/paragraph', 'core/list', 'core/quote', 'lead/main', 'horizontal-rule/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>
 			</div>
 		] );

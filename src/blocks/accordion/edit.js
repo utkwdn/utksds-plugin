@@ -24,7 +24,7 @@ import { InnerBlocks, InspectorControls, useBlockProps } from '@wordpress/block-
 import './editor.scss';
 
 const ACCORDION_TEMPLATE = [
-    [ 'utksds/accordion-fold' ],
+    [ 'utkwds/accordion-fold' ],
 ];
 
 /**
@@ -52,7 +52,7 @@ export default function Edit( props ) {
 			</InspectorControls>,
 			<div { ...blockProps }>
 			<div className={ "accordion" } id={ attributes.accordionID }>
-				<InnerBlocks template={ ACCORDION_TEMPLATE } allowedBlocks={ [ 'utksds/accordion-fold', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks template={ ACCORDION_TEMPLATE } allowedBlocks={ [ 'utkwds/accordion-fold', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 			</div>
 		] );

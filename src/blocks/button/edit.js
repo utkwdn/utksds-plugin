@@ -63,7 +63,7 @@ const AllIcons = [
 	}
 ];
 const BUTTON_TEMPLATE = [
-    [ 'utksds/button' ],
+    [ 'utkwds/button' ],
 ];
 
 const LinkControl = __experimentalLinkControl;

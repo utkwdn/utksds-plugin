@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "utksds/alert",
+	"name": "utkwds/alert",
 	"version": "0.1.0",
 	"title": "Alert",
 	"category": "design",
@@ -25,7 +25,7 @@
 			"default": "Enter alert text here."
 		}
 	},
-	"textdomain": "utksds",
+	"textdomain": "utkwds",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"
 }

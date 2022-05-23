@@ -25,7 +25,7 @@ import save from './save';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-registerBlockType( 'utksds/card-main', {
+registerBlockType( 'utkwds/card-main', {
 
 	/**
 	 * @see ./edit.js

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Design System Gutenberg Block Plugin
- * Description:       utksds is a Gutenberg plugin created via Create Block tool.
+ * Description:       utkwds is a Gutenberg plugin created via Create Block tool.
  * Requires at least: 5.8
  * Requires PHP:      7.0
  * Version:           0.1.0
@@ -9,16 +9,16 @@
  * Author URI:		  https://communications.utk.edu/
  * License:           GPL2+
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       utksds
+ * Text Domain:       utkwds
  *
  * @package           create-block
  */
 
 require 'plugin-update-checker/plugin-update-checker.php';
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-	'https://github.com/utkwdn/utksds-plugin',
+	'https://github.com/utkwdn/utkwds-plugin',
 	__FILE__,
-	'utksds-plugin'
+	'utkwds-plugin'
 );
 
 // Exit if accessed directly.
@@ -74,13 +74,13 @@ function create_block_block_test_block_init() {
 }
 add_action( 'init', 'create_block_block_test_block_init' );
 
-function utksds_scripts_init(){
-	wp_register_script( 'disable', plugins_url('utksds-plugin') . '/build/frontend/disable.js', array( 'wp-blocks', 'wp-block-library', 'wp-i18n', 'wp-element', 'wp-editor' ), null, true );
-	//wp_enqueue_editor( 'editor-style', plugins_url('utksds-plugin') . '/build/frontend/disable.css' );
+function utkwds_scripts_init(){
+	wp_register_script( 'disable', plugins_url('utkwds-plugin') . '/build/frontend/disable.js', array( 'wp-blocks', 'wp-block-library', 'wp-i18n', 'wp-element', 'wp-editor' ), null, true );
+	//wp_enqueue_editor( 'editor-style', plugins_url('utkwds-plugin') . '/build/frontend/disable.css' );
 
 	wp_register_style(
 		'editor-style-utds', // Handle.
-		plugins_url( 'utksds-plugin' ) . '/build/frontend/disable.css', // Block editor CSS.
+		plugins_url( 'utkwds-plugin' ) . '/build/frontend/disable.css', // Block editor CSS.
 		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
 		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
 	);
@@ -93,7 +93,7 @@ function utksds_scripts_init(){
 	);
 
 }
-add_action( 'init', 'utksds_scripts_init' );
+add_action( 'init', 'utkwds_scripts_init' );
 
 /**
  * Block Initializer.
@@ -354,13 +354,13 @@ add_filter( 'render_block', function( $block_content, $block ) {
 }, 5, 2 );
 
 //disables loading remote patterns
-function utksds_disable_remote_patterns(){
+function utkwds_disable_remote_patterns(){
 	return false;
 }
-add_filter( 'should_load_remote_block_patterns', 'utksds_disable_remote_patterns' );
+add_filter( 'should_load_remote_block_patterns', 'utkwds_disable_remote_patterns' );
 
 //adds patterns to available patterns list
-function utksds_register_patterns() {
+function utkwds_register_patterns() {
 
 	//disables built-in core patterns
 	unregister_block_pattern( 'core/query-standard-posts' );
@@ -372,22 +372,22 @@ function utksds_register_patterns() {
 	unregister_block_pattern( 'core/social-links-shared-background-color' );
 
 	register_block_pattern(
-		'utksds/profile-pattern',
+		'utkwds/profile-pattern',
     array(
-        'title'       => __( 'Person Profile', 'UTKSDS' ),
-        'description' => _x( 'A profile of a single person, including an image, their name, title, bio, and contact information.', 'Block pattern description', 'UTKSDS' ),
+        'title'       => __( 'Person Profile', 'utkwds' ),
+        'description' => _x( 'A profile of a single person, including an image, their name, title, bio, and contact information.', 'Block pattern description', 'utkwds' ),
 		'categories'  => array( 'buttons' ),
         'content'     => "<!-- wp:group {\"className\":\"col-lg-4 border border-dark\"} -->
-		<div class=\"wp-block-group col-lg-4 border border-dark\"><!-- wp:utksds/columns {\"rowClass\":\"column-100\",\"numCols\":1} -->
-		<div class=\"row undefined\"><!-- wp:utksds/column {\"colWidth\":12,\"className\":\"col-12\"} -->
+		<div class=\"wp-block-group col-lg-4 border border-dark\"><!-- wp:utkwds/columns {\"rowClass\":\"column-100\",\"numCols\":1} -->
+		<div class=\"row undefined\"><!-- wp:utkwds/column {\"colWidth\":12,\"className\":\"col-12\"} -->
 		<div class=\"undefined col-12 col-md-12 col-12\"><!-- wp:image {\"align\":\"center\",\"id\":247,\"width\":200,\"height\":200,\"sizeSlug\":\"full\",\"linkDestination\":\"none\",\"className\":\"mb-n5 mt-3 is-style-rounded\"} -->
 		<div class=\"wp-block-image mb-n5 mt-3 is-style-rounded\"><figure class=\"aligncenter size-full is-resized\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/smokey-x-01.png\" alt=\"\" class=\"wp-image-247\" width=\"200\" height=\"200\"/></figure></div>
 		<!-- /wp:image --></div>
-		<!-- /wp:utksds/column --></div>
-		<!-- /wp:utksds/columns -->
+		<!-- /wp:utkwds/column --></div>
+		<!-- /wp:utkwds/columns -->
 		
-		<!-- wp:utksds/columns {\"rowClass\":\"column-100\",\"numCols\":1} -->
-		<div class=\"row undefined\"><!-- wp:utksds/column {\"colWidth\":12,\"className\":\"col-12\"} -->
+		<!-- wp:utkwds/columns {\"rowClass\":\"column-100\",\"numCols\":1} -->
+		<div class=\"row undefined\"><!-- wp:utkwds/column {\"colWidth\":12,\"className\":\"col-12\"} -->
 		<div class=\"undefined col-12 col-md-12 col-12\"><!-- wp:heading -->
 		<h2>Smokey X</h2>
 		<!-- /wp:heading -->
@@ -403,24 +403,24 @@ function utksds_register_patterns() {
 		<!-- wp:paragraph -->
 		<p>Etiam lacus nisl, congue vel vehicula ac, porta nec quam. Vestibulum a tempus neque, vitae posuere tellus. Sed imperdiet quam eu gravida commodo. In arcu sapien, imperdiet eu lobortis et, hendrerit vitae metus. Ut orci tellus, egestas sit amet euismod sit amet, mattis ac enim. Donec condimentum velit sit amet justo consectetur facilis.</p>
 		<!-- /wp:paragraph --></div>
-		<!-- /wp:utksds/column --></div>
-		<!-- /wp:utksds/columns --></div>
+		<!-- /wp:utkwds/column --></div>
+		<!-- /wp:utkwds/columns --></div>
 		<!-- /wp:group -->",
     )
 	);
 
 	register_block_pattern(
-		'utksds/page-pattern',
+		'utkwds/page-pattern',
     array(
-        'title'       => __( 'Starter Page', 'UTKSDS' ),
-        'description' => _x( 'A sample page layout to get started.', 'Block pattern description', 'UTKSDS' ),
+        'title'       => __( 'Starter Page', 'utkwds' ),
+        'description' => _x( 'A sample page layout to get started.', 'Block pattern description', 'utkwds' ),
 		'categories'  => array( 'buttons' ),
         'content'     => "<!-- wp:spacer {\"height\":\"50px\"} -->
 		<div style=\"height:50px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>
 		<!-- /wp:spacer -->
 		
-		<!-- wp:utksds/columns {\"rowClass\":\"column-50-50\",\"numCols\":2} -->
-		<div class=\"row undefined\"><!-- wp:utksds/column -->
+		<!-- wp:utkwds/columns {\"rowClass\":\"column-50-50\",\"numCols\":2} -->
+		<div class=\"row undefined\"><!-- wp:utkwds/column -->
 		<div class=\"undefined col-12 col-md-3 undefined\"><!-- wp:image {\"id\":219,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"className\":\"is-style-framed\"} -->
 		<figure class=\"wp-block-image size-large is-style-framed\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-02.png\" alt=\"\" class=\"wp-image-219\"/></figure>
 		<!-- /wp:image -->
@@ -432,9 +432,9 @@ function utksds_register_patterns() {
 		<!-- wp:paragraph -->
 		<p><em>Nunc pretium nibh ac quam finibus, rutrum tempor odio lacinia. Proin id orci in nisl molestie tincidunt non id ligula. Phasellus cursus scelerisque orci ut aliquet. Curabitur vel orci cursus, aliquam diam.</em></p>
 		<!-- /wp:paragraph --></div>
-		<!-- /wp:utksds/column -->
+		<!-- /wp:utkwds/column -->
 		
-		<!-- wp:utksds/column {\"colWidth\":9} -->
+		<!-- wp:utkwds/column {\"colWidth\":9} -->
 		<div class=\"undefined col-12 col-md-9 undefined\"><!-- wp:heading -->
 		<h2>Nam et Vestibulum</h2>
 		<!-- /wp:heading -->
@@ -460,47 +460,47 @@ function utksds_register_patterns() {
 		<!-- /wp:paragraph -->
 		
 		<!-- wp:group {\"className\":\"my-5\"} -->
-		<div class=\"wp-block-group my-5\"><!-- wp:utksds/button {\"buttonColor\":{\"name\":\"Link\",\"slug\":\"btn-link\",\"color\":\"\",\"text\":\"\"},\"buttonText\":true} -->
+		<div class=\"wp-block-group my-5\"><!-- wp:utkwds/button {\"buttonColor\":{\"name\":\"Link\",\"slug\":\"btn-link\",\"color\":\"\",\"text\":\"\"},\"buttonText\":true} -->
 		<div><a class=\"btn save mb-3 btn-link btn-nrml\"><span>Explore Area 01</span><span></span></a></div>
-		<!-- /wp:utksds/button -->
+		<!-- /wp:utkwds/button -->
 		
-		<!-- wp:utksds/button {\"buttonColor\":{\"name\":\"Link\",\"slug\":\"btn-link\",\"color\":\"\",\"text\":\"\"},\"buttonText\":true} -->
+		<!-- wp:utkwds/button {\"buttonColor\":{\"name\":\"Link\",\"slug\":\"btn-link\",\"color\":\"\",\"text\":\"\"},\"buttonText\":true} -->
 		<div><a class=\"btn save mb-3 btn-link btn-nrml\"><span>Explore Area 02</span><span></span></a></div>
-		<!-- /wp:utksds/button -->
+		<!-- /wp:utkwds/button -->
 		
-		<!-- wp:utksds/button {\"buttonColor\":{\"name\":\"Link\",\"slug\":\"btn-link\",\"color\":\"\",\"text\":\"\"},\"buttonText\":true} -->
+		<!-- wp:utkwds/button {\"buttonColor\":{\"name\":\"Link\",\"slug\":\"btn-link\",\"color\":\"\",\"text\":\"\"},\"buttonText\":true} -->
 		<div><a class=\"btn save mb-3 btn-link btn-nrml\"><span>Explore Area 03</span><span></span></a></div>
-		<!-- /wp:utksds/button --></div>
+		<!-- /wp:utkwds/button --></div>
 		<!-- /wp:group --></div>
-		<!-- /wp:utksds/column --></div>
-		<!-- /wp:utksds/columns -->
+		<!-- /wp:utkwds/column --></div>
+		<!-- /wp:utkwds/columns -->
 		
 		<!-- wp:spacer {\"height\":\"50px\"} -->
 		<div style=\"height:50px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>
 		<!-- /wp:spacer -->
 		
-		<!-- wp:utksds/strip {\"imagePostion\":{\"name\":\"Smokey\",\"slug\":\"strip-smokey\",\"color\":\"#58595B\",\"text\":\"text-white\"},\"padding\":\"p-md\"} -->
-		<div><div class=\"strip strip-smokey text-white p-md my-0\"><div class=\"container\"><!-- wp:utksds/columns {\"rowClass\":\"column-50-50\",\"numCols\":2} -->
-		<div class=\"row undefined\"><!-- wp:utksds/column {\"colWidth\":8} -->
+		<!-- wp:utkwds/strip {\"imagePostion\":{\"name\":\"Smokey\",\"slug\":\"strip-smokey\",\"color\":\"#58595B\",\"text\":\"text-white\"},\"padding\":\"p-md\"} -->
+		<div><div class=\"strip strip-smokey text-white p-md my-0\"><div class=\"container\"><!-- wp:utkwds/columns {\"rowClass\":\"column-50-50\",\"numCols\":2} -->
+		<div class=\"row undefined\"><!-- wp:utkwds/column {\"colWidth\":8} -->
 		<div class=\"undefined col-12 col-md-8 undefined\"><!-- wp:quote {\"className\":\"text-white\"} -->
 		<blockquote class=\"wp-block-quote text-white\"><p>Maecenas et turpis metus. Integer ut volutpat augue. Vestibulum ante lectus, aliquet vel sem in, viverra ornare dui. Mauris id nisi tortor. Quisque risus ante, tristique non vulputate aliquet, rutrum non risus. Aliquam vulputate elementum diam, ut molestie ligula egestas sit amet.</p><cite>Aliquam Volutpat</cite></blockquote>
 		<!-- /wp:quote --></div>
-		<!-- /wp:utksds/column -->
+		<!-- /wp:utkwds/column -->
 		
-		<!-- wp:utksds/column {\"colWidth\":4} -->
+		<!-- wp:utkwds/column {\"colWidth\":4} -->
 		<div class=\"undefined col-12 col-md-4 undefined\"><!-- wp:image {\"id\":219,\"sizeSlug\":\"large\",\"linkDestination\":\"none\"} -->
 		<figure class=\"wp-block-image size-large\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-02.png\" alt=\"\" class=\"wp-image-219\"/></figure>
 		<!-- /wp:image --></div>
-		<!-- /wp:utksds/column --></div>
-		<!-- /wp:utksds/columns --></div></div></div>
-		<!-- /wp:utksds/strip -->
+		<!-- /wp:utkwds/column --></div>
+		<!-- /wp:utkwds/columns --></div></div></div>
+		<!-- /wp:utkwds/strip -->
 		
 		<!-- wp:spacer -->
 		<div style=\"height:100px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>
 		<!-- /wp:spacer -->
 		
-		<!-- wp:utksds/columns {\"rowClass\":\"column-50-50\",\"numCols\":2} -->
-		<div class=\"row undefined\"><!-- wp:utksds/column {\"colWidth\":6} -->
+		<!-- wp:utkwds/columns {\"rowClass\":\"column-50-50\",\"numCols\":2} -->
+		<div class=\"row undefined\"><!-- wp:utkwds/column {\"colWidth\":6} -->
 		<div class=\"undefined col-12 col-md-6 undefined\"><!-- wp:heading -->
 		<h2><p>Vulputate Aliquet</p></h2>
 		<!-- /wp:heading -->
@@ -509,12 +509,12 @@ function utksds_register_patterns() {
 		<p>Aliquam erat volutpat. Morbi et dictum elit, sed sagittis urna. Nam quis tempor justo, quis tempor augue. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque elit tortor, aliquam sed nisi ac, semper laoreet nulla. Nullam in finibus urna. Sed gravida sapien dapibus tortor facilisis pretium. Aenean accumsan arcu a enim semper, quis porta ligula tincidunt. In hac habitasse platea dictumst. Cras tempor velit eget massa convallis, bibendum aliquam felis cursus.</p>
 		<!-- /wp:paragraph -->
 		
-		<!-- wp:utksds/button {\"buttonColor\":{\"name\":\"Link\",\"slug\":\"btn-link\",\"color\":\"\",\"text\":\"\"},\"buttonText\":true} -->
+		<!-- wp:utkwds/button {\"buttonColor\":{\"name\":\"Link\",\"slug\":\"btn-link\",\"color\":\"\",\"text\":\"\"},\"buttonText\":true} -->
 		<div><a class=\"btn save mb-3 btn-link btn-nrml\"><span>Explore Vulputate</span><span></span></a></div>
-		<!-- /wp:utksds/button --></div>
-		<!-- /wp:utksds/column -->
+		<!-- /wp:utkwds/button --></div>
+		<!-- /wp:utkwds/column -->
 		
-		<!-- wp:utksds/column {\"colWidth\":6} -->
+		<!-- wp:utkwds/column {\"colWidth\":6} -->
 		<div class=\"undefined col-12 col-md-6 undefined\"><!-- wp:gallery {\"columns\":2,\"linkTo\":\"none\",\"sizeSlug\":\"medium\"} -->
 		<figure class=\"wp-block-gallery has-nested-images columns-2 is-cropped\"><!-- wp:image {\"id\":238,\"sizeSlug\":\"medium\",\"linkDestination\":\"none\"} -->
 		<figure class=\"wp-block-image size-medium\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-02.png\" alt=\"\" class=\"wp-image-238\"/></figure>
@@ -532,8 +532,8 @@ function utksds_register_patterns() {
 		<figure class=\"wp-block-image size-medium\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder.png\" alt=\"\" class=\"wp-image-241\"/></figure>
 		<!-- /wp:image --><figcaption class=\"blocks-gallery-caption\">Duis in neque sit amet mi dictum</figcaption></figure>
 		<!-- /wp:gallery --></div>
-		<!-- /wp:utksds/column --></div>
-		<!-- /wp:utksds/columns -->
+		<!-- /wp:utkwds/column --></div>
+		<!-- /wp:utkwds/columns -->
 		
 		<!-- wp:spacer {\"height\":\"50px\"} -->
 		<div style=\"height:50px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>
@@ -542,4 +542,4 @@ function utksds_register_patterns() {
 		);
   }
    
-  add_action( 'init', 'utksds_register_patterns' );
+  add_action( 'init', 'utkwds_register_patterns' );

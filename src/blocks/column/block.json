@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "utksds/column",
+	"name": "utkwds/column",
 	"version": "0.1.0",
 	"title": "Column",
 	"category": "utdesign_layout",
@@ -16,9 +16,9 @@
 			"default": 3
 		}
 	},
-	"parent": [ "utksds/columns" ],
+	"parent": [ "utkwds/columns" ],
 	"usesContext": [ "card/blockName", "columns/numCols" ],
-	"textdomain": "utksds",
+	"textdomain": "utkwds",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"
 }

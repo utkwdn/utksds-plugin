@@ -25,11 +25,11 @@ import { useBlockProps, InnerBlocks, InspectorControls, __experimentalBlockVaria
  */
 import './editor.scss';
 
-const ALLOWED_BLOCKS = [ 'utksds/column' ];
+const ALLOWED_BLOCKS = [ 'utkwds/column' ];
 
 const withCustomClassName = createHigherOrderComponent((BlockListBlock) => {
   return props => {
-	if(props.name === 'utksds/column'){
+	if(props.name === 'utkwds/column'){
     	return <BlockListBlock { ...props } className={ 'col-12 col-md-' + props.attributes.colWidth } />
 	}else{
 		return <BlockListBlock { ...props } />
@@ -56,10 +56,10 @@ export default function Edit( props ) {
 
 	  const blockProps = useBlockProps();
 
-	  if(typeof context['card/blockName'] !== 'undefined' && context['card/blockName'] === 'utksds/card'){
+	  if(typeof context['card/blockName'] !== 'undefined' && context['card/blockName'] === 'utkwds/card'){
 		var these_blocks = [ 'card/body', 'card/image' ];
 	}else{
-		//var these_blocks = [ 'core/paragraph', 'core/heading', 'core/list', 'core/quote', 'core/table', 'core/image', 'core/gallery', 'core/file', 'core/video', 'core/freeform', 'core/code', 'core/navigation', 'core/shortcode', 'core/html', 'core/latest-posts', 'core/page-list', 'core/rss', 'core/social-link', 'core/embed', 'lead/main', 'media-object/main', 'utksds/tabs', 'horizontal-rule/main', 'alert/main', 'utksds/buttongroup', 'utksds/button', 'utksds/accordion', 'utksds/card', 'utksds/calendar' ] ;
+		//var these_blocks = [ 'core/paragraph', 'core/heading', 'core/list', 'core/quote', 'core/table', 'core/image', 'core/gallery', 'core/file', 'core/video', 'core/freeform', 'core/code', 'core/navigation', 'core/shortcode', 'core/html', 'core/latest-posts', 'core/page-list', 'core/rss', 'core/social-link', 'core/embed', 'lead/main', 'media-object/main', 'utkwds/tabs', 'horizontal-rule/main', 'alert/main', 'utkwds/buttongroup', 'utkwds/button', 'utkwds/accordion', 'utkwds/card', 'utkwds/calendar' ] ;
 		var these_blocks = null;
 	}
 	
@@ -206,8 +206,8 @@ export default function Edit( props ) {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<div { ...blockProps } className={ blockProps.className.replace("wp-block-utksds-column", "") }>
-				<div className="wp-block-utksds-column">
+			<div { ...blockProps } className={ blockProps.className.replace("wp-block-utkwds-column", "") }>
+				<div className="wp-block-utkwds-column">
 				<InnerBlocks allowedBlocks={ these_blocks } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 				</div>
 			</div>

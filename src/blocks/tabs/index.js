@@ -25,7 +25,7 @@ import save from './save';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-registerBlockType( 'utksds/tabs', {
+registerBlockType( 'utkwds/tabs', {
 
 	icon: <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" fill="currentColor" class="bi bi-segmented-nav" viewBox="0 0 24 24">
 	<path d="M22,5.5h-2.3v0h0V3.4c0-1-0.8-1.8-1.8-1.8h-16C0.8,1.5,0,2.4,0,3.4v17c0,1.1,0.9,2,2,2h20c1.1,0,2-0.9,2-2v-13

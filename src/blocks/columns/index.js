@@ -27,7 +27,7 @@ import save from './save';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-registerBlockType( 'utksds/columns', {
+registerBlockType( 'utkwds/columns', {
 
 	variations: [
 		{
@@ -38,7 +38,7 @@ registerBlockType( 'utksds/columns', {
 			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-columns" viewBox="0 0 16 16"><path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V2zm8.5 0v8H15V2H8.5zm0 9v3H15v-3H8.5zm-1-9H1v3h6.5V2zM1 14h6.5V6H1v8z"/></svg>
 		),
 		attributes: { rowClass: 'column-100', numCols: 1 },
-		innerBlocks: [ [ 'utksds/column', { className: 'col-12' } ] ],
+		innerBlocks: [ [ 'utkwds/column', { className: 'col-12' } ] ],
 		scope: [ 'block' ],
 	},
 	{
@@ -62,8 +62,8 @@ registerBlockType( 'utksds/columns', {
 		attributes: { rowClass: 'column-50-50', numCols: 2 },
 		isDefault: true,
 		innerBlocks: [ 
-		  [ 'utksds/column', { colWidth: 6 } ], 
-		  [ 'utksds/column', { colWidth: 6 } ] 
+		  [ 'utkwds/column', { colWidth: 6 } ], 
+		  [ 'utkwds/column', { colWidth: 6 } ] 
 		],
 		scope: [ 'block' ],
 	},
@@ -87,8 +87,8 @@ registerBlockType( 'utksds/columns', {
 		),
 		attributes: { rowClass: 'column-30-70', numCols: 2 },
 		innerBlocks: [
-			[ 'utksds/column', { colWidth: 4 } ],
-			[ 'utksds/column', { colWidth: 8 } ],
+			[ 'utkwds/column', { colWidth: 4 } ],
+			[ 'utkwds/column', { colWidth: 8 } ],
 		],
 		scope: [ 'block' ],
 	},
@@ -112,8 +112,8 @@ registerBlockType( 'utksds/columns', {
 		),
 		attributes: { rowClass: 'column-70-30', numCols: 2 },
 		innerBlocks: [
-			[ 'utksds/column', { colWidth: 8 } ],
-			[ 'utksds/column', { colWidth: 4 } ],
+			[ 'utkwds/column', { colWidth: 8 } ],
+			[ 'utkwds/column', { colWidth: 4 } ],
 		],
 		scope: [ 'block' ],
 	},
@@ -136,9 +136,9 @@ registerBlockType( 'utksds/columns', {
 		),
 		attributes: { rowClass: 'column-33-33-33', numCols: 3 },
 		innerBlocks: [
-			[ 'utksds/column', { colWidth: 4 } ],
-			[ 'utksds/column', { colWidth: 4 } ],
-			[ 'utksds/column', { colWidth: 4 } ],
+			[ 'utkwds/column', { colWidth: 4 } ],
+			[ 'utkwds/column', { colWidth: 4 } ],
+			[ 'utkwds/column', { colWidth: 4 } ],
 		],
 		scope: [ 'block' ],
 	},
@@ -161,9 +161,9 @@ registerBlockType( 'utksds/columns', {
 		),
 		attributes: { rowClass: 'column-25-50-25', numCols: 3 },
 		innerBlocks: [
-			[ 'utksds/column', { colWidth: 3 } ],
-			[ 'utksds/column', { colWidth: 6 } ],
-			[ 'utksds/column', { colWidth: 3 } ],
+			[ 'utkwds/column', { colWidth: 3 } ],
+			[ 'utkwds/column', { colWidth: 6 } ],
+			[ 'utkwds/column', { colWidth: 3 } ],
 		],
 		scope: [ 'block' ],
 	},
@@ -178,10 +178,10 @@ registerBlockType( 'utksds/columns', {
 		),
 		attributes: { rowClass: 'column-25-25-25-25', numCols: 4 },
 		innerBlocks: [
-			[ 'utksds/column', { colWidth: 3 } ],
-			[ 'utksds/column', { colWidth: 3 } ],
-			[ 'utksds/column', { colWidth: 3 } ],
-			[ 'utksds/column', { colWidth: 3 } ],
+			[ 'utkwds/column', { colWidth: 3 } ],
+			[ 'utkwds/column', { colWidth: 3 } ],
+			[ 'utkwds/column', { colWidth: 3 } ],
+			[ 'utkwds/column', { colWidth: 3 } ],
 		],
 		scope: [ 'block' ],
 	},

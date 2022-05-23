@@ -26,7 +26,7 @@ import { useBlockProps, InnerBlocks, InspectorControls, RichText } from '@wordpr
 import './editor.scss';
 
 const TAB_TEMPLATE = [
-    [ 'utksds/tab' ],
+    [ 'utkwds/tab' ],
 ];
 
 function setTabNames( parentID ){

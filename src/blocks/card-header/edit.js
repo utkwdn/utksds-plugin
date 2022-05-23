@@ -23,7 +23,7 @@ import { RichText, InspectorControls, useBlockProps, SelectControl } from '@word
  */
 import './editor.scss';
 
-const ALLOWED_BLOCKS = [ 'utksds/button', 'utksds/buttongroup', 'core/paragraph', 'card/heading', 'core/list', 'core/quote', 'utksds/lead', 'utksds/horizontal-rule' ];
+const ALLOWED_BLOCKS = [ 'utkwds/button', 'utkwds/buttongroup', 'core/paragraph', 'card/heading', 'core/list', 'core/quote', 'utkwds/lead', 'utkwds/horizontal-rule' ];
 
 const HEADING_TEMPLATE = [
 	[ 'core/heading', { className: 'card-title' } ],

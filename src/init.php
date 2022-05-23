@@ -122,16 +122,16 @@ add_action( 'customize_register', 'ukds_customizecolor_register' );
 
 //Make Customizer secondary color value avaliable in Gutenberg
 if( get_theme_mod('site_secondary_color') ){
-	function utksds_secondary_color_script(){
+	function utkwds_secondary_color_script(){
 		wp_register_script( 'sc-handle-header', '' );
 		wp_enqueue_script( 'sc-handle-header' );
 		wp_add_inline_script( 'sc-handle-header', 'const secondaryColor = ' . get_theme_mod('site_secondary_color') );
 	}
-	add_action( 'enqueue_block_editor_assets', 'utksds_secondary_color_script', 100 );
+	add_action( 'enqueue_block_editor_assets', 'utkwds_secondary_color_script', 100 );
 }
 
 
-function utksds_current_screen(){
+function utkwds_current_screen(){
 
 	$current_screen = get_current_screen();
 
@@ -143,7 +143,7 @@ function utksds_current_screen(){
 
 	wp_add_inline_script( 'screen-handle-header', 'const currentScreen = ' . json_encode($current_screen, JSON_HEX_TAG) );
 }
-add_action( 'enqueue_block_editor_assets', 'utksds_current_screen', 100 );
+add_action( 'enqueue_block_editor_assets', 'utkwds_current_screen', 100 );
 
 //$post_editor_context = new WP_Block_Editor_Context( array( 'post' => get_post() ) );
 

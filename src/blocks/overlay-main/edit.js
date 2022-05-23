@@ -26,11 +26,11 @@ import { useBlockProps, InnerBlocks, InspectorControls, ColorPalette, getColorOb
  */
 import './editor.scss';
 
-const ALLOWED_BLOCKS = [ 'utksds/button', 'core/paragraph', 'utksds/card-heading', 'core/list', 'core/quote', 'utksds/lead', 'utksds/horizontal-rule' ];
+const ALLOWED_BLOCKS = [ 'utkwds/button', 'core/paragraph', 'utkwds/card-heading', 'core/list', 'core/quote', 'utkwds/lead', 'utkwds/horizontal-rule' ];
 
 const OVERLAY_TEMPLATE = [
-    [ 'utksds/overlay-main', {}, [
-		[ 'utksds/card-heading' ],
+    [ 'utkwds/overlay-main', {}, [
+		[ 'utkwds/card-heading' ],
 		[ 'core/paragraph' ],
 	] ],
 ];
@@ -53,7 +53,7 @@ export default function Edit( props ) {
 		return ( [
 			<div { ...blockProps }>
 			<div className={ "card-img-overlay" }>
-				<InnerBlocks allowedBlocks={ [ 'card/heading', 'core/paragraph', 'utksds/button', 'lead/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks allowedBlocks={ [ 'card/heading', 'core/paragraph', 'utkwds/button', 'lead/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 			</div>
 		] );

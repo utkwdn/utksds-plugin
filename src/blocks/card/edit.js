@@ -27,7 +27,7 @@ import { InnerBlocks, InspectorControls, ColorPalette, getColorObjectByColorValu
  */
 import './editor.scss';
 
-const ALLOWED_BLOCKS = [ 'utksds/button', 'utksds/buttongroup', 'core/paragraph', 'card/heading', 'core/list', 'core/quote', 'utksds/lead', 'utksds/horizontal-rule' ];
+const ALLOWED_BLOCKS = [ 'utkwds/button', 'utkwds/buttongroup', 'core/paragraph', 'card/heading', 'core/list', 'core/quote', 'utkwds/lead', 'utkwds/horizontal-rule' ];
 
 const HEADING_TEMPLATE = [
 	[ 'core/heading', { className: 'card-title' } ],
@@ -59,7 +59,7 @@ export default function Edit( props ) {
 
 	const blockProps = useBlockProps();
 
-	const cardVariations = getBlockVariations( 'utksds/card' );
+	const cardVariations = getBlockVariations( 'utkwds/card' );
 	const { replaceInnerBlocks } = useDispatch( blockEditorStore );
 
 	var cardPlaceholder = (
@@ -170,7 +170,7 @@ export default function Edit( props ) {
 			// eslint-disable-next-line react/jsx-key
 			<div { ...blockProps }>
 			<div className={'card card-edit ' + attributes.textColor + ' ' + attributes.cardColor.slug }>
-				<InnerBlocks allowedBlocks={ [ 'utksds/card-body', 'utksds/card-image', 'utksds/columns', 'utksds/card-topcap', ] } placeholder={ cardPlaceholder } templateLock={ 'all' } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks allowedBlocks={ [ 'utkwds/card-body', 'utkwds/card-image', 'utkwds/columns', 'utkwds/card-topcap', ] } placeholder={ cardPlaceholder } templateLock={ 'all' } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 			</div>,
 		] );

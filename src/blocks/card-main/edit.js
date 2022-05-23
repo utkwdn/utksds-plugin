@@ -21,7 +21,7 @@ import { InnerBlocks, useBlockProps, __experimentalBlockVariationPicker } from '
  */
 import './editor.scss';
 
-const ALLOWED_BLOCKS = [ 'utksds/button', 'utksds/buttongroup', 'core/paragraph', 'card/heading', 'core/list', 'core/quote', 'utksds/lead', 'utksds/horizontal-rule' ];
+const ALLOWED_BLOCKS = [ 'utkwds/button', 'utkwds/buttongroup', 'core/paragraph', 'card/heading', 'core/list', 'core/quote', 'utkwds/lead', 'utkwds/horizontal-rule' ];
 
 const HEADING_TEMPLATE = [
 	[ 'core/heading', { className: 'card-title' } ],
@@ -50,10 +50,10 @@ export default function Edit( props ) {
 
 	  const blockProps = useBlockProps();
 
-	if( context['columns/blockName'] == 'utksds/columns' ){
+	if( context['columns/blockName'] == 'utkwds/columns' ){
 		var columns_blocks = [ 'card/body', 'card/image', 'card/overlay', 'card/topcap', ];
 	}else{
-		var columns_blocks = [ 'card/body', 'card/image', 'utksds/columns', 'card/overlay', 'card/topcap', ];
+		var columns_blocks = [ 'card/body', 'card/image', 'utkwds/columns', 'card/overlay', 'card/topcap', ];
 	}
 
 

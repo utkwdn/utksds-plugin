@@ -1,13 +1,13 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "utksds/accordion-fold",
+	"name": "utkwds/accordion-fold",
 	"version": "0.1.0",
 	"title": "Accordion Fold",
 	"category": "design",
 	"icon": "list-view",
 	"description": "",
-	"parent": [ "utksds/accordion" ],
+	"parent": [ "utkwds/accordion" ],
 	"usesContext": [ "accordion/parentID" ],
 	"supports": {
 		"html": false
@@ -42,7 +42,7 @@
 			"default": ""
 		}
 	},
-	"textdomain": "utksds",
+	"textdomain": "utkwds",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"
 }

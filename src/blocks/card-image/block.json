@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "utksds/card-image",
+	"name": "utkwds/card-image",
 	"version": "0.1.0",
 	"title": "Card Image",
 	"category": "design",
@@ -10,8 +10,8 @@
 	"supports": {
 		"html": false
 	},
-	"parent": [ "utksds/card" ],
-	"textdomain": "utksds",
+	"parent": [ "utkwds/card" ],
+	"textdomain": "utkwds",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"
 }
