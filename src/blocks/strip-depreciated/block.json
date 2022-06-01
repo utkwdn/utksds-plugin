@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "strip/main",
+	"version": "0.1.0",
+	"title": "Depreciated Content Strip",
+	"category": "utdesign_layout",
+	"icon": "editor-table",
+	"description": "",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"imagePostion": {
+			"type": "object",
+			"default": { "name": "Smokey", "slug": "strip-smokey", "color": "#58595B", "text": "text-white" }
+		},
+		"spacing": {
+			"type": "integer",
+			"default": 0
+		},
+		"padding":{
+			"type": "string",
+			"default": "py-0"
+		},
+		"bgImage":{
+			"type": "object"
+		}
+	},
+	"textdomain": "utkwds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}

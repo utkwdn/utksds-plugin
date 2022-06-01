@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utksds/overlay",
+	"version": "0.1.0",
+	"title": "Deppreciated Image with Text Overlay",
+	"category": "design",
+	"icon": "editor-table",
+	"description": "",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"imageAlt": {
+			"type": "string",
+			"default": ""
+		},
+		"imageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"overColor": {
+			"type": "object",
+			"default": { "name": "Dark", "slug": "bg-dark", "color": "#4b4b4b", "text": "text-white" }
+		},
+		"overOpacity": {
+			"type": "integer",
+			"default": 0
+		}
+	},
+	"providesContext": {
+		"overlay/bgColor": "overColor",
+		"overlay/opacity": "overOpacity"
+	},
+	"textdomain": "utkwds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}

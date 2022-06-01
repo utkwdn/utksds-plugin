@@ -107,7 +107,7 @@ export default function Edit( props ) {
 				{ attributes.imageUrl !== '' && (
   				<img src={ attributes.imageUrl } className="card-img" alt={ attributes.imageAlt } />
 				) }
-    			<InnerBlocks allowedBlocks={ [ 'overlay/main' ] } placeholder={ ovPlaceholder } templateLock={ true } />
+    			<InnerBlocks allowedBlocks={ [ 'utkwds/overlay-main' ] } placeholder={ ovPlaceholder } templateLock={ true } />
 			</div>
 			</div>
 		] );

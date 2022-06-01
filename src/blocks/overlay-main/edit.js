@@ -53,7 +53,7 @@ export default function Edit( props ) {
 		return ( [
 			<div { ...blockProps }>
 			<div className={ "card-img-overlay" }>
-				<InnerBlocks allowedBlocks={ [ 'card/heading', 'core/paragraph', 'utkwds/button', 'lead/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks allowedBlocks={ [ 'utkwds/card-heading', 'core/paragraph', 'utkwds/button', 'utkwds/lead' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 			</div>
 		] );

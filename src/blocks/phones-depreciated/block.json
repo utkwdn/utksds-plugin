@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utksds/phones",
+	"version": "0.1.0",
+	"title": "Depreciated Phone Numbers",
+	"category": "",
+	"icon": "editor-table",
+	"description": "A container for phone numbers.",
+	"supports": {
+		"html": false
+	},
+	"parent": [ "utksds/contact" ],
+	"textdomain": "utkwds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}

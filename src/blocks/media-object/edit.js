@@ -149,7 +149,7 @@ export default function Edit( props ) {
 					className="image"
 				/>
 				) }
-				<InnerBlocks allowedBlocks={ [ 'media/content' ] } placeholder={ ovPlaceholder } templateLock={ true } />
+				<InnerBlocks allowedBlocks={ [ 'utkwds/media-content' ] } placeholder={ ovPlaceholder } templateLock={ true } />
 			</div>
 			</div>
 		] );
