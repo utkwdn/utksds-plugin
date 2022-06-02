@@ -5,7 +5,7 @@ import { Path, SVG } from '@wordpress/components';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockType, createBlock } from '@wordpress/blocks';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -29,6 +29,20 @@ import save from './save';
  */
 registerBlockType( 'utksds/columns', {
 
+	transforms: {
+		to: [
+			{
+				type: 'block',
+				blocks: [ 'utkwds/columns' ],
+				transform: ( attributes, innerBlocks ) => {
+					return createBlock( 'utkwds/columns',
+						attributes,
+						innerBlocks
+					);
+				},
+			},
+		],
+	},
 	variations: [
 		{
 		name: 'one-column-full',

@@ -3,7 +3,7 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockType, createBlock } from '@wordpress/blocks';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -28,6 +28,20 @@ import save from './save';
 registerBlockType( 'lead/main', {
 
 	icon: <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M20 15h4.071v2h-4.071v4.071h-2v-4.071h-4.071v-2h4.071v-4.071h2v4.071zm-8 6h-12v-2h12v2zm0-4.024h-12v-2h12v2zm0-3.976h-12v-2h12v2zm12-4h-24v-2h24v2zm0-4h-24v-2h24v2z"/></svg>,
+	transforms: {
+		to: [
+			{
+				type: 'block',
+				blocks: [ 'utkwds/lead' ],
+				transform: ( attributes, innerBlocks ) => {
+					return createBlock( 'utkwds/lead',
+						attributes,
+						innerBlocks
+					);
+				},
+			},
+		],
+	},
 
 	/**
 	 * @see ./edit.js

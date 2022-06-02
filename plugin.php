@@ -16,9 +16,9 @@
 
 require 'plugin-update-checker/plugin-update-checker.php';
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-	'https://github.com/utkwdn/utkwds-plugin',
+	'https://github.com/utkwdn/utksds-plugin',
 	__FILE__,
-	'utkwds-plugin'
+	'utksds-plugin'
 );
 
 // Exit if accessed directly.
@@ -124,7 +124,7 @@ function utkwds_scripts_init(){
 add_action( 'init', 'utkwds_scripts_init' );
 
 /**
- * Block Initializer.
+ * Runs other plugin functions.
  */
 require 'src/init.php';
 
