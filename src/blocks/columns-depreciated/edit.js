@@ -27,7 +27,7 @@ import { useBlockProps, InnerBlocks, InspectorControls, __experimentalBlockVaria
  */
 import './editor.scss';
 
-const ALLOWED_BLOCKS = [ 'utksds/column' ];
+const ALLOWED_BLOCKS = [ 'utkwds/column', 'utksds/column' ];
 
 const withCustomClassName = createHigherOrderComponent((BlockListBlock) => {
   return props => {

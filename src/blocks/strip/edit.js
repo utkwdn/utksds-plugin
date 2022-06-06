@@ -24,7 +24,7 @@ import { useBlockProps, MediaUpload, MediaUploadCheck, InnerBlocks, InspectorCon
  */
 import './editor.scss';
 
-const ALLOWED_BLOCKS = [  'utkwds/button', 'core/separator', 'core/paragraph', 'core/heading', 'utkwds/columns' ];
+const ALLOWED_BLOCKS = [  'utkwds/button', 'core/separator', 'core/paragraph', 'core/heading', 'utkwds/columns', 'utksds/button', 'utksds/columns' ];
 
 /**
  * The edit function describes the structure of your block in the context of the

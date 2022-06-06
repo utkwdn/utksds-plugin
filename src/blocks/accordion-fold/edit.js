@@ -83,7 +83,7 @@ export default function Edit( props ) {
     			</div>
     			<div id={ "collapse" + attributes.foldSlug } className={ "collapse" + attributes.showS } aria-labelledby={ "heading" + attributes.foldSlug } data-parent={ "#" + attributes.parentID }>
       				<div className="card-body">
-        				<InnerBlocks allowedBlocks={ [ 'utkwds/button', 'core/paragraph', 'core/list', 'core/quote', 'utkwds/lead', 'utkwds/horizontal-rule' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
+        				<InnerBlocks allowedBlocks={ [ 'utkwds/button', 'core/paragraph', 'core/list', 'core/quote', 'utkwds/lead', 'utkwds/horizontal-rule', 'utksds/button', 'lead/main', 'horizontal-rule/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
       				</div>
     			</div>
   			</div>

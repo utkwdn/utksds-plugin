@@ -85,7 +85,7 @@ export default function Edit( props ) {
 			</InspectorControls>,
 			<div { ...blockProps }>
 			<div class="tab-content" id="myTabContent">
-				<InnerBlocks template={ TAB_TEMPLATE } allowedBlocks={ [ 'tabs/tab', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks template={ TAB_TEMPLATE } allowedBlocks={ [ 'utkwds/tab', 'tabs/tab' ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 			</div>,
 		] );

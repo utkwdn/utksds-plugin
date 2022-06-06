@@ -25,7 +25,7 @@ import { useBlockProps, MediaUpload, BlockIcon, MediaPlaceholder, InnerBlocks, I
  */
 import './editor.scss';
 
-const ALLOWED_BLOCKS = [ 'utksds/button', 'horizontal-rule/main', 'core/paragraph', 'core/heading' ];
+const ALLOWED_BLOCKS = [ 'utkwds/button', 'utkwds/horizontal-rule', 'core/paragraph', 'core/heading', 'utksds/button', 'horizontal-rule/main' ];
 
 const MEDIA_TEMPLATE = [
 	[ 'media/content', {}, [
@@ -149,7 +149,7 @@ export default function Edit( props ) {
 					className="image"
 				/>
 				) }
-				<InnerBlocks allowedBlocks={ [ 'media/content' ] } placeholder={ ovPlaceholder } templateLock={ true } />
+				<InnerBlocks allowedBlocks={ [ 'utkwds/media-content', 'media/content' ] } placeholder={ ovPlaceholder } templateLock={ true } />
 			</div>
 			</div>
 		] );

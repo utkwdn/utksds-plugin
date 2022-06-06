@@ -25,7 +25,7 @@ import { useBlockProps, InnerBlocks, InspectorControls, __experimentalBlockVaria
  */
 import './editor.scss';
 
-const ALLOWED_BLOCKS = [ 'utksds/column' ];
+const ALLOWED_BLOCKS = [ 'utkwds/column', 'utksds/column' ];
 
 const withCustomClassName = createHigherOrderComponent((BlockListBlock) => {
   return props => {
@@ -57,7 +57,7 @@ export default function Edit( props ) {
 	  const blockProps = useBlockProps();
 
 	  if(typeof context['card/blockName'] !== 'undefined' && context['card/blockName'] === 'utksds/card'){
-		var these_blocks = [ 'card/body', 'card/image' ];
+		var these_blocks = [ 'utkwds/card-body', 'utkwds/card-image', 'card/body', 'card/image' ];
 	}else{
 		//var these_blocks = [ 'core/paragraph', 'core/heading', 'core/list', 'core/quote', 'core/table', 'core/image', 'core/gallery', 'core/file', 'core/video', 'core/freeform', 'core/code', 'core/navigation', 'core/shortcode', 'core/html', 'core/latest-posts', 'core/page-list', 'core/rss', 'core/social-link', 'core/embed', 'lead/main', 'media-object/main', 'utkwds/tabs', 'horizontal-rule/main', 'alert/main', 'utkwds/buttongroup', 'utkwds/button', 'utkwds/accordion', 'utkwds/card', 'utkwds/calendar' ] ;
 		var these_blocks = null;

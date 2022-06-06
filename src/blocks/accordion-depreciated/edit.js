@@ -52,7 +52,7 @@ export default function Edit( props ) {
 			</InspectorControls>,
 			<div { ...blockProps }>
 			<div className={ "accordion" } id={ attributes.accordionID }>
-				<InnerBlocks template={ ACCORDION_TEMPLATE } allowedBlocks={ [ 'accordion/fold', ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
+				<InnerBlocks template={ ACCORDION_TEMPLATE } allowedBlocks={ [ 'utkwds/accordion-fold', 'accordion/fold' ] } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 			</div>
 		] );

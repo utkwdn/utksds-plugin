@@ -24,7 +24,7 @@ import { useBlockProps, InnerBlocks, RichText, __experimentalLinkControl, BlockC
  */
 import './editor.scss';
 
-const ALLOWED_BLOCKS = [ 'utkwds/button', 'utkwds/buttongroup', 'core/paragraph', 'card/heading', 'core/list', 'core/quote', 'utkwds/lead', 'utkwds/horizontal-rule' ];
+const ALLOWED_BLOCKS = [ 'utkwds/button', 'core/paragraph', 'utkwds/card-heading', 'core/list', 'core/quote', 'utkwds/lead', 'utkwds/horizontal-rule', 'utksds/button', 'card/heading','lead/main', 'horizontal-rule/main' ];
 
 const CONTACT_TEMPLATE = [
 	[ 'utkwds/phones', {} ],
