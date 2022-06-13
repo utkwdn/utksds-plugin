@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-//this creates the utdesign system category for the new blocks
+//This creates the utdesign system category for the new blocks. It should probably be split out into its own include file.
 function utdesign_blocks_category($categories, $post) {
 	return array_merge(
 		$categories,
@@ -45,14 +45,14 @@ if(class_exists('WP_Block_Editor_Context')){
 
 
 /**
- * Deregister the gutenberg styles
+ * Deregister the gutenberg styles. This could probably be moved into plugin.php
  */
 add_action( 'wp_print_styles', 'wps_deregister_styles', 100 );
 function wps_deregister_styles() {
     wp_dequeue_style( 'wp-block-library' );
 }
 
-//Add secondary color control to Customizer
+//Adds a secondary color control to Customizer. All the secondary color code should probably be split out into its own include file.
 function ukds_customizecolor_register( $wp_customize ) {
 		class UTK_Customize_Secondary_Color_Control extends WP_Customize_Control {
 
@@ -130,7 +130,8 @@ if( get_theme_mod('site_secondary_color') ){
 	add_action( 'enqueue_block_editor_assets', 'utkwds_secondary_color_script', 100 );
 }
 
-
+//This adds a javascript constant called currentScreen to the editors that returns which editor is currently in use, such as the page editor or the widget editor.
+//This should probably be split out into its own include file.
 function utkwds_current_screen(){
 
 	$current_screen = get_current_screen();

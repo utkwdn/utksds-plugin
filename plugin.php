@@ -14,6 +14,7 @@
  * @package           create-block
  */
 
+ //Update Checker code
 require 'plugin-update-checker/plugin-update-checker.php';
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 	'https://github.com/utkwdn/utksds-plugin',
@@ -26,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-//Set the branch that contains the stable release.
+//Set the branch that contains the stable release. Used by the Update Checker
 //$myUpdateChecker->setBranch('main');
 $myUpdateChecker->getVcsApi()->enableReleaseAssets();
 
@@ -102,6 +103,7 @@ function create_block_block_test_block_init() {
 }
 add_action( 'init', 'create_block_block_test_block_init' );
 
+//Registers all the non-block javascript
 function utkwds_scripts_init(){
 	wp_register_script( 'disable', plugins_url('utkwds-plugin') . '/build/frontend/disable.js', array( 'wp-blocks', 'wp-block-library', 'wp-i18n', 'wp-element', 'wp-editor' ), null, true );
 	//wp_enqueue_editor( 'editor-style', plugins_url('utkwds-plugin') . '/build/frontend/disable.css' );
@@ -124,7 +126,7 @@ function utkwds_scripts_init(){
 add_action( 'init', 'utkwds_scripts_init' );
 
 /**
- * Runs other plugin functions.
+ * Runs other plugin functions. This file should probably be renamed and/or broken apart.
  */
 require 'src/init.php';
 
@@ -144,6 +146,8 @@ As of this writing, we settled on a set of three groups of radio options. The fi
 Once the selections are chosen, the block content ($block_content) and block array ($block) are passed to the PHP filter. Unfortunately, the classes from the radio selections are not stored in $block['attrs']['className']. So far, I haven't found them anywhere else in the $block array. This makes reading and modifying the selected classes more difficult than the original implementation. I read the selected classes by parsing the entire $block_content using 'wp-block-button ' as the beginning of the desired text and '">' as the end. Everything in between should be the classes from the radio selections. It splits them into an array to make them easier to work with, and reads each of the three options, outputing a class string of the correct Bootstrap class(es) based on the editor's selections. In then removes the radio selection classes from the container div and adds the Bootstrap class string to the button's a tag using 'wp-block-button__link' as a guide to know where to add the string.
 
 I anticipate a similar method will be used to add Bootstrap classes to the other core Wordpress blocks.
+
+This section should probably be broken out into its own include file.
 */
 add_filter( 'render_block', function( $block_content, $block ) {
 	if ( $block['blockName'] === 'core/button' ) {
@@ -380,6 +384,8 @@ add_filter( 'render_block', function( $block_content, $block ) {
 	return $block_content;
 
 }, 5, 2 );
+
+//The following code is for configuring the patterns area of the Gutenberg editor. It should probably be split out into its own include file.
 
 //disables loading remote patterns
 function utkwds_disable_remote_patterns(){

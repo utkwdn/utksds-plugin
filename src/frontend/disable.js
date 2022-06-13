@@ -1,3 +1,4 @@
+//The imports below allow all the non-block javascript to compile.
 import './styles/index.js';
 import './code/code.js';
 import './heading/heading.js';
@@ -7,7 +8,9 @@ import './paragraph/paragraph.js';
 import './quote/quote.js';
 import './table/table.js';
 
-// remove default button styles, declare default and/or plugin created blocks to selectively disable
+// remove default button styles, declare default and/or plugin created blocks to selectively disabled.
+// The following could should probably be spun off into './disable/disable.js' and this file renmaed to index.js.
+// NOTE: Doing so would require modifying the code that registers the non-block javascript in plugin.php and the custom entrypoint in webpack.config.js
 wp.domReady( () => {
 
 	//console.log(wp.blocks.getBlockTypes());
