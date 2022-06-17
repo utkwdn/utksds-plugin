@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "lead/main",
+	"version": "0.1.0",
+	"title": "Depreciated Lead Paragraph",
+	"category": "text",
+	"icon": "editor-table",
+	"description": "",
+	"supports": {
+		"html": false,
+		"anchor": true
+	},
+	"attributes": {
+		"backgroundColor": {
+			"type": "string",
+			"default": ""
+		},
+		"align": {
+        	"type": "string",
+			"default": "left"
+    	},
+   		"content": {
+       		"type": "string"
+    	}
+	},
+	"textdomain": "utkwds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}

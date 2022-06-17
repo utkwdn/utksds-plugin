@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utkwds/socials",
+	"version": "0.1.0",
+	"title": "Social Media Links",
+	"category": "",
+	"icon": "editor-table",
+	"description": "A container for social media links.",
+	"supports": {
+		"html": false
+	},
+	"parent": [ "utkwds/contact" ],
+	"textdomain": "utkwds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}

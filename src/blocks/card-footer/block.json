@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utkwds/card-footer",
+	"version": "0.1.0",
+	"title": "Card Footer",
+	"category": "design",
+	"icon": "table-row-after",
+	"description": "",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"content": {
+			"type": "string"
+		},
+		"muted": {
+			"type": "boolean",
+			"default": false
+		},
+		"mutedClass": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"parent": [ "utkwds/card" ],
+	"textdomain": "utkwds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}

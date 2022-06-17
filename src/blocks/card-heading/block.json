@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utkwds/card-heading",
+	"version": "0.1.0",
+	"title": "Card Heading",
+	"category": "design",
+	"icon": "heading",
+	"description": "",
+	"supports": {
+		"html": false
+	},
+	"parent": [ "utkwds/card-body" ],
+	"textdomain": "utkwds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}

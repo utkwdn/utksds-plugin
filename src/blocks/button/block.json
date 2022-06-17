@@ -1,0 +1,88 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utkwds/button",
+	"version": "0.1.0",
+	"title": "Button",
+	"category": "design",
+	"icon": "list-view",
+	"description": "",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"url": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "href"
+		},
+		"title": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "title"
+		},
+		"text": {
+			"type": "string",
+			"source": "html",
+			"selector": "span"
+		},
+		"linkTarget": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "target"
+		},
+		"linkTab": {
+			"type": "boolean",
+			"default": false
+		},
+		"rel": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "rel"
+		},
+		"placeholder": {
+			"type": "string",
+			"default": "Button"
+		},
+		"buttonColor": {
+			"type": "object",
+			"default": { "name": "Link", "slug": "btn-utlink", "color": "#1a73c5", "text": "text-white" }
+		},
+		"buttonText": {
+			"type": "boolean",
+			"default": false
+		},
+		"buttonOutline": {
+			"type": "boolean",
+			"default": false
+		},
+		"buttonSize": {
+			"type": "string",
+			"default": " btn-nrml"
+		},
+		"blockClass": {
+			"type": "string",
+			"default": ""
+		},
+		"iconCode": {
+			"type": "object",
+			"default": { "name": "", "string": "", "code": null }
+		},
+		"iconSize": {
+			"type": "string",
+			"default": "24"
+		},
+		"useIcon": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"textdomain": "utkwds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
