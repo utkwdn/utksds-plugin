@@ -5,7 +5,7 @@
  */
 
 // This extension is editor only, and probably temporary until we get the editors to add proper classes.
-
+@use 'sass:math';
 @import '../../common.scss';
 @import "../../../node_modules/utksds-framework/src/scss/components/strip";
 .align-items-center {
@@ -21,27 +21,27 @@
 // There are several 'settings' for the Gutenberg editor. (full screen mode, with the settings rail open or closed, etc. The following code adjusts the width of the content ribbon accordingly.)
 .wp-block .strip {
   width: calc(100vw - 160px);
-  margin-left: -($spacer / 2);
+  margin-left: math.div($spacer, 2);
   &.py-0 {
     padding-top: 0;
     padding-bottom: 0;
   }
   .block-editor-inner-blocks {
-    padding: ($spacer / 2);
+    padding: math.div($spacer, 2);
   }
    @include media-breakpoint-up(sm) {
   //  max-width: 540px;
-  margin-left: -($spacer / 2);
+  margin-left: math.div(-$spacer, 2);
 
   }
   @include media-breakpoint-up(md) {
   //  max-width: 720px;
-  margin-left: -($spacer / 2);
+  margin-left: math.div(-$spacer, 2);
 
   }
   @include media-breakpoint-up(lg) {
   //  max-width: 1060px;
-  margin-left: -($spacer / 2);
+  margin-left: math.div(-$spacer, 2);
 
   }
   @include media-breakpoint-up(xl) {
@@ -58,23 +58,23 @@
 body.is-fullscreen-mode {
   .wp-block .strip {
     width: 100vw;
-    margin-left: -($spacer / 2);
+    margin-left: math.div(-$spacer, 2);
     .block-editor-inner-blocks {
-      padding: ($spacer / 2);
+      padding: math.div($spacer, 2);
     }
      @include media-breakpoint-up(sm) {
     //  max-width: 540px;
-    margin-left: -($spacer / 2);
+    margin-left: math.div(-$spacer, 2);
 
     }
     @include media-breakpoint-up(md) {
     //  max-width: 720px;
-    margin-left: -($spacer / 2);
+    margin-left: math.div(-$spacer, 2);
 
     }
     @include media-breakpoint-up(lg) {
     //  max-width: 1060px;
-    margin-left: -($spacer / 2);
+    margin-left: math.div(-$spacer, 2);
 
     }
     @include media-breakpoint-up(xl) {
@@ -93,7 +93,7 @@ div.is-sidebar-opened {
   .wp-block .strip {
     width: calc(100vw - 280px);
     @include media-breakpoint-up(xl) {
-     margin-left: -($spacer / 2);
+     margin-left: math.div(-$spacer, 2);
     }
     @media (min-width: 1450px) {
      margin-left: calc(-50vw + 710px);
@@ -111,7 +111,7 @@ body:not(.is-fullscreen-mode) {
     .wp-block .strip {
       width: calc(100vw - 440px);
       @include media-breakpoint-up(xl) {
-       margin-left: -($spacer / 2);
+       margin-left: math.div(-$spacer, 2);
       }
       @include media-breakpoint-up(xxl) {
        margin-left: calc(-50vw + 790px);

@@ -66,6 +66,7 @@ function create_block_block_test_block_init() {
 		'phones',
 		'socials',
 		'strip',
+		'styles',
 		'tab',
 		'tabs',
 		'accordion-depreciated',
