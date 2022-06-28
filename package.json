@@ -16,7 +16,7 @@
 		"start": "wp-scripts start"
 	},
 	"devDependencies": {
-		"utksds-framework": "0.1.0",
+		"utksds-framework": "0.2.0",
 		"@wordpress/scripts": "^22.3.0"
 	},
 	"dependencies": {
