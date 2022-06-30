@@ -4,11 +4,3 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-
- @import '../../common.scss';
- @import '../../../node_modules/bootstrap/scss/button-group';
- @import '../../../node_modules/bootstrap/scss/buttons';
-
- .wp-block-button__link {
-    @extend .btn;
-  }
