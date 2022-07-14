@@ -168,7 +168,7 @@ function misha_blacklist_blocks( $allowed_blocks ) {
 	unset( $blocks[ 'core/search' ] );
 	unset( $blocks[ 'core/columns' ] );
 	unset( $blocks[ 'core/column' ] );
-	unset( $blocks[ 'core/navigation' ] );
+	//unset( $blocks[ 'core/navigation' ] );
 	unset( $blocks[ 'core/site-logo' ] );
 	unset( $blocks[ 'core/site-title' ] );
 	unset( $blocks[ 'core/site-tagline' ] );
