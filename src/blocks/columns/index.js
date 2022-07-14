@@ -29,21 +29,6 @@ import save from './save';
  */
 registerBlockType( 'utkwds/columns', {
 
-	transforms: {
-		to: [
-			{
-				type: 'block',
-				blocks: [ 'utksds/columns' ],
-				transform: ( attributes, innerBlocks ) => {
-					return createBlock( 'utksds/columns',
-						attributes,
-						innerBlocks
-					);
-				},
-			},
-		],
-	},
-
 	variations: [
 		{
 		name: 'one-column-full',

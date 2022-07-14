@@ -37,13 +37,15 @@ registerBlockType( 'utksds/columns', {
 				transform: ( attributes, innerBlocks ) => {
 					return createBlock( 'utkwds/columns',
 						attributes,
-						innerBlocks.map(innerBlock => {
-							if (innerBlock.name === 'utksds/column') {
-								return createBlock('utkwds/column', innerBlock.attributes, innerBlock.innerBlocks);
-							} else {
-								return innerBlock;
-							}
-						})
+						Array.isArray(innerBlocks)
+							? innerBlocks.map(block => {
+								if (block.name === 'utksds/column') {
+									return createBlock('utkwds/column', block.attributes, block.innerBlocks);
+								} else {
+									return block;
+								}
+							})
+							: innerBlocks
 					);
 				},
 			},
