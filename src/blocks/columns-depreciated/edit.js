@@ -167,7 +167,7 @@ export default function Edit( props ) {
 			<div { ...blockProps }>
 				<div className="container">
 				<div className={"row " + attributes.rowClass }>
-					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } placeholder={ colPlaceholder } templateLock={ 'all' } />
+					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } placeholder={ colPlaceholder } templateLock={ false } />
 				</div>
 				</div>
 			</div>,
