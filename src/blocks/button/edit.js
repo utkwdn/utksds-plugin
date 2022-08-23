@@ -103,13 +103,9 @@ export default function Edit( props ) {
 
 	//console.log(siteColors);
 
-	function onButtonColorChange( newColor ) {
-		setAttributes( { buttonColor: newColor } );
-	}
-
-	if(attributes.iconCode.name !== ''){
+	if(attributes.iconName !== ''){
 		var iconResults = AllIcons.find(obj => {
-			return obj.name === attributes.iconCode.name;
+			return obj.name === attributes.iconName;
 		} );
 
 		attributes.useIcon = false;
@@ -176,49 +172,77 @@ export default function Edit( props ) {
                 					title: 'No Icon',
                 					icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-app" viewBox="0 0 16 16"><path d="M11 2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3h6zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4H5z"/></svg>,
 				  					onClick: () =>{
-										setAttributes( { iconCode:{ name:'', string:'', code:null }, useIcon:true } );
+										setAttributes({
+											iconName: '',
+											iconString: '',
+											useIcon:true
+										});
 									},
             					},
 								{
                 					title: 'Box arrow up-right',
                 					icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>,
 				  					onClick: () =>{
-										setAttributes( { iconCode:{ name:'Box arrow up-right', string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>', code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>) }, useIcon:true } );
+										setAttributes({
+											iconName: 'Box arrow up-right',
+											iconString: /* html */ `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>`,
+											useIcon: true
+										});
 									},
             					},
 								{
                 					title: 'Check 2',
                 					icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>,
 				  					onClick: () =>{
-										setAttributes( { iconCode:{ name:'Check 2', string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>', code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>) }, useIcon:true } );
+										setAttributes({
+											iconName: 'Check 2',
+											iconString: /* html */ `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>`,
+											useIcon:true
+										});
 									},
             					},
 								{
                 					title: 'Check 2 circle',
                 					icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>,
 				  					onClick: () =>{
-										setAttributes( { iconCode:{ name:'Check 2 circle', string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>', code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>) }, useIcon:true } );
+										setAttributes({
+											iconName: 'Check 2 circle',
+											iconString: /* html */ `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>`,
+											useIcon:true
+										});
 									},
             					},
 								{
                 					title: 'Chevron right',
                 					icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>,
 				  					onClick: () =>{
-										setAttributes( { iconCode:{ name:'Chevron right', string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>', code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>) }, useIcon:true } );
+										setAttributes({
+											iconName: 'Chevron right',
+											iconString: /* html */ `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>`,
+											useIcon:true
+										});
 									},
             					},
 								{
                 					title: 'Chevron left',
                 					icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>,
 				  					onClick: () =>{
-										setAttributes( { iconCode:{ name:'Chevron left', string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>', code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>) }, useIcon:true } );
+										setAttributes({
+											iconName: 'Chevron left',
+											iconString: /* html */ `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>`,
+											useIcon: true
+										});
 									},
             					},
 								{
                 					title: 'Plus',
                 					icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>,
 				  					onClick: () =>{
-										setAttributes( { iconCode:{ name:'Plus', string:'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>', code:(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>) }, useIcon:true } );
+										setAttributes({
+											iconName: 'Plus',
+											iconString: /* html */ `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>`,
+											useIcon:true
+										});
 									},
             					},
 							] }
@@ -236,12 +260,13 @@ export default function Edit( props ) {
 					<PanelRow>
 						<ColorPalette
 							colors = { siteColors }
-							value={ attributes.buttonColor.color }
+							value={ attributes.color }
 							onChange={ ( value ) =>{
-								var thisColor = getColorObjectByColorValue( siteColors, value );
-								thisColor.slug = thisColor.slug.replace("bg-", "btn-");
-								thisColor.slug = thisColor.slug.replace("btn-outline-", "btn-");
-								setAttributes( { buttonColor:thisColor } );
+								const thisColor = getColorObjectByColorValue( siteColors, value );
+								setAttributes({
+									color: thisColor.color,
+									colorSlug: thisColor.slug.replace("bg-", "btn-").replace("btn-outline-", "btn-")
+								});
 								//console.log(thisColor);
 							} }
 							disableCustomColors={ true }
@@ -258,15 +283,17 @@ export default function Edit( props ) {
 					<PanelRow>
 						<ColorPalette
 							colors = { siteColors }
-							value={ attributes.buttonColor.color }
+							value={ attributes.color }
 							onChange={ ( value ) =>{
-								var thisColor = getColorObjectByColorValue( siteColors, value );
-								thisColor.slug = thisColor.slug.replace("bg-", "btn-outline-");
-								if(thisColor.slug.indexOf("outline-") === -1){
-									thisColor.slug = thisColor.slug.replace("btn-", "btn-outline-");
+								const thisColor = getColorObjectByColorValue( siteColors, value );
+								let newColorSlug = thisColor.slug.replace("bg-", "btn-outline-");
+								if (newColorSlug.indexOf("outline-") === -1){
+									newColorSlug = newColorSlug.replace("btn-", "btn-outline-");
 								}
-								//var thisTextColor = getColorObjectByColorValue( textColors, value );
-								setAttributes( { buttonColor:thisColor } );
+								setAttributes({
+									color: thisColor.color,
+									colorSlug: newColorSlug
+								});
 								//console.log(thisColor);
 							} }
 							disableCustomColors={ true }
@@ -285,26 +312,25 @@ export default function Edit( props ) {
 								//console.log(attributes.buttonOutline);
 
 								if( !attributes.buttonOutline === true ){
-									//const thisColor = getColorObjectByColorValue( outlineColors, attributes.buttonColor.color );
-
-									var thisColor = getColorObjectByColorValue( siteColors, attributes.buttonColor.color );
-									thisColor.slug = thisColor.slug.replace("bg-", "btn-outline-");
-									if(thisColor.slug.indexOf("outline-") === -1){
-										thisColor.slug = thisColor.slug.replace("btn-", "btn-outline-");
+									const thisColor = getColorObjectByColorValue( siteColors, attributes.color );
+									let newColorSlug = thisColor.slug.replace("bg-", "btn-outline-");
+									if (newColorSlug.indexOf("outline-") === -1) {
+										newColorSlug = newColorSlug.replace("btn-", "btn-outline-");
 									}
-									//var thisTextColor = getColorObjectByColorValue( textColors, value );
-									setAttributes( { buttonColor:thisColor } );
+									setAttributes({
+										color: thisColor.color,
+										colorSlug: newColorSlug
+									});
 									//console.log(thisColor);
 								}else{
-									//const thisColor = getColorObjectByColorValue( colors, attributes.buttonColor.color );
-									var thisColor = getColorObjectByColorValue( siteColors, attributes.buttonColor.color );
-									thisColor.slug = thisColor.slug.replace("bg-", "btn-");
-									thisColor.slug = thisColor.slug.replace("btn-outline-", "btn-");
-									setAttributes( { buttonColor:thisColor } );
+									const thisColor = getColorObjectByColorValue( siteColors, attributes.color );
+									setAttributes({
+										color: thisColor.color,
+										colorSlug: thisColor.slug.replace("bg-", "btn-").replace("btn-outline-", "btn-")
+									});
 									//console.log(thisColor);
 								}
 
-								//console.log(attributes.buttonColor);
 							} }
 						/>
 					</PanelRow>
@@ -318,13 +344,18 @@ export default function Edit( props ) {
 								setAttributes( { buttonText: !attributes.buttonText } );
 								//console.log(attributes.buttonOutline);
 
-								if( !attributes.buttonText === true ){
-									setAttributes( { buttonColor:{ name: 'Link', slug: 'btn-link', color: '', text: ''} } );
-								}else{
-									setAttributes( { buttonColor:{ name: 'Link', slug: 'btn-utlink', color: '#1a73c5', text: 'text-light'}, buttonOutline:false } );
+								if ( !attributes.buttonText === true ) {
+									setAttributes({
+										color: '',
+										colorSlug: 'btn-link'
+									});
+								} else {
+									setAttributes({
+										color: '#1a73c5',
+										colorSlug: 'btn-utlink',
+										buttonOutline: false
+									});
 								}
-
-								//console.log(attributes.buttonColor);
 							} }
 						/>
 					</PanelRow>
@@ -358,7 +389,7 @@ export default function Edit( props ) {
 			</InspectorControls>,
 			<div { ...blockProps }>
 			<div className={ attributes.blockClass } >
-				<div className={ 'btn mb-3 ' + attributes.buttonColor.slug + attributes.buttonSize }>
+				<div className={ 'btn mb-3 ' + attributes.colorSlug + attributes.buttonSize }>
 					<RichText
 						tagName='span'
 						placeholder={ attributes.placeholder }
@@ -373,7 +404,7 @@ export default function Edit( props ) {
 						size={ attributes.iconSize }
 					/>
 					) }
-					{ attributes.iconCode.code !== null && attributes.useIcon === true && (
+					{ attributes.iconString !== '' && attributes.useIcon === true && (
 					<Icon
 						icon={ iconResults.code }
 						size={ attributes.iconSize }

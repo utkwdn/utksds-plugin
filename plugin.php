@@ -495,15 +495,15 @@ function utkwds_register_patterns() {
 		<!-- /wp:paragraph -->
 		
 		<!-- wp:group {\"className\":\"my-5\"} -->
-		<div class=\"wp-block-group my-5\"><!-- wp:utkwds/button {\"buttonColor\":{\"name\":\"Link\",\"slug\":\"btn-link\",\"color\":\"\",\"text\":\"\"},\"buttonText\":true} -->
+		<div class=\"wp-block-group my-5\"><!-- wp:utkwds/button {\"color\":\"\",\"colorSlug\":\"btn-link\",\"buttonText\":true} -->
 		<div><a class=\"btn save mb-3 btn-link btn-nrml\"><span>Explore Area 01</span><span></span></a></div>
 		<!-- /wp:utkwds/button -->
 		
-		<!-- wp:utkwds/button {\"buttonColor\":{\"name\":\"Link\",\"slug\":\"btn-link\",\"color\":\"\",\"text\":\"\"},\"buttonText\":true} -->
+		<!-- wp:utkwds/button {\"color\":\"\",\"colorSlug\":\"btn-link\",\"buttonText\":true} -->
 		<div><a class=\"btn save mb-3 btn-link btn-nrml\"><span>Explore Area 02</span><span></span></a></div>
 		<!-- /wp:utkwds/button -->
 		
-		<!-- wp:utkwds/button {\"buttonColor\":{\"name\":\"Link\",\"slug\":\"btn-link\",\"color\":\"\",\"text\":\"\"},\"buttonText\":true} -->
+		<!-- wp:utkwds/button {\"color\":\"\",\"colorSlug\":\"btn-link\",\"buttonText\":true} -->
 		<div><a class=\"btn save mb-3 btn-link btn-nrml\"><span>Explore Area 03</span><span></span></a></div>
 		<!-- /wp:utkwds/button --></div>
 		<!-- /wp:group --></div>
@@ -544,7 +544,7 @@ function utkwds_register_patterns() {
 		<p>Aliquam erat volutpat. Morbi et dictum elit, sed sagittis urna. Nam quis tempor justo, quis tempor augue. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque elit tortor, aliquam sed nisi ac, semper laoreet nulla. Nullam in finibus urna. Sed gravida sapien dapibus tortor facilisis pretium. Aenean accumsan arcu a enim semper, quis porta ligula tincidunt. In hac habitasse platea dictumst. Cras tempor velit eget massa convallis, bibendum aliquam felis cursus.</p>
 		<!-- /wp:paragraph -->
 		
-		<!-- wp:utkwds/button {\"buttonColor\":{\"name\":\"Link\",\"slug\":\"btn-link\",\"color\":\"\",\"text\":\"\"},\"buttonText\":true} -->
+		<!-- wp:utkwds/button {\"color\":\"\",\"colorSlug\":\"btn-link\",\"buttonText\":true} -->
 		<div><a class=\"btn save mb-3 btn-link btn-nrml\"><span>Explore Vulputate</span><span></span></a></div>
 		<!-- /wp:utkwds/button --></div>
 		<!-- /wp:utkwds/column -->

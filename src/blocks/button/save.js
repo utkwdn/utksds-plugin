@@ -28,7 +28,7 @@ export default function save( props ) {
 	return (
 		<div className={ attributes.className }>
 			<a
-				className={ 'btn save mb-3 ' + attributes.buttonColor.slug + attributes.buttonSize }
+				className={ 'btn save mb-3 ' + attributes.colorSlug + attributes.buttonSize }
 				href={ attributes.url }
 				title={ attributes.title }
 				target={ attributes.linkTarget }
@@ -40,7 +40,7 @@ export default function save( props ) {
 				/>
 				<RichText.Content
 					tagName="span"
-					value={ attributes.iconCode.string }
+					value={ attributes.iconString }
 				/>
 			</a>
 			</div>
