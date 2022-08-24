@@ -107,11 +107,14 @@ export default function Edit( props ) {
 					<PanelRow>
 						<ColorPalette
 							colors = { siteColors }
-							value={ attributes.cardColor.color }
+							value={ attributes.color }
 							onChange={ ( value ) =>{
-								var thisColor = getColorObjectByColorValue( siteColors, value );
-								thisColor.slug = thisColor.slug.replace("border-", "bg-");
-								setAttributes( { cardColor:thisColor, textColor:thisColor.text } );
+								const thisColor = getColorObjectByColorValue( siteColors, value );
+								setAttributes({
+									color: thisColor.color,
+									colorSlug: thisColor.slug.replace("border-", "bg-"),
+									textColor:thisColor.text
+								});
 								//console.log(thisColor);
 							} }
 							disableCustomColors={ true }
@@ -128,11 +131,14 @@ export default function Edit( props ) {
 					<PanelRow>
 						<ColorPalette
 							colors = { siteColors }
-							value={ attributes.cardColor.color }
+							value={ attributes.color }
 							onChange={ ( value ) =>{
-								var thisColor = getColorObjectByColorValue( siteColors, value );
-								thisColor.slug = thisColor.slug.replace("bg-", "border-");
-								setAttributes( { cardColor:thisColor, textColor:"" } );
+								const thisColor = getColorObjectByColorValue( siteColors, value );
+								setAttributes({
+									color: thisColor.color,
+									colorSlug: thisColor.slug.replace("bg-", "border-"),
+									textColor: ''
+								});
 								//console.log(thisColor);
 							} }
 							disableCustomColors={ true }
@@ -150,14 +156,20 @@ export default function Edit( props ) {
 								//console.log(attributes.buttonOutline);
 
 								if( !attributes.cardOutline === true ){
-									var thisColor = getColorObjectByColorValue( siteColors, attributes.cardColor.color );
-									thisColor.slug = thisColor.slug.replace("bg-", "border-");
-									setAttributes( { cardColor:thisColor, textColor:"" } );
+									const thisColor = getColorObjectByColorValue( siteColors, attributes.color );
+									setAttributes({
+										color: thisColor.color,
+										colorSlug: thisColor.slug.replace("bg-", "border-"),
+										textColor: ''
+									});
 									//console.log(thisColor);
 								}else{
-									var thisColor = getColorObjectByColorValue( siteColors, attributes.cardColor.color );
-									thisColor.slug = thisColor.slug.replace("border-", "bg-");
-									setAttributes( { cardColor:thisColor, textColor:thisColor.text } );
+									const thisColor = getColorObjectByColorValue( siteColors, attributes.color );
+									setAttributes({
+										color: thisColor.color,
+										colorSlug: thisColor.slug.replace("border-", "bg-"),
+										textColor:thisColor.text
+									});
 									//console.log(thisColor);
 								}
 
@@ -169,7 +181,7 @@ export default function Edit( props ) {
 			</InspectorControls>,
 			// eslint-disable-next-line react/jsx-key
 			<div { ...blockProps }>
-			<div className={'card card-edit ' + attributes.textColor + ' ' + attributes.cardColor.slug }>
+			<div className={'card card-edit ' + attributes.textColor + ' ' + attributes.colorSlug }>
 				<InnerBlocks allowedBlocks={ [ 'utkwds/card-body', 'utkwds/card-image', 'utkwds/columns', 'utkwds/card-topcap', 'card/body', 'card/image', 'utksds/columns', 'card/topcap' ] } placeholder={ cardPlaceholder } templateLock={ 'all' } renderAppender={ () => ( <InnerBlocks.ButtonBlockAppender /> ) } />
 			</div>
 			</div>,
