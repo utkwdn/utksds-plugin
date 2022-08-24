@@ -25,19 +25,17 @@ import { InnerBlocks } from '@wordpress/block-editor';
 export default function save( props ) {
 	const { attributes } = props;
 
-	const { imagePostion } = attributes;
-
 	return (
 		<div className={ attributes.className }>
-			{ attributes.bgImage === undefined && (
-			<div className={ "strip " + imagePostion.slug + " " + imagePostion.text + " " + attributes.padding + " my-" + attributes.spacing } >
+			{ !attributes.imageUrl && (
+			<div className={ "strip " + attributes.colorSlug + " " + attributes.textColor + " " + attributes.padding + " my-" + attributes.spacing } >
 			  <div className="container">
 				<InnerBlocks.Content />
 				</div>
 			</div>
 			) }
-			{ attributes.bgImage && (
-		  	<div className={ "strip " + attributes.padding + " my-" + attributes.spacing } style={{ backgroundImage: `url(${attributes.bgImage.url})` }}>
+			{ attributes.imageUrl && (
+		  	<div className={ "strip " + attributes.padding + " my-" + attributes.spacing } style={{ backgroundImage: `url(${attributes.imageUrl})` }}>
 				<div className="container">
 				<InnerBlocks.Content />
 				</div>

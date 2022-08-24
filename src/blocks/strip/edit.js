@@ -1,5 +1,6 @@
 import { Button, ResponsiveWrapper, PanelBody, PanelRow, RangeControl, RadioControl } from '@wordpress/components';
 import { siteColors } from '../../globals.js'
+import { useState } from '@wordpress/element'
 
 /**
  * Retrieves the translation of text.
@@ -40,13 +41,14 @@ export default function Edit( props ) {
     	setAttributes
 	  } = props;
 
-	  const { imagePostion } = attributes;
-
 	  const blockProps = useBlockProps();
 
+		const [image, setImage] = useState(undefined);
+
 		const onRemoveImage = () => {
-            setAttributes( { bgImage: undefined, } );
-        };
+			setAttributes({ imageUrl: '' });
+			setImage(undefined);
+		};
 
 		return ( [
 			<InspectorControls>
@@ -60,15 +62,18 @@ export default function Edit( props ) {
 						max={ 5 }
 				/>
 				</PanelRow>
-				{ attributes.bgImage === undefined &&
+				{ image === undefined &&
 				<PanelRow>
 						<ColorPalette
 							colors = { siteColors }
-							value={ attributes.imagePostion.color }
+							value={ attributes.color }
 							onChange={ ( value ) =>{
-								var thisColor = getColorObjectByColorValue( siteColors, value );
-								thisColor.slug = thisColor.slug.replace("bg-", "strip-");
-								setAttributes( { imagePostion:thisColor } );
+								const thisColor = getColorObjectByColorValue( siteColors, value );
+								setAttributes({
+									color: thisColor.color,
+									colorSlug: thisColor.slug.replace("bg-", "strip-"),
+									textColor: thisColor.text
+								});
 								//console.log(thisColor);
 							} }
 							disableCustomColors={ true }
@@ -80,23 +85,23 @@ export default function Edit( props ) {
 				<MediaUploadCheck>
 					<MediaUpload
 						onSelect={ ( media ) =>{
-							setAttributes( {bgImage: media} );
-
-							console.log(media);
+							setAttributes({ imageUrl: media.url });
+							setImage(media);
+							// console.log(media);
 						} }
 						allowedTypes={ [ 'image' ] }
-						value={ attributes.bgImage }
+						value={ image }
 						render={ ( { open } ) => (
 							<Button
-								className={ ! attributes.bgImage ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview' }
+								className={ ! image ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview' }
 								onClick={ open }>
-								{ attributes.bgImage === undefined && ( 'Select a Background Image' ) }
-								{ attributes.bgImage && (
+								{ image === undefined && ( 'Select a Background Image' ) }
+								{ image && (
 									<ResponsiveWrapper
-                                    	naturalWidth={ attributes.bgImage.width }
-                                        naturalHeight={ attributes.bgImage.height }
+                                    	naturalWidth={ image.width }
+                                        naturalHeight={ image.height }
                                     >
-										<img src={ attributes.bgImage.url } alt={ attributes.bgImage.alt } style={ { "maxHeight":attributes.bgImage.height, "maxWidth":attributes.bgImage.width } } />
+										<img src={ image.url } alt={ image.alt } style={ { "maxHeight":image.height, "maxWidth":image.width } } />
                                     </ResponsiveWrapper>
 								) }
 							</Button>
@@ -104,15 +109,16 @@ export default function Edit( props ) {
 					/>
 				</MediaUploadCheck>
 				</PanelRow>
-				{ attributes.bgImage &&
+				{ image &&
 				<PanelRow>
                 <MediaUploadCheck>
                 	<MediaUpload
                     	onSelect={ ( media ) =>{
-							setAttributes( {bgImage: media} );
+												setAttributes({ imageUrl: media.url });
+												setImage(media)
 						} }
                         allowedTypes={ [ 'image' ] }
-                        value={ attributes.bgImage }
+                        value={ image }
                         render={ ( { open } ) => (
                         	<Button onClick={ open } isDefault isLarge>Replace background image</Button>
                         ) }
@@ -120,7 +126,7 @@ export default function Edit( props ) {
                 </MediaUploadCheck>
 				</PanelRow>
                 }
-                { attributes.bgImage &&
+                { image &&
 				<PanelRow>
                 <MediaUploadCheck>
                 	<Button onClick={ onRemoveImage } isLink isDestructive>Remove background image</Button>
@@ -146,13 +152,13 @@ export default function Edit( props ) {
 				</PanelBody>
 			</InspectorControls>,
 			<div { ...blockProps }>
-			{ attributes.bgImage === undefined && (
-		  	<div className={ "strip " + imagePostion.slug + " " + imagePostion.text + " " + attributes.padding + " my-" + attributes.spacing } >
+			{ image === undefined && (
+		  	<div className={ "strip " + attributes.colorSlug + " " + attributes.textColor + " " + attributes.padding + " my-" + attributes.spacing } >
 				<InnerBlocks templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>
 			) }
-			{ attributes.bgImage &&
-		  	<div className={ "strip " + attributes.padding + " my-" + attributes.spacing } style={{ backgroundImage: `url(${attributes.bgImage.url})` }}>
+			{ image &&
+		  	<div className={ "strip " + attributes.padding + " my-" + attributes.spacing } style={{ backgroundImage: `url(${attributes.imageUrl})` }}>
 				<InnerBlocks templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>
 			}
