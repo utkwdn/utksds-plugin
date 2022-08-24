@@ -53,7 +53,7 @@ export default function Edit( props ) {
 	  const blockProps = useBlockProps();
 
 	  if( context['card/cardOutline'] === true ){
-		const thisColor = context['card/cardColor'].slug.replace('border-', 'text-');
+		const thisColor = context['card/colorSlug'].replace('border-', 'text-');
 		setAttributes( { textColor:thisColor } );
 	}
 

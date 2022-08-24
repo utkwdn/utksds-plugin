@@ -48,9 +48,13 @@
 			"type": "string",
 			"default": "Button"
 		},
-		"buttonColor": {
-			"type": "object",
-			"default": { "name": "Link", "slug": "btn-utlink", "color": "#1a73c5", "text": "text-white" }
+		"color": {
+			"type": "string",
+			"default": "#1a73c5"
+		},
+		"colorSlug": {
+			"type": "string",
+			"default": "btn-utlink"
 		},
 		"buttonText": {
 			"type": "boolean",
@@ -68,9 +72,13 @@
 			"type": "string",
 			"default": ""
 		},
-		"iconCode": {
-			"type": "object",
-			"default": { "name": "", "string": "", "code": null }
+		"iconName": {
+			"type": "string",
+			"default": ""
+		},
+		"iconString": {
+			"type": "string",
+			"default": ""
 		},
 		"iconSize": {
 			"type": "string",

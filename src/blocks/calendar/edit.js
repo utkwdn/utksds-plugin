@@ -28,6 +28,18 @@ import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import './editor.scss';
 
 /**
+ * The returned string is the array's string-elements, comma-separated and URI-encoded.
+ * @param {string[]} arr
+ */
+const toStr = (arr) => arr.map(str => encodeURIComponent(str)).join(',');
+
+/**
+ * Splits a string at the commas and URI-decodes the elements of the returned array.
+ * @param {string} str
+ */
+const toArr = (str) => str.split(',').map(s => decodeURIComponent(s));
+
+/**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
  *
@@ -40,15 +52,15 @@ export default function Edit( props ) {
 
 	const blockProps = useBlockProps();
 
-	attributes.all_types = attributes.type.concat(attributes.topic, attributes.audience);
-		attributes.exAll_types = attributes.exType.concat(attributes.exTopic, attributes.exAudience);
-	
+	const all_types = [attributes.type, attributes.topic, attributes.audience].filter(Boolean).join(',');
+	const exAll_types = [attributes.exType, attributes.exTopic, attributes.exAudience].filter(Boolean).join(',');
+	// console.log({attributes, all_types, exAll_types})
 		//var urlParams = Object.entries(CalScript).map(([key, val]) => `${key}=${encodeURIComponent(val)}`).join('&');
 
-		const calScript = document.createElement( 'script' );
-		calScript.src = "https://calendar.utk.edu/widget/" + attributes.widgetType + "?schools=utk&venues=" + attributes.place + "&departments=" +  attributes.department  + "&groups=" + attributes.group + "&types=" + attributes.all_types + "&days=" + attributes.daysAhead + "&num=" + attributes.numResults + "&tags=" + attributes.keywords + attributes.featuredS + attributes.sponsoredS + attributes.matchingS + attributes.pastS + attributes.hideDescS + attributes.truncateS + attributes.htmlDescS + attributes.evImageS + attributes.evTimeS + attributes.viewAllS + attributes.newWinS + attributes.hideDropS + "&match=" + attributes.mustMatch + "&exclude_types=" + attributes.exAll_types + "&container=localist-widget-12345" + attributes.incStyleS + "&template=" + attributes.template;
+		// const calScript = document.createElement( 'script' );
+		// calScript.src = "https://calendar.utk.edu/widget/" + attributes.widgetType + "?schools=utk&venues=" + attributes.place + "&departments=" +  attributes.department  + "&groups=" + attributes.group + "&types=" + all_types + "&days=" + attributes.daysAhead + "&num=" + attributes.numResults + "&tags=" + attributes.keywords + attributes.featuredS + attributes.sponsoredS + attributes.matchingS + attributes.pastS + attributes.hideDescS + attributes.truncateS + attributes.htmlDescS + attributes.evImageS + attributes.evTimeS + attributes.viewAllS + attributes.newWinS + attributes.hideDropS + "&match=" + attributes.mustMatch + "&exclude_types=" + exAll_types + "&container=localist-widget-12345" + attributes.incStyleS + "&template=" + attributes.template;
 	
-		//console.log(calScript);
+		// console.log(calScript);
 
 		return ( [
 			<InspectorControls>
@@ -97,34 +109,49 @@ export default function Edit( props ) {
 						multiple
 						help="Hold CTRL (CMD on Mac) to make multiple selections."
 						style={{height: '150px'}}
-						value={ attributes.group }
+						value={ toArr(attributes.group) }
 						options={ all_groups }
-						onChange={ ( value ) =>{ setAttributes( {group:value} ); } }
+						onChange={
+							/** @param {string[]} value */
+							(value) => {
+								setAttributes({ group: toStr(value) });
+							}
+						}
 					/>
 					<SelectControl
 						label='Department'
 						multiple
 						help="Hold CTRL (CMD on Mac) to make multiple selections."
 						style={{height: '150px'}}
-						value={ attributes.department }
+						value={ toArr(attributes.department) }
 						options={ all_departments }
-						onChange={ ( value ) =>{ setAttributes( {department:value} ); } }
+						onChange={
+							/** @param {string[]} value */
+							(value) => {
+								setAttributes({ department: toStr(value) });
+							}
+						}
 					/>
 					<SelectControl
 						label='Place'
 						multiple
 						help="Hold CTRL (CMD on Mac) to make multiple selections."
 						style={{height: '150px'}}
-						value={ attributes.place }
+						value={ toArr(attributes.place) }
 						options={ all_places }
-						onChange={ ( value ) =>{ setAttributes( {place:value} ); } }
+						onChange={
+							/** @param {string[]} value */
+							(value) => {
+								setAttributes({ place: toStr(value) });
+							}
+						}
 					/>
 					<SelectControl
 						label='Event Type'
 						multiple
 						help="Hold CTRL (CMD on Mac) to make multiple selections."
 						style={{height: '150px'}}
-						value={ attributes.type }
+						value={ toArr(attributes.type) }
 						options={ [
 							{ label: 'Academic & Financial Dates', value: '113455' },
 							{ label: 'Ceremonies & Special Events', value: '114205' },
@@ -139,14 +166,19 @@ export default function Edit( props ) {
 							{ label: 'Sports & Recreation', value: '113105' },
 							{ label: 'Training & Workshops', value: '114206' },
 						] }
-						onChange={ ( value ) =>{ setAttributes( {type:value} ); } }
+						onChange={
+							/** @param {string[]} value */
+							(value) => {
+								setAttributes({ type: toStr(value) });
+							}
+						}
 					/>
 					<SelectControl
 						label='Topic'
 						multiple
 						help="Hold CTRL (CMD on Mac) to make multiple selections."
 						style={{height: '150px'}}
-						value={ attributes.topic }
+						value={ toArr(attributes.topic) }
 						options={ [
 							{ label: 'Academic Administration', value: '117945' },
 							{ label: 'Admissions', value: '113721' },
@@ -169,14 +201,19 @@ export default function Edit( props ) {
 							{ label: 'Visual & Performing Arts', value: '114610' },
 							{ label: 'Volunteering', value: '116008' },
 						] }
-						onChange={ ( value ) =>{ setAttributes( {topic:value} ); } }
+						onChange={
+							/** @param {string[]} value */
+							(value) => {
+								setAttributes({ topic: toStr(value) });
+							}
+						}
 					/>
 					<SelectControl
 						label='Audience'
 						multiple
 						help="Hold CTRL (CMD on Mac) to make multiple selections."
 						style={{height: '150px'}}
-						value={ attributes.audience }
+						value={ toArr(attributes.audience) }
 						options={ [
 							{ label: 'Alumni', value: '113116' },
 							{ label: 'Current Students', value: '113114' },
@@ -185,7 +222,12 @@ export default function Edit( props ) {
 							{ label: 'General Public', value: '113117' },
 							{ label: 'Prospective Students', value: '113118' },
 						] }
-						onChange={ ( value ) =>{ setAttributes( {audience:value} ); } }
+						onChange={
+							/** @param {string[]} value */
+							(value) => {
+								setAttributes({ audience: toStr(value) });
+							}
+						}
 					/>
 				    <TextControl
 						label='Keywords and Tags'
@@ -267,7 +309,7 @@ export default function Edit( props ) {
 						multiple
 						help="Hold CTRL (CMD on Mac) to make multiple selections."
 						style={{height: '150px'}}
-						value={ attributes.exType }
+						value={ toArr(attributes.exType) }
 						options={ [
 							{ label: 'Academic & Financial Dates', value: '113455' },
 							{ label: 'Ceremonies & Special Events', value: '114205' },
@@ -282,14 +324,19 @@ export default function Edit( props ) {
 							{ label: 'Sports & Recreation', value: '113105' },
 							{ label: 'Training & Workshops', value: '114206' },
 						] }
-						onChange={ ( value ) =>{ setAttributes( {exType:value} ); } }
+						onChange={
+							/** @param {string[]} value */
+							(value) => {
+								setAttributes({ exType: toStr(value) });
+							}
+						}
 					/>
 					<SelectControl
 						label='Exclude Topic'
 						multiple
 						help="Hold CTRL (CMD on Mac) to make multiple selections."
 						style={{height: '150px'}}
-						value={ attributes.exTopic }
+						value={ toArr(attributes.exTopic) }
 						options={ [
 							{ label: 'Academic Administration', value: '117945' },
 							{ label: 'Admissions', value: '113721' },
@@ -312,14 +359,19 @@ export default function Edit( props ) {
 							{ label: 'Visual & Performing Arts', value: '114610' },
 							{ label: 'Volunteering', value: '116008' },
 						] }
-						onChange={ ( value ) =>{ setAttributes( {exTopic:value} ); } }
+						onChange={
+							/** @param {string[]} value */
+							(value) => {
+								setAttributes({ exTopic: toStr(value) });
+							}
+						}
 					/>
 					<SelectControl
 						label='Exclude Audience'
 						multiple
 						help="Hold CTRL (CMD on Mac) to make multiple selections."
 						style={{height: '150px'}}
-						value={ attributes.exAudience }
+						value={ toArr(attributes.exAudience) }
 						options={ [
 							{ label: 'Alumni', value: '113116' },
 							{ label: 'Current Students', value: '113114' },
@@ -328,7 +380,12 @@ export default function Edit( props ) {
 							{ label: 'General Public', value: '113117' },
 							{ label: 'Prospective Students', value: '113118' },
 						] }
-						onChange={ ( value ) =>{ setAttributes( {exAudience:value} ); } }
+						onChange={
+							/** @param {string[]} value */
+							(value) => {
+								setAttributes({ exAudience: toStr(value) });
+							}
+						}
 					/>
 				</PanelBody>
 				<PanelBody title='Display Options' initialOpen={ false }>
@@ -504,7 +561,7 @@ export default function Edit( props ) {
 			</InspectorControls>,
 			<div { ...blockProps } >
 			<SandBox
-				html={ "<div id='localist-widget-12345' class='localist-widget'></div><script defer type='text/javascript' src='https://calendar.utk.edu/widget/" + attributes.widgetType + "?schools=utk&venues=" + attributes.place + "&departments=" +  attributes.department  + "&groups=" + attributes.group + "&types=" + attributes.all_types + "&days=" + attributes.daysAhead + "&num=" + attributes.numResults + "&tags=" + attributes.keywords + attributes.featuredS + attributes.sponsoredS + attributes.matchingS + attributes.pastS + attributes.hideDescS + attributes.truncateS + attributes.htmlDescS + attributes.evImageS + attributes.evTimeS + attributes.viewAllS + attributes.newWinS + attributes.hideDropS + "&match=" + attributes.mustMatch + "&exclude_types=" + attributes.exAll_types + "&container=localist-widget-12345" + attributes.incStyleS + "&template=" + attributes.template + "'></script>" }
+				html={ "<div id='localist-widget-12345' class='localist-widget'></div><script defer type='text/javascript' src='https://calendar.utk.edu/widget/" + attributes.widgetType + "?schools=utk&venues=" + attributes.place + "&departments=" +  attributes.department  + "&groups=" + attributes.group + "&types=" + all_types + "&days=" + attributes.daysAhead + "&num=" + attributes.numResults + "&tags=" + attributes.keywords + attributes.featuredS + attributes.sponsoredS + attributes.matchingS + attributes.pastS + attributes.hideDescS + attributes.truncateS + attributes.htmlDescS + attributes.evImageS + attributes.evTimeS + attributes.viewAllS + attributes.newWinS + attributes.hideDropS + "&match=" + attributes.mustMatch + "&exclude_types=" + exAll_types + "&container=localist-widget-12345" + attributes.incStyleS + "&template=" + attributes.template + "'></script>" }
 				type="embed"
 			/>
 			</div>,

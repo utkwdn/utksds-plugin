@@ -80,10 +80,15 @@ export default function Edit( props ) {
 				<PanelRow>
 					<ColorPalette
 							colors = { siteColors }
-							value={ attributes.overColor.color }
+							value={ attributes.color }
 							onChange={ ( value ) =>{
+								if (!value) return;
 								const thisColor = getColorObjectByColorValue( siteColors, value );
-								setAttributes( { overColor:thisColor } );
+								setAttributes({
+									color: thisColor.color,
+									colorSlug: thisColor.slug,
+									textColor: thisColor.text
+								});
 								//console.log(thisColor);
 							} }
 							disableCustomColors={ true }
@@ -103,7 +108,7 @@ export default function Edit( props ) {
 				</PanelBody>
 			</InspectorControls>,
 			<div { ...blockProps }>
-			<div className={ "card wpeditor-card-overlay overlay " + attributes.overColor.slug + " overlay-" + attributes.overOpacity + " " + attributes.overColor.text }>
+			<div className={ "card wpeditor-card-overlay overlay " + attributes.colorSlug + " overlay-" + attributes.overOpacity + " " + attributes.textColor }>
 				{ attributes.imageUrl !== '' && (
   				<img src={ attributes.imageUrl } className="card-img" alt={ attributes.imageAlt } />
 				) }

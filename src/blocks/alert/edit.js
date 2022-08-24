@@ -34,7 +34,7 @@ import './editor.scss';
  */
 export default function Edit( props ) {
 	const { attributes, setAttributes, clientId } = props;
-	const { imagePostion } = attributes;
+	const { colorSlug, color } = attributes;
 
 	const blockProps = useBlockProps();
 
@@ -44,11 +44,14 @@ export default function Edit( props ) {
 				<PanelRow>
 						<ColorPalette
 							colors = { siteColors }
-							value={ attributes.imagePostion.color }
+							value={ color }
 							onChange={ ( value ) =>{
-								var thisColor = getColorObjectByColorValue( siteColors, value );
-								thisColor.slug = thisColor.slug.replace("bg-", "alert-");
-								setAttributes( { imagePostion:thisColor } );
+								if (!value) return;
+								const thisColor = getColorObjectByColorValue( siteColors, value );
+								setAttributes({
+									colorSlug: thisColor.slug.replace("bg-", "alert-"),
+									color: thisColor.color,
+								});
 								//console.log(thisColor);
 							} }
 							disableCustomColors={ true }
@@ -58,7 +61,7 @@ export default function Edit( props ) {
 				</PanelBody>
 			</InspectorControls>,
 			<div { ...blockProps }>
-		  	<div className={ 'alert ' + imagePostion.slug }>
+		  	<div className={ 'alert ' + colorSlug }>
 				<RichText
 					tagName='span'
 					key={ clientId }

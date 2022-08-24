@@ -15,9 +15,13 @@
 			"type": "string",
 			"default": "utkwds/card"
 		},
-		"cardColor": {
-			"type": "object",
-			"default": { "name": "Light", "slug": "bg-light", "color": "#F6F6F6", "text": "text-dark" }
+		"color": {
+			"type": "string",
+			"default": "#F6F6F6"
+		},
+		"colorSlug": {
+			"type": "string",
+			"default": "bg-light"
 		},
 		"cardOutline": {
 			"type": "boolean",
@@ -29,8 +33,8 @@
 		}
 	},
 	"providesContext": {
-    	"card/blockName": "blockName",
-		"card/cardColor": "cardColor",
+    "card/blockName": "blockName",
+		"card/colorSlug": "colorSlug",
 		"card/cardOutline": "cardOutline"
 	},
 	"textdomain": "utkwds",

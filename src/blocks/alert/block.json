@@ -11,9 +11,13 @@
 		"html": false
 	},
 	"attributes": {
-		"imagePostion": {
-			"type": "object",
-			"default": { "name": "Smokey", "slug": "alert-smokey", "color": "#58595B", "text": "text-white"}
+		"colorSlug": {
+			"type": "string",
+			"default": "alert-smokey"
+		},
+		"color": {
+			"type": "string",
+			"default": "#58595B"
 		},
 		"text": {
 			"type": "string",

@@ -55,6 +55,7 @@ export default function Edit( props ) {
 		const { replaceInnerBlocks } = useDispatch( blockEditorStore );
 
 		function onBackgroundColorChange( newColor ) {
+			if (!newColor) return;
 			setAttributes( { backgroundColor: newColor } );
 		}
 

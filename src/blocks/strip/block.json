@@ -11,9 +11,17 @@
 		"html": false
 	},
 	"attributes": {
-		"imagePostion": {
-			"type": "object",
-			"default": { "name": "Smokey", "slug": "strip-smokey", "color": "#58595B", "text": "text-white" }
+		"color": {
+			"type": "string",
+			"default": "#58595B"
+		},
+		"colorSlug": {
+			"type": "string",
+			"default": "strip-smokey"
+		},
+		"textColor": {
+			"type": "string",
+			"default": "text-white"
 		},
 		"spacing": {
 			"type": "integer",
@@ -23,8 +31,9 @@
 			"type": "string",
 			"default": "py-0"
 		},
-		"bgImage":{
-			"type": "object"
+		"imageUrl": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"textdomain": "utkwds",

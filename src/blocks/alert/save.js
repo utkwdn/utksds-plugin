@@ -24,10 +24,10 @@ import { RichText } from '@wordpress/block-editor';
  */
 export default function save( props ) {
 	const { attributes } = props;
-	const { imagePostion } = attributes;
+	const { colorSlug } = attributes;
 
 	return (
-		<div className={ 'alert ' + imagePostion.slug + " " + attributes.className }>
+		<div className={ 'alert ' + colorSlug + " " + attributes.className }>
 				<RichText.Content
 					tagName="span"
 					value={ attributes.text }

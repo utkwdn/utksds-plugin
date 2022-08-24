@@ -8,7 +8,7 @@
 	"icon": "media-text",
 	"description": "Contains all the text elements within a Card.",
 	"parent": [ "utkwds/card-main" ],
-	"usesContext": [ "card/cardColor", "card/cardOutline" ],
+	"usesContext": [ "card/colorSlug", "card/cardOutline" ],
 	"supports": {
 		"html": false
 	},

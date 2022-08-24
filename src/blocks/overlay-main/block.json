@@ -11,7 +11,6 @@
 		"html": false
 	},
 	"parent": [ "utkwds/overlay" ],
-	"usesContext": [ "overlay/bgColor", "overlay/opacity" ],
 	"textdomain": "utkwds",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"
