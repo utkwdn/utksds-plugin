@@ -25,11 +25,15 @@ import { __ } from '@wordpress/i18n';
 export default function save( props ) {
 	const { attributes } = props;
 
+	const all_types = [attributes.type, attributes.topic, attributes.audience].filter(Boolean).join(',');
+	const exAll_types = [attributes.exType, attributes.exTopic, attributes.exAudience].filter(Boolean).join(',');
+
+	// console.log({attributes, all_types, exAll_types})
 	return (
 		<div className={ attributes.className }>
 			<div id="localist-widget-12345" className="localist-widget"></div>
 			<script defer type="text/javascript"
-src={"https://calendar.utk.edu/widget/" + attributes.widgetType + "?schools=utk&venues=" + attributes.place + "&departments=" +  attributes.department  + "&groups=" + attributes.group + "&types=" + attributes.all_types + "&days=" + attributes.daysAhead + "&num=" + attributes.numResults + "&tags=" + attributes.keywords + attributes.featuredS + attributes.sponsoredS + attributes.matchingS + attributes.pastS + attributes.hideDescS + attributes.truncateS + attributes.htmlDescS + attributes.evImageS + attributes.evTimeS + attributes.viewAllS + attributes.newWinS + attributes.hideDropS + "&match=" + attributes.mustMatch + "&exclude_types=" + attributes.exAll_types + "&container=localist-widget-12345" + attributes.incStyleS + "&template=" + attributes.template}></script>
+src={"https://calendar.utk.edu/widget/" + attributes.widgetType + "?schools=utk&venues=" + attributes.place + "&departments=" +  attributes.department  + "&groups=" + attributes.group + "&types=" + all_types + "&days=" + attributes.daysAhead + "&num=" + attributes.numResults + "&tags=" + attributes.keywords + attributes.featuredS + attributes.sponsoredS + attributes.matchingS + attributes.pastS + attributes.hideDescS + attributes.truncateS + attributes.htmlDescS + attributes.evImageS + attributes.evTimeS + attributes.viewAllS + attributes.newWinS + attributes.hideDropS + "&match=" + attributes.mustMatch + "&exclude_types=" + exAll_types + "&container=localist-widget-12345" + attributes.incStyleS + "&template=" + attributes.template}></script>
 			</div>
 	);
 }

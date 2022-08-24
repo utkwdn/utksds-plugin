@@ -24,31 +24,27 @@
 			"default": 31
 		},
 		"department": {
-			"type": "array",
+			"type": "string",
 			"default": ""
 		},
 		"place": {
-			"type": "array",
+			"type": "string",
 			"default": ""
 		},
 		"group": {
-			"type": "array",
+			"type": "string",
 			"default": ""
 		},
 		"type": {
-			"type": "array",
+			"type": "string",
 			"default": ""
 		},
 		"topic": {
-			"type": "array",
+			"type": "string",
 			"default": ""
 		},
 		"audience": {
-			"type": "array",
-			"default": ""
-		},
-		"all_types": {
-			"type": "array",
+			"type": "string",
 			"default": ""
 		},
 		"keywords": {
@@ -92,19 +88,15 @@
 			"default": ""
 		},
 		"exType": {
-			"type": "array",
+			"type": "string",
 			"default": ""
 		},
 		"exTopic": {
-			"type": "array",
+			"type": "string",
 			"default": ""
 		},
 		"exAudience": {
-			"type": "array",
-			"default": ""
-		},
-		"exAll_types": {
-			"type": "array",
+			"type": "string",
 			"default": ""
 		},
 		"widgetType": {
