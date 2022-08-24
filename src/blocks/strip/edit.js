@@ -68,6 +68,7 @@ export default function Edit( props ) {
 							colors = { siteColors }
 							value={ attributes.color }
 							onChange={ ( value ) =>{
+								if (!value) return;
 								const thisColor = getColorObjectByColorValue( siteColors, value );
 								setAttributes({
 									color: thisColor.color,

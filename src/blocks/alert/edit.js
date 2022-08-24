@@ -46,6 +46,7 @@ export default function Edit( props ) {
 							colors = { siteColors }
 							value={ color }
 							onChange={ ( value ) =>{
+								if (!value) return;
 								const thisColor = getColorObjectByColorValue( siteColors, value );
 								setAttributes({
 									colorSlug: thisColor.slug.replace("bg-", "alert-"),
