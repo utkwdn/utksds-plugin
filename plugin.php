@@ -4,7 +4,7 @@
  * Description:       utkwds is a Gutenberg plugin created via Create Block tool.
  * Requires at least: 5.8
  * Requires PHP:      7.0
- * Version:           0.1.0
+ * Version:           0.1.1
  * Author:            University of Tennessee, Office of Communications and Marketing
  * Author URI:		  https://communications.utk.edu/
  * License:           GPL2+
