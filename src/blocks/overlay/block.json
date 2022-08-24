@@ -19,10 +19,6 @@
 			"type": "string",
 			"default": ""
 		},
-		"overColor": {
-			"type": "object",
-			"default": { "name": "Dark", "slug": "bg-dark", "color": "", "text": "text-white" }
-		},
 		"color": {
 			"type": "string",
 			"default": "#4b4b4b"
