@@ -4,7 +4,7 @@
 	"name": "utksds/phone",
 	"version": "0.1.0",
 	"title": "Depreciated Add Phone",
-	"category": "",
+	"category": "utdesign_layout",
 	"icon": "editor-table",
 	"description": "Add a phone number.",
 	"supports": {
