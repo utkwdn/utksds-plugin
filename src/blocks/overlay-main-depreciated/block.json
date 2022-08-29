@@ -4,7 +4,7 @@
 	"name": "overlay/main",
 	"version": "0.1.0",
 	"title": "Depreciated Overlay Main",
-	"category": "",
+	"category": "utdesign_layout",
 	"icon": "editor-table",
 	"description": "Inner blocks container for Overlay.",
 	"supports": {

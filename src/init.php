@@ -160,14 +160,14 @@ function misha_blacklist_blocks( $allowed_blocks ) {
 	// then disable some of them
 	unset( $blocks[ 'core/verse' ] );
 	unset( $blocks[ 'core/calendar' ] );
-	unset( $blocks[ 'core/cover' ] );
+	//unset( $blocks[ 'core/cover' ] );
 	unset( $blocks[ 'core/preformatted' ] );
 	unset( $blocks[ 'core/pullquote' ] );
 	unset( $blocks[ 'core/separator' ] );
 	unset( $blocks[ 'core/tag-cloud' ] );
 	unset( $blocks[ 'core/search' ] );
-	unset( $blocks[ 'core/columns' ] );
-	unset( $blocks[ 'core/column' ] );
+	//unset( $blocks[ 'core/columns' ] );
+	//unset( $blocks[ 'core/column' ] );
 	//unset( $blocks[ 'core/navigation' ] );
 	unset( $blocks[ 'core/site-logo' ] );
 	unset( $blocks[ 'core/site-title' ] );

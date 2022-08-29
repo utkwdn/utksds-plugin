@@ -4,7 +4,7 @@
 	"name": "utkwds/socials",
 	"version": "0.1.0",
 	"title": "Social Media Links",
-	"category": "",
+	"category": "utdesign_layout",
 	"icon": "editor-table",
 	"description": "A container for social media links.",
 	"supports": {

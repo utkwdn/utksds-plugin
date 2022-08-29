@@ -4,7 +4,7 @@
 	"name": "utkwds/phones",
 	"version": "0.1.0",
 	"title": "Phone Numbers",
-	"category": "",
+	"category": "utdesign_layout",
 	"icon": "editor-table",
 	"description": "A container for phone numbers.",
 	"supports": {
