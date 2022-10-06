@@ -177,8 +177,8 @@ function misha_blacklist_blocks( $allowed_blocks ) {
 	//unset( $blocks[ 'core/post-excerpt' ] );
 	unset( $blocks[ 'core/comments-query-loop' ] );
 	unset( $blocks[ 'core/post-comments-form' ] );
-	unset( $blocks[ 'core/loginout' ] );
-	unset( $blocks[ 'core/term-description' ] );
+	//unset( $blocks[ 'core/loginout' ] );
+	//unset( $blocks[ 'core/term-description' ] );
 	//unset( $blocks[ 'core/media-text' ] );
 
 	// return the new list of allowed blocks
