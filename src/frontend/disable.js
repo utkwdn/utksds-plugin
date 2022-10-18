@@ -19,17 +19,17 @@ wp.domReady( () => {
 	wp.richText.unregisterFormatType( 'core/image' );
 
 	const allowedEmbedBlocks = [
-    	'twitter',
-    	'youtube',
+		'twitter',
+		'youtube',
 		'soundcloud',
 		'flickr',
 		'vimeo',
-  	];
-  	wp.blocks.getBlockVariations( 'core/embed' ).forEach( function ( blockVariation ) {
-    	if ( -1 === allowedEmbedBlocks.indexOf( blockVariation.name )) {
-			wp.blocks.unregisterBlockVariation( 'core/embed', blockVariation.name );
-    	}
-  	});
+  ];
+	wp.blocks.getBlockVariations( 'core/embed' ).forEach( function ( blockVariation ) {
+		if ( -1 === allowedEmbedBlocks.indexOf( blockVariation.name )) {
+		wp.blocks.unregisterBlockVariation( 'core/embed', blockVariation.name );
+		}
+	});
 
 	if(document.body.classList.contains( 'block-editor-page' ) && !document.body.classList.contains( 'widgets-php' )){
 		var utksdsAllowedBlocks = [
@@ -37,24 +37,12 @@ wp.domReady( () => {
 			'utksds/phones',
 			'utksds/socials',
 			'utksds/phone',
-			//'core/button',
-			//'core/buttons',
-			//'core/columns',
-			//'core/column',
-			//'core/cover',
-			'core/media-text',
 			'core/pullquote',
 			'core/search',
 			'core/verse',
 		]
 	}else if(document.body.classList.contains( 'block-editor-page' ) && document.body.classList.contains( 'widgets-php' )){
 		var utksdsAllowedBlocks = [
-			//'core/button',
-			//'core/buttons',
-			//'core/columns',
-			//'core/column',
-			//'core/cover',
-			'core/media-text',
 			'core/pullquote',
 			'core/search',
 			'core/verse',

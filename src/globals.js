@@ -15,7 +15,6 @@ if(typeof secondaryColor !== 'undefined'){
 }
 
 let textColors = [
-	{ name: 'Light',   slug: 'text-light',   color: '#F6F6F6'},
 	{ name: 'Orange',  slug: 'text-orange',  color: '#ff8200'},
 	{ name: 'Dark',    slug: 'text-dark',    color: '#4b4b4b'},
 	{ name: 'Smokey',  slug: 'text-smokey',  color: '#58595B'},

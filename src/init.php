@@ -169,17 +169,17 @@ function misha_blacklist_blocks( $allowed_blocks ) {
 	//unset( $blocks[ 'core/columns' ] );
 	//unset( $blocks[ 'core/column' ] );
 	//unset( $blocks[ 'core/navigation' ] );
-	unset( $blocks[ 'core/site-logo' ] );
-	unset( $blocks[ 'core/site-title' ] );
-	unset( $blocks[ 'core/site-tagline' ] );
+	//unset( $blocks[ 'core/site-logo' ] );
+	//unset( $blocks[ 'core/site-title' ] );
+	//unset( $blocks[ 'core/site-tagline' ] );
 	unset( $blocks[ 'core/avatar' ] );
-	unset( $blocks[ 'core/post-title' ] );
-	unset( $blocks[ 'core/post-excerpt' ] );
+	//unset( $blocks[ 'core/post-title' ] );
+	//unset( $blocks[ 'core/post-excerpt' ] );
 	unset( $blocks[ 'core/comments-query-loop' ] );
 	unset( $blocks[ 'core/post-comments-form' ] );
-	unset( $blocks[ 'core/loginout' ] );
-	unset( $blocks[ 'core/term-description' ] );
-	unset( $blocks[ 'core/media-tex' ] );
+	//unset( $blocks[ 'core/loginout' ] );
+	//unset( $blocks[ 'core/term-description' ] );
+	//unset( $blocks[ 'core/media-text' ] );
 
 	// return the new list of allowed blocks
 	return array_keys( $blocks );
