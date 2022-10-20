@@ -37,7 +37,7 @@ registerBlockType( 'utkwds/card', {
 			innerBlocks: [
 				[ 'utkwds/card-main', {}, [
 					[ 'utkwds/card-topcap' ],
-					[ 'utkwds/card-body', {}, [ [ 'utkwds/card-heading' ], [ 'core/paragraph' ], [ 'utkwds/button' ] ] ],
+					[ 'utkwds/card-body', {}, [ [ 'utkwds/card-heading' ], [ 'core/paragraph' ], [ 'core/buttons' ] ] ],
 				] ],
 			],
 			scope: [ 'block' ],
