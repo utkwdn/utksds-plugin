@@ -43,7 +43,6 @@ function create_block_block_test_block_init() {
 		'accordion',
 		'accordion-fold',
 		'alert',
-		//'button',
 		'calendar',
 		'card',
 		'card-body',
@@ -53,15 +52,9 @@ function create_block_block_test_block_init() {
 		'card-image',
 		'card-main',
 		'card-topcap',
-		//'column',
-		//'columns',
 		'contact',
 		'horizontal-rule',
 		'lead',
-		//'media-content',
-		//'media-object',
-		//'overlay',
-		//'overlay-main',
 		'phone',
 		'phones',
 		'socials',
@@ -69,34 +62,6 @@ function create_block_block_test_block_init() {
 		'styles',
 		'tab',
 		'tabs',
-		//'accordion-depreciated',
-		//'accordion-fold-depreciated',
-		//'alert-depreciated',
-		//'button-depreciated',
-		//'calendar-depreciated',
-		//'card-depreciated',
-		//'card-body-depreciated',
-		//'card-footer-depreciated',
-		//'card-header-depreciated',
-		//'card-heading-depreciated',
-		//'card-image-depreciated',
-		//'card-main-depreciated',
-		//'card-topcap-depreciated',
-		//'column-depreciated',
-		//'columns-depreciated',
-		// 'contact-depreciated',
-		// 'horizontal-rule-depreciated',
-		// 'lead-depreciated',
-		// 'media-content-depreciated',
-		// 'media-object-depreciated',
-		// 'overlay-depreciated',
-		// 'overlay-main-depreciated',
-		// 'phone-depreciated',
-		// 'phones-depreciated',
-		// 'socials-depreciated',
-		// 'strip-depreciated',
-		// 'tab-depreciated',
-		// 'tabs-depreciated'
 	];
 	foreach($block_list as $this_block){
 		register_block_type( __DIR__ . '/build/blocks/' . $this_block );
@@ -170,7 +135,7 @@ add_filter( 'render_block', function( $block_content, $block ) {
     	$parsed_classes = substr($string, $ini, $len);
 		
 		// Clean up the Wordpress classes so they don't have any bootstrap fragments from the button settings
-		$class_needle = 'wp-block-button '.$parsed_classes;
+		$class_needle = 'wp-block-button '. $parsed_classes;
 		$block_content = str_replace($class_needle, 'wp-block-button', $block_content);
 
 		// Translate the button settings into Bootstrap classes
@@ -228,6 +193,7 @@ add_filter( 'render_block', function( $block_content, $block ) {
 			'wp-block-button__link btn ' . $btnClasses,
 			$block_content
 		);
+
 	}
 	
 	if ( $block['blockName'] === 'core/table' ) {
@@ -410,176 +376,7 @@ function utkwds_register_patterns() {
 	unregister_block_pattern( 'core/query-large-title-posts' );
 	unregister_block_pattern( 'core/query-offset-posts' );
 	unregister_block_pattern( 'core/social-links-shared-background-color' );
-
-	register_block_pattern(
-		'utkwds/profile-pattern',
-    array(
-        'title'       => __( 'Person Profile', 'utkwds' ),
-        'description' => _x( 'A profile of a single person, including an image, their name, title, bio, and contact information.', 'Block pattern description', 'utkwds' ),
-		'categories'  => array( 'buttons' ),
-        'content'     => "<!-- wp:group {\"className\":\"col-lg-4 border border-dark\"} -->
-		<div class=\"wp-block-group col-lg-4 border border-dark\"><!-- wp:utkwds/columns {\"rowClass\":\"column-100\",\"numCols\":1} -->
-		<div class=\"row undefined\"><!-- wp:utkwds/column {\"colWidth\":12,\"className\":\"col-12\"} -->
-		<div class=\"undefined col-12 col-md-12 col-12\"><!-- wp:image {\"align\":\"center\",\"id\":247,\"width\":200,\"height\":200,\"sizeSlug\":\"full\",\"linkDestination\":\"none\",\"className\":\"mb-n5 mt-3 is-style-rounded\"} -->
-		<div class=\"wp-block-image mb-n5 mt-3 is-style-rounded\"><figure class=\"aligncenter size-full is-resized\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/smokey-x-01.png\" alt=\"\" class=\"wp-image-247\" width=\"200\" height=\"200\"/></figure></div>
-		<!-- /wp:image --></div>
-		<!-- /wp:utkwds/column --></div>
-		<!-- /wp:utkwds/columns -->
-		
-		<!-- wp:utkwds/columns {\"rowClass\":\"column-100\",\"numCols\":1} -->
-		<div class=\"row undefined\"><!-- wp:utkwds/column {\"colWidth\":12,\"className\":\"col-12\"} -->
-		<div class=\"undefined col-12 col-md-12 col-12\"><!-- wp:heading -->
-		<h2>Smokey X</h2>
-		<!-- /wp:heading -->
-		
-		<!-- wp:paragraph -->
-		<p><strong><em>Volunteer's Best Friend</em></strong></p>
-		<!-- /wp:paragraph -->
-		
-		<!-- wp:paragraph -->
-		<p>865-234-1235 | <a href=\"mailto:smokeyx@utk.edu\">smokeyx@utk.edu</a></p>
-		<!-- /wp:paragraph -->
-		
-		<!-- wp:paragraph -->
-		<p>Etiam lacus nisl, congue vel vehicula ac, porta nec quam. Vestibulum a tempus neque, vitae posuere tellus. Sed imperdiet quam eu gravida commodo. In arcu sapien, imperdiet eu lobortis et, hendrerit vitae metus. Ut orci tellus, egestas sit amet euismod sit amet, mattis ac enim. Donec condimentum velit sit amet justo consectetur facilis.</p>
-		<!-- /wp:paragraph --></div>
-		<!-- /wp:utkwds/column --></div>
-		<!-- /wp:utkwds/columns --></div>
-		<!-- /wp:group -->",
-    )
-	);
-
-	register_block_pattern(
-		'utkwds/page-pattern',
-    array(
-        'title'       => __( 'Starter Page', 'utkwds' ),
-        'description' => _x( 'A sample page layout to get started.', 'Block pattern description', 'utkwds' ),
-		'categories'  => array( 'buttons' ),
-        'content'     => "<!-- wp:spacer {\"height\":\"50px\"} -->
-		<div style=\"height:50px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>
-		<!-- /wp:spacer -->
-		
-		<!-- wp:utkwds/columns {\"rowClass\":\"column-50-50\",\"numCols\":2} -->
-		<div class=\"row undefined\"><!-- wp:utkwds/column -->
-		<div class=\"undefined col-12 col-md-3 undefined\"><!-- wp:image {\"id\":219,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"className\":\"is-style-framed\"} -->
-		<figure class=\"wp-block-image size-large is-style-framed\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-02.png\" alt=\"\" class=\"wp-image-219\"/></figure>
-		<!-- /wp:image -->
-		
-		<!-- wp:paragraph -->
-		<p><strong>Duis Lacinia Nis</strong></p>
-		<!-- /wp:paragraph -->
-		
-		<!-- wp:paragraph -->
-		<p><em>Nunc pretium nibh ac quam finibus, rutrum tempor odio lacinia. Proin id orci in nisl molestie tincidunt non id ligula. Phasellus cursus scelerisque orci ut aliquet. Curabitur vel orci cursus, aliquam diam.</em></p>
-		<!-- /wp:paragraph --></div>
-		<!-- /wp:utkwds/column -->
-		
-		<!-- wp:utkwds/column {\"colWidth\":9} -->
-		<div class=\"undefined col-12 col-md-9 undefined\"><!-- wp:heading -->
-		<h2>Nam et Vestibulum</h2>
-		<!-- /wp:heading -->
-		
-		<!-- wp:spacer {\"height\":\"25px\"} -->
-		<div style=\"height:25px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>
-		<!-- /wp:spacer -->
-		
-		<!-- wp:paragraph -->
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam finibus maximus massa vel lobortis. Pellentesque id sem aliquet, facilisis arcu nec, sagittis est. Aliquam quis eleifend urna. Donec hendrerit, purus eu elementum rhoncus, orci metus ultrices erat, congue viverra urna leo eget quam. Aenean diam leo, lobortis at euismod et, fermentum in metus. Nunc pretium nibh ac quam finibus, rutrum tempor odio lacinia. Proin id orci in nisl molestie tincidunt non id ligula. Phasellus cursus scelerisque orci ut aliquet. Curabitur vel orci cursus, aliquam diam et, sollicitudin mi. Praesent sit amet felis sed est feugiat euismod quis vulputate turpis. Suspendisse ut metus pharetra, luctus lacus a, ornare ante. In aliquet commodo diam, quis varius enim. Nulla posuere metus turpis, vel eleifend massa gravida sed.</p>
-		<!-- /wp:paragraph -->
-		
-		<!-- wp:image {\"align\":\"right\",\"id\":224,\"width\":292,\"height\":292,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"className\":\"d-inline-block float-end\"} -->
-		<div class=\"wp-block-image d-inline-block float-end\"><figure class=\"alignright size-large is-resized\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-02.png\" alt=\"\" class=\"wp-image-224\" width=\"292\" height=\"292\"/></figure></div>
-		<!-- /wp:image -->
-		
-		<!-- wp:paragraph -->
-		<p>Nunc aliquam varius commodo. Nam et vestibulum ante. Nunc in est tellus. Nam quis odio non sem faucibus faucibus vel in erat. Nulla risus mauris, vulputate nec commodo tempus, euismod vitae nunc. Vestibulum eget dapibus justo. Duis at lacinia nisl. Aenean fringilla venenatis tempor. Donec efficitur velit nec ante tincidunt accumsan sed in enim. Praesent auctor justo mattis augue tincidunt suscipit.</p>
-		<!-- /wp:paragraph -->
-		
-		<!-- wp:paragraph -->
-		<p>Suspendisse a mauris sed quam ultricies sodales nec id orci. Donec vitae auctor leo, et auctor enim. Donec vitae velit pretium, vulputate tellus eu, interdum felis. Curabitur nec mattis enim. Integer magna felis, placerat eu sollicitudin id, dignissim at nibh. Proin tempus accumsan lorem, a ornare velit vehicula tincidunt. Morbi vel lacus arcu. Nunc eu volutpat metus, in convallis nisi. Mauris pulvinar dolor at magna consequat, et auctor diam facilisis. Integer faucibus vulputate ante non semper. Duis in neque sit amet mi dictum imperdiet. Cras non consequat lorem, eget facilisis purus. Pellentesque vel massa ultrices, porta dolor ac, ornare lectus. Maecenas venenatis consequat arcu, eget dapibus ligula auctor at.</p>
-		<!-- /wp:paragraph -->
-		
-		<!-- wp:group {\"className\":\"my-5\"} -->
-		<div class=\"wp-block-group my-5\"><!-- wp:utkwds/button {\"color\":\"\",\"colorSlug\":\"btn-link\",\"buttonText\":true} -->
-		<div><a class=\"btn save mb-3 btn-link btn-nrml\"><span>Explore Area 01</span><span></span></a></div>
-		<!-- /wp:utkwds/button -->
-		
-		<!-- wp:utkwds/button {\"color\":\"\",\"colorSlug\":\"btn-link\",\"buttonText\":true} -->
-		<div><a class=\"btn save mb-3 btn-link btn-nrml\"><span>Explore Area 02</span><span></span></a></div>
-		<!-- /wp:utkwds/button -->
-		
-		<!-- wp:utkwds/button {\"color\":\"\",\"colorSlug\":\"btn-link\",\"buttonText\":true} -->
-		<div><a class=\"btn save mb-3 btn-link btn-nrml\"><span>Explore Area 03</span><span></span></a></div>
-		<!-- /wp:utkwds/button --></div>
-		<!-- /wp:group --></div>
-		<!-- /wp:utkwds/column --></div>
-		<!-- /wp:utkwds/columns -->
-		
-		<!-- wp:spacer {\"height\":\"50px\"} -->
-		<div style=\"height:50px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>
-		<!-- /wp:spacer -->
-		
-		<!-- wp:utkwds/strip {\"imagePostion\":{\"name\":\"Smokey\",\"slug\":\"strip-smokey\",\"color\":\"#58595B\",\"text\":\"text-white\"},\"padding\":\"p-md\"} -->
-		<div><div class=\"strip strip-smokey text-white p-md my-0\"><div class=\"container\"><!-- wp:utkwds/columns {\"rowClass\":\"column-50-50\",\"numCols\":2} -->
-		<div class=\"row undefined\"><!-- wp:utkwds/column {\"colWidth\":8} -->
-		<div class=\"undefined col-12 col-md-8 undefined\"><!-- wp:quote {\"className\":\"text-white\"} -->
-		<blockquote class=\"wp-block-quote text-white\"><p>Maecenas et turpis metus. Integer ut volutpat augue. Vestibulum ante lectus, aliquet vel sem in, viverra ornare dui. Mauris id nisi tortor. Quisque risus ante, tristique non vulputate aliquet, rutrum non risus. Aliquam vulputate elementum diam, ut molestie ligula egestas sit amet.</p><cite>Aliquam Volutpat</cite></blockquote>
-		<!-- /wp:quote --></div>
-		<!-- /wp:utkwds/column -->
-		
-		<!-- wp:utkwds/column {\"colWidth\":4} -->
-		<div class=\"undefined col-12 col-md-4 undefined\"><!-- wp:image {\"id\":219,\"sizeSlug\":\"large\",\"linkDestination\":\"none\"} -->
-		<figure class=\"wp-block-image size-large\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-02.png\" alt=\"\" class=\"wp-image-219\"/></figure>
-		<!-- /wp:image --></div>
-		<!-- /wp:utkwds/column --></div>
-		<!-- /wp:utkwds/columns --></div></div></div>
-		<!-- /wp:utkwds/strip -->
-		
-		<!-- wp:spacer -->
-		<div style=\"height:100px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>
-		<!-- /wp:spacer -->
-		
-		<!-- wp:utkwds/columns {\"rowClass\":\"column-50-50\",\"numCols\":2} -->
-		<div class=\"row undefined\"><!-- wp:utkwds/column {\"colWidth\":6} -->
-		<div class=\"undefined col-12 col-md-6 undefined\"><!-- wp:heading -->
-		<h2><p>Vulputate Aliquet</p></h2>
-		<!-- /wp:heading -->
-		
-		<!-- wp:paragraph -->
-		<p>Aliquam erat volutpat. Morbi et dictum elit, sed sagittis urna. Nam quis tempor justo, quis tempor augue. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque elit tortor, aliquam sed nisi ac, semper laoreet nulla. Nullam in finibus urna. Sed gravida sapien dapibus tortor facilisis pretium. Aenean accumsan arcu a enim semper, quis porta ligula tincidunt. In hac habitasse platea dictumst. Cras tempor velit eget massa convallis, bibendum aliquam felis cursus.</p>
-		<!-- /wp:paragraph -->
-		
-		<!-- wp:utkwds/button {\"color\":\"\",\"colorSlug\":\"btn-link\",\"buttonText\":true} -->
-		<div><a class=\"btn save mb-3 btn-link btn-nrml\"><span>Explore Vulputate</span><span></span></a></div>
-		<!-- /wp:utkwds/button --></div>
-		<!-- /wp:utkwds/column -->
-		
-		<!-- wp:utkwds/column {\"colWidth\":6} -->
-		<div class=\"undefined col-12 col-md-6 undefined\"><!-- wp:gallery {\"columns\":2,\"linkTo\":\"none\",\"sizeSlug\":\"medium\"} -->
-		<figure class=\"wp-block-gallery has-nested-images columns-2 is-cropped\"><!-- wp:image {\"id\":238,\"sizeSlug\":\"medium\",\"linkDestination\":\"none\"} -->
-		<figure class=\"wp-block-image size-medium\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-02.png\" alt=\"\" class=\"wp-image-238\"/></figure>
-		<!-- /wp:image -->
-		
-		<!-- wp:image {\"id\":239,\"sizeSlug\":\"medium\",\"linkDestination\":\"none\"} -->
-		<figure class=\"wp-block-image size-medium\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-03.png\" alt=\"\" class=\"wp-image-239\"/></figure>
-		<!-- /wp:image -->
-		
-		<!-- wp:image {\"id\":240,\"sizeSlug\":\"medium\",\"linkDestination\":\"none\"} -->
-		<figure class=\"wp-block-image size-medium\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder-04.png\" alt=\"\" class=\"wp-image-240\"/></figure>
-		<!-- /wp:image -->
-		
-		<!-- wp:image {\"id\":241,\"sizeSlug\":\"medium\",\"linkDestination\":\"none\"} -->
-		<figure class=\"wp-block-image size-medium\"><img src=\"".plugin_dir_url( __FILE__ )."src/img/5x7-placeholder.png\" alt=\"\" class=\"wp-image-241\"/></figure>
-		<!-- /wp:image --><figcaption class=\"blocks-gallery-caption\">Duis in neque sit amet mi dictum</figcaption></figure>
-		<!-- /wp:gallery --></div>
-		<!-- /wp:utkwds/column --></div>
-		<!-- /wp:utkwds/columns -->
-		
-		<!-- wp:spacer {\"height\":\"50px\"} -->
-		<div style=\"height:50px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>
-		<!-- /wp:spacer -->",
-		)
-		);
-  }
+	
+}
    
-  add_action( 'init', 'utkwds_register_patterns' );
+add_action( 'init', 'utkwds_register_patterns' );

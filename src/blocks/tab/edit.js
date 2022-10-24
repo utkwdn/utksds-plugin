@@ -91,7 +91,7 @@ export default function Edit( props ) {
 						withoutInteractiveFormatting
 					/>
 				</div>
-				<InnerBlocks allowedBlocks={ [ 'utkwds/button', 'core/paragraph', 'core/list', 'core/quote', 'utkwds/lead', 'utkwds/horizontal-rule', 'utksds/button', 'lead/main', 'horizontal-rule/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
+				<InnerBlocks allowedBlocks={ [ 'core/buttons', 'core/paragraph', 'core/list', 'core/quote', 'utkwds/lead', 'utkwds/horizontal-rule', 'lead/main', 'horizontal-rule/main' ] } templateLock={ false } renderAppender={ () => ( <InnerBlocks.DefaultBlockAppender /> ) } />
 			</div>
 			</div>
 		] );
