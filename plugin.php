@@ -69,33 +69,6 @@ function create_block_block_test_block_init() {
 }
 add_action( 'init', 'create_block_block_test_block_init' );
 
-//Registers all the non-block javascript
-function utkwds_scripts_init(){
-	wp_register_script( 
-		'disable',plugin_dir_url( __FILE__ ) . '/build/frontend/disable.js', 
-		array( 'wp-blocks', 'wp-block-library', 'wp-i18n', 'wp-element', 'wp-editor' ), 
-		null,
-		true
-	);
-	//wp_enqueue_editor( 'editor-style', plugins_url('utksds-plugin') . '/build/frontend/disable.css' );
-
-	wp_register_style(
-		'editor-style-utds', // Handle.
-		plugin_dir_url( __FILE__ ) . '/build/frontend/disable.css', // Block editor CSS.
-		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
-	);
-	
-	register_block_type(
-		'cgb/block-utds', array(
-			'editor_script' => 'disable',
-			'editor_style'  => 'editor-style-utds',
-		)
-	);
-
-}
-add_action( 'init', 'utkwds_scripts_init' );
-
 /**
  * Runs other plugin functions. This file should probably be renamed and/or broken apart.
  */
