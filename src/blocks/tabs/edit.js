@@ -31,7 +31,7 @@ const TAB_TEMPLATE = [
 
 function setTabNames( parentID ){
 	
-	var thisBlock = select( 'core/editor' ).getBlock( parentID );
+	var thisBlock = select( 'core/block-editor' ).getBlock( parentID );
 	var tabs_title = [];
 	
 	thisBlock.innerBlocks.map( ( childrenBlock, index ) =>{
