@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Modify internal link URLs to add add-internal-link attr
+ * Modify internal link URLs to add data-internal-link attr
  */
 function replace_headless_content_link_urls(string $content): string{
 	if (!is_graphql_request() && !defined('REST_REQUEST')) {
