@@ -27,6 +27,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Modify internal link URLs to add add-internal-link attr
+ */
+function replace_headless_content_link_urls(string $content): string{
+	if (!is_graphql_request() && !defined('REST_REQUEST')) {
+		return $content;
+	}
+
+	$site_url = site_url();
+
+	return str_replace('href="' . $site_url, 'data-internal-link="true" href="' . $site_url, $content);
+
+}
+
+add_filter('the_content', 'replace_headless_content_link_urls');
+
 //Set the branch that contains the stable release. Used by the Update Checker
 //$myUpdateChecker->setBranch('main');
 $myUpdateChecker->getVcsApi()->enableReleaseAssets();
