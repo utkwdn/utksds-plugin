@@ -27,6 +27,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Modify internal link URLs to add data-internal-link attr
+ */
+function replace_headless_content_link_urls(string $content): string{
+	if (!is_graphql_request() && !defined('REST_REQUEST')) {
+		return $content;
+	}
+
+	$site_url = site_url();
+
+	return str_replace('href="' . $site_url, 'data-internal-link="true" href="' . $site_url, $content);
+
+}
+
+add_filter('the_content', 'replace_headless_content_link_urls');
+
 //Set the branch that contains the stable release. Used by the Update Checker
 //$myUpdateChecker->setBranch('main');
 $myUpdateChecker->getVcsApi()->enableReleaseAssets();
@@ -44,22 +60,12 @@ function create_block_block_test_block_init() {
 		'accordion-fold',
 		'alert',
 		'calendar',
-		'card',
-		'card-body',
-		'card-footer',
-		'card-header',
-		'card-heading',
-		'card-image',
-		'card-main',
-		'card-topcap',
 		'contact',
 		'horizontal-rule',
 		'lead',
 		'phone',
 		'phones',
 		'socials',
-		'strip',
-		'styles',
 		'tab',
 		'tabs',
 	];
@@ -68,33 +74,6 @@ function create_block_block_test_block_init() {
 	}
 }
 add_action( 'init', 'create_block_block_test_block_init' );
-
-//Registers all the non-block javascript
-function utkwds_scripts_init(){
-	wp_register_script( 
-		'disable',plugin_dir_url( __FILE__ ) . '/build/frontend/disable.js', 
-		array( 'wp-blocks', 'wp-block-library', 'wp-i18n', 'wp-element', 'wp-editor' ), 
-		null,
-		true
-	);
-	//wp_enqueue_editor( 'editor-style', plugins_url('utksds-plugin') . '/build/frontend/disable.css' );
-
-	wp_register_style(
-		'editor-style-utds', // Handle.
-		plugin_dir_url( __FILE__ ) . '/build/frontend/disable.css', // Block editor CSS.
-		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
-	);
-	
-	register_block_type(
-		'cgb/block-utds', array(
-			'editor_script' => 'disable',
-			'editor_style'  => 'editor-style-utds',
-		)
-	);
-
-}
-add_action( 'init', 'utkwds_scripts_init' );
 
 /**
  * Runs other plugin functions. This file should probably be renamed and/or broken apart.
@@ -121,81 +100,6 @@ I anticipate a similar method will be used to add Bootstrap classes to the other
 This section should probably be broken out into its own include file.
 */
 add_filter( 'render_block', function( $block_content, $block ) {
-	if ( $block['blockName'] === 'core/button' ) {
-
-		// Find the button settings in the Wordpress classes
-		$start = 'wp-block-button ';
-		$end = '">';
-		
-		$string = ' ' . $block_content;
-		$ini = strpos($string, $start);
-    	if ($ini == 0) return '';
-    	$ini += strlen($start);
-    	$len = strpos($string, $end, $ini) - $ini;
-    	$parsed_classes = substr($string, $ini, $len);
-		
-		// Clean up the Wordpress classes so they don't have any bootstrap fragments from the button settings
-		$class_needle = 'wp-block-button '. $parsed_classes;
-		$block_content = str_replace($class_needle, 'wp-block-button', $block_content);
-
-		// Translate the button settings into Bootstrap classes
-		$custom_classes = explode( ' ', $parsed_classes );
-		
-		$color_classes = array(
-			'btn-primary',
-			'btn-secondary',
-			'btn-success',
-			'btn-danger',
-			'btn-warning',
-			'btn-info',
-			'btn-light',
-			'btn-dark',
-		);
-		
-		$fill_classes = array(
-			'btn-fill',
-			'btn-outline',
-			'btn-link',
-		);
-		
-		$size_classes = array(
-			'btn-sm',
-			'btn-normal',
-			'btn-lg',
-			'btn-block',
-		);
-		
-		$btnOptions['fill'] = array_intersect($fill_classes, $custom_classes);
-		$btnOptions['fill'] = implode(' ', $btnOptions['fill']);
-		
-		$btnOptions['color'] = array_intersect($color_classes, $custom_classes);
-		$btnOptions['color'] = implode(' ', $btnOptions['color']);
-		
-		$btnOptions['size'] = array_intersect($size_classes, $custom_classes);
-		$btnOptions['size'] = implode(' ', $btnOptions['size']);
-		
-		$btnClasses = '';
-		if(isset($btnOptions['fill']) && $btnOptions['fill'] == 'btn-fill'){
-			$btnClasses .= $btnOptions['color'];
-		}elseif(isset($btnOptions['fill']) && $btnOptions['fill'] == 'btn-outline'){
-			$btnColor = str_replace('btn', '', $btnOptions['color']);
-			$btnClasses .= $btnOptions['fill'] . $btnColor;
-		}elseif(isset($btnOptions['fill']) && $btnOptions['fill'] == 'btn-link'){
-			$btnClasses .= $btnOptions['fill'];
-		}
-		if(isset($btnOptions['size']) && $btnOptions['size'] != 'btn-normal'){
-			$btnClasses .= ' ' . $btnOptions['size'];
-		}
-
-		// Apply the Bootstrap button link classes.
-		$block_content = str_replace(
-			'wp-block-button__link',
-			'wp-block-button__link btn ' . $btnClasses,
-			$block_content
-		);
-
-	}
-	
 	if ( $block['blockName'] === 'core/table' ) {
 		$start = 'wp-block-table ';
 		$end = '">';

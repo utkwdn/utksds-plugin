@@ -31,7 +31,7 @@ const TAB_TEMPLATE = [
 
 function setTabNames( parentID ){
 	
-	var thisBlock = select( 'core/editor' ).getBlock( parentID );
+	var thisBlock = select( 'core/block-editor' ).getBlock( parentID );
 	var tabs_title = [];
 	
 	thisBlock.innerBlocks.map( ( childrenBlock, index ) =>{
@@ -67,7 +67,7 @@ export default function Edit( props ) {
 		const parentBlocks = wp.data.select( 'core/block-editor' ).getBlockParents(clientId);
 	
 		for(var thisParent of parentBlocks){
-			var thisBlock = select( 'core/editor' ).getBlock( thisParent );
+			var thisBlock = select( 'core/block-editor' ).getBlock( thisParent );
 			if( thisBlock.name === 'utkwds/tabs'){
 				parentID = thisBlock.clientId;
 			}
