@@ -47,10 +47,7 @@ if(class_exists('WP_Block_Editor_Context')){
 /**
  * Deregister the gutenberg styles. This could probably be moved into plugin.php
  */
-add_action( 'wp_print_styles', 'wps_deregister_styles', 100 );
-function wps_deregister_styles() {
-    wp_dequeue_style( 'wp-block-library' );
-}
+// Removed
 
 //Adds a secondary color control to Customizer. All the secondary color code should probably be split out into its own include file.
 function ukds_customizecolor_register( $wp_customize ) {
