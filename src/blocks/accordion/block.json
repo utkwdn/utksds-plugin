@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utkwds/accordion",
+	"version": "0.1.0",
+	"title": "Accordion",
+	"category": "design",
+	"icon": "smiley",
+	"description": "Add vertically collapsing sections of content.",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"accordionID": {
+			"type": "string",
+			"default": "newAccordion"
+		}
+	},
+	"providesContext": {
+		"accordion/parentID":"accordionID"
+	},
+	"textdomain": "utkwds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}

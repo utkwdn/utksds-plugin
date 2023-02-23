@@ -1,20 +1,29 @@
 {
-  "name": "utds-cgb-guten-block",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "start": "cgb-scripts start",
-    "build": "cgb-scripts build",
-    "dist": "cgb-scripts build && gulp package",
-    "eject": "cgb-scripts eject"
-  },
-  "dependencies": {
-    "utksds-framework": "0.1.0",
-    "cgb-scripts": "1.23.1"
-  },
-  "devDependencies": {
-    "classnames": "^2.3.1",
-    "gulp": "^4.0.2",
-    "gulp-cli": "^2.3.0"
-  }
+	"name": "block-test",
+	"version": "0.1.2",
+	"description": "Example static block scaffolded with Create Block tool.",
+	"author": "The WordPress Contributors",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"scripts": {
+		"build": "wp-scripts build",
+		"dist": "wp-scripts build && gulp package",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"lint:js:src": "wp-scripts lint-js ./src",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"start": "wp-scripts start"
+	},
+	"devDependencies": {
+		"utksds-framework": "0.2.0",
+		"@wordpress/scripts": "^22.3.0"
+	},
+	"dependencies": {
+		"@wordpress/blocks": "^11.4.0",
+		"classnames": "^2.3.1",
+		"gulp": "^4.0.2",
+		"gulp-cli": "^2.3.0"
+	}
 }

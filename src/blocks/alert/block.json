@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utkwds/alert",
+	"version": "0.1.0",
+	"title": "Alert",
+	"category": "design",
+	"icon": "smiley",
+	"description": "",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"colorSlug": {
+			"type": "string",
+			"default": "alert-smokey"
+		},
+		"color": {
+			"type": "string",
+			"default": "#58595B"
+		},
+		"text": {
+			"type": "string",
+			"source": "html",
+			"selector": "span"
+		},
+		"placeholder": {
+			"type": "string",
+			"default": "Enter alert text here."
+		}
+	},
+	"textdomain": "utkwds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}

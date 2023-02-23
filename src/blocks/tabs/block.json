@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utkwds/tabs",
+	"version": "0.1.0",
+	"title": "Tabs",
+	"category": "design",
+	"icon": "editor-table",
+	"description": "",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"tabID": {
+			"type": "string",
+			"default": "myTab"
+		},
+		"tabNames": {
+			"type": "array",
+			"default": []
+		}
+	},
+	"textdomain": "utkwds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}

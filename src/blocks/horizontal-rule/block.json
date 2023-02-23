@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "utkwds/horizontal-rule",
+	"version": "0.1.0",
+	"title": "Separator",
+	"category": "design",
+	"icon": "editor-table",
+	"description": "",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"imagePostion": {
+			"type": "string",
+			"default": "hr"
+		}
+	},
+	"textdomain": "utkwds",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}
